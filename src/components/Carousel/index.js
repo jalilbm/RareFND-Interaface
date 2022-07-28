@@ -17,7 +17,7 @@ function carousel() {
           />
 
           <Carousel.Caption className="top-caption">
-            <h1 class="display-1">Rare Find then Fund</h1>
+            <h1 class="display-1">Rare Find then Funddddd</h1>
             <br/>
             <br/>
             <h4>

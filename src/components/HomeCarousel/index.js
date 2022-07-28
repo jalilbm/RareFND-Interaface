@@ -3,8 +3,28 @@ import main from '../../assets/carousel/main.jpeg';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import Button from 'react-bootstrap/Button';
+import React, { useState, useEffect } from 'react';
 
-function carousel() {
+function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height
+  };
+}
+
+export default function HomeCarousel() {
+  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions());
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
       <Carousel fade controls={false} indicators={false}>
         <Carousel.Item>
@@ -13,7 +33,8 @@ function carousel() {
             src={main}
             alt="Third slide"
             style={{
-              height: "700px",
+              height: windowDimensions.height - 67,
+              minHeight: "600px",
               objectFit: "cover"
             }}
           />
@@ -36,5 +57,3 @@ function carousel() {
       </Carousel>
   );
 }
-
-export default carousel;

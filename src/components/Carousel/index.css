@@ -1,0 +1,9 @@
+img {
+  height: 700px;
+  object-fit: cover;
+}
+
+.top-caption {
+  position: absolute;
+  top: 80px;
+}

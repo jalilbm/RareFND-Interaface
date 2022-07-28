@@ -1,0 +1,14 @@
+.logo {
+  width: 100px;
+  height: 60px;
+  margin-top: -7px;
+  margin-right: 20px;
+}
+
+/* .navbar {
+  height: 80px;
+} */
+
+.btn-log-in, .btn-signup, .btn-wallet {
+  width: 140px;
+}

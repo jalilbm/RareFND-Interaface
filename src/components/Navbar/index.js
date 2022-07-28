@@ -9,15 +9,16 @@ import './index.css';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { Link } from 'react-router-dom';
 
 
 function NavBar() {
   return (
     <Navbar collapseOnSelect expand="lg" bg="black" variant="dark" className="navbar">
       <Container>
-        <a href="/home">
+        <Link to="/home">
           <Image src={rarefnd_logo} className="logo" to="/home" />
-        </a>
+        </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">

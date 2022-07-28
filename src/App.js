@@ -1,13 +1,15 @@
+import Main from './Main.js';
 import NavBar from './components/Navbar';
-import Carousel from './components/Carousel';
-import HomeCards from './components/CardGrid';
+import { BrowserRouter as Router } from "react-router-dom";
+
 
 export default function App() {
   return (
-    <div className="App">
-      <NavBar />
-      <Carousel />
-      <HomeCards />
-    </div>
+    <Router>
+      <div className="App">
+        <NavBar />
+        <Main />
+      </div>
+    </Router>
   );
 }

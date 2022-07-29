@@ -7,20 +7,19 @@ import Container from 'react-bootstrap/Container';
 import "./index.css";
 
 
-function HomeCard(props) {
+function MainCard(props) {
   return (
     <Container className={(props.image ? "" : "no-image-card-text")}>
-      <Card className="border-0 mt-5 bg-dark" >
+      <Card className={"border-0 " + (props.backgroudColor ? ("bg-" + props.backgroudColor) : "bg-dark")} style={{backgroudColor: props.backgroudColor}}>
         <Row>
           {props.image ?
             (<Col 
               md={props.horizontal ? 6 : 12}
               className={(props.imageLeft ? "order-1" : "order-0")}>
-                {/* <div style={{width: "100px", margin: "auto"}}> */}
                 <div style={props.multi_cards ? {width: "100px", margin: "auto"} : {}}>
                   <a href={props.buttonHref}>
                     <Card.Img 
-                      variant="left h-100" 
+                      variant="left" 
                       src={props.image}
                       style={
                         props.multi_cards ? {
@@ -30,6 +29,8 @@ function HomeCard(props) {
                           } : {
                           objectFit: "cover",
                           width: "100%",
+                          height: "100%",
+                          height: props.image_height
                         }
                       }
                     />
@@ -39,13 +40,13 @@ function HomeCard(props) {
           }
           <Col md={(props.image && !props.multi_cards ? 6 : 12)}>
             <Card.Body className="text-light">
-              <Card.Title className={(props.multi_cards ? 'display-6 ' : "display-6 ") + "fw-bold text-center mb-5"}>{props.title}</Card.Title>
-              <Card.Text className={(props.multi_cards ? 'p ' : "h5 ") + (props.image ? "" : "text-center")}>
+              <Card.Title className={(props.project_title ? 'display-5 ' : "display-6 ") + "fw-bold text-center mb-5"}>{props.title}</Card.Title>
+              <Card.Text className={(props.multi_cards ? 'p ' : props.project_header ? "h4 " : "h5 ") + (!props.image || props.center_card_text ? "text-center" : "")}>
                 {props.text}
-              </Card.Text>              
+              </Card.Text>
               {props.buttonText ?
-              (<Row>
-                <Col className={"mt-5 " + (props.image ? "" : "text-center")}>
+              (<Row >
+                <Col className={"mt-2 " + (props.image ? "" : "text-center")}>
                   <Button variant="warning" href={props.buttonHref} size="lg">{props.buttonText}</Button>
                 </Col>
               </Row>) : (null)
@@ -58,4 +59,4 @@ function HomeCard(props) {
   );
 }
 
-export default HomeCard;
+export default MainCard;

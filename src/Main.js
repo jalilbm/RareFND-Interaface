@@ -1,5 +1,7 @@
 import Home from './pages/Home';
 import { Routes, Route } from 'react-router-dom';
+import Project from './pages/Project';
+import {useEffect} from 'react'
 
 
 export default function Main() {
@@ -8,6 +10,7 @@ export default function Main() {
       <Routes>
         <Route exact path="/" element={<Home/>} />
         <Route exact path="/home" element={<Home/>} />
+        <Route exact path="/project" element={<Project/>} />
       </Routes>
     </div>
   )

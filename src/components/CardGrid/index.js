@@ -2,7 +2,7 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import 'bootstrap/dist/css/bootstrap.css';
-import HomeCard from './Card.js'
+import MainCard from './Card.js'
 import Container from 'react-bootstrap/Container';
 import help from '../../assets/carousel/help.jpg';
 import star from '../../assets/carousel/star.png';
@@ -15,7 +15,7 @@ function HomeCards() {
     <Container >
       <Row>
         <Col lg={12} className="mt-4">
-          <HomeCard
+          <MainCard
             image={binance_card}
             title="Key Partnerships"
             text="Key partnerships to be announced with some of the leading names in the industry across the charity space.
@@ -29,7 +29,7 @@ function HomeCards() {
       </Row>
       <Row>
         <Col lg={12} className="mt-4">
-          <HomeCard
+          <MainCard
             image={help}
             title="The Only Crowdfunding Platform That Pays You To Crowdfund"
             text="Start crowdfunding with Rare Fnd today and we will give you 10% towards your crowdfunding target!
@@ -46,7 +46,7 @@ function HomeCards() {
       <br />
       <Row>
         <Col lg={12} className="mt-4">
-          <HomeCard
+          <MainCard
             title="Fundraising solution"
             text="Crowdfunding with the speed and flexibility of crypto! We’re the first and only
             platform to offer a cryptocurrency based fundraising program. Contribution
@@ -63,7 +63,7 @@ function HomeCards() {
       <br/>
       <Row>
         <Col lg={12} className="mt-4">
-          <HomeCard
+          <MainCard
             title="The Most Innovative Crowfunding Platform            "
             text="Not only does Rare Fnd help charities and startups reach their full potential quicker, but we also ensure that all donators and contributors are rewarded even in the unlikely event that the crowdfunding campaign was unsuccessful.            "
           />
@@ -71,7 +71,7 @@ function HomeCards() {
       </Row>
       <Row>
         <Col lg={4}>
-          <HomeCard
+          <MainCard
             image={star}
             title="Free and more"
             text="It’s not only free to fundraise — but we’ll also help you meet your goal! We’re currently offering campaigns 10% toward their fundraising target. YES, we’re paying you to launch your fundraising campaign on Rare FND!"
@@ -80,7 +80,7 @@ function HomeCards() {
           />
         </Col>
         <Col lg={4}>
-          <HomeCard
+          <MainCard
             image={star}
             title="Incentives"
             text="Your incentives for contribution tiers are embedded in an NFT which can be bought, sold, traded or used. From event tickets to gift cards – It’s easy to deliver. No complications or expense of shipping items which allow you to better fund your project and opens up the usefulness of the reward to a worldwide audience"
@@ -89,7 +89,7 @@ function HomeCards() {
           />
         </Col>
         <Col lg={4}>
-          <HomeCard
+          <MainCard
             image={star}
             title="Safe for investors"
             text="All of the contributions by investors in your campaign are autostaked in our platform. This provides the ultimate in safety for the contributors due to the fact that if a campaign fails to reach its fundraising goal, the funds are returned to the contributor PLUS any staking rewards that were earned during the campaign!"
@@ -112,7 +112,7 @@ function HomeCards() {
       <br />
       <Row>
         <Col lg={12} className="mt-4">
-          <HomeCard
+          <MainCard
             title="Our mission: Empower the innovator in all of us"
             text="We want to ensure that the innovators amongst all of us are given the best opportunity to make their ideas a success"
             buttonHref="/startproject"

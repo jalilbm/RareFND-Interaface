@@ -40,7 +40,7 @@ export default function HomeCarousel() {
           />
 
           <Carousel.Caption className="top-caption" style={{position: "absolute", top: "80px"}}>
-            <h1 class="display-1">Rare Find then Fund</h1>
+            <h1 class="display-1" style={{fontFamily: "'Cinzel', serif"}}>Rare Find then Fund</h1>
             <br/>
             <br/>
             <h4>

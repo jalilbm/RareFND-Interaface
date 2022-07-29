@@ -49,7 +49,7 @@ export default function HomeCarousel() {
             <br/>
             <br/>
             <br/>
-            <Button variant="warning" href="/signup" size="lg">Sign Up - It's FREE</Button>
+            <Button variant="warning" href="/signup" size="lg">Sign Up - It's FREEe</Button>
             <br/>
             <p>or, <a href="/start-project">Start a project!</a></p>
           </Carousel.Caption>

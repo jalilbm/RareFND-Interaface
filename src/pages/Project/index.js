@@ -4,9 +4,13 @@ import MainCard from '../../components/CardGrid/Card.js';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/esm/Container';
+import axios from 'axios';
+import {useState, useEffect} from 'react';
 
 
 export default function Project() {
+  const [projectData, setProjectData ] = useState({})
+  const projects = axios.get("http://localhost:8000/api/project/").then(res => console.log(res.data))
   return (
     <div className="post" style={{height: '1000px'}}>
       <MainCard
@@ -22,6 +26,7 @@ export default function Project() {
         project_title={true}
         backgroudColor="black"
       />
+
     </div>
   )
 }

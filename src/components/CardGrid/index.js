@@ -12,7 +12,7 @@ import Button from 'react-bootstrap/Button';
 
 function HomeCards() {
   return (
-    <Container >
+    <Container className="pt-5 pb-5">
       <Row>
         <Col lg={12} className="mt-4">
           <MainCard
@@ -57,6 +57,11 @@ function HomeCards() {
             We’re a true end to end crowdfunding solution!"
             buttonHref="/startproject"
             buttonText="Start Fundraising"
+            textStyle = {{
+              position: "realtive",
+              textAlign: "center",
+              // marginLeft: "200px"
+            }}
           />
         </Col>
       </Row>
@@ -66,11 +71,15 @@ function HomeCards() {
           <MainCard
             title="The Most Innovative Crowfunding Platform            "
             text="Not only does Rare Fnd help charities and startups reach their full potential quicker, but we also ensure that all donators and contributors are rewarded even in the unlikely event that the crowdfunding campaign was unsuccessful.            "
+            // textStyle = {{
+            //   marginRight: "200px",
+            //   marginLeft: "200px"
+            // }}
           />
         </Col>
       </Row>
-      <Row>
-        <Col lg={4}>
+      <Row className="mt-4">
+        <Col lg={4} className="mt-4">
           <MainCard
             image={star}
             title="Free and more"
@@ -79,7 +88,7 @@ function HomeCards() {
             multi_cards={true}
           />
         </Col>
-        <Col lg={4}>
+        <Col lg={4} className="mt-4">
           <MainCard
             image={star}
             title="Incentives"
@@ -88,7 +97,7 @@ function HomeCards() {
             multi_cards={true}
           />
         </Col>
-        <Col lg={4}>
+        <Col lg={4} className="mt-4">
           <MainCard
             image={star}
             title="Safe for investors"

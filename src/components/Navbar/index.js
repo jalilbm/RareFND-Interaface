@@ -10,17 +10,17 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Link } from 'react-router-dom';
+import Web3ConnectButton from '../Web3ConnectButton';
 
 
 function NavBar() {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="black" variant="dark" className="navbar">
-      <Container>
+    <Navbar collapseOnSelect expand="lg" bg="black" variant="dark" className="navbar" sticky="top">
         <Link to="/home">
-          <Image src={rarefnd_logo} className="logo" to="/home" />
+          <Image src={rarefnd_logo} className="logo" to="/home" style={{marginLeft: "40px"}}/>
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
+        <Navbar.Collapse id="responsive-navbar-nav" style={{paddingRight: "40px"}}>
           <Nav className="me-auto">
             <Nav.Link href="/about">About Us</Nav.Link>
             <Nav.Link href="programs">Programs</Nav.Link>
@@ -40,21 +40,11 @@ function NavBar() {
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          <Nav>
-            <Row className="user-log-options">
-              <Col md={4}>
-                <Button variant="outline-warning" className="btn-log-in" href="/login">Log In</Button>
-              </Col>
-              <Col md={4}>
-                <Button variant="warning" href="/signup" className="btn-signup">Sign Up</Button>
-              </Col>
-              <Col md={4}>
-                <Button variant="light" className="btn-wallet">Connect Wallet</Button>
-              </Col>
-            </Row>
-          </Nav>
+          <Button variant="outline-warning" className="btn-log-in" href="/login" style={{marginRight: "10px"}}>Log In</Button>
+          <Button variant="warning" href="/signup" className="btn-signup" style={{marginRight: "10px"}}>Sign Up</Button>
+          <Web3ConnectButton />
         </Navbar.Collapse>
-      </Container>
+        
     </Navbar>
   );
 }

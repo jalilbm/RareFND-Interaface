@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 import render from 'react';
-import CKEditor from "react-ckeditor-component";
 
 
 export default function ProjectDescription(props) {

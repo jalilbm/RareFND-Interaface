@@ -1,0 +1,9 @@
+.card{
+  border-radius: 4px;
+  box-shadow: 0 10px 12px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+    transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+  }
+.card:hover{
+  transform: scale(1.05);
+box-shadow: 0 10px 20px rgba(242, 238, 238, 0.328), 0 4px 8px rgba(231, 228, 228, 0.301);
+}

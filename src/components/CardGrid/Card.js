@@ -9,7 +9,6 @@ import "./index.css";
 
 function MainCard(props) {
   return (
-    <Container className={(props.image ? "" : "no-image-card-text")}>
       <Card className={"border-0 " + (props.backgroudColor ? ("bg-" + props.backgroudColor) : "bg-dark")} style={{backgroudColor: props.backgroudColor}}>
         <Row>
           {props.image ?
@@ -41,7 +40,15 @@ function MainCard(props) {
           <Col md={(props.image && !props.multi_cards ? 6 : 12)}>
             <Card.Body className="text-light">
               <Card.Title className={(props.project_title ? 'display-5 ' : "display-6 ") + "fw-bold text-center mb-5"}>{props.title}</Card.Title>
-              <Card.Text className={(props.multi_cards ? 'p ' : props.project_header ? "h4 " : "h5 ") + (!props.image || props.center_card_text ? "text-center" : "")}>
+              <Card.Text 
+              className={
+                (
+                  props.multi_cards ? 'p ' : props.project_header ? "h4 " : "h5 "
+                ) + (
+                  !props.image || props.center_card_text ? "text-center" : ""
+                )}
+              style={props.textStyle}
+              >
                 {props.text}
               </Card.Text>
               {props.buttonText ?
@@ -55,7 +62,6 @@ function MainCard(props) {
           </Col>
         </Row>
       </Card>
-    </Container>
   );
 }
 

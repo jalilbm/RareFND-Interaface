@@ -1,18 +1,14 @@
-import main from '../../assets/carousel/main.jpeg';
 import 'bootstrap/dist/css/bootstrap.css';
-import MainCard from '../../components/CardGrid/Card.js';
-import ContributeBtn from '../../components/Web3ContributeButton';
 import ProjectCurrentContributions from '../../components/ProjectCurrentContributions';
 import ProjectDescription from '../../components/ProjectDescription';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Container from 'react-bootstrap/esm/Container';
 import axios from 'axios';
 import {useState, useEffect} from 'react';
 import ProjectCard from '../../components/ProjectCard'
+import { useParams } from 'react-router';
 
 
-export default function Project() {
+export default function Project(props) {
+  const { id } = useParams();
   const [ height, setHeight ] = useState({})
   const [projectData, setProjectData] = useState({})
   useEffect(() => {
@@ -21,12 +17,10 @@ export default function Project() {
     return () => window.removeEventListener('resize', () => setHeight(window.innerHeight));
   }, [])
   useEffect(() => {
-    axios.get("http://localhost:8000/api/project/")
+    axios.get(`http://localhost:8000/api/project/${id}/`)
     .then((response) => {
-      // response.data.projects.data[0];
-      // console.log(response.data.projects[0]);
-      setProjectData(response.data.projects[0]);
-      // console.log(response.data.projects[0]);
+      setProjectData(response.data);
+      console.log(response.data);
     })
     .then((data) => {
       // setprojectData(data)
@@ -34,7 +28,7 @@ export default function Project() {
     });
   },[])
   return (
-    <div className="post" style={{height: '10000px'}}>
+    <div className="post">
       <ProjectCard
         image={projectData.thumbnail}
         title={projectData.title}

@@ -9,11 +9,11 @@ import Web3ContributeButton from '../Web3ContributeButton';
 export default function ProjectCard(props) {
   return (
     <Card className={"border-0 " + (props.backgroudColor ? ("bg-" + props.backgroudColor) : "bg-dark")}>
-      <Row>
+      <Row className="w-100">
         <Col md={6}>
           <Card.Img 
             variant="left"
-            src={props.image}
+            src= {"http://127.0.0.1:8000" + props.image}
             style = {{
               width: "100%",
               height: props.image_height
@@ -30,7 +30,6 @@ export default function ProjectCard(props) {
             {props.text}
           </Card.Text>
           <Web3ContributeButton wallet_address={props.wallet_address} />
-          {/* <Button classNmae="align-self-end" variant="warning" size="lg" style={{marginTop: "auto"}}>Contribute Now</Button> */}
         </Card.Body>
         </Col>
       </Row>

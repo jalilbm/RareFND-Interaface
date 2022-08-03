@@ -14,11 +14,11 @@ export default function Main() {
       <Routes>
         <Route exact path="/" element={<Home/>} />
         <Route exact path="/home" element={<Home/>} />
-        <Route exact path="/art" element={<Category image={ArtImage} title="Arts"/>} />
-        <Route exact path="/design-and-tech" element={<Category image={DesignAndTech} title="Design And Tech"/>} />
-        <Route exact path="/film" element={<Category image={FilmImage} title="Film" />} />
-        <Route exact path="/all" element={<Category image={AllCategories} title="All Categories" />} />
-        <Route exact path="/project" element={<Project />} />
+        <Route exact path="/art" element={<Category category_name='art'/>} />
+        <Route exact path="/design-and-tech" element={<Category category_name='design and tech'/>} />
+        <Route exact path="/film" element={<Category category_name='film' />} />
+        <Route exact path="/all" element={<Category category_name='all' />} />
+        <Route exact path="/project/:id" element={<Project />} />
       </Routes>
     </div>
   )

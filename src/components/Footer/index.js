@@ -7,7 +7,7 @@ import RareFnd from '../../assets/logos/rarefnd_logo.png';
 
 export default function Footer() {
   return (
-    <CDBFooter className="shadow bg-white mt-5">
+    <CDBFooter className="shadow bg-white">
       <CDBBox display="flex" flex="column" className="mx-auto py-3 p-0" style={{ width: '90%'}}>
         <CDBBox display="flex" justifyContent="between" className="flex-wrap">
           <CDBBox >
@@ -15,7 +15,7 @@ export default function Footer() {
               <img alt="logo" src={RareFnd} width="90px" />
             </a>
             <p className="my-3 text-secondary" style={{ width: '250px' }}>
-            <span className='fw-bold'>ADDRESS:</span> RATBits NFT Marketplace DMCC Crypto Centre, 48th Floor, Almas Tower, JLT, UAE PO BOX 48800.
+            <span className='fw-bold'>ADDRESS:</span> DMCC Crypto Centre, 48th Floor, Almas Tower, JLT, UAE PO BOX 48800.
             </p>
           </CDBBox>
           <CDBBox>

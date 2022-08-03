@@ -28,25 +28,23 @@ export default function CategoryCarousel(props){
 
   return(
     <Carousel fade controls={false} indicators={false}>
-    <Carousel.Item>
-        <img
-            className="d-block w-100"
-            src={props.image}
-            alt="Third slide"
-            style={{
-              height: windowDimensions.height/2,
-              minHeight: "200px",
-              objectFit: "cover",
-              filter: "blur(3px)",
-              webkitFilter: "blur(3px)"
-            }}
-          />
-    
-
-    <Carousel.Caption className="top-caption" style={{}}>
-            <h1 class="display-1" style={{fontFamily: "'Cinzel', serif",color:"white",top: "50%",transform:"translateY(-50%)",bottom: "initial"}}>{props.title}</h1>
-    </Carousel.Caption>  
-    </Carousel.Item>      
+      <Carousel.Item>
+          <img
+              className="d-block w-100"
+              src={props.image}
+              alt="Third slide"
+              style={{
+                height: windowDimensions.height/2,
+                minHeight: "200px",
+                objectFit: "cover",
+                filter: "blur(3px)",
+                webkitFilter: "blur(3px)"
+              }}
+            />
+      <Carousel.Caption className="carousel-caption">
+              <h1 className="display-1" style={{fontFamily: "'Cinzel', serif",color:"white",top: "50%",transform:"translateY(-50%)",bottom: "initial",fontSize:"100px"}}>{props.title}</h1>
+      </Carousel.Caption>  
+      </Carousel.Item>      
     </Carousel> 
   );
 } 

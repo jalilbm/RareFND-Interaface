@@ -25,17 +25,17 @@ function NavBar() {
             <Nav.Link href="/about">About Us</Nav.Link>
             <Nav.Link href="programs">Programs</Nav.Link>
             <NavDropdown title="Categories" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="art">
+              <NavDropdown.Item href="/art">
                 Art
               </NavDropdown.Item>
-              <NavDropdown.Item href="design-and-tech">
+              <NavDropdown.Item href="/design-and-tech">
                 Design and Tech
               </NavDropdown.Item>
-              <NavDropdown.Item href="film">
+              <NavDropdown.Item href="/film">
                 Film
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="all">
+              <NavDropdown.Item href="/all">
                 All
               </NavDropdown.Item>
             </NavDropdown>

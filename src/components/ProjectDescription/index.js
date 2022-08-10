@@ -1,9 +1,4 @@
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
 import 'bootstrap/dist/css/bootstrap.css';
-import {useState, useEffect} from 'react';
-import axios from 'axios';
-import render from 'react';
 
 
 export default function ProjectDescription(props) {

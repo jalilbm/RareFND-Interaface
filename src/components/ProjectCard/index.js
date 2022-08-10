@@ -5,12 +5,13 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import help from '../../assets/carousel/help.jpg';
 import Web3ContributeButton from '../Web3ContributeButton';
+import "./index.css"
 
 export default function ProjectCard(props) {
   return (
     <Card className={"border-0 " + (props.backgroudColor ? ("bg-" + props.backgroudColor) : "bg-dark")}>
-      <Row className="w-100">
-        <Col md={6}>
+      <Row className="w-100 vertical-divider">
+        <Col md={6} >
           <Card.Img 
             variant="left"
             src= {"http://127.0.0.1:8000" + props.image}
@@ -20,7 +21,6 @@ export default function ProjectCard(props) {
             }}
           />
         </Col>
-
         <Col md={6}>
         <Card.Body className="text-white text-center d-flex flex-column h-100">
           <Card.Title className="display-5">

@@ -5,27 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import React, { useState, useEffect } from 'react';
 
 
-
-function getWindowDimensions() {
-    const { innerWidth: width, innerHeight: height } = window;
-    return {
-      width,
-      height
-    };
-  }
-
 export default function CategoryCarousel(props){
-  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
-
-  useEffect(() => {
-    function handleResize() {
-      setWindowDimensions(getWindowDimensions());
-    }
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   return(
     <Carousel fade controls={false} indicators={false}>
       <Carousel.Item>
@@ -34,8 +14,8 @@ export default function CategoryCarousel(props){
               src={props.image}
               alt="Third slide"
               style={{
-                height: windowDimensions.height/2,
-                minHeight: "200px",
+                height: "50vh",
+                minHeight: "300px",
                 objectFit: "cover",
                 filter: "blur(3px)",
                 webkitFilter: "blur(3px)"

@@ -10,7 +10,6 @@ export default function CategoryGridCard(props) {
         <Row xs={1} s={2} md={2} lg={4} className="g-4" style={{marginTop:"50px",marginLeft:"40px",marginRight:"40px"}}>
           {Array.from(props.categoryProjects).map((_, idx) => (
           <Col>
-            {console.log(_)}
             <CategoryProjectCard head={_.head} title={_.title} image={"http://localhost:8000" + _.thumbnail} project_id={_.id} />
           </Col>
           ))}

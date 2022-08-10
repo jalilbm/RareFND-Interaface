@@ -57,27 +57,27 @@ export default function Footer() {
           style={{ width: '100%' }}
           className="mx-auto"
         >
-        <a href="https://www.facebook.com/therat.finance/" className='text-decoration-none'>
+        <a href="https://www.facebook.com/therat.finance/" target="_blank" className='text-decoration-none'>
           <CDBBtn flat color="warning" className=" border-0 p-2 ">
             <CDBIcon fab icon="facebook-f" />
           </CDBBtn>
         </a>
-        <a href="https://twitter.com/rare_fnd" className='text-decoration-none'>
+        <a href="https://twitter.com/rare_fnd" target="_blank" className='text-decoration-none'>
           <CDBBtn flat color="warning" className=" border-0 mx-3 p-2">
             <CDBIcon fab icon="twitter" />
           </CDBBtn>
         </a> 
-        <a href="https://www.instagram.com/therareantiquities/" className='text-decoration-none'> 
+        <a href="https://www.instagram.com/rarefnd/" target="_blank" className='text-decoration-none'> 
           <CDBBtn flat color="warning" className=" border-0 p-2">
             <CDBIcon fab icon="instagram" />
           </CDBBtn>
         </a> 
-        <a href="https://t.me/RareFnd" className='text-decoration-none'> 
+        <a href="https://t.me/RareFnd" target="_blank" className='text-decoration-none'> 
           <CDBBtn flat color="warning" className=" mx-3 border-0 p-2">
             <CDBIcon fab icon="telegram" />
           </CDBBtn>
         </a>  
-        <a href="https://www.linkedin.com/company/the-rare-antiquities-token/" className='text-decoration-none'> 
+        <a href="https://www.linkedin.com/company/the-rare-antiquities-token/" target="_blank" className='text-decoration-none'> 
           <CDBBtn flat color="warning" className="border-0 p-2">
             <CDBIcon fab icon="linkedin-in" />
           </CDBBtn>

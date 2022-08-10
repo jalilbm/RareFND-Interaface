@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@coinbase/wallet-sdk": "^3.4.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "@walletconnect/web3-provider": "^1.8.0",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
     "cdbreact": "^1.5.3",
@@ -15,9 +17,12 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
     "react-multi-carousel": "^2.8.2",
+    "react-phone-input-2": "^2.15.1",
+    "react-phone-number-input": "^3.2.6",
     "react-router-dom": "^6.3.0",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "react-scripts": "^4.0.3",
+    "web-vitals": "^2.1.4",
+    "web3modal": "^1.9.8"
   },
   "scripts": {
     "start": "react-scripts start",

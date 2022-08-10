@@ -9,6 +9,7 @@ import "./index.css";
 
 function MainCard(props) {
   return (
+    <Container>
       <Card className={"border-0 " + (props.backgroudColor ? ("bg-" + props.backgroudColor) : "bg-dark")} style={{backgroudColor: props.backgroudColor}}>
         <Row>
           {props.image ?
@@ -62,6 +63,7 @@ function MainCard(props) {
           </Col>
         </Row>
       </Card>
+    </Container>
   );
 }
 

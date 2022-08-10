@@ -16,13 +16,14 @@ export default function ProjectCurrentContributions() {
     .then(response => response.data)
     .then((data) => {
       setprojectData(data);
+      setUsdRaisedAmount(data.rewarded_amount)
     });
   },[])
 
   useEffect(() => {
     axios.get(`http://localhost:8000/api/price/`)
         .then((response) => {
-          setUsdRaisedAmount(Number(projectData.raised_amount) * response.data.price)
+          setUsdRaisedAmount(Number(projectData.raised_amount) * response.data.price + projectData.rewarded_amount)
         })
   },[projectData])
 
@@ -33,7 +34,7 @@ export default function ProjectCurrentContributions() {
       <Row className="justify-content-md-center">
         <Col md={12} className="text-center" style={{color: "black"}}>
           <h1 className="display-6 fw-bold" style={{fontFamily: "'Kaisei Opti', sans-serif"}}>US$ {(usdRaisedAmount).toLocaleString()} / {Number(projectData.fund_amount).toLocaleString()}</h1>
-          <ProgressBar animated variant="light" now={(usdRaisedAmount / Number(projectData.fund_amount) * 100)} label={`${(usdRaisedAmount / Number(projectData.fund_amount) * 100).toFixed(2)}%`} className="mx-auto" style={{width: "50%", height: "20px"}}/>
+          <ProgressBar animated variant="dark" now={(usdRaisedAmount / Number(projectData.fund_amount) * 100)} label={`${(usdRaisedAmount / Number(projectData.fund_amount) * 100).toFixed(2)}%`} className="mx-auto" style={{width: "50%", height: "20px"}}/>
         </Col>
       </Row>
 

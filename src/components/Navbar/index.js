@@ -16,7 +16,7 @@ function NavBar() {
 	const [categoriesData, setCategoriesData] = useState({});
 	useEffect(() => {
 		axios
-			.get("http://localhost:8000/api/category/")
+			.get("94.202.120.29:8000/api/category/")
 			.then((response) => setCategoriesData(response.data.categories));
 	}, []);
 

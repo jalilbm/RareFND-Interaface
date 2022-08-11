@@ -49,7 +49,7 @@ export default function ContributeBtn(props) {
 						addr,
 						(Number(contribution_amount) * token_decimals).toString()
 					);
-					axios.post("http://localhost:8000/api/pending_contribution/", {
+					axios.post("94.202.120.29:8000/api/pending_contribution/", {
 						hash: tx.hash,
 						project: id,
 					});

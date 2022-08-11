@@ -46,7 +46,7 @@ export default function () {
 		if (formValues.username) {
 			axios
 				.get(
-					`http://localhost:8000/api/unique/username/${
+					`94.202.120.29:8000/api/unique/username/${
 						document.getElementById("username").value
 					}/`
 				)
@@ -66,13 +66,13 @@ export default function () {
 	useEffect(() => {
 		if (formValues.email) {
 			console.log(
-				`http://localhost:8000/api/unique/username/${
+				`94.202.120.29:8000/api/unique/username/${
 					document.getElementById("username").value
 				}/`
 			);
 			axios
 				.get(
-					`http://localhost:8000/api/unique/email/${
+					`94.202.120.29:8000/api/unique/email/${
 						document.getElementById("email").value
 					}/`
 				)

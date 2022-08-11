@@ -102,7 +102,6 @@ export default function ContributeBtn(props) {
 					border: "4px solid",
 					borderColor: "#FEC008",
 					borderRadius: "12px",
-					padding: "0px",
 				}}
 			>
 				<Row
@@ -132,7 +131,7 @@ export default function ContributeBtn(props) {
 							variant="warning"
 							classNmae="btn-wallet align-self-end"
 							size="lg"
-							style={{ width: "100%" }}
+							style={{ width: "100%", fontSize: "1.5vw", maxHeight: "100%" }}
 							onClick={() => transferPayment(props.wallet_address)}
 							disabled={!readyToContribute}
 						>

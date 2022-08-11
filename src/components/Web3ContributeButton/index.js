@@ -131,7 +131,7 @@ export default function ContributeBtn(props) {
 							variant="warning"
 							classNmae="btn-wallet align-self-end"
 							size="lg"
-							style={{ width: "100%", fontSize: "1.5vw", maxHeight: "100%" }}
+							style={{ width: "100%", fontSize: "2vh", maxHeight: "100%" }}
 							onClick={() => transferPayment(props.wallet_address)}
 							disabled={!readyToContribute}
 						>

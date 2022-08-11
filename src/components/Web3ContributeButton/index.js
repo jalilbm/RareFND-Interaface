@@ -99,7 +99,7 @@ export default function ContributeBtn(props) {
 		>
 			<div
 				style={{
-					border: "4px solid",
+					border: "3px solid",
 					borderColor: "#FEC008",
 					borderRadius: "12px",
 				}}
@@ -135,7 +135,7 @@ export default function ContributeBtn(props) {
 							onClick={() => transferPayment(props.wallet_address)}
 							disabled={!readyToContribute}
 						>
-							Contribute Now
+							Contribute
 						</Button>
 					</Col>
 				</Row>

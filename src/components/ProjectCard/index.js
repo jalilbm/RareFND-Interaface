@@ -17,7 +17,7 @@ export default function ProjectCard(props) {
 				<Col md={6}>
 					<Card.Img
 						variant="left"
-						src={"http://127.0.0.1:8000" + props.image}
+						src={"http://c503-94-202-120-29.ngrok.io" + props.image}
 						style={{
 							width: "100%",
 							height: props.image_height,

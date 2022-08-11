@@ -19,7 +19,7 @@ export default function Category() {
 					if (data[i].name === categoryName) {
 						setCategoryData({
 							title: data[i].name,
-							image: "http://127.0.0.1:8000" + data[i].image,
+							image: "http://c503-94-202-120-29.ngrok.io" + data[i].image,
 						});
 						break;
 					}

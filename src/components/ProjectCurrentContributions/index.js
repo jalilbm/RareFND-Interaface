@@ -12,7 +12,7 @@ export default function ProjectCurrentContributions() {
 	const [usdRaisedAmount, setUsdRaisedAmount] = useState(0);
 	useEffect(() => {
 		axios
-			.get(`94.202.120.29:8000/api/project/${id}/`)
+			.get(`http://c503-94-202-120-29.ngrok.io/api/project/${id}/`)
 			.then((response) => response.data)
 			.then((data) => {
 				setprojectData(data);
@@ -21,12 +21,14 @@ export default function ProjectCurrentContributions() {
 	}, []);
 
 	useEffect(() => {
-		axios.get(`94.202.120.29:8000/api/price/`).then((response) => {
-			setUsdRaisedAmount(
-				Number(projectData.raised_amount) * response.data.price +
-					projectData.rewarded_amount
-			);
-		});
+		axios
+			.get(`http://c503-94-202-120-29.ngrok.io/api/price/`)
+			.then((response) => {
+				setUsdRaisedAmount(
+					Number(projectData.raised_amount) * response.data.price +
+						projectData.rewarded_amount
+				);
+			});
 	}, [projectData]);
 
 	return (

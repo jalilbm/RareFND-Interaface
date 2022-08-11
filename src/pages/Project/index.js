@@ -18,7 +18,7 @@ export default function Project(props) {
 	}, []);
 	useEffect(() => {
 		axios
-			.get(`94.202.120.29:8000/api/project/${id}/`)
+			.get(`http://c503-94-202-120-29.ngrok.io/api/project/${id}/`)
 			.then((response) => {
 				setProjectData(response.data);
 				console.log(response.data);

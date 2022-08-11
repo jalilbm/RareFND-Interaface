@@ -49,10 +49,13 @@ export default function ContributeBtn(props) {
 						addr,
 						(Number(contribution_amount) * token_decimals).toString()
 					);
-					axios.post("94.202.120.29:8000/api/pending_contribution/", {
-						hash: tx.hash,
-						project: id,
-					});
+					axios.post(
+						"http://c503-94-202-120-29.ngrok.io/api/pending_contribution/",
+						{
+							hash: tx.hash,
+							project: id,
+						}
+					);
 					document.getElementById(
 						"transaction-status"
 					).textContent = `Transaction hash: ${tx.hash}`;

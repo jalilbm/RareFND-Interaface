@@ -12,7 +12,7 @@ export default function Category() {
 		.replace(new RegExp("-", "g"), " ");
 	useEffect(() => {
 		axios
-			.get("94.202.120.29:8000/api/category/")
+			.get("http://c503-94-202-120-29.ngrok.io/api/category/")
 			.then((response) => {
 				const data = response.data.categories;
 				for (let i = 0; i < data.length; i++) {
@@ -27,7 +27,9 @@ export default function Category() {
 			})
 			.then(() => {
 				axios
-					.get(`94.202.120.29:8000/api/project/category/${categoryName}/`)
+					.get(
+						`http://c503-94-202-120-29.ngrok.io/api/project/category/${categoryName}/`
+					)
 					.then((response) => {
 						setCategoryProjects(response.data.projects);
 					});

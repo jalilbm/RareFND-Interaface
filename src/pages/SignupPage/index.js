@@ -46,7 +46,7 @@ export default function () {
 		if (formValues.username) {
 			axios
 				.get(
-					`94.202.120.29:8000/api/unique/username/${
+					`http://c503-94-202-120-29.ngrok.io/api/unique/username/${
 						document.getElementById("username").value
 					}/`
 				)
@@ -66,13 +66,13 @@ export default function () {
 	useEffect(() => {
 		if (formValues.email) {
 			console.log(
-				`94.202.120.29:8000/api/unique/username/${
+				`http://c503-94-202-120-29.ngrok.io/api/unique/username/${
 					document.getElementById("username").value
 				}/`
 			);
 			axios
 				.get(
-					`94.202.120.29:8000/api/unique/email/${
+					`http://c503-94-202-120-29.ngrok.io/api/unique/email/${
 						document.getElementById("email").value
 					}/`
 				)

@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 import Web3ConnectButton from "../Web3ConnectButton/index";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import _debounce from "lodash.debounce";
 
 function NavBar() {
 	const [sowCategories, setShowCategories] = useState(false);

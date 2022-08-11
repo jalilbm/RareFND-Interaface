@@ -8,7 +8,6 @@ import axios from "axios";
 import token_info from "../../token.json";
 import { useParams } from "react-router";
 import { ProviderContext } from "../../web3/ProviderContext";
-import Web3Modal from "web3modal";
 
 const abi = token_info.token_abi;
 const token_address = token_info.token_address;

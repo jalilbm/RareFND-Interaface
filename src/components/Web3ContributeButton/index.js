@@ -32,7 +32,6 @@ export default function ContributeBtn(props) {
 	const token = new ethers.Contract(token_address, abi, signer);
 	const stakingAddress = "";
 	const staking = new ethers.Contract(stakingAddress, abi, signer);
-	
 
 	useEffect(() => {
 		axios
@@ -44,10 +43,10 @@ export default function ContributeBtn(props) {
 
 	useEffect(() => {
 		isReadyToContribute();
-		const getAllowance = async() => {
+		const getAllowance = async () => {
 			const allownce = await token.allowance(walletAddress, stakingAddress);
-			setAllowance(allownce)
-		}
+			setAllowance(allownce);
+		};
 		getAllowance();
 	}, [provider]);
 
@@ -63,7 +62,6 @@ export default function ContributeBtn(props) {
 			if (!walletAddress || (walletAddress && chainId !== "0x38")) {
 				document.querySelector("#connect-btn").click();
 			} else if (walletAddress && chainId === "0x38") {
-				
 				try {
 					const tx = await staking.stake(
 						ethers.utils.parseEther(contribution_amount)
@@ -95,7 +93,7 @@ export default function ContributeBtn(props) {
 	async function approve() {
 		let approveTx;
 		setPending(true);
-		approveTx = await token.approve(stakingAddress ,ethers.constants.MaxInt256);
+		approveTx = await token.approve(stakingAddress, ethers.constants.MaxInt256);
 		await approveTx.wait();
 		setPending(false);
 	}
@@ -157,7 +155,7 @@ export default function ContributeBtn(props) {
 						></input>
 					</Col>
 					<Col className="p-0 w-20" style={{ width: "20%" }}>
-						{allowance > 0 ? 
+						{allowance > 0 ? (
 							<Button
 								id="contribute-btn"
 								variant="warning"
@@ -168,7 +166,8 @@ export default function ContributeBtn(props) {
 								disabled={!readyToContribute || pending}
 							>
 								Contribute
-							</Button> : 
+							</Button>
+						) : (
 							<Button
 								id="approve-btn"
 								variant="warning"
@@ -180,7 +179,7 @@ export default function ContributeBtn(props) {
 							>
 								Approve
 							</Button>
-						}
+						)}
 					</Col>
 				</Row>
 			</div>

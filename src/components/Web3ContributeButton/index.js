@@ -24,13 +24,14 @@ export default function ContributeBtn(props) {
 	const [chainId, setChainId] = useState();
 	const [readyToContribute, setReadyToContribute] = useState();
 	const [pending, setPending] = useState(false);
+	const [token, setToken] = useState()
+	const [staking, setStaking] = useState()
 	const [allowance, setAllowance] = useState(0);
 	const [projectData, setProjectData] = useState();
 	const { id } = useParams();
 	const { provider, setProvider } = useContext(ProviderContext);
 	const stakingAddress = "0xFC938a4d3eF55e908448C4fCBfe48513163D8348";
 	const tokenAddress = "0x6e6BC5aE02058a080A99e39bcca7EF631a6c7771";
-	let token, staking;
 	const token_abi = [
 		{
 		"inputs": [
@@ -151,12 +152,15 @@ export default function ContributeBtn(props) {
 	useEffect(() => {
 		if (provider) {
 				const signer = provider.getSigner();
-				token = new ethers.Contract(tokenAddress, token_abi, signer);
-				staking = new ethers.Contract(stakingAddress, staking_abi, signer);
+				const token = new ethers.Contract(tokenAddress, token_abi, signer);
+				const staking = new ethers.Contract(stakingAddress, staking_abi, signer);
+				setToken(token)
+				setStaking(staking)
 				isReadyToContribute();
 				const getAllowance = async() => {
 					const allownce = await token.allowance(walletAddress, stakingAddress);
 					setAllowance(allownce)
+					console.log('allowance', allowance)
 				}
 				getAllowance();
 		}
@@ -176,9 +180,12 @@ export default function ContributeBtn(props) {
 			} else if (walletAddress && chainId === "0x38") {
 				
 				try {
+					setPending(true);
 					const tx = await staking?.stake(
 						ethers.utils.parseEther(contribution_amount)
 					);
+					await tx.wait()
+					setPending(false)
 					axios.post(
 						"http://c503-94-202-120-29.ngrok.io/api/pending_contribution/",
 						{
@@ -206,6 +213,7 @@ export default function ContributeBtn(props) {
 	async function approve() {
 		let approveTx;
 		setPending(true);
+		console.log('token', token)
 		approveTx = await token?.approve(stakingAddress ,ethers.constants.MaxInt256);
 		await approveTx.wait();
 		setPending(false);

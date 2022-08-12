@@ -23,9 +23,16 @@ export default function ContributeBtn(props) {
 	const [walletAddress, setWalletAddress] = useState();
 	const [chainId, setChainId] = useState();
 	const [readyToContribute, setReadyToContribute] = useState();
+	const [pending, setPending] = useState(false);
+	const [allowance, setAllowance] = useState(0);
 	const [projectData, setProjectData] = useState();
 	const { id } = useParams();
 	const { provider, setProvider } = useContext(ProviderContext);
+	const signer = provider.getSigner();
+	const token = new ethers.Contract(token_address, abi, signer);
+	const stakingAddress = "";
+	const staking = new ethers.Contract(stakingAddress, abi, signer);
+	
 
 	useEffect(() => {
 		axios
@@ -37,9 +44,14 @@ export default function ContributeBtn(props) {
 
 	useEffect(() => {
 		isReadyToContribute();
-	}, [provider, projectData]);
+		const getAllowance = async() => {
+			const allownce = await token.allowance(walletAddress, stakingAddress);
+			setAllowance(allownce)
+		}
+		getAllowance();
+	}, [provider]);
 
-	async function transferPayment(addr) {
+	async function stake() {
 		let contribution_amount =
 			document.getElementById("contribute-amount").value;
 		if (!regexp.test(contribution_amount)) {
@@ -51,12 +63,10 @@ export default function ContributeBtn(props) {
 			if (!walletAddress || (walletAddress && chainId !== "0x38")) {
 				document.querySelector("#connect-btn").click();
 			} else if (walletAddress && chainId === "0x38") {
-				const signer = provider.getSigner();
-				const token = new ethers.Contract(token_address, abi, signer);
+				
 				try {
-					const tx = await token.transfer(
-						addr,
-						(Number(contribution_amount) * token_decimals).toString()
+					const tx = await staking.stake(
+						ethers.utils.parseEther(contribution_amount)
 					);
 					axios.post(
 						"http://c503-94-202-120-29.ngrok.io/api/pending_contribution/",
@@ -80,6 +90,14 @@ export default function ContributeBtn(props) {
 				}
 			}
 		}
+	}
+
+	async function approve() {
+		let approveTx;
+		setPending(true);
+		approveTx = await token.approve(stakingAddress ,ethers.constants.MaxInt256);
+		await approveTx.wait();
+		setPending(false);
 	}
 
 	async function isReadyToContribute() {
@@ -139,17 +157,30 @@ export default function ContributeBtn(props) {
 						></input>
 					</Col>
 					<Col className="p-0 w-20" style={{ width: "20%" }}>
-						<Button
-							id="contribute-btn"
-							variant="warning"
-							classNmae="btn-wallet align-self-end"
-							size="lg"
-							style={{ width: "100%", fontSize: "2vh", maxHeight: "100%" }}
-							onClick={() => transferPayment(props.wallet_address)}
-							disabled={!readyToContribute}
-						>
-							Contribute
-						</Button>
+						{allowance > 0 ? 
+							<Button
+								id="contribute-btn"
+								variant="warning"
+								classNmae="btn-wallet align-self-end"
+								size="lg"
+								style={{ width: "100%", fontSize: "2vh", maxHeight: "100%" }}
+								onClick={() => stake()}
+								disabled={!readyToContribute || pending}
+							>
+								Contribute
+							</Button> : 
+							<Button
+								id="approve-btn"
+								variant="warning"
+								classNmae="btn-wallet align-self-end"
+								size="lg"
+								style={{ width: "100%", fontSize: "2vh", maxHeight: "100%" }}
+								onClick={() => approve()}
+								disabled={pending}
+							>
+								Approve
+							</Button>
+						}
 					</Col>
 				</Row>
 			</div>

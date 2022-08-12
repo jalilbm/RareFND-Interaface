@@ -74,6 +74,7 @@ export default function ContributeBtn(props) {
 	}
 
 	async function isReadyToContribute() {
+		if (!props.projectLive) return false;
 		console.log("1");
 		if (provider) {
 			setChainId(toHex(provider.network.chainId));

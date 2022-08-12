@@ -25,8 +25,7 @@ export default function ProjectCurrentContributions() {
 			.get(`http://c503-94-202-120-29.ngrok.io/api/price/`)
 			.then((response) => {
 				setUsdRaisedAmount(
-					Number(projectData.raised_amount) * response.data.price +
-						projectData.rewarded_amount
+					Number(projectData.raised_amount) + projectData.rewarded_amount
 				);
 			});
 	}, [projectData]);

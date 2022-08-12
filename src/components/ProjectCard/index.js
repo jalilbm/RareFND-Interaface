@@ -28,7 +28,10 @@ export default function ProjectCard(props) {
 					<Card.Body className="text-white text-center d-flex flex-column h-100">
 						<Card.Title className="display-5">{props.title}</Card.Title>
 						<Card.Text style={{ fontSize: "30px" }}>{props.text}</Card.Text>
-						<Web3ContributeButton wallet_address={props.wallet_address} />
+						<Web3ContributeButton
+							wallet_address={props.wallet_address}
+							projectLive={props.projectLive}
+						/>
 					</Card.Body>
 				</Col>
 			</Row>

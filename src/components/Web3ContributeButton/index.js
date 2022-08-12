@@ -23,12 +23,21 @@ export default function ContributeBtn(props) {
 	const [walletAddress, setWalletAddress] = useState();
 	const [chainId, setChainId] = useState();
 	const [readyToContribute, setReadyToContribute] = useState();
+	const [projectData, setProjectData] = useState();
 	const { id } = useParams();
 	const { provider, setProvider } = useContext(ProviderContext);
 
 	useEffect(() => {
+		axios
+			.get(`http://c503-94-202-120-29.ngrok.io/api/project/${id}/`)
+			.then((response) => {
+				setProjectData(response.data);
+			});
+	}, []);
+
+	useEffect(() => {
 		isReadyToContribute();
-	}, [provider]);
+	}, [provider, projectData]);
 
 	async function transferPayment(addr) {
 		let contribution_amount =
@@ -74,7 +83,10 @@ export default function ContributeBtn(props) {
 	}
 
 	async function isReadyToContribute() {
-		// if (!props.projectLive) return false;
+		if (projectData) {
+			setReadyToContribute(projectData.live);
+			return;
+		}
 		console.log("1");
 		if (provider) {
 			setChainId(toHex(provider.network.chainId));

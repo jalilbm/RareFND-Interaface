@@ -28,13 +28,119 @@ export default function ContributeBtn(props) {
 	const [projectData, setProjectData] = useState();
 	const { id } = useParams();
 	const { provider, setProvider } = useContext(ProviderContext);
-	const signer = provider.getSigner();
-	const token = new ethers.Contract(token_address, abi, signer);
-	const stakingAddress = "";
-	const staking = new ethers.Contract(stakingAddress, abi, signer);
-	
+	const stakingAddress = "0xFC938a4d3eF55e908448C4fCBfe48513163D8348";
+	const tokenAddress = "0x6e6BC5aE02058a080A99e39bcca7EF631a6c7771";
+	let token, staking;
+	const token_abi = [
+		{
+		"inputs": [
+		  { "internalType": "address", "name": "owner", "type": "address" },
+		  { "internalType": "address", "name": "spender", "type": "address" }
+		],
+		"name": "allowance",
+		"outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+		"stateMutability": "view",
+		"type": "function"
+	  },
+	  {
+		"inputs": [
+		  { "internalType": "address", "name": "spender", "type": "address" },
+		  { "internalType": "uint256", "name": "amount", "type": "uint256" }
+		],
+		"name": "approve",
+		"outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	  },
+	];
+	const staking_abi = [
+		{
+		  "inputs": [
+			{ "internalType": "address", "name": "_FND", "type": "address" }
+		  ],
+		  "stateMutability": "nonpayable",
+		  "type": "constructor"
+		},
+		{
+		  "inputs": [],
+		  "name": "FND",
+		  "outputs": [
+			{ "internalType": "contract IERC20", "name": "", "type": "address" }
+		  ],
+		  "stateMutability": "view",
+		  "type": "function"
+		},
+		{
+		  "inputs": [],
+		  "name": "PERIOD",
+		  "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+		  "stateMutability": "view",
+		  "type": "function"
+		},
+		{
+		  "inputs": [],
+		  "name": "REWARDRATE",
+		  "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+		  "stateMutability": "view",
+		  "type": "function"
+		},
+		{
+		  "inputs": [],
+		  "name": "divideReward",
+		  "outputs": [],
+		  "stateMutability": "nonpayable",
+		  "type": "function"
+		},
+		{
+		  "inputs": [],
+		  "name": "getReward",
+		  "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+		  "stateMutability": "view",
+		  "type": "function"
+		},
+		{
+		  "inputs": [],
+		  "name": "owner",
+		  "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+		  "stateMutability": "view",
+		  "type": "function"
+		},
+		{
+		  "inputs": [
+			{ "internalType": "uint256", "name": "_amount", "type": "uint256" }
+		  ],
+		  "name": "stake",
+		  "outputs": [],
+		  "stateMutability": "nonpayable",
+		  "type": "function"
+		},
+		{
+		  "inputs": [],
+		  "name": "totalStaked",
+		  "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+		  "stateMutability": "view",
+		  "type": "function"
+		},
+		{
+		  "inputs": [
+			{ "internalType": "uint256", "name": "_amount", "type": "uint256" }
+		  ],
+		  "name": "withdraw",
+		  "outputs": [],
+		  "stateMutability": "nonpayable",
+		  "type": "function"
+		},
+		{
+		  "inputs": [],
+		  "name": "withdrawAll",
+		  "outputs": [],
+		  "stateMutability": "nonpayable",
+		  "type": "function"
+		}
+	  ];
 
 	useEffect(() => {
+	
 		axios
 			.get(`http://c503-94-202-120-29.ngrok.io/api/project/${id}/`)
 			.then((response) => {
@@ -43,12 +149,17 @@ export default function ContributeBtn(props) {
 	}, []);
 
 	useEffect(() => {
-		isReadyToContribute();
-		const getAllowance = async() => {
-			const allownce = await token.allowance(walletAddress, stakingAddress);
-			setAllowance(allownce)
+		if (provider) {
+				const signer = provider.getSigner();
+				token = new ethers.Contract(tokenAddress, token_abi, signer);
+				staking = new ethers.Contract(stakingAddress, staking_abi, signer);
+				isReadyToContribute();
+				const getAllowance = async() => {
+					const allownce = await token.allowance(walletAddress, stakingAddress);
+					setAllowance(allownce)
+				}
+				getAllowance();
 		}
-		getAllowance();
 	}, [provider]);
 
 	async function stake() {
@@ -65,7 +176,7 @@ export default function ContributeBtn(props) {
 			} else if (walletAddress && chainId === "0x38") {
 				
 				try {
-					const tx = await staking.stake(
+					const tx = await staking?.stake(
 						ethers.utils.parseEther(contribution_amount)
 					);
 					axios.post(
@@ -95,7 +206,7 @@ export default function ContributeBtn(props) {
 	async function approve() {
 		let approveTx;
 		setPending(true);
-		approveTx = await token.approve(stakingAddress ,ethers.constants.MaxInt256);
+		approveTx = await token?.approve(stakingAddress ,ethers.constants.MaxInt256);
 		await approveTx.wait();
 		setPending(false);
 	}

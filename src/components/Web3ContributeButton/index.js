@@ -1,7 +1,7 @@
 import Button from "react-bootstrap/Button";
 import { ethers } from "ethers";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useMemo } from "react";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import axios from "axios";
@@ -149,7 +149,11 @@ export default function ContributeBtn(props) {
 			});
 	}, []);
 
-	useEffect(() => {
+	const getAllowance = async() => {
+		const allownce = await token.allowance(walletAddress, stakingAddress);
+		setAllowance(allownce)
+	}
+	useMemo(() => {
 		if (provider) {
 				const signer = provider.getSigner();
 				const token = new ethers.Contract(tokenAddress, token_abi, signer);
@@ -157,14 +161,11 @@ export default function ContributeBtn(props) {
 				setToken(token)
 				setStaking(staking)
 				isReadyToContribute();
-				const getAllowance = async() => {
-					const allownce = await token.allowance(walletAddress, stakingAddress);
-					setAllowance(allownce)
-					console.log('allowance', allowance)
-				}
+				
+				console.log('allow---', walletAddress)
 				getAllowance();
 		}
-	}, [provider]);
+	}, [provider, walletAddress]);
 
 	async function stake() {
 		let contribution_amount =
@@ -217,6 +218,7 @@ export default function ContributeBtn(props) {
 		approveTx = await token?.approve(stakingAddress ,ethers.constants.MaxInt256);
 		await approveTx.wait();
 		setPending(false);
+		setAllowance(ethers.constants.MaxInt256);
 	}
 
 	async function isReadyToContribute() {

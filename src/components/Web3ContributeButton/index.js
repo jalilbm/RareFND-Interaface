@@ -192,7 +192,7 @@ export default function ContributeBtn(props) {
 								size="lg"
 								style={{ width: "100%", fontSize: "2vh", maxHeight: "100%" }}
 								onClick={() => approve()}
-								disabled={!projectLive || pending}
+								disabled={!provider || !projectLive || pending}
 							>
 								Approve
 							</Button>

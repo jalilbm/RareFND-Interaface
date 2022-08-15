@@ -1,5 +1,6 @@
 import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.css";
+import { FixedNumber } from "ethers";
 
 export default function CategoryCarousel(props) {
 	return (
@@ -21,12 +22,9 @@ export default function CategoryCarousel(props) {
 					<h1
 						className="display-1"
 						style={{
+							color:"white",
 							fontFamily: "'Cinzel', serif",
-							color: "white",
-							top: "50%",
-							transform: "translateY(-50%)",
-							bottom: "initial",
-							fontSize: "100px",
+							fontSize: "10vw",
 						}}
 					>
 						{props.title}

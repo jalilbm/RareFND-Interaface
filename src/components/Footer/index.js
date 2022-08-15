@@ -33,22 +33,20 @@ export default function Footer() {
 							style={{ cursor: "pointer", padding: "0" }}
 						>
 							<Link className="text-decoration-none text-secondary" to="/">
-								Resources
+								Home
 							</Link>
-							<Link className="text-decoration-none text-secondary" to="/">
+							<Link className="text-decoration-none text-secondary" to="/about">
 								About Us
 							</Link>
 							<Link className="text-decoration-none text-secondary" to="/">
-								Contact
+								Contacts
 							</Link>
-							<Link className="text-decoration-none text-secondary" to="/">
-								Blog
-							</Link>
+							
 						</CDBBox>
 					</CDBBox>
 					<CDBBox>
-						<p className="h5" style={{ fontWeight: "600" }}>
-							Help
+						<p className="h5" style={{ fontWeight: "600"}}>
+							Help & Support
 						</p>
 						<CDBBox
 							display="flex"
@@ -58,17 +56,17 @@ export default function Footer() {
 							<Link className="text-decoration-none text-secondary" to="/">
 								Support
 							</Link>
-							<Link className="text-decoration-none text-secondary" to="/">
+							<Link className="text-decoration-none text-secondary" to="/signup">
 								Sign Up
 							</Link>
-							<Link className="text-decoration-none text-secondary" to="/">
+							<Link className="text-decoration-none text-secondary" to="/login">
 								Sign In
 							</Link>
 						</CDBBox>
 					</CDBBox>
 					<CDBBox>
 						<p className="h5" style={{ fontWeight: "600" }}>
-							Products
+							Our services
 						</p>
 						<CDBBox
 							display="flex"
@@ -76,13 +74,10 @@ export default function Footer() {
 							style={{ cursor: "pointer", padding: "0" }}
 						>
 							<Link className="text-decoration-none text-secondary" to="/">
-								Windframe
+								 Startaps Fundraising
 							</Link>
 							<Link className="text-decoration-none text-secondary" to="/">
-								Loop
-							</Link>
-							<Link className="text-decoration-none text-secondary" to="/">
-								Contrast
+								 Charities Fundraising
 							</Link>
 						</CDBBox>
 					</CDBBox>
@@ -145,7 +140,7 @@ export default function Footer() {
 					</a>
 				</CDBBox>
 				<small className="text-center mt-2">
-					&copy; Devwares, 2022. All rights reserved.
+					&copy; RareFnd, 2022. All rights reserved.
 				</small>
 			</CDBBox>
 		</CDBFooter>

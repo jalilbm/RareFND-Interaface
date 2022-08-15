@@ -2,7 +2,7 @@ import Card from "react-bootstrap/Card";
 import "./index.css";
 
 export default function ProjectCard(props) {
-	const head = props.head < 80 ? props.head : props.head.slice(0, 80) + "...";
+	const head = props.head < 40 ? props.head : props.head.slice(0, 40) + "...";
 	return (
 		<a
 			href={`/project/${props.project_id}`}

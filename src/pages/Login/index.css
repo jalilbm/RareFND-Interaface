@@ -2,7 +2,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 61vh;
+  height: 100%;
+  padding: 50px;
 }
 
 .Auth-form {

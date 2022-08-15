@@ -1,0 +1,36 @@
+
+.aboutpage .AboutBody{
+  margin:4%;
+  color:white;
+  padding: 60px;
+  top:0;
+  width: 90%;
+
+}
+.aboutpage .quote{
+  font-size: 24px;
+  text-align: center;
+  margin-top: 1%;
+  color:white;
+  padding: 1%;
+  width:60%;
+  font-family: "'Cinzel', serif";
+  font-weight: bold;
+}
+.aboutpage blockquote::before {
+  content: open-quote;
+}
+.aboutpage blockquote::after {
+  content: close-quote;
+}
+.aboutpage blockquote {
+  quotes: "“" "”" "‘" "’";
+}
+
+.contacttitle{
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+.aboutpage a, a:hover, a:focus, a:active {
+ 
+  color: white;
+}

@@ -37,7 +37,7 @@ export default function Project(props) {
 				backgroudColor="black"
 				projectLive={projectData.live}
 				image_height={height / 1.8}
-				wallet_address={projectData.wallet_address}
+				staking_address={projectData.staking_address}
 			/>
 			<ProjectCurrentContributions />
 			<ProjectDescription description={projectData.description} />

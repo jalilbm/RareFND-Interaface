@@ -8,12 +8,14 @@ import "./index.css";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import Web3ConnectButton from "../Web3ConnectButton/index";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import AuthContext from "../../Context/AuthContext";
 
 function NavBar() {
 	const [sowCategories, setShowCategories] = useState(false);
 	const [categoriesData, setCategoriesData] = useState({});
+	const { user, logOut } = useContext(AuthContext);
 	useEffect(() => {
 		axios
 			.get("http://c503-94-202-120-29.ngrok.io/api/category/")
@@ -83,26 +85,41 @@ function NavBar() {
 						</NavDropdown.Item>
 					</NavDropdown>
 				</Nav>
-				<Button
-					variant="outline-warning"
-					className="btn-log-in"
-					as={Link}
-					to="/login"
-					style={{ marginRight: "10px" }}
-					onMouseDown={(e) => e.preventDefault()}
-				>
-					Log In
-				</Button>
-				<Button
-					variant="warning"
-					as={Link}
-					to="/signup"
-					className="btn-signup"
-					style={{ marginRight: "10px" }}
-					onMouseDown={(e) => e.preventDefault()}
-				>
-					Sign Up
-				</Button>
+				{user ? (
+					<Button
+						variant="outline-warning"
+						className="btn-log-in"
+						as={Link}
+						to="/login"
+						style={{ marginRight: "10px" }}
+						onMouseDown={logOut}
+					>
+						Log Out
+					</Button>
+				) : (
+					<>
+						<Button
+							variant="outline-warning"
+							className="btn-log-in"
+							as={Link}
+							to="/login"
+							style={{ marginRight: "10px" }}
+							onMouseDown={(e) => e.preventDefault()}
+						>
+							Log In
+						</Button>
+						<Button
+							variant="warning"
+							as={Link}
+							to="/signup"
+							className="btn-signup"
+							style={{ marginRight: "10px" }}
+							onMouseDown={(e) => e.preventDefault()}
+						>
+							Sign Up
+						</Button>
+					</>
+				)}
 				<Web3ConnectButton />
 			</Navbar.Collapse>
 		</Navbar>

@@ -6,6 +6,7 @@ import Web3ContributeButton from "../Web3ContributeButton";
 import "./index.css";
 
 export default function ProjectCard(props) {
+	console.log(props.image);
 	return (
 		<Card
 			className={
@@ -29,7 +30,8 @@ export default function ProjectCard(props) {
 						<Card.Title className="display-5">{props.title}</Card.Title>
 						<Card.Text style={{ fontSize: "30px" }}>{props.text}</Card.Text>
 						<Web3ContributeButton
-							wallet_address={props.wallet_address}
+							staking_address={props.staking_address}
+							staking_abi={props.staking_abi}
 							projectLive={props.projectLive}
 						/>
 					</Card.Body>

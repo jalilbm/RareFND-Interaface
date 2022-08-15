@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useCallback } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import React from "react";
 import "./index.css";
@@ -6,6 +6,13 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import axios from "axios";
 import { ProviderContext } from "../../web3/ProviderContext";
+import { Link } from "react-router-dom";
+
+var regexp = /^[\s()+-]*([0-9][\s()+-]*){6,20}$/;
+function isValidPhonenumber(value) {
+	if (!value) return false;
+	return regexp.test(value.replace(/[\s()+\-\.]|ext/gi, ""));
+}
 
 export default function () {
 	const initialValues = { email: "", password: "" };
@@ -14,6 +21,9 @@ export default function () {
 	const [isSubmit, setIsSubmit] = useState(false);
 	const [walletAddress, setWalletAddress] = useState();
 	const { provider, setProvider } = useContext(ProviderContext);
+	const [reload, setReload] = useState(false);
+	const [, updateState] = useState();
+	const forceUpdate = useCallback(() => updateState({}), []);
 
 	const getWallletAdress = async () => {
 		const accounts = await provider.listAccounts();
@@ -31,14 +41,12 @@ export default function () {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(formErrors);
 		setFormErrors({ ...formErrors, ...validate(formValues) });
 		setIsSubmit(true);
 	};
 
 	useEffect(() => {
 		if (Object.keys(formErrors).length === 0 && isSubmit) {
-			console.log(formValues);
 		}
 	}, [formErrors]);
 
@@ -58,18 +66,14 @@ export default function () {
 						});
 					} else {
 						delete formErrors.username;
+						forceUpdate();
 					}
 				});
 		}
-	}, [formValues.username]);
+	}, [formValues]);
 
 	useEffect(() => {
 		if (formValues.email) {
-			console.log(
-				`http://c503-94-202-120-29.ngrok.io/api/unique/username/${
-					document.getElementById("username").value
-				}/`
-			);
 			axios
 				.get(
 					`http://c503-94-202-120-29.ngrok.io/api/unique/email/${
@@ -112,7 +116,18 @@ export default function () {
 			errors.password = "Password cannot exceed more than 30 characters";
 		}
 
-		console.log(formErrors);
+		if (values.password !== values.password2) {
+			errors.password2 = "Password confirmation doesn't match with password";
+		}
+
+		if (values.phone && !isValidPhonenumber(values.phone)) {
+			errors.phone = "Invalid phone number";
+		}
+
+		if (!isValidPhonenumber(values.walletAddress)) {
+			errors.walletAddress = "Please connect using your wallet";
+		}
+
 		return errors;
 	};
 
@@ -122,7 +137,9 @@ export default function () {
 				<div className="Auth-form-content">
 					<h3 className="Auth-form-title">Sign Up</h3>
 					<div className="form-group mt-3">
-						<label>Username</label>
+						<label>
+							Username <span className="text-danger">*</span>
+						</label>
 						<input
 							id="username"
 							name="username"
@@ -134,7 +151,9 @@ export default function () {
 						<p className="text-danger">{formErrors.username}</p>
 					</div>
 					<div className="form-group mt-3">
-						<label>Email address</label>
+						<label>
+							Email address <span className="text-danger">*</span>
+						</label>
 						<input
 							id="email"
 							type="email"
@@ -147,7 +166,9 @@ export default function () {
 						<p className="text-danger">{formErrors.email}</p>
 					</div>
 					<div className="form-group mt-3">
-						<label>Password</label>
+						<label>
+							Password <span className="text-danger">*</span>
+						</label>
 						<input
 							type="password"
 							name="password"
@@ -159,7 +180,9 @@ export default function () {
 						<p className="text-danger">{formErrors.password}</p>
 					</div>
 					<div className="form-group mt-3">
-						<label>Password Confirmation</label>
+						<label>
+							Password Confirmation <span className="text-danger">*</span>
+						</label>
 						<input
 							type="password"
 							name="password2"
@@ -200,10 +223,10 @@ export default function () {
 					<div className="form-group mt-3">
 						<label>Phone Number</label>
 						<PhoneInput
+							id="phonenumber"
 							name="phone"
 							className="mt-1"
 							inputStyle={{ width: "100%" }}
-							// containerClass="form-control mt-1"
 							placeholder="Enter Phone Number (Optional)"
 							value={formValues.phone}
 							onChange={(value) =>
@@ -211,7 +234,7 @@ export default function () {
 							}
 							inputProps={{
 								name: "phone",
-								required: true,
+								// required: true,
 								autoFocus: true,
 							}}
 						/>
@@ -219,28 +242,26 @@ export default function () {
 					</div>
 
 					<div className="form-group mt-3">
-						<label>Wallet Address</label>
+						<label>
+							Wallet Address <span className="text-danger">*</span>
+						</label>
 						{walletAddress ? (
 							<p className="text-success mt-2">
 								{walletAddress.slice(0, 10) +
 									"....." +
 									walletAddress.slice(-10)}
 							</p>
-						) : (
-							<p className="text-danger mt-2">
-								Please connect to the website using your wallet
-							</p>
-						)}
+						) : null}
 						<p className="text-danger">{formErrors.walletAddress}</p>
 					</div>
 
 					<div className="d-grid gap-2 mt-3">
-						<button type="submit" className="btn btn-primary">
+						<button type="submit" className="btn btn-warning">
 							Submit
 						</button>
 					</div>
 					<p className="forgot-password text-right mt-2">
-						Forgot <a href="#">password?</a>
+						Have an account? <Link to="/login">Login</Link>
 					</p>
 				</div>
 			</form>

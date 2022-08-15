@@ -1,3 +1,4 @@
-img {
+.project-description img {
   max-width: 100%;
+  object-fit: contain;
 }

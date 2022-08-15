@@ -1,7 +1,7 @@
 import Button from "react-bootstrap/Button";
 import { ethers } from "ethers";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useMemo } from "react";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import axios from "axios";
@@ -9,9 +9,6 @@ import token_info from "../../token.json";
 import { useParams } from "react-router";
 import { ProviderContext } from "../../web3/ProviderContext";
 
-const abi = token_info.token_abi;
-const token_address = token_info.token_address;
-const token_decimals = token_info.token_decimals;
 var regexp = /^\d+(\.\d{1,18})?$/;
 
 const toHex = (num) => {
@@ -28,134 +25,43 @@ export default function ContributeBtn(props) {
 	const [staking, setStaking] = useState();
 	const [allowance, setAllowance] = useState(0);
 	const [projectData, setProjectData] = useState();
+	const [projectLive, setProjectLive] = useState(false);
+	const [stakingAddress, setStakingAddress] = useState();
+	const [staking_abi, setStaking_abi] = useState();
 	const { id } = useParams();
 	const { provider, setProvider } = useContext(ProviderContext);
-	const stakingAddress = "0xFC938a4d3eF55e908448C4fCBfe48513163D8348";
-	const tokenAddress = "0x6e6BC5aE02058a080A99e39bcca7EF631a6c7771";
-	const token_abi = [
-		{
-			inputs: [
-				{ internalType: "address", name: "owner", type: "address" },
-				{ internalType: "address", name: "spender", type: "address" },
-			],
-			name: "allowance",
-			outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-			stateMutability: "view",
-			type: "function",
-		},
-		{
-			inputs: [
-				{ internalType: "address", name: "spender", type: "address" },
-				{ internalType: "uint256", name: "amount", type: "uint256" },
-			],
-			name: "approve",
-			outputs: [{ internalType: "bool", name: "", type: "bool" }],
-			stateMutability: "nonpayable",
-			type: "function",
-		},
-	];
-	const staking_abi = [
-		{
-			inputs: [{ internalType: "address", name: "_FND", type: "address" }],
-			stateMutability: "nonpayable",
-			type: "constructor",
-		},
-		{
-			inputs: [],
-			name: "FND",
-			outputs: [{ internalType: "contract IERC20", name: "", type: "address" }],
-			stateMutability: "view",
-			type: "function",
-		},
-		{
-			inputs: [],
-			name: "PERIOD",
-			outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-			stateMutability: "view",
-			type: "function",
-		},
-		{
-			inputs: [],
-			name: "REWARDRATE",
-			outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-			stateMutability: "view",
-			type: "function",
-		},
-		{
-			inputs: [],
-			name: "divideReward",
-			outputs: [],
-			stateMutability: "nonpayable",
-			type: "function",
-		},
-		{
-			inputs: [],
-			name: "getReward",
-			outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-			stateMutability: "view",
-			type: "function",
-		},
-		{
-			inputs: [],
-			name: "owner",
-			outputs: [{ internalType: "address", name: "", type: "address" }],
-			stateMutability: "view",
-			type: "function",
-		},
-		{
-			inputs: [{ internalType: "uint256", name: "_amount", type: "uint256" }],
-			name: "stake",
-			outputs: [],
-			stateMutability: "nonpayable",
-			type: "function",
-		},
-		{
-			inputs: [],
-			name: "totalStaked",
-			outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-			stateMutability: "view",
-			type: "function",
-		},
-		{
-			inputs: [{ internalType: "uint256", name: "_amount", type: "uint256" }],
-			name: "withdraw",
-			outputs: [],
-			stateMutability: "nonpayable",
-			type: "function",
-		},
-		{
-			inputs: [],
-			name: "withdrawAll",
-			outputs: [],
-			stateMutability: "nonpayable",
-			type: "function",
-		},
-	];
+	const token_abi = token_info.token_abi;
+	const tokenAddress = token_info.token_address;
 
 	useEffect(() => {
 		axios
 			.get(`http://c503-94-202-120-29.ngrok.io/api/project/${id}/`)
 			.then((response) => {
 				setProjectData(response.data);
+				setProjectLive(response.data.live);
+				setStakingAddress(response.data.staking_address);
+				setStaking_abi(JSON.parse(response.data.staking_abi));
 			});
 	}, []);
 
-	useEffect(() => {
-		if (provider) {
+	const getAllowance = async (token_) => {
+		const allownce = await token_.allowance(walletAddress, stakingAddress);
+		setAllowance(allownce);
+	};
+
+	useMemo(() => {
+		if (provider && stakingAddress && stakingAddress) {
 			const signer = provider.getSigner();
-			const token = new ethers.Contract(tokenAddress, token_abi, signer);
+			const token_ = new ethers.Contract(tokenAddress, token_abi, signer);
 			const staking = new ethers.Contract(stakingAddress, staking_abi, signer);
-			setToken(token);
+			setToken(token_);
 			setStaking(staking);
 			isReadyToContribute();
-			const getAllowance = async () => {
-				const allownce = await token.allowance(walletAddress, stakingAddress);
-				setAllowance(allownce);
-				console.log("allowance", allowance);
-			};
-			getAllowance();
+
+			console.log("allow---", walletAddress);
+			getAllowance(token_);
 		}
-	}, [provider]);
+	}, [provider, walletAddress, stakingAddress]);
 
 	async function stake() {
 		let contribution_amount =
@@ -210,27 +116,24 @@ export default function ContributeBtn(props) {
 		);
 		await approveTx.wait();
 		setPending(false);
+		setAllowance(ethers.constants.MaxInt256);
 	}
 
 	async function isReadyToContribute() {
-		if (projectData) {
-			setReadyToContribute(projectData.live);
+		if (!projectLive) {
+			setReadyToContribute(false);
 			return;
 		}
-		console.log("1");
-		if (provider) {
+		if (provider && projectLive) {
 			setChainId(toHex(provider.network.chainId));
 			const accounts = await provider.listAccounts();
 			if (accounts) setWalletAddress(accounts[0]);
 			if (accounts[0]) {
-				console.log("3");
 				setReadyToContribute(true);
 			} else {
-				console.log("4");
 				setReadyToContribute(false);
 			}
 		} else {
-			console.log("5");
 			setReadyToContribute(false);
 		}
 	}
@@ -256,7 +159,7 @@ export default function ContributeBtn(props) {
 							id="contribute-amount"
 							className="bg-black"
 							placeholder="0.00 FND"
-							autocomplete="off"
+							autoComplete="off"
 							style={{
 								border: "none",
 								width: "100%",
@@ -289,7 +192,7 @@ export default function ContributeBtn(props) {
 								size="lg"
 								style={{ width: "100%", fontSize: "2vh", maxHeight: "100%" }}
 								onClick={() => approve()}
-								disabled={pending}
+								disabled={!projectLive || pending}
 							>
 								Approve
 							</Button>

@@ -55,7 +55,7 @@ function HomeCards() {
             and crowdfunding space. Some of your campaign contributors not crypto – savvy?
             No problem! We offer fiat based payments as well using credit and debit cards.
             We’re a true end to end crowdfunding solution!"
-						buttonHref="/startproject"
+						buttonHref="/start-project"
 						buttonText="Start Fundraising"
 						textStyle={{
 							position: "realtive",
@@ -154,7 +154,7 @@ function HomeCards() {
 					<MainCard
 						title="Our mission: Empower the innovator in all of us"
 						text="We want to ensure that the innovators amongst all of us are given the best opportunity to make their ideas a success"
-						buttonHref="/startproject"
+						buttonHref="/start-project"
 						buttonText="Start Fundraising"
 					/>
 				</Col>

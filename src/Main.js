@@ -6,6 +6,8 @@ import Programs from "./pages/Programs";
 import About from "./pages/About";
 import Login from "./pages/Login";
 import Signup from "./pages/SignupPage";
+import StartProject from "./pages/StartProject";
+import PrivateRoute from "./utils/PrivateRoute";
 
 export default function Main() {
 	return (
@@ -19,6 +21,11 @@ export default function Main() {
 				<Route exact path="/programs" element={<Programs />} />
 				<Route exact path="/login" element={<Login />} />
 				<Route exact path="/signup" element={<Signup />} />
+				<Route
+					exact
+					path="/start-project"
+					element={<PrivateRoute Component={StartProject} />}
+				/>
 			</Routes>
 		</div>
 	);

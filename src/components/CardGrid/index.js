@@ -18,7 +18,7 @@ function HomeCards() {
 						title="Key Partnerships"
 						text="Key partnerships to be announced with some of the leading names in the industry across the charity space.
             Stay tuned to our socials as some of the biggest partnerships in the crowdfunding space are to be announced, and you have the chance to get involved too!"
-						buttonHref="/partnerships"
+						buttonHref="/about"
 						buttonText="Learn More"
 						imageLeft={false}
 						horizontal={true}
@@ -33,7 +33,7 @@ function HomeCards() {
 						title="The Only Crowdfunding Platform That Pays You To Crowdfund"
 						text="Start crowdfunding with Rare Fnd today and we will give you 10% towards your crowdfunding target!
             Not only that but reach your target quicker with 240% APY on all contributions."
-						buttonHref="/offers"
+						buttonHref="/programs"
 						buttonText="Learn More"
 						imageLeft={true}
 						horizontal={true}
@@ -60,7 +60,8 @@ function HomeCards() {
 						textStyle={{
 							position: "realtive",
 							textAlign: "center",
-							// marginLeft: "200px"
+							width: "100%",
+							maxWidth: "600px",
 						}}
 					/>
 				</Col>
@@ -72,10 +73,10 @@ function HomeCards() {
 					<MainCard
 						title="The Most Innovative Crowfunding Platform            "
 						text="Not only does Rare Fnd help charities and startups reach their full potential quicker, but we also ensure that all donators and contributors are rewarded even in the unlikely event that the crowdfunding campaign was unsuccessful.            "
-						// textStyle = {{
-						//   marginRight: "200px",
-						//   marginLeft: "200px"
-						// }}
+						textStyle={{
+							width: "100%",
+							maxWidth: "600px",
+						}}
 					/>
 				</Col>
 			</Row>
@@ -156,6 +157,10 @@ function HomeCards() {
 						text="We want to ensure that the innovators amongst all of us are given the best opportunity to make their ideas a success"
 						buttonHref="/start-project"
 						buttonText="Start Fundraising"
+						textStyle={{
+							width: "100%",
+							maxWidth: "600px",
+						}}
 					/>
 				</Col>
 			</Row>

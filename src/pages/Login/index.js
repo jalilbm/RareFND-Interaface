@@ -77,7 +77,7 @@ export default function (props) {
 						<p className="text-danger">{formErrors.password}</p>
 					</div>
 					<div className="d-grid gap-2 mt-3">
-						<button type="submit" className="btn btn-primary">
+						<button type="submit" className="btn btn-warning">
 							Submit
 						</button>
 					</div>

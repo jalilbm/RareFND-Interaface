@@ -5,6 +5,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import "./index.css";
+import { Link } from "react-router-dom";
 
 function MainCard(props) {
 	return (
@@ -66,7 +67,9 @@ function MainCard(props) {
 										: props.project_header
 										? "h4 "
 										: "h5 ") +
-									(!props.image || props.center_card_text ? "text-center" : "")
+									(!props.image || props.center_card_text
+										? "mx-auto mb-4 text-center"
+										: "")
 								}
 								style={props.textStyle}
 							>
@@ -75,9 +78,11 @@ function MainCard(props) {
 							{props.buttonText ? (
 								<Row>
 									<Col className={"mt-2 " + (props.image ? "" : "text-center")}>
-										<Button variant="warning" href={props.buttonHref} size="lg">
-											{props.buttonText}
-										</Button>
+										<Link to={props.buttonHref}>
+											<Button variant="warning" size="lg">
+												{props.buttonText}
+											</Button>
+										</Link>
 									</Col>
 								</Row>
 							) : null}

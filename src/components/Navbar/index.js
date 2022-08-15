@@ -90,7 +90,7 @@ function NavBar() {
 						variant="outline-warning"
 						className="btn-log-in"
 						as={Link}
-						to="/login"
+						to="/logout"
 						style={{ marginRight: "10px" }}
 						onMouseDown={logOut}
 					>

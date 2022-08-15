@@ -11,7 +11,7 @@ import PrivateRoute from "./utils/PrivateRoute";
 
 export default function Main() {
 	return (
-		<div className="main">
+		<div className="main" style={{ minHeight: "100vh" }}>
 			<Routes>
 				<Route exact path="/" element={<Home />} />
 				<Route exact path="/home" element={<Home />} />

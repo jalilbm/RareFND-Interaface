@@ -3,8 +3,11 @@ import { CDBFooter, CDBBox, CDBBtn, CDBIcon } from "cdbreact";
 import "bootstrap/dist/css/bootstrap.css";
 import { Link } from "react-router-dom";
 import RareFnd from "../../assets/logos/rarefnd_logo.png";
+import AuthContext from "../../Context/AuthContext";
+import { useContext } from "react";
 
 export default function Footer() {
+	const { user, logOut } = useContext(AuthContext);
 	return (
 		<CDBFooter className="shadow bg-white">
 			<CDBBox
@@ -41,11 +44,10 @@ export default function Footer() {
 							<Link className="text-decoration-none text-secondary" to="/">
 								Contacts
 							</Link>
-							
 						</CDBBox>
 					</CDBBox>
 					<CDBBox>
-						<p className="h5" style={{ fontWeight: "600"}}>
+						<p className="h5" style={{ fontWeight: "600" }}>
 							Help & Support
 						</p>
 						<CDBBox
@@ -56,12 +58,28 @@ export default function Footer() {
 							<Link className="text-decoration-none text-secondary" to="/">
 								Support
 							</Link>
-							<Link className="text-decoration-none text-secondary" to="/signup">
+							<Link
+								className="text-decoration-none text-secondary"
+								to="/signup"
+							>
 								Sign Up
 							</Link>
-							<Link className="text-decoration-none text-secondary" to="/login">
-								Sign In
-							</Link>
+							{user ? (
+								<Link
+									className="text-decoration-none text-secondary"
+									to="/logout"
+									onMouseDown={logOut}
+								>
+									Log Out
+								</Link>
+							) : (
+								<Link
+									className="text-decoration-none text-secondary"
+									to="/login"
+								>
+									Log In
+								</Link>
+							)}
 						</CDBBox>
 					</CDBBox>
 					<CDBBox>
@@ -74,10 +92,10 @@ export default function Footer() {
 							style={{ cursor: "pointer", padding: "0" }}
 						>
 							<Link className="text-decoration-none text-secondary" to="/">
-								 Startaps Fundraising
+								Startaps Fundraising
 							</Link>
 							<Link className="text-decoration-none text-secondary" to="/">
-								 Charities Fundraising
+								Charities Fundraising
 							</Link>
 						</CDBBox>
 					</CDBBox>

@@ -28,8 +28,8 @@ export const AuthProvider = ({ children }) => {
 				password: password,
 			})
 			.then((response) => {
-				console.log(jwt_decode(response.data.access));
-				if (response.status == 200) {
+				console.log(response);
+				if (response.status === 200) {
 					setAuthTokens(response.data);
 					setUser(jwt_decode(response.data.access));
 					localStorage.setItem("authTokens", JSON.stringify(response.data));
@@ -37,6 +37,9 @@ export const AuthProvider = ({ children }) => {
 				} else {
 					alert("login failed");
 				}
+			})
+			.catch(function (error) {
+				alert("login failed");
 			});
 	};
 	const logOut = () => {

@@ -62,9 +62,8 @@ function NavBar() {
 							if (data.name.toLowerCase() !== "all") {
 								return (
 									<NavDropdown.Item
-										// as={Link}
-										// to={"/category/" + data.name.replace(new RegExp(' ', 'g'), "-")}
-										href={
+										as={Link}
+										to={
 											"/category/" +
 											data.name.replace(new RegExp(" ", "g"), "-")
 										}
@@ -77,8 +76,8 @@ function NavBar() {
 						})}
 						<NavDropdown.Divider />
 						<NavDropdown.Item
-							// as={Link}
-							href="/category/all"
+							as={Link}
+							to="/category/all"
 							style={{ textTransform: "capitalize" }}
 						>
 							all

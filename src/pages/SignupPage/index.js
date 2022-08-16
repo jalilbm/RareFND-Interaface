@@ -18,10 +18,10 @@ export default function () {
 	const initialValues = { email: "", password: "" };
 	const [formValues, setFormValues] = useState(initialValues);
 	const [formErrors, setFormErrors] = useState({});
+	const [reatTimeFormErrors, setReatTimeFormErrors] = useState({});
 	const [isSubmit, setIsSubmit] = useState(false);
 	const [walletAddress, setWalletAddress] = useState();
 	const { provider, setProvider } = useContext(ProviderContext);
-	const [reload, setReload] = useState(false);
 	const [, updateState] = useState();
 	const forceUpdate = useCallback(() => updateState({}), []);
 
@@ -41,12 +41,29 @@ export default function () {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		setFormErrors({ ...formErrors, ...validate(formValues) });
+		setFormErrors({ ...reatTimeFormErrors, ...validate(formValues) });
 		setIsSubmit(true);
 	};
 
 	useEffect(() => {
+		console.log(Object.keys(formErrors).length);
 		if (Object.keys(formErrors).length === 0 && isSubmit) {
+			console.log(formValues);
+			axios
+				.post("http://c503-94-202-120-29.ngrok.io/api/user/signup/", {
+					username: formValues.username,
+					email: formValues.email,
+					password: formValues.password,
+					first_name: formValues.firstname,
+					last_name: formValues.lastname,
+					phone: "+" + formValues.phone,
+					wallet_address: formValues.walletAddress,
+				})
+				.then((response) => {
+					if (response.status === 200) {
+						alert("user created");
+					}
+				});
 		}
 	}, [formErrors]);
 
@@ -60,12 +77,12 @@ export default function () {
 				)
 				.then(function (response) {
 					if (!response.data.valid) {
-						setFormErrors({
-							...formErrors,
+						setReatTimeFormErrors({
+							...reatTimeFormErrors,
 							username: "Username already exists",
 						});
 					} else {
-						delete formErrors.username;
+						delete reatTimeFormErrors.username;
 						forceUpdate();
 					}
 				});
@@ -82,9 +99,12 @@ export default function () {
 				)
 				.then(function (response) {
 					if (!response.data.valid) {
-						setFormErrors({ ...formErrors, email: "Email already exists" });
+						setReatTimeFormErrors({
+							...reatTimeFormErrors,
+							email: "Email already exists",
+						});
 					} else {
-						delete formErrors.email;
+						delete reatTimeFormErrors.email;
 					}
 				});
 		}
@@ -124,9 +144,9 @@ export default function () {
 			errors.phone = "Invalid phone number";
 		}
 
-		if (!isValidPhonenumber(values.walletAddress)) {
-			errors.walletAddress = "Please connect using your wallet";
-		}
+		if (walletAddress)
+			setFormValues({ ...formValues, walletAddress: walletAddress });
+		else errors.walletAddress = "Please connect using your wallet";
 
 		return errors;
 	};
@@ -148,7 +168,7 @@ export default function () {
 							value={formValues.username}
 							onChange={handleChange}
 						/>
-						<p className="text-danger">{formErrors.username}</p>
+						<p className="text-danger">{reatTimeFormErrors.username}</p>
 					</div>
 					<div className="form-group mt-3">
 						<label>
@@ -163,7 +183,7 @@ export default function () {
 							value={formValues.email}
 							onChange={handleChange}
 						/>
-						<p className="text-danger">{formErrors.email}</p>
+						<p className="text-danger">{reatTimeFormErrors.email}</p>
 					</div>
 					<div className="form-group mt-3">
 						<label>

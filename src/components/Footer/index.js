@@ -18,9 +18,9 @@ export default function Footer() {
 			>
 				<CDBBox display="flex" justifyContent="between" className="flex-wrap">
 					<CDBBox>
-						<a href="/" className="align-items-center text-dark">
+						<Link to="/" className="align-items-center text-dark">
 							<img alt="logo" src={RareFnd} width="90px" />
-						</a>
+						</Link>
 						<p className="my-3 text-secondary" style={{ width: "250px" }}>
 							<span className="fw-bold">ADDRESS:</span> DMCC Crypto Centre, 48th
 							Floor, Almas Tower, JLT, UAE PO BOX 48800.

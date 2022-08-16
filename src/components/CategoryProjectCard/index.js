@@ -1,11 +1,12 @@
 import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
 import "./index.css";
 
 export default function ProjectCard(props) {
 	const head = props.head < 40 ? props.head : props.head.slice(0, 40) + "...";
 	return (
-		<a
-			href={`/project/${props.project_id}`}
+		<Link
+			to={`/project/${props.project_id}`}
 			style={{ color: "black", textDecoration: "none" }}
 		>
 			<Card style={{ cursor: "pointer" }} className="card-project-card">
@@ -25,6 +26,6 @@ export default function ProjectCard(props) {
 					</Card.Text>
 				</Card.Body>
 			</Card>
-		</a>
+		</Link>
 	);
 }

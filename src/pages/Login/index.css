@@ -33,3 +33,10 @@ label {
   font-weight: 600;
   color: rgb(34, 34, 34);
 }
+
+/* .Auth-form-container a {
+  color: whitesmoke;
+} */
+.Auth-form-container a:hover {
+color: #FFC007;
+}

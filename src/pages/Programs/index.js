@@ -21,7 +21,7 @@ export default function About() {
       <CategoryCarousel image={AboutUs} title="Programs" />
       <div
         className="mt-5"
-        style={{ border: " 2px solid #FAD02C", width: "5%", marginLeft: "5%" }}
+        style={{ border: " 2px solid #FAD02C", width: "10%",minWidth:"60px", marginLeft: "5%" }}
       ></div>
       <h1
         className="mt-4"
@@ -40,7 +40,7 @@ export default function About() {
           <Tabs
             value={tabIndex}
             onChange={handleChange}
-            className="m-5"
+            className="m-2"
             TabIndicatorProps={{ style: { background: "#FAD02C" } }}
             aria-label="secondary tabs example"
             centered
@@ -65,7 +65,7 @@ export default function About() {
             />
           </Tabs>
         </Box>
-        <Box sx={{ padding: 2 }}>
+        <Box sx={{ padding: "3vw" }}>
           {
             <Box className="h-100">
               <Typography>
@@ -85,7 +85,7 @@ export default function About() {
                     />
                   </div>
                    
-                  <div style={{ padding: "60px" }}>
+                  <div style={{ padding: "5vw" }}>
                   
                     {tabIndex === 0 ? (<><p>
                      RareFnd campaigns make ideas into reality. It’s where

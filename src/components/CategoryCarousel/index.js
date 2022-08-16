@@ -11,11 +11,12 @@ export default function CategoryCarousel(props) {
 					src={props.image}
 					alt="Third slide"
 					style={{
-						height: "50vh",
+						height: "300px",
 						minHeight: "300px",
 						objectFit: "cover",
 						filter: "blur(3px)",
 						webkitFilter: "blur(3px)",
+
 					}}
 				/>
 				<Carousel.Caption className="carousel-caption">

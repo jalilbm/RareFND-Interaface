@@ -45,27 +45,30 @@ export default function About() {
             aria-label="secondary tabs example"
             centered
           >
-            <Tab
-            id = "CharityFundraising"
+            <Tab  id="CharityFundraising"
+            
               style={{
                 maxWidth:"200px",
                 width:"50%",
                 color: "white",
                 fontFamily:
-                  "Cambria, Cochin, Georgia, Times, 'Times New Roman', serif",
-                fontWeight: "bold",
+                  "'Calibri', sans-serif",
+                  fontWeight: "bold",
+                  fontSize:"15px"
+                
               }}
               label="Charity Fundraising" 
             />
             <Tab
-            id = "Startups Fundraising"
+             id="StartupFundraising"
               style={{
                 maxWidth:"200px",
                 width:"50%",
                 color: "white",
                 fontFamily:
-                  "Cambria, Cochin, Georgia, Times, 'Times New Roman', serif",
+                  "'Calibri', sans-serif",
                 fontWeight: "bold",
+                fontSize:"15px"
               }}
               label="Startups Fundraising"
              />
@@ -91,7 +94,7 @@ export default function About() {
                     />
                   </div>
                    
-                  <div style={{ padding: "5vw" }}>
+                  <div style={{ padding: "5vw" ,fontFamily:"Calibri"}}>
                   
                     {tabIndex === 0 ? (<><p>
                      RareFnd campaigns make ideas into reality. It’s where
@@ -118,7 +121,7 @@ export default function About() {
                     <div className="col-md-12 text-center">
                       <Link to="/start-project">
                         <button type="button" className="btn">
-                          Start Project
+                          Start Project  {'>>'}
                         </button>
                       </Link>
                     </div>

@@ -44,7 +44,7 @@ function NavBar() {
 				id="responsive-navbar-nav"
 				style={{ paddingRight: "40px" }}
 			>
-				<Nav className="me-auto">
+				<Nav className="me-auto" style={{fontFamily:"Calibri"}}>
 					<Nav.Link as={Link} to="/about">
 						About Us
 					</Nav.Link>

@@ -22,13 +22,14 @@ export default function ProjectCard(props) {
 						style={{
 							width: "100%",
 							height: props.image_height,
+							objectFit: "cover"
 						}}
 					/>
 				</Col>
 				<Col md={6}>
 					<Card.Body className="text-white text-center d-flex flex-column h-100">
-						<Card.Title className="display-5">{props.title}</Card.Title>
-						<Card.Text style={{ fontSize: "30px" }}>{props.text}</Card.Text>
+						<h1><Card.Title style={{ fontSize:"xx-large",fontFamily:"Times, 'Times New Roman', serif" }}>{props.title}</Card.Title></h1>
+						<p><Card.Text style={{ fontSize:"larger",fontFamily:"Calibri" }}>{props.text}</Card.Text></p>
 						<Web3ContributeButton
 							staking_address={props.staking_address}
 							staking_abi={props.staking_abi}

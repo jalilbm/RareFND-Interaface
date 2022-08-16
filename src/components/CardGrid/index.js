@@ -70,7 +70,7 @@ function HomeCards() {
 			<hr className="text-light" />
 			<Row>
 				<Col lg={12} className="mt-4">
-					<MainCard
+					<MainCard 
 						title="The Most Innovative Crowfunding Platform            "
 						text="Not only does Rare Fnd help charities and startups reach their full potential quicker, but we also ensure that all donators and contributors are rewarded even in the unlikely event that the crowdfunding campaign was unsuccessful.            "
 						textStyle={{

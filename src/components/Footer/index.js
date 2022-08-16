@@ -91,10 +91,10 @@ export default function Footer() {
 							flex="column"
 							style={{ cursor: "pointer", padding: "0" }}
 						>
-							<Link className="text-decoration-none text-secondary" to="/">
+							<Link className="text-decoration-none text-secondary" to="/programs#0">
 								Startaps Fundraising
 							</Link>
-							<Link className="text-decoration-none text-secondary" to="/">
+							<Link className="text-decoration-none text-secondary" to="/programs#1">
 								Charities Fundraising
 							</Link>
 						</CDBBox>

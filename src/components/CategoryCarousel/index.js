@@ -12,7 +12,6 @@ export default function CategoryCarousel(props) {
 					alt="Third slide"
 					style={{
 						height: `50${window.innerHeight > window.innerWidth ? "vw" : "vh"}`,
-						// minHeight: "300px",
 						objectFit: "cover",
 						filter: "blur(3px)",
 						webkitFilter: "blur(3px)",

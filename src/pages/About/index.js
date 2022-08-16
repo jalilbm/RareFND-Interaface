@@ -4,9 +4,25 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./index.css";
+import React, { useRef } from 'react';
+import emailjs from '@emailjs/browser';
 import { Col, Row } from "react-bootstrap";
 
 export default function About() {
+
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm('service_afejnhj', 'template_gktw9ca', form.current, 'OHpPnX-MUtF6ELUyq')
+      .then((result) => {
+          console.log(result.text);
+          console.log("message sent succesfully")
+      }, (error) => {
+          console.log(error.text);
+      });
+  };
 	return (
 		<div className="aboutpage">
 			<CategoryCarousel image={AboutUs} title="About Us" />
@@ -45,7 +61,7 @@ export default function About() {
 					</p>
 				</div>
 			</section>
-			<section className="contact text-light p-5 m-5">
+			<section className="contact text-light p-5 m-5" id="contacts">
 				<Row>
 					<Col md={6}>
 						<h1 className="contacttitle text-center mt-3"> Contact Us</h1>
@@ -67,7 +83,7 @@ export default function About() {
 							<h6 className="ml-3 pl-5 mt-3">
 								{" "}
 								<i
-									class="bi bi-telegram"
+									className="bi bi-telegram"
 									style={{ color: "#FAD02C", fontSize: "1.5em" }}
 								></i>{" "}
 								RareFnd Telegram Comunity
@@ -77,7 +93,7 @@ export default function About() {
 							<h6 className="ml-3 pl-5 mt-3">
 								{" "}
 								<i
-									class="bi bi-twitter"
+									className="bi bi-twitter"
 									style={{ color: "#FAD02C", fontSize: "1.5em" }}
 								></i>{" "}
 								RareFnd Twitter Account
@@ -92,28 +108,32 @@ export default function About() {
 								padding: "20px",
 							}}
 						>
-							<Form.Label className="text-light">Email address</Form.Label>
-							<Form.Control type="text" placeholder="Normal text" />
+              <Form ref={form} onSubmit={sendEmail}>
+							<Form.Label className="text-light">User Name</Form.Label>
+							<Form.Control type="text" name ="user_name" placeholder="william Smith" />
 							<Form.Group
 								className="mb-3 mt-4"
 								controlId="exampleForm.ControlInput1"
 							>
-								<Form.Label className="text-light">Email address</Form.Label>
-								<Form.Control type="email" placeholder="name@example.com" />
+								<Form.Label className="text-light">Email Address</Form.Label>
+								<Form.Control type="email" name ="user_email" placeholder="name@example.com" />
 							</Form.Group>
 							<Form.Group
 								className="mb-3 mt-4"
 								controlId="exampleForm.ControlTextarea1"
 							>
-								<Form.Label className="text-light">Example textarea</Form.Label>
-								<Form.Control as="textarea" rows={3} />
+								<Form.Label className="text-light">Message</Form.Label>
+								<Form.Control as="textarea" rows={3} name="message" />
 							</Form.Group>
 							<Button
 								className="mb-3 mt-3 text-center mx-auto"
 								variant="warning"
+                type="submit"
+          
 							>
 								Submit
 							</Button>
+              </Form>
 						</div>
 					</Col>
 				</Row>

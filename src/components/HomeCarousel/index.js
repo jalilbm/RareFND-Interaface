@@ -1,8 +1,8 @@
 import Carousel from "react-bootstrap/Carousel";
 import main from "../../assets/carousel/main.jpeg";
 import "bootstrap/dist/css/bootstrap.css";
-import "./index.css";
 import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 
 export default function HomeCarousel() {
 	return (
@@ -36,12 +36,12 @@ export default function HomeCarousel() {
 					<br />
 					<br />
 					<br />
-					<Button variant="warning" href="/signup" size="lg">
+					<Button variant="warning" to="/signup" size="lg">
 						Sign Up - It's FREE
 					</Button>
 					<br />
 					<p>
-						or, <a href="/start-project">Start a project!</a>
+						or, <Link to="/start-project">Start a project!</Link>
 					</p>
 				</Carousel.Caption>
 			</Carousel.Item>

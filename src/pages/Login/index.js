@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import React from "react";
 import "./index.css";
 import AuthContext from "../../Context/AuthContext";
+import { Link } from "react-router-dom";
 
 export default function (props) {
 	const initialValues = { email: "", password: "" };
@@ -81,8 +82,11 @@ export default function (props) {
 							Submit
 						</button>
 					</div>
-					<p className="forgot-password text-right mt-2">
-						Forgot <a href="#">password?</a>
+					<p className="text-right mt-2">
+						Forgot <Link to="#">password?</Link>
+					</p>
+					<p className="text-right mt-2">
+						You don't have an account? <Link to="/signup">Sign Up</Link>
 					</p>
 				</div>
 			</form>

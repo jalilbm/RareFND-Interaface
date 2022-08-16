@@ -8,18 +8,22 @@ import Login from "./pages/Login";
 import Signup from "./pages/SignupPage";
 import StartProject from "./pages/StartProject";
 import PrivateRoute from "./utils/PrivateRoute";
+import { useContext } from "react";
+import AuthContext from "./Context/AuthContext";
 
 export default function Main() {
+	let { user } = useContext(AuthContext);
+	console.log(user);
 	return (
 		<div className="main" style={{ minHeight: "100vh" }}>
 			<Routes>
 				<Route exact path="/" element={<Home />} />
 				<Route exact path="/home" element={<Home />} />
-				<Route path="/category/:categoryname" element={<Category />} />
+				<Route exact path="/category/:categoryname" element={<Category />} />
 				<Route exact path="/project/:id" element={<Project />} />
 				<Route exact path="/about" element={<About />} />
 				<Route exact path="/programs" element={<Programs />} />
-				<Route exact path="/login" element={<Login />} />
+				<Route exact path="/login" element={!user ? <Login /> : <Home />} />
 				<Route exact path="/signup" element={<Signup />} />
 				<Route
 					exact

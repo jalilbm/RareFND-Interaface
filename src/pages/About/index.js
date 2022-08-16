@@ -64,12 +64,12 @@ export default function About() {
 			<section className="contact text-light" id="contacts">
 				<Row>
 					<Col md={6}>
-						<h1 className="contacttitle text-center mt-3"> Contact Us</h1>
-						<h4 className="mt-5">
+						<h1 className="contacttitle text-center mt-5"> Contact Us</h1>
+						<h4 className="mt-3">
 							Fill out the form and we'll get back to you within 24 hours.
 						</h4>
 						<a target="_blank" href="https://maps.app.goo.gl/zaKNmoRAopMUHWDi9">
-							<h6 className="ml-3 mt-5 pl-5">
+							<h6 className="ml-3 mt-3 pl-5">
 								<i
 									className="bi bi-pin-map-fill"
 									style={{ color: "#FAD02C", fontSize: "1.5em" }}
@@ -90,7 +90,7 @@ export default function About() {
 							</h6>
 						</a>
 						<a target="_blank" href="https://twitter.com/rare_fnd">
-							<h6 className="ml-3 pl-5 mt-3 mb-4">
+							<h6 className="ml-3 pl-5 mt-3 mb-5">
 								{" "}
 								<i
 									className="bi bi-twitter"
@@ -127,7 +127,7 @@ export default function About() {
 							</Form.Group>
 							<div className="col-md-12 text-center">
 							<Button
-								className="mb-3 mt-3 text-center mx-auto"
+								className="mt-3 text-center mx-auto"
 								variant="warning"
                 type="submit"
           

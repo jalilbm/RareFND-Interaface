@@ -46,6 +46,7 @@ export default function About() {
             centered
           >
             <Tab
+            id = "CharityFundraising"
               style={{
                 maxWidth:"200px",
                 width:"50%",
@@ -57,6 +58,7 @@ export default function About() {
               label="Charity Fundraising" 
             />
             <Tab
+            id = "Startups Fundraising"
               style={{
                 maxWidth:"200px",
                 width:"50%",

@@ -31,7 +31,7 @@ export default function About() {
 					It is the long history of humankind (and animal kind, too) those who
 					learned to collaborate and improvise most effectively have prevailed.
 				</blockquote>
-				<figcaption style={{ fontSize: "18px" }}>
+				<figcaption>
 					&mdash; Charles Darwin
 				</figcaption>
 			</section>
@@ -39,7 +39,7 @@ export default function About() {
 				className="AboutBody bg-white text-black mx-auto"
 				style={{ height: "100%" }}
 			>
-				<div>
+				<div style={{padding: "3vw"}}>
 					<p>
 						RareFnd campaigns make ideas into reality. It’s where creators share
 						new visions for creative work with the communities that will come
@@ -61,15 +61,15 @@ export default function About() {
 					</p>
 				</div>
 			</section>
-			<section className="contact text-light p-5 m-5" id="contacts">
+			<section className="contact text-light" id="contacts">
 				<Row>
 					<Col md={6}>
 						<h1 className="contacttitle text-center mt-3"> Contact Us</h1>
-						<h4 className="m-3 p-5">
+						<h4 className="mt-5">
 							Fill out the form and we'll get back to you within 24 hours.
 						</h4>
 						<a target="_blank" href="https://maps.app.goo.gl/zaKNmoRAopMUHWDi9">
-							<h6 className="ml-3 pl-5">
+							<h6 className="ml-3 mt-5 pl-5">
 								<i
 									className="bi bi-pin-map-fill"
 									style={{ color: "#FAD02C", fontSize: "1.5em" }}
@@ -90,7 +90,7 @@ export default function About() {
 							</h6>
 						</a>
 						<a target="_blank" href="https://twitter.com/rare_fnd">
-							<h6 className="ml-3 pl-5 mt-3">
+							<h6 className="ml-3 pl-5 mt-3 mb-4">
 								{" "}
 								<i
 									className="bi bi-twitter"
@@ -105,26 +105,27 @@ export default function About() {
 							className="boxcontact text-light"
 							style={{
 								border: "4px solid #FAD02C",
-								padding: "20px",
+								padding: "5%",
 							}}
 						>
               <Form ref={form} onSubmit={sendEmail}>
-							<Form.Label className="text-light">User Name</Form.Label>
-							<Form.Control type="text" name ="user_name" placeholder="william Smith" />
+							<Form.Label className="text-light">Your Full Name</Form.Label>
+							<Form.Control type="text" name ="user_name" placeholder="Ex. william Smith" />
 							<Form.Group
 								className="mb-3 mt-4"
 								controlId="exampleForm.ControlInput1"
 							>
-								<Form.Label className="text-light">Email Address</Form.Label>
-								<Form.Control type="email" name ="user_email" placeholder="name@example.com" />
+								<Form.Label className="text-light">Your Email Address</Form.Label>
+								<Form.Control type="email" name ="user_email" placeholder="Ex. name@example.com" />
 							</Form.Group>
 							<Form.Group
 								className="mb-3 mt-4"
 								controlId="exampleForm.ControlTextarea1"
 							>
-								<Form.Label className="text-light">Message</Form.Label>
+								<Form.Label className="text-light">Your Message</Form.Label>
 								<Form.Control as="textarea" rows={3} name="message" />
 							</Form.Group>
+							<div className="col-md-12 text-center">
 							<Button
 								className="mb-3 mt-3 text-center mx-auto"
 								variant="warning"
@@ -133,6 +134,7 @@ export default function About() {
 							>
 								Submit
 							</Button>
+							</div>
               </Form>
 						</div>
 					</Col>

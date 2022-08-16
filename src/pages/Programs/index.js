@@ -36,7 +36,7 @@ export default function About() {
         Our Programs
       </h1>
       <Box>
-        <Box>
+        <Box  className="w-100">
           <Tabs
             value={tabIndex}
             onChange={handleChange}
@@ -47,22 +47,26 @@ export default function About() {
           >
             <Tab
               style={{
+                maxWidth:"200px",
+                width:"50%",
                 color: "white",
                 fontFamily:
                   "Cambria, Cochin, Georgia, Times, 'Times New Roman', serif",
                 fontWeight: "bold",
               }}
-              label="Charity Fundraising"
+              label="Charity Fundraising" 
             />
             <Tab
               style={{
+                maxWidth:"200px",
+                width:"50%",
                 color: "white",
                 fontFamily:
                   "Cambria, Cochin, Georgia, Times, 'Times New Roman', serif",
                 fontWeight: "bold",
               }}
               label="Startups Fundraising"
-            />
+             />
           </Tabs>
         </Box>
         <Box sx={{ padding: "3vw" }}>

@@ -41,7 +41,7 @@ export default function Footer() {
 							<Link className="text-decoration-none text-secondary" to="/about">
 								About Us
 							</Link>
-							<Link className="text-decoration-none text-secondary" to="/">
+							<Link className="text-decoration-none text-secondary" to="/about#contacts">
 								Contacts
 							</Link>
 						</CDBBox>
@@ -55,7 +55,7 @@ export default function Footer() {
 							flex="column"
 							style={{ cursor: "pointer", padding: "0" }}
 						>
-							<Link className="text-decoration-none text-secondary" to="/">
+							<Link className="text-decoration-none text-secondary" to="/about#contacts">
 								Support
 							</Link>
 							<Link

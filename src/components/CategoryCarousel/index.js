@@ -11,7 +11,7 @@ export default function CategoryCarousel(props) {
 					src={props.image}
 					alt="Third slide"
 					style={{
-						height: "50vh",
+						height: `50${window.innerHeight > window.innerWidth ? "vw" : "vh"}`,
 						minHeight: "300px",
 						objectFit: "cover",
 						filter: "blur(3px)",
@@ -22,7 +22,7 @@ export default function CategoryCarousel(props) {
 					<h1
 						className="display-1"
 						style={{
-							color:"white",
+							color: "white",
 							fontFamily: "'Cinzel', serif",
 							fontSize: "10vw",
 						}}

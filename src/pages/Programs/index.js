@@ -7,10 +7,16 @@ import { Tab } from "@mui/material";
 import { Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import "./index.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function About() {
 	const [tabIndex, setTabIndex] = useState(0);
+	const location = useLocation();
+
+	useEffect(() => {
+		if (location.hash) setTabIndex(parseInt(location.hash.replace("#", "")));
+	}, [location.hash]);
 
 	const handleChange = (event, newTabInex) => {
 		setTabIndex(newTabInex);
@@ -55,9 +61,9 @@ export default function About() {
 								maxWidth: "200px",
 								width: "50%",
 								color: "white",
-								fontFamily:
-									"Cambria, Cochin, Georgia, Times, 'Times New Roman', serif",
+								fontFamily: "'Calibri', sans-serif",
 								fontWeight: "bold",
+								fontSize: "15px",
 							}}
 							label="Charity Fundraising"
 						/>
@@ -66,9 +72,9 @@ export default function About() {
 								maxWidth: "200px",
 								width: "50%",
 								color: "white",
-								fontFamily:
-									"Cambria, Cochin, Georgia, Times, 'Times New Roman', serif",
+								fontFamily: "'Calibri', sans-serif",
 								fontWeight: "bold",
+								fontSize: "15px",
 							}}
 							label="Startups Fundraising"
 						/>
@@ -85,13 +91,12 @@ export default function About() {
 									<div>
 										<img
 											style={{
-												height: `60${
-													window.innerHeight > window.innerWidth ? "vw" : "vh"
-												}`,
+												height: "60vh",
 												width: "100%",
 												objectFit: "cover",
 											}}
 											src={tabIndex === 0 ? Charity : Startup}
+											id={tabIndex.toString()}
 											className="img-fluid shadow-4"
 											alt="..."
 										/>
@@ -133,7 +138,7 @@ export default function About() {
 										<div className="col-md-12 text-center">
 											<Link to="/start-project">
 												<button type="button" className="btn">
-													Start Project
+													Start Project {">>"}
 												</button>
 											</Link>
 										</div>

@@ -22,8 +22,16 @@ export default function Footer() {
 							<img alt="logo" src={RareFnd} width="90px" />
 						</Link>
 						<p className="my-3 text-secondary" style={{ width: "250px" }}>
-							<span className="fw-bold">ADDRESS:</span> DMCC Crypto Centre, 48th
-							Floor, Almas Tower, JLT, UAE PO BOX 48800.
+							<span className="fw-bold">ADDRESS: </span>
+							<a
+								target="_blank"
+								href="https://maps.app.goo.gl/zaKNmoRAopMUHWDi9"
+								className="my-3 text-secondary"
+								style={{ width: "250px" }}
+							>
+								DMCC Crypto Centre, 48th Floor, Almas Tower, JLT, UAE PO BOX
+								48800.
+							</a>
 						</p>
 					</CDBBox>
 					<CDBBox>
@@ -41,7 +49,10 @@ export default function Footer() {
 							<Link className="text-decoration-none text-secondary" to="/about">
 								About Us
 							</Link>
-							<Link className="text-decoration-none text-secondary" to="/about#contacts">
+							<Link
+								className="text-decoration-none text-secondary"
+								to="/about#contacts"
+							>
 								Contacts
 							</Link>
 						</CDBBox>
@@ -55,7 +66,10 @@ export default function Footer() {
 							flex="column"
 							style={{ cursor: "pointer", padding: "0" }}
 						>
-							<Link className="text-decoration-none text-secondary" to="/about#contacts">
+							<Link
+								className="text-decoration-none text-secondary"
+								to="/about#contacts"
+							>
 								Support
 							</Link>
 							<Link
@@ -91,10 +105,16 @@ export default function Footer() {
 							flex="column"
 							style={{ cursor: "pointer", padding: "0" }}
 						>
-							<Link className="text-decoration-none text-secondary" to="/">
+							<Link
+								className="text-decoration-none text-secondary"
+								to="/programs#0"
+							>
 								Startaps Fundraising
 							</Link>
-							<Link className="text-decoration-none text-secondary" to="/">
+							<Link
+								className="text-decoration-none text-secondary"
+								to="/programs#1"
+							>
 								Charities Fundraising
 							</Link>
 						</CDBBox>

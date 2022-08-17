@@ -10,7 +10,7 @@ export default function ProjectCard(props) {
 			style={{ color: "black", textDecoration: "none" }}
 		>
 			<Card style={{ cursor: "pointer" }} className="card-project-card">
-				<Card.Img variant="top" src={props.image} style={{ height: "200px" }} />
+				<Card.Img variant="top" src={props.image} style={{ height: "200px",objectFit: "cover" }} />
 				<Card.Body style={{ height: "140px" }}>
 					<Card.Title
 						style={{

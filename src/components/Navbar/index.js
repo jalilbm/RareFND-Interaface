@@ -68,6 +68,7 @@ function NavBar() {
 						as={Link}
 						to="/about"
 						onClick={() => setShowNavItems(!showNavItems)}
+						style={{ fontFamily: "Calibri" }}
 					>
 						About Us
 					</Nav.Link>

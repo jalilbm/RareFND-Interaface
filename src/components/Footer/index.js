@@ -34,7 +34,7 @@ export default function Footer() {
 							</a>
 						</p>
 					</CDBBox>
-					<CDBBox>
+					<CDBBox className="mt-1">
 						<p className="h5" style={{ fontWeight: "600" }}>
 							RareFnd
 						</p>
@@ -57,7 +57,7 @@ export default function Footer() {
 							</Link>
 						</CDBBox>
 					</CDBBox>
-					<CDBBox>
+					<CDBBox className="mt-1">
 						<p className="h5" style={{ fontWeight: "600" }}>
 							Help & Support
 						</p>
@@ -96,7 +96,7 @@ export default function Footer() {
 							)}
 						</CDBBox>
 					</CDBBox>
-					<CDBBox>
+					<CDBBox className="mt-1">
 						<p className="h5" style={{ fontWeight: "600" }}>
 							Our services
 						</p>
@@ -107,13 +107,13 @@ export default function Footer() {
 						>
 							<Link
 								className="text-decoration-none text-secondary"
-								to="/programs#0"
+								to="/programs#1"
 							>
 								Startaps Fundraising
 							</Link>
 							<Link
 								className="text-decoration-none text-secondary"
-								to="/programs#1"
+								to="/programs#0"
 							>
 								Charities Fundraising
 							</Link>
@@ -124,7 +124,7 @@ export default function Footer() {
 					display="flex"
 					justifyContent="center"
 					style={{ width: "100%" }}
-					className="mx-auto"
+					className="mx-auto mt-3"
 				>
 					<a
 						href="https://www.facebook.com/therat.finance/"

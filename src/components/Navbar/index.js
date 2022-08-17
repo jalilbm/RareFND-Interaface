@@ -26,12 +26,6 @@ function NavBar() {
 			.get("http://c503-94-202-120-29.ngrok.io/api/category/")
 			.then((response) => setCategoriesData(response.data.categories));
 	}, []);
-	const navToggle = () => {
-		setExpanded(expanded ? false : true);
-	};
-	const closeNav = () => {
-		setExpanded(false);
-	};
 
 	return (
 		<Navbar

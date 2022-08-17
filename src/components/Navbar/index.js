@@ -62,6 +62,7 @@ function NavBar() {
 			<div
 				className={`collapse navbar-collapse  ${showNavItems ? "show" : ""}`}
 				id="navbarCollapse"
+				style={{ marginLeft: "40px" }}
 			>
 				<Nav className="me-auto">
 					<Nav.Link

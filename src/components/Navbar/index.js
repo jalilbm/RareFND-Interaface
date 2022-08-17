@@ -49,8 +49,11 @@ function NavBar() {
 			<button
 				className="navbar-toggler"
 				type="button"
-				onClick={() => setShowNavItems(!showNavItems)}
+				onClick={() => {
+					setShowNavItems(!showNavItems);
+				}}
 				style={{ marginRight: "10px" }}
+				onMouseDown={(e) => e.preventDefault()}
 			>
 				<span className="navbar-toggler-icon" />
 			</button>

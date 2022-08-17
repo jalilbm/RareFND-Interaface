@@ -91,7 +91,9 @@ export default function About() {
 									<div>
 										<img
 											style={{
-												height: "60vh",
+												height: `56${
+													window.innerHeight > window.innerWidth ? "vw" : "vh"
+												}`,
 												width: "100%",
 												objectFit: "cover",
 											}}

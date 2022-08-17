@@ -43,13 +43,8 @@ function NavBar() {
 			className="navbar"
 			sticky="top"
 		>
-			<Link to="/home">
-				<Image
-					src={rarefnd_logo}
-					className="logo"
-					to="/home"
-					style={{ marginLeft: "40px" }}
-				/>
+			<Link to="/home" style={{ marginLeft: "40px" }}>
+				<Image src={rarefnd_logo} className="logo" />
 			</Link>
 			<button
 				className="navbar-toggler"

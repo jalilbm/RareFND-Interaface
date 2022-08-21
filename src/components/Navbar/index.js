@@ -23,7 +23,7 @@ function NavBar() {
 	const { user, logOut } = useContext(AuthContext);
 	useEffect(() => {
 		axios
-			.get("http://c503-94-202-120-29.ngrok.io/api/category/")
+			.get("https://rarefndapi.herokuapp.com/api/category/")
 			.then((response) => setCategoriesData(response.data.categories));
 	}, []);
 

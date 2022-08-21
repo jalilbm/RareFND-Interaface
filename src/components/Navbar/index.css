@@ -16,3 +16,46 @@
 #nav-bar .dropdown-menu {
 	margin-bottom: 16px;
 }
+
+.navbar .divider-vertical {
+	height: 30px;
+	margin: 0 9px;
+	margin-top: 5px;
+	border-right: 1px solid #919191;
+	border-left: 1px solid #919191;
+}
+
+.navbar-inverse .divider-vertical {
+	border-right-color: #222222;
+	border-left-color: #111111;
+}
+
+@media (max-width: 767px) {
+	.navbar-collapse .nav > .divider-vertical {
+		display: none;
+	}
+}
+
+.nav-bar-item {
+	display: inline-block;
+	position: relative;
+	color: #ffc007;
+}
+
+.nav-bar-item:after {
+	content: "";
+	position: absolute;
+	width: 100%;
+	transform: scaleX(0);
+	height: 2px;
+	bottom: 0;
+	left: 0;
+	background-color: #ffc007;
+	transform-origin: bottom right;
+	transition: transform 0.25s ease-out;
+}
+
+.nav-bar-item:hover:after {
+	transform: scaleX(1);
+	transform-origin: bottom left;
+}

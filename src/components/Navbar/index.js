@@ -36,6 +36,7 @@ function NavBar() {
 			variant="dark"
 			className="navbar"
 			sticky="top"
+			style={{ fontFamily: "Calibri" }}
 		>
 			<Link to="/home" style={{ marginLeft: "40px" }}>
 				<Image src={rarefnd_logo} className="logo" />
@@ -52,16 +53,47 @@ function NavBar() {
 				<span className="navbar-toggler-icon" />
 			</button>
 			<div
-				className={`collapse navbar-collapse  ${showNavItems ? "show" : ""}`}
+				className={`collapse navbar-collapse  ${
+					showNavItems ? "show" : ""
+				} w-100`}
 				id="navbarCollapse"
 				style={{ marginLeft: "40px" }}
 			>
-				<Nav className="me-auto">
+				<Nav className="mx-auto">
+					{Array.from(categoriesData).map((data, idx) => {
+						if (data.name.toLowerCase() !== "all") {
+							return (
+								<Nav.Link
+									as={Link}
+									to={
+										"/category/" + data.name.replace(new RegExp(" ", "g"), "-")
+									}
+									style={{ textTransform: "capitalize" }}
+									onClick={() => setShowNavItems(!showNavItems)}
+									className="nav-bar-item mx-3"
+									// syle={{
+									// 	width: "",
+									// }}
+								>
+									{data.name}
+								</Nav.Link>
+							);
+						}
+					})}
 					<Nav.Link
+						as={Link}
+						to="/category/all"
+						style={{ textTransform: "capitalize" }}
+						onClick={() => setShowNavItems(!showNavItems)}
+						className="nav-bar-item"
+					>
+						All Categories
+					</Nav.Link>
+
+					{/* <Nav.Link
 						as={Link}
 						to="/about"
 						onClick={() => setShowNavItems(!showNavItems)}
-						style={{ fontFamily: "Calibri" }}
 					>
 						About Us
 					</Nav.Link>
@@ -75,23 +107,6 @@ function NavBar() {
 						onClick={() => setShowCategories(!sowCategories)}
 						style={{ maxWidth: "70%" }}
 					>
-						{Array.from(categoriesData).map((data, idx) => {
-							if (data.name.toLowerCase() !== "all") {
-								return (
-									<NavDropdown.Item
-										as={Link}
-										to={
-											"/category/" +
-											data.name.replace(new RegExp(" ", "g"), "-")
-										}
-										style={{ textTransform: "capitalize" }}
-										onClick={() => setShowNavItems(!showNavItems)}
-									>
-										{data.name}
-									</NavDropdown.Item>
-								);
-							}
-						})}
 						<NavDropdown.Divider />
 						<NavDropdown.Item
 							as={Link}
@@ -101,7 +116,7 @@ function NavBar() {
 						>
 							all
 						</NavDropdown.Item>
-					</NavDropdown>
+					</NavDropdown> */}
 				</Nav>
 				<div style={{ marginRight: "20px" }}>
 					{user ? (

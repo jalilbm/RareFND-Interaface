@@ -70,7 +70,7 @@ function HomeCards() {
 			<hr className="text-light" />
 			<Row>
 				<Col lg={12} className="mt-4">
-					<MainCard 
+					<MainCard
 						title="The Most Innovative Crowfunding Platform            "
 						text="Not only does Rare Fnd help charities and startups reach their full potential quicker, but we also ensure that all donators and contributors are rewarded even in the unlikely event that the crowdfunding campaign was unsuccessful.            "
 						textStyle={{
@@ -84,7 +84,7 @@ function HomeCards() {
 				<Col lg={4} className="mt-4">
 					<MainCard
 						image={star}
-						title="Free and more"
+						title="Free And More"
 						text="It’s not only free to fundraise — but we’ll also help you meet your goal! We’re currently offering campaigns 10% toward their fundraising target. YES, we’re paying you to launch your fundraising campaign on Rare FND!"
 						horizontal={false}
 						multi_cards={true}
@@ -102,7 +102,7 @@ function HomeCards() {
 				<Col lg={4} className="mt-4">
 					<MainCard
 						image={star}
-						title="Safe for investors"
+						title="Safe For Investors"
 						text="All of the contributions by investors in your campaign are autostaked in our platform. This provides the ultimate in safety for the contributors due to the fact that if a campaign fails to reach its fundraising goal, the funds are returned to the contributor PLUS any staking rewards that were earned during the campaign!"
 						horizontal={false}
 						multi_cards={true}

@@ -35,7 +35,7 @@ export default function ContributeBtn(props) {
 
 	useEffect(() => {
 		axios
-			.get(`http://c503-94-202-120-29.ngrok.io/api/project/${id}/`)
+			.get(`https://rarefndapi.herokuapp.com/api/project/${id}/`)
 			.then((response) => {
 				setProjectData(response.data);
 				setProjectLive(response.data.live);
@@ -83,7 +83,7 @@ export default function ContributeBtn(props) {
 					await tx.wait();
 					setPending(false);
 					axios.post(
-						"http://c503-94-202-120-29.ngrok.io/api/pending_contribution/",
+						"https://rarefndapi.herokuapp.com/api/pending_contribution/",
 						{
 							hash: tx.hash,
 							project: id,
@@ -160,6 +160,8 @@ export default function ContributeBtn(props) {
 							className="bg-black"
 							placeholder="0.00 FND"
 							autoComplete="off"
+							type="text"
+							pattern="(^[0-9]{0,2}$)|(^[0-9]{0,2}\.[0-9]{0,5}$)"
 							style={{
 								border: "none",
 								width: "100%",

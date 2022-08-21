@@ -9,7 +9,7 @@ import ScrollToTop from "./Context/ScrollToTop/index.js";
 export default function App() {
 	const [provider, setProvider] = useState();
 	return (
-		<div className="App">
+		<div className="App" style={{ fontFamily: "Calibri" }}>
 			<ScrollToTop />
 			<AuthProvider>
 				<ProviderContext.Provider value={{ provider, setProvider }}>

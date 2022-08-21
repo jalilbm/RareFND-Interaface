@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import "./index.css";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 export default function About() {
 	const [tabIndex, setTabIndex] = useState(0);
@@ -138,11 +139,14 @@ export default function About() {
 										)}
 
 										<div className="col-md-12 text-center">
-											<Link to="/start-project">
-												<button type="button" className="btn">
-													Start Project {">>"}
-												</button>
-											</Link>
+											<Button
+												type="button"
+												className="btn-warning"
+												size="lg"
+												to="/start-project"
+											>
+												Start Project {""}
+											</Button>
 										</div>
 									</div>
 								</div>

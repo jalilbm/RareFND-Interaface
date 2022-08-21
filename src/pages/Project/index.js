@@ -4,12 +4,23 @@ import ProjectDescription from "../../components/ProjectDescription";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import ProjectCard from "../../components/ProjectCard";
-import { useParams } from "react-router";
 
 export default function Project(props) {
-	const { id } = useParams();
 	const [height, setHeight] = useState({});
 	const [projectData, setProjectData] = useState({});
+	const [incentivesData, setIncentivesData] = useState(null);
+
+	const projectId = window.location.href.split("/").at(-1);
+
+	useEffect(() => {
+		axios
+			.get(`https://rarefndapi.herokuapp.com/api/incentives/${projectId}/`)
+			.then((response) => {
+				if (response.status === 200)
+					setIncentivesData(response.data.incentives);
+			});
+	}, []);
+
 	useEffect(() => {
 		setHeight(window.innerHeight);
 		window.addEventListener("resize", () => setHeight(window.innerHeight));
@@ -18,14 +29,9 @@ export default function Project(props) {
 	}, []);
 	useEffect(() => {
 		axios
-			.get(`http://c503-94-202-120-29.ngrok.io/api/project/${id}/`)
+			.get(`https://rarefndapi.herokuapp.com/api/project/${projectId}/`)
 			.then((response) => {
 				setProjectData(response.data);
-				console.log(response.data);
-			})
-			.then((data) => {
-				// setprojectData(data)
-				console.log(projectData);
 			});
 	}, []);
 	return (
@@ -40,7 +46,11 @@ export default function Project(props) {
 				staking_address={projectData.staking_address}
 			/>
 			<ProjectCurrentContributions />
-			<ProjectDescription description={projectData.description} />
+			<ProjectDescription
+				description={projectData.description}
+				projectId={projectData.id}
+				incentivesData={incentivesData}
+			/>
 		</div>
 	);
 }

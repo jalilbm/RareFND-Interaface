@@ -12,7 +12,7 @@ export default function ProjectCurrentContributions() {
 	const [usdRaisedAmount, setUsdRaisedAmount] = useState(0);
 	useEffect(() => {
 		axios
-			.get(`http://c503-94-202-120-29.ngrok.io/api/project/${id}/`)
+			.get(`https://rarefndapi.herokuapp.com/api/project/${id}/`)
 			.then((response) => response.data)
 			.then((data) => {
 				setprojectData(data);
@@ -22,7 +22,7 @@ export default function ProjectCurrentContributions() {
 
 	useEffect(() => {
 		axios
-			.get(`http://c503-94-202-120-29.ngrok.io/api/price/`)
+			.get(`https://rarefndapi.herokuapp.com/api/price/`)
 			.then((response) => {
 				setUsdRaisedAmount(
 					Number(projectData.raised_amount) + projectData.rewarded_amount

@@ -7,7 +7,7 @@ export default function index(props) {
 	console.log("asfasdfas", included_incentives);
 	return (
 		<div
-			className="incentive border-1 mx-auto"
+			className="incentive border-1 mx-auto w-100"
 			style={{
 				width: "80%",
 				marginLeft: "1vw",

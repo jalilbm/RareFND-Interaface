@@ -14,7 +14,12 @@ export default function ProjectDescription(props) {
 		});
 	}
 	return (
-		<div className="project-description bg-white p-5 w-100">
+		<div
+			className="project-description bg-white w-100"
+			style={{
+				padding: "5vw",
+			}}
+		>
 			<Row>
 				<Col md={8}>
 					<div

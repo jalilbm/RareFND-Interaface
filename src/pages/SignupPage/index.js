@@ -15,6 +15,7 @@ function isValidPhonenumber(value) {
 }
 
 export default function () {
+	const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 	const initialValues = { email: "", password: "" };
 	const [formValues, setFormValues] = useState(initialValues);
 	const [formErrors, setFormErrors] = useState({});
@@ -46,7 +47,7 @@ export default function () {
 	};
 
 	useEffect(() => {
-		console.log(Object.keys(formErrors).length);
+		console.log(Object.keys(formErrors).length, formErrors);
 		if (Object.keys(formErrors).length === 0 && isSubmit) {
 			console.log(formValues);
 			axios
@@ -56,7 +57,7 @@ export default function () {
 					password: formValues.password,
 					first_name: formValues.firstname,
 					last_name: formValues.lastname,
-					phone: "+" + formValues.phone,
+					phone: formValues.phone ? "+" + formValues.phone : "",
 					wallet_address: formValues.walletAddress,
 				})
 				.then((response) => {
@@ -81,6 +82,16 @@ export default function () {
 							...reatTimeFormErrors,
 							username: "Username already exists",
 						});
+					} else if (document.getElementById("username").value.length < 5) {
+						setReatTimeFormErrors({
+							...reatTimeFormErrors,
+							username: "Username must be more than 5 characters",
+						});
+					} else if (document.getElementById("username").value.length > 20) {
+						setReatTimeFormErrors({
+							...reatTimeFormErrors,
+							username: "Username cannot exceed more than 20 characters",
+						});
 					} else {
 						delete reatTimeFormErrors.username;
 						forceUpdate();
@@ -103,6 +114,11 @@ export default function () {
 							...reatTimeFormErrors,
 							email: "Email already exists",
 						});
+					} else if (!regex.test(document.getElementById("email").value)) {
+						setReatTimeFormErrors({
+							...reatTimeFormErrors,
+							email: "This is not a valid email format!",
+						});
 					} else {
 						delete reatTimeFormErrors.email;
 					}
@@ -112,7 +128,6 @@ export default function () {
 
 	const validate = (values) => {
 		const errors = {};
-		const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
 		if (!values.username) {
 			errors.username = "Username is required!";

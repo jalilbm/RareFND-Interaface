@@ -11,24 +11,17 @@ export default function ProjectCurrentContributions() {
 	const [projectData, setprojectData] = useState({});
 	const [usdRaisedAmount, setUsdRaisedAmount] = useState(0);
 	useEffect(() => {
-		axios
-			.get(`https://rarefndapi.herokuapp.com/api/project/${id}/`)
-			.then((response) => response.data)
-			.then((data) => {
-				setprojectData(data);
-				setUsdRaisedAmount(data.rewarded_amount);
-			});
+		let interval = setInterval(() => {
+			axios
+				.get(`https://rarefndapi.herokuapp.com/api/project/${id}/`)
+				.then((response) => response.data)
+				.then((data) => {
+					setprojectData(data);
+					setUsdRaisedAmount(Number(data.raised_amount) + data.rewarded_amount);
+				});
+		}, 1000 * 5);
+		return () => clearInterval(interval);
 	}, []);
-
-	useEffect(() => {
-		axios
-			.get(`https://rarefndapi.herokuapp.com/api/price/`)
-			.then((response) => {
-				setUsdRaisedAmount(
-					Number(projectData.raised_amount) + projectData.rewarded_amount
-				);
-			});
-	}, [projectData]);
 
 	return (
 		<div className="project-current-contributions bg-warning p-5">

@@ -1,0 +1,20 @@
+.dashboard-projects {
+	display: flex;
+	background-color: white;
+	.dashboard-projects-container {
+		flex: 6;
+	}
+}
+
+input,
+textarea {
+	border: 1px solid lightgrey;
+	&::placeholder {
+		/* Chrome, Firefox, Opera, Safari 10.1+ */
+		color: lightgrey;
+		opacity: 1; /* Firefox */
+	}
+	&:focus {
+		border-color: #fad02c;
+	}
+}

@@ -1,18 +1,21 @@
 import Category from "./pages/Category";
 import Home from "./pages/Home";
 import { Routes, Route } from "react-router-dom";
-import Project from "./pages/Project";
 import Programs from "./pages/Programs";
 import About from "./pages/About";
 import Login from "./pages/Login";
 import Signup from "./pages/SignupPage";
 import StartProject from "./pages/StartProject";
-import Dashboard from "./pages/Dashboard";
+import Project from "./pages/Project";
 import PrivateRoute from "./utils/PrivateRoute";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "./Context/AuthContext";
+import DashboardHome from "./pages/Dashboard/Home/Home.js";
+import Stats from "./pages/Dashboard/Stats/Stats.js";
+import Profile from "./pages/Dashboard/Profile/Profile.js";
+import DashboardProject from "./pages/Dashboard/Project/Project.js";
 
 export default function Main() {
 	const { pathname, hash, key } = useLocation();
@@ -46,11 +49,30 @@ export default function Main() {
 				<Route exact path="/programs" element={<Programs />} />
 				<Route exact path="/login" element={!user ? <Login /> : <Home />} />
 				<Route exact path="/signup" element={<Signup />} />
-				<Route exact path="/dashboard" element={<Signup />} />
 				<Route
 					exact
 					path="/start-project"
 					element={<PrivateRoute Component={StartProject} />}
+				/>
+				<Route
+					exact
+					path="/dashboard"
+					element={<PrivateRoute Component={DashboardHome} />}
+				/>
+				<Route
+					exact
+					path="/dashboard/projects"
+					element={<PrivateRoute Component={DashboardProject} />}
+				/>
+				<Route
+					exact
+					path="/dashboard/profile"
+					element={<PrivateRoute Component={Profile} />}
+				/>
+				<Route
+					exact
+					path="/dashboard/stats"
+					element={<PrivateRoute Component={Stats} />}
 				/>
 			</Routes>
 		</div>

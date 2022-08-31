@@ -1,6 +1,5 @@
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import "bootstrap/dist/css/bootstrap.css";
 import Image from "react-bootstrap/Image";
 import rarefnd_logo from "../../assets/logos/rarefnd_logo.png";
@@ -11,6 +10,7 @@ import Web3ConnectButton from "../Web3ConnectButton/index";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import AuthContext from "../../Context/AuthContext";
+import avatar from "../../assets/logos/user.png";
 
 function NavBar() {
 	const [sowCategories, setShowCategories] = useState(false);
@@ -89,43 +89,15 @@ function NavBar() {
 					>
 						All Categories
 					</Nav.Link>
-
-					{/* <Nav.Link
-						as={Link}
-						to="/about"
-						onClick={() => setShowNavItems(!showNavItems)}
-					>
-						About Us
-					</Nav.Link>
-					<Nav.Link as={Link} to="/programs" onClick={handleNavClick}>
-						Programs
-					</Nav.Link>
-					<NavDropdown
-						title="Categories"
-						id="collasible-nav-dropdown"
-						show={sowCategories}
-						onClick={() => setShowCategories(!sowCategories)}
-						style={{ maxWidth: "70%" }}
-					>
-						<NavDropdown.Divider />
-						<NavDropdown.Item
-							as={Link}
-							to="/category/all"
-							style={{ textTransform: "capitalize" }}
-							onClick={() => setShowNavItems(!showNavItems)}
-						>
-							all
-						</NavDropdown.Item>
-					</NavDropdown> */}
 				</Nav>
-				<div style={{ marginRight: "20px" }}>
+				<div style={{ marginRight: "20px", display: "flex" }}>
 					{user ? (
 						<Button
 							variant="outline-warning"
 							className="btn-log-in"
 							as={Link}
 							to="/logout"
-							style={{ marginRight: "10px" }}
+							style={{ marginRight: "10px", flex: "4" }}
 							onMouseDown={logOut}
 							onClick={() => setShowNavItems(!showNavItems)}
 						>
@@ -138,7 +110,7 @@ function NavBar() {
 								className="btn-log-in"
 								as={Link}
 								to="/login"
-								style={{ marginRight: "10px" }}
+								style={{ marginRight: "10px", flex: "4" }}
 								onMouseDown={(e) => e.preventDefault()}
 								onClick={() => setShowNavItems(!showNavItems)}
 							>
@@ -149,7 +121,7 @@ function NavBar() {
 								as={Link}
 								to="/signup"
 								className="btn-signup"
-								style={{ marginRight: "10px" }}
+								style={{ marginRight: "10px", flex: "4" }}
 								onMouseDown={(e) => e.preventDefault()}
 								onClick={() => setShowNavItems(!showNavItems)}
 							>
@@ -158,6 +130,21 @@ function NavBar() {
 						</>
 					)}
 					<Web3ConnectButton />
+
+					{user && (
+						<div className="user-avatar" style={{ flex: "4" }}>
+							<img
+								className="user-avatar-image"
+								src={avatar}
+								alt="Avatar"
+								style={{
+									height: "40px",
+									marginLeft: "10px",
+									cursor: "pointer",
+								}}
+							></img>
+						</div>
+					)}
 				</div>
 			</div>
 		</Navbar>

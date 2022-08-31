@@ -1,0 +1,17 @@
+[id^="dashboard-rules-LI_"] {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	text-align: center;
+	height: 100%;
+	pointer-events: pointer;
+}
+
+[class*="selected"] {
+	border-bottom: 3px solid #fad02c;
+}
+
+#dashboard-rules-NAV_1 {
+	box-shadow: 0 2px 6px 0 rgb(0 0 0 / 17%);
+}

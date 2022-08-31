@@ -36,7 +36,7 @@ export default function HomeCarousel() {
 					<br />
 					<br />
 					<br />
-					<Button  variant="warning" to="/signup" size="lg">
+					<Button variant="warning" to="/signup" size="lg">
 						Sign Up - It's FREE
 					</Button>
 					<br />

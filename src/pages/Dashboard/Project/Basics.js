@@ -5,14 +5,14 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 export default function Basics() {
-	const [categories, setCategories] = useState(second);
+	const [categories, setCategories] = useState({});
 	useEffect(() => {
-		axios.get("https://rarefndapi.herokuapp.com/api/category/");
-
-		return () => {
-			second;
-		};
-	}, [third]);
+		axios
+			.get("https://rarefndapi.herokuapp.com/api/category/")
+			.then((response) => {
+				setCategories(response.data);
+			});
+	}, []);
 
 	return (
 		<div className="DashboardCreateProjectBasics">

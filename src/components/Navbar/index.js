@@ -29,14 +29,15 @@ function NavBar() {
 
 	return (
 		<Navbar
+		
 			id="nav-bar"
 			collapseOnSelect
 			expand="lg"
-			bg="black"
+			bg="transparent"
 			variant="dark"
 			className="navbar"
 			sticky="top"
-			style={{ fontFamily: "Calibri" }}
+			style={{ fontFamily: "'Poppins', sans-serif" }}
 		>
 			<Link to="/home" style={{ marginLeft: "40px" }}>
 				<Image src={rarefnd_logo} className="logo" />

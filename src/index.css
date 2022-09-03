@@ -1,6 +1,7 @@
 #root {
 	margin: 0;
-	font-family: "Calibri", sans-serif;
+	font-family: Avenir, sans-serif;
+	background-color: #212529;
 }
 
 ::-webkit-scrollbar {
@@ -14,11 +15,6 @@
 	background: #ffc007;
 	border-radius: 60px;
 	height: 10px;
-}
-
-#root {
-	background-color: #212529;
-	border-radius: 60px;
 }
 
 @keyframes shake {

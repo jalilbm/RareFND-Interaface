@@ -41,7 +41,7 @@ function MainCard(props) {
 												  }
 												: {
 														objectFit: "cover",
-														width: "100%",
+														width: "20rem",
 														height: props.image_height,
 												  }
 										}

@@ -18,16 +18,13 @@ export default function ProjectCard(props) {
 				<Card.Body style={{ height: "140px" }}>
 					<Card.Title
 						style={{
-							fontFamily: "Times New Roman",
 							fontWeight: "bold",
 							fontSize: "22px",
 						}}
 					>
 						{props.title}
 					</Card.Title>
-					<Card.Text style={{ fontFamily: "Times New Roman", opacity: "0.8" }}>
-						{head}
-					</Card.Text>
+					<Card.Text>{head}</Card.Text>
 				</Card.Body>
 			</Card>
 		</Link>

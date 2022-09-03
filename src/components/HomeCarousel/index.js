@@ -23,7 +23,10 @@ export default function HomeCarousel() {
 					className="top-caption"
 					style={{ position: "absolute", top: "80px" }}
 				>
-					<h1 className="display-1" style={{ fontFamily: "'Cinzel', serif" }}>
+					<h1
+						className="display-1"
+						style={{ fontFamily: "'Avenir', sans-serif;" }}
+					>
 						Rare Find then Fund
 					</h1>
 					<br />

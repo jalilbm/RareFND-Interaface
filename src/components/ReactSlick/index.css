@@ -1,0 +1,13 @@
+.navSlider {
+	padding-left: 2rem;
+	padding-right: 2rem;
+	margin-top: 1.5rem;
+}
+.slick-track {
+	display: flex;
+	width: auto !important;
+	align-items: center;
+}
+.slick-dots {
+	display: none !important;
+}

@@ -3,18 +3,18 @@ import Row from "react-bootstrap/Row";
 import "bootstrap/dist/css/bootstrap.css";
 import MainCard from "./Card.js";
 import Container from "react-bootstrap/Container";
-import help from "../../assets/carousel/help.jpg";
 import star from "../../assets/carousel/star.png";
-import binance_card from "../../assets/carousel/binance_card.webp";
+import partnerShip from "../../assets/carousel/partnership.png";
 import Button from "react-bootstrap/Button";
-
+import CroudFunding from "../../assets/carousel/croudFunding.png";
+import "./index.css";
 function HomeCards() {
 	return (
 		<Container className="pt-5 pb-5">
 			<Row>
 				<Col lg={12} className="mt-4">
 					<MainCard
-						image={binance_card}
+						image={partnerShip}
 						title="Key Partnerships"
 						text="Key partnerships to be announced with some of the leading names in the industry across the charity space.
             Stay tuned to our socials as some of the biggest partnerships in the crowdfunding space are to be announced, and you have the chance to get involved too!"
@@ -29,7 +29,7 @@ function HomeCards() {
 			<Row>
 				<Col lg={12} className="mt-4">
 					<MainCard
-						image={help}
+						image={CroudFunding}
 						title="The Only Crowdfunding Platform That Pays You To Crowdfund"
 						text="Start crowdfunding with Rare Fnd today and we will give you 10% towards your crowdfunding target!
             Not only that but reach your target quicker with 240% APY on all contributions."

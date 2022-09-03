@@ -1,22 +1,101 @@
 .logo {
 	width: 100px;
-	height: 60px;
-	margin-top: -7px;
+	height: 50px;
 }
 
-/* .navbar {
-  height: 80px;
-} */
+.navbar {
+	display: block;
+	font-family: Avenir, sans-serif;
+}
+
+.TopLargeMiddleSec {
+	display: flex;
+	justify-content: center;
+}
+.secRow {
+	display: flex;
+	justify-content: center;
+}
+.secRow ul {
+	display: flex;
+	gap: 2rem;
+	color: white;
+}
+
+.ConnectBtnLarge {
+	display: flex;
+	gap: 1rem;
+	padding-left: 1rem;
+}
+
+.TopLargeRightSec {
+	display: flex;
+	justify-content: end;
+	align-items: center;
+}
+
+.CollapsButtonsDivLarge {
+	display: flex;
+	justify-content: end;
+	align-items: center;
+}
+
+.ConnectBtn {
+	display: none;
+}
+
+.CollapsButtonsDiv {
+	display: none;
+}
+
+.navbar-nav {
+	font-size: 18px;
+}
+
+.topNavRow {
+	width: 100%;
+	display: flex;
+	padding-top: 0.2rem;
+}
+
+.TopLargeleftSec {
+	display: flex;
+	gap: 2rem;
+	align-items: center;
+}
 
 .btn-log-in,
 .btn-signup {
 	width: 140px;
+	height: fit-content;
 }
 
-#nav-bar .dropdown-menu {
-	margin-bottom: 16px;
+.secNavRow {
+	padding-top: 1rem;
+	margin-top: 1rem;
+	border-top: 1px solid rgba(54, 69, 79, 0.8);
+}
+.mainNavbar {
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+	margin-top: 1rem;
+	border-top: 1px solid rgba(54, 69, 79, 0.8);
+	border-bottom: 1px solid rgba(54, 69, 79, 0.8);
+	display: flex;
+	gap: 2rem;
+	width: 100%;
+}
+.ExtraNavItems {
+	display: flex;
+	gap: 2rem;
 }
 
+#nav-bar {
+	max-width: 100%;
+}
+.mobileShowButtons {
+	display: none;
+}
 .navbar .divider-vertical {
 	height: 30px;
 	margin: 0 9px;
@@ -30,10 +109,116 @@
 	border-left-color: #111111;
 }
 
-@media (max-width: 767px) {
+.CollapsNavbar {
+	gap: 20px;
+}
+
+/* Collaps Navbar  */
+.navbar-toggler {
+	position: absolute;
+	right: 0;
+	top: 1rem;
+}
+.webNavLinks {
+	width: 100%;
+	margin: 0;
+	display: flex;
+}
+.MobileNavLinks {
+	display: block;
+	width: 100%;
+	color: white !important;
+}
+.ResponsiveNav {
+	display: none;
+}
+@media (max-width: 1024px) {
+	.webNavLinks {
+		display: none;
+	}
+	.ResponsiveNav {
+		display: block;
+		margin-top: 1rem;
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+}
+
+@media (max-width: 768px) {
 	.navbar-collapse .nav > .divider-vertical {
 		display: none;
 	}
+	.webNavLinks {
+		display: none;
+	}
+	.MobileNavLinks {
+		display: flex;
+		color: white !important;
+	}
+	.SliderNav {
+		display: flex;
+		width: "100%";
+		color: white;
+	}
+	.CollapsNavbar {
+		/* border: 1px solid red; */
+		padding-top: 30px;
+	}
+
+	.CollapsButtonsDiv {
+		display: block;
+		margin-top: 40px;
+	}
+
+	.TopLargeleftSec {
+		display: none;
+	}
+	.TopLargeMiddleSec {
+		margin-bottom: 0.5rem;
+	}
+
+	.CollapsButtonsDivLarge {
+		display: none;
+	}
+	.mobileShowButtons button {
+		color: #ffc007 !important;
+	}
+	.mobileShowButtons {
+		padding-right: 10px;
+		padding-top: 10px;
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+	}
+	.mobileShowButtons button {
+		background: transparent;
+		border: none;
+		outline: none;
+		color: white;
+		font-family: Avenir, sans-serif;
+		font-size: 0.9rem;
+	}
+
+	/* .ConnectBtnLarge{
+		display: none;
+	
+	} */
+	.navbar-collapse {
+		height: 100vh;
+	}
+
+	.topNavRow {
+		display: flex;
+	}
+
+	.ConnectBtn {
+		margin-top: 20px;
+		display: block;
+	}
+
+	/* .CollapsButtonsDivLarge{
+		display: none;
+	} */
 }
 
 .nav-bar-item {
@@ -58,4 +243,11 @@
 .nav-bar-item:hover:after {
 	transform: scaleX(1);
 	transform-origin: bottom left;
+}
+.slick-track {
+	display: flex !important;
+	gap: 2rem !important;
+}
+.slick-track h3 {
+	color: #ffc007 !important;
 }

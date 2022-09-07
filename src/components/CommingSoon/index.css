@@ -1,0 +1,89 @@
+.mainDiv {
+	background-color: black;
+	height: 100vh;
+	font-family: Avenir, sans-serif;
+}
+.mainRow {
+	height: 100%;
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	padding-top: 10rem;
+	color: white;
+}
+
+.textCol {
+	display: flex;
+	order: 0;
+	justify-content: end;
+	padding-top: 4rem;
+}
+.textCol h3 {
+	font-size: 3rem;
+	font-weight: 600;
+}
+.paraDiv {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+.paraDiv p {
+	width: 30rem;
+	margin-top: 1rem;
+	text-align: center;
+}
+.buttonDiv {
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
+	margin-top: 2rem;
+}
+.buttonDiv input {
+	padding: 16px 30px;
+	border: 1px solid rgba(245, 245, 245, 0.14);
+	border-radius: 4px;
+	background-color: rgba(255, 255, 255, 0.14);
+	font-size: 14px;
+	height: 48px;
+	color: #ffffff;
+	width: 14rem;
+}
+.buttonDiv button {
+	padding: 16px 20px;
+	font-size: 13px;
+	font-weight: bold;
+	color: black;
+	border-radius: 4px;
+	background-color: #ffc007;
+
+	border: 0;
+	height: 48px;
+	white-space: nowrap;
+}
+.imageCol {
+	order: 1;
+}
+.imageCol img {
+	height: 25rem;
+	width: 100%;
+	padding-left: 0rem;
+	padding-right: 6rem;
+}
+
+@media (max-width: 768px) {
+	.imageCol {
+		display: none;
+	}
+	.mainRow {
+		padding-top: 0;
+	}
+	.textCol {
+		text-align: center;
+	}
+	.textCol h3 {
+		font-size: 1.6rem;
+	}
+	.paraDiv p {
+		width: auto;
+	}
+}

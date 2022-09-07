@@ -1,0 +1,23 @@
+.drop-down {
+	background-color: transparent;
+	width: 100%;
+	.dropdown {
+		background-color: transparent;
+		color: black;
+		border-radius: 0px;
+		width: 100%;
+		border: 0.5px solid lightgrey;
+		outline: none;
+		text-align: left;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		&:focus {
+			box-shadow: none !important;
+		}
+	}
+	.drop-menu {
+		width: 100%;
+		border-radius: 0px;
+	}
+}

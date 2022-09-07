@@ -8,17 +8,6 @@ export default function HomeCarousel() {
 	return (
 		<Carousel fade controls={false} indicators={false}>
 			<Carousel.Item>
-				<img
-					className="d-block w-100"
-					src={main}
-					alt="Third slide"
-					style={{
-						height: "92vh",
-						minHeight: "600px",
-						objectFit: "cover",
-					}}
-				/>
-
 				<Carousel.Caption
 					className="top-caption"
 					style={{ position: "absolute", top: "80px" }}

@@ -1,8 +1,9 @@
 import React from "react";
 import Slider from "react-slick";
-import "./index.css";
+
 import LeftArrow from "../../assets/left-arrow.svg";
 import RightArrow from "../../assets/right-arrow.svg";
+import "./index.css";
 
 export default function ReactSlick({}) {
 	const Mobilenavdata = [

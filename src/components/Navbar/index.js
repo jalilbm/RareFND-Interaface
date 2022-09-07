@@ -5,27 +5,22 @@ import Image from "react-bootstrap/Image";
 import rarefnd_logo from "../../assets/logos/rarefnd_logo.png";
 import "./index.css";
 import Button from "react-bootstrap/Button";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Web3ConnectButton from "../Web3ConnectButton/index";
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import AuthContext from "../../Context/AuthContext";
-import ReactSlick from "../ReactSlick/index";
-
-const navdata = [
-	"Comics & Illustration",
-	"Film",
-	"Food & Craft",
-	"Games",
-	"Music",
-	"Publishing",
-];
+import avatar from "../../assets/logos/user.png";
+import ReactSlick from "../../components/ReactSlick";
 
 function NavBar() {
+	const [sowCategories, setShowCategories] = useState(false);
 	const [categoriesData, setCategoriesData] = useState({});
+	const [expanded, setExpanded] = useState(false);
 	const [showNavItems, setShowNavItems] = useState(false);
-	const navigate = useNavigate();
-
+	const handleNavClick = () => {
+		setShowNavItems(false);
+	};
 	const { user, logOut } = useContext(AuthContext);
 	useEffect(() => {
 		axios
@@ -34,174 +29,126 @@ function NavBar() {
 	}, []);
 
 	return (
-		<div>
+		<div
+			style={{
+				display: "flex",
+				alignItems: "center",
+				justifyContent: "center",
+			}}
+		>
 			<Navbar
 				id="nav-bar"
-				collapseOnSelect
 				expand="lg"
-				bg="black"
-				variant="dark"
+				bg="white"
 				className="navbar"
-				sticky="top"
+				style={{ position: "relative" }}
 			>
-				<div className="row topNavRow">
-					<div className="col-12 col-md-4 TopLargeleftSec">
-						<div className="ConnectBtnLarge">
+				<div
+					style={{
+						display: "flex",
+						width: "100%",
+						// gap: "1rem",
+						// padding: "0 1rem 0 1rem",
+					}}
+				>
+					<div
+						style={{
+							display: "flex",
+							gap: "1rem",
+							padding: "0 1rem 0 1rem",
+						}}
+					>
+						<div className="nav-bar-btn-wrapper">
 							<Web3ConnectButton />
+						</div>
+						<div className="nav-bar-btn-wrapper">
 							<Button
 								variant="warning"
-								as={Link}
-								to="/start-project"
-								className="btn-signup"
-								style={{ marginRight: "10px" }}
 								onMouseDown={(e) => e.preventDefault()}
+								style={{
+									whiteSpace: "nowrap",
+									textAlign: "center",
+									width: "155px",
+								}}
+								// onClick={props.nextTabFunction}
 							>
-								Start a Project
+								Start Project
 							</Button>
 						</div>
 					</div>
-					<div className="col-12 col-md-4 TopLargeMiddleSec ">
-						<Link to="/home" style={{ marginLeft: "40px" }}>
+
+					<div className="w-100 text-center">
+						<Link to="/home">
 							<Image src={rarefnd_logo} className="logo" />
 						</Link>
 					</div>
-					<div className="col-12 col-md-4 TopLargeRightSec">
-						<div
-							className="CollapsButtonsDivLarge"
-							style={{ marginRight: "20px" }}
-						>
-							{user ? (
+
+					<div
+						style={{ display: "flex", gap: "1rem", padding: "0 1rem 0 1rem" }}
+					>
+						{user ? (
+							<div className="nav-bar-btn-wrapper">
 								<Button
 									variant="outline-warning"
-									className="btn-log-in"
 									as={Link}
 									to="/logout"
-									style={{ marginRight: "10px" }}
+									style={{
+										whiteSpace: "nowrap",
+										textAlign: "center",
+										width: "155px",
+									}}
 									onMouseDown={logOut}
-									onClick={() => setShowNavItems(!showNavItems)}
 								>
 									Log Out
 								</Button>
-							) : (
-								<>
+							</div>
+						) : (
+							<>
+								<div className="nav-bar-btn-wrapper">
 									<Button
 										variant="outline-warning"
-										className="btn-log-in"
 										as={Link}
 										to="/login"
-										style={{ marginRight: "10px" }}
+										style={{
+											whiteSpace: "nowrap",
+											textAlign: "center",
+											width: "155px",
+										}}
 										onMouseDown={(e) => e.preventDefault()}
-										onClick={() => setShowNavItems(!showNavItems)}
 									>
 										Log In
 									</Button>
+								</div>
+								<div className="nav-bar-btn-wrapper">
 									<Button
 										variant="warning"
 										as={Link}
 										to="/signup"
 										className="btn-signup"
-										style={{ marginRight: "10px" }}
+										style={{
+											whiteSpace: "nowrap",
+											textAlign: "center",
+											width: "155px",
+										}}
 										onMouseDown={(e) => e.preventDefault()}
-										onClick={() => setShowNavItems(!showNavItems)}
 									>
 										Sign Up
 									</Button>
-								</>
-							)}
-						</div>
-						<div className="row mobileShowButtons">
-							<div
-								className="col-md-12"
-								style={{
-									display: "flex",
-									justifyContent: "space-between",
-								}}
-							>
-								<div style={{ display: "flex" }}>
-									<Web3ConnectButton />
-									<button
-										style={{
-											fontSize: "0.7rem",
-											textDecoration: "Underline",
-											textUnderlineOffset: "3px",
-										}}
-										as={Link}
-										to="/start-project"
-										onMouseDown={(e) => e.preventDefault()}
-										onClick={() => navigate("/start-project")}
-									>
-										Start a Project
-									</button>
 								</div>
-								<div>
-									<button
-										style={{ fontSize: "0.7rem" }}
-										as={Link}
-										onClick={() => navigate("/login")}
-										to="/login"
-									>
-										Log In
-									</button>
-									<button
-										style={{ fontSize: "0.7rem" }}
-										as={Link}
-										onClick={() => navigate("/signup")}
-										to="/signup"
-									>
-										Sign Up
-									</button>
-								</div>
-							</div>
-						</div>
+							</>
+						)}
 					</div>
 				</div>
-				<div className="row webNavLinks">
-					<Nav
-						className="mx-auto mainNavbar"
-						style={{
-							display: "flex",
-							justifyContent: "center",
-						}}
-					>
-						{Array.from(categoriesData).map((data, idx) => {
-							if (data.name.toLowerCase() !== "all") {
-								return (
-									<Nav.Link
-										as={Link}
-										to={
-											"/category/" +
-											data.name.replace(new RegExp(" ", "g"), "-")
-										}
-										style={{ textTransform: "capitalize" }}
-										onClick={() => setShowNavItems(!showNavItems)}
-										className="nav-bar-item "
-									>
-										{data.name}
-									</Nav.Link>
-								);
-							}
-						})}
-						<div className="ExtraNavItems">
-							{navdata.map((item) => {
-								return (
-									<Nav.Link
-										as={Link}
-										to="/commingSoon"
-										style={{ textTransform: "capitalize" }}
-										onClick={() => setShowNavItems(!showNavItems)}
-										className="nav-bar-item"
-									>
-										{item}
-									</Nav.Link>
-								);
-							})}
-						</div>
-					</Nav>
-				</div>
-				<div className="ResponsiveNav">
-					<ReactSlick />
+				<div>
+					<img
+						src="https://assets-global.website-files.com/612f5131b9c94ecd0fe9c722/612f5131b9c94e2c0ee9ca3d_drops.svg"
+						className="decor"
+					/>
 				</div>
 			</Navbar>
+			{/* <div className="ResponsiveNav">
+				<ReactSlick />
+			</div> */}
 		</div>
 	);
 }

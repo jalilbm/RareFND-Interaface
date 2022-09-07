@@ -34,14 +34,12 @@ export default function ContributeBtn(props) {
 	const tokenAddress = token_info.token_address;
 
 	useEffect(() => {
-		axios
-			.get(`https://rarefndapi.herokuapp.com/api/project/${id}/`)
-			.then((response) => {
-				setProjectData(response.data);
-				setProjectLive(response.data.live);
-				setStakingAddress(response.data.staking_address);
-				setStaking_abi(JSON.parse(response.data.staking_abi));
-			});
+		axios.get(`http://127.0.0.1:8000/api/project/${id}/`).then((response) => {
+			setProjectData(response.data);
+			setProjectLive(response.data.live);
+			setStakingAddress(response.data.staking_address);
+			setStaking_abi(JSON.parse(response.data.staking_abi));
+		});
 	}, []);
 
 	const getAllowance = async (token_) => {
@@ -82,13 +80,10 @@ export default function ContributeBtn(props) {
 					);
 					await tx.wait();
 					setPending(false);
-					axios.post(
-						"https://rarefndapi.herokuapp.com/api/pending_contribution/",
-						{
-							hash: tx.hash,
-							project: id,
-						}
-					);
+					axios.post("http://127.0.0.1:8000/api/pending_contribution/", {
+						hash: tx.hash,
+						project: id,
+					});
 					document.getElementById(
 						"transaction-status"
 					).textContent = `Transaction hash: ${tx.hash}`;
@@ -178,7 +173,7 @@ export default function ContributeBtn(props) {
 							<Button
 								id="contribute-btn"
 								variant="warning"
-								classNmae="btn-wallet align-self-end"
+								// classNmae="btn-wallet align-self-end"
 								size="lg"
 								style={{ width: "100%", fontSize: "2vh", maxHeight: "100%" }}
 								onClick={() => stake()}
@@ -190,7 +185,7 @@ export default function ContributeBtn(props) {
 							<Button
 								id="approve-btn"
 								variant="warning"
-								classNmae="btn-wallet align-self-end"
+								// classNmae="btn-wallet align-self-end"
 								size="lg"
 								style={{ width: "100%", fontSize: "2vh", maxHeight: "100%" }}
 								onClick={() => approve()}

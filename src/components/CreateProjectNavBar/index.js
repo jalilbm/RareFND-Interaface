@@ -2,23 +2,10 @@ import { useState, useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
 import "./index.css";
 
-export default function CreateProjectNavBar() {
-	const [selectedNavItem, setSelectedNavItem] = useState(null);
+export default function CreateProjectNavBar(props) {
 	const handleNavItem = (event) => {
-		if (selectedNavItem !== event.target.id) {
-			if (selectedNavItem) {
-				document.getElementById(selectedNavItem).className = document
-					.getElementById(selectedNavItem)
-					.className.replace(" selected", "");
-			}
-			setSelectedNavItem(event.target.id);
-		}
+		props.changeTab(event.target.id);
 	};
-	useEffect(() => {
-		if (selectedNavItem)
-			document.getElementById(selectedNavItem).className =
-				document.getElementById(selectedNavItem).className + " selected";
-	}, [selectedNavItem]);
 	return (
 		<nav
 			id="dashboard-rules-NAV_1"
@@ -48,7 +35,7 @@ export default function CreateProjectNavBar() {
 								<Row style={{ height: "100%" }} className="d-none d-md-flex">
 									<Col>
 										<li
-											id="dashboard-rules-LI_7"
+											id="create-project-tab-1"
 											onClick={handleNavItem}
 											style={{ padding: "15px" }}
 										>
@@ -72,7 +59,7 @@ export default function CreateProjectNavBar() {
 										</li>
 									</Col>
 									<Col>
-										<li id="dashboard-rules-LI_12" onClick={handleNavItem}>
+										<li id="create-project-tab-2" onClick={handleNavItem}>
 											<div
 												id="dashboard-rules-DIV_14"
 												style={{ pointerEvents: "none" }}
@@ -93,7 +80,7 @@ export default function CreateProjectNavBar() {
 										</li>
 									</Col>
 									<Col>
-										<li id="dashboard-rules-LI_17" onClick={handleNavItem}>
+										<li id="create-project-tab-3" onClick={handleNavItem}>
 											<div
 												id="dashboard-rules-DIV_19"
 												style={{ pointerEvents: "none" }}
@@ -114,7 +101,7 @@ export default function CreateProjectNavBar() {
 										</li>
 									</Col>
 									<Col>
-										<li id="dashboard-rules-LI_22" onClick={handleNavItem}>
+										<li id="create-project-tab-4" onClick={handleNavItem}>
 											<div
 												id="dashboard-rules-DIV_24"
 												style={{ pointerEvents: "none" }}
@@ -135,7 +122,7 @@ export default function CreateProjectNavBar() {
 										</li>
 									</Col>
 									<Col>
-										<li id="dashboard-rules-LI_27" onClick={handleNavItem}>
+										<li id="create-project-tab-5" onClick={handleNavItem}>
 											<div
 												id="dashboard-rules-DIV_29"
 												style={{ pointerEvents: "none" }}
@@ -156,7 +143,7 @@ export default function CreateProjectNavBar() {
 										</li>
 									</Col>
 									<Col>
-										<li id="dashboard-rules-LI_32" onClick={handleNavItem}>
+										<li id="create-project-tab-6" onClick={handleNavItem}>
 											<div
 												id="dashboard-rules-DIV_34"
 												style={{ pointerEvents: "none" }}
@@ -173,27 +160,6 @@ export default function CreateProjectNavBar() {
 													</span>
 												</div>
 												Payment
-											</div>
-										</li>
-									</Col>
-									<Col>
-										<li id="dashboard-rules-LI_37" onClick={handleNavItem}>
-											<div
-												id="dashboard-rules-DIV_39"
-												style={{ pointerEvents: "none" }}
-											>
-												<div
-													id="dashboard-rules-DIV_40"
-													style={{ pointerEvents: "none" }}
-												>
-													<span
-														id="dashboard-rules-SPAN_41"
-														style={{ pointerEvents: "none" }}
-													>
-														📢
-													</span>
-												</div>
-												Promotion
 											</div>
 										</li>
 									</Col>

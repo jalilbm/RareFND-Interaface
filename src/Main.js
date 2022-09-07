@@ -16,6 +16,7 @@ import DashboardHome from "./pages/Dashboard/Home/Home.js";
 import Stats from "./pages/Dashboard/Stats/Stats.js";
 import Profile from "./pages/Dashboard/Profile/Profile.js";
 import DashboardProject from "./pages/Dashboard/Project/Project.js";
+import CommingSoon from "./components/CommingSoon/CommingSoon";
 
 export default function Main() {
 	const { pathname, hash, key } = useLocation();
@@ -48,6 +49,7 @@ export default function Main() {
 				<Route exact path="/about" element={<About />} />
 				<Route exact path="/programs" element={<Programs />} />
 				<Route exact path="/login" element={!user ? <Login /> : <Home />} />
+				<Route exact path="/commingSoon" element={<CommingSoon />} />
 				<Route exact path="/signup" element={<Signup />} />
 				<Route
 					exact

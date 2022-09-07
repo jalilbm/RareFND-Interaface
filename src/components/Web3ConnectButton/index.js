@@ -169,9 +169,14 @@ export default function Web3ConnectButton() {
 	return (
 		<Button
 			id="connect-btn"
-			variant="light"
-			className="btn-wallet"
+			variant="dark"
+			// className="btn-wallet"
 			onClick={connectWallet}
+			style={{
+				whiteSpace: "nowrap",
+				textAlign: "center",
+				color: "black",
+			}}
 		>
 			Connect to Wallet
 		</Button>

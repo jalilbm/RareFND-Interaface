@@ -1,0 +1,17 @@
+.FooterMobile {
+	display: none;
+}
+/* .FooterDesktop {
+	display: flex;
+	width: 100%;
+} */
+
+@media (max-width: 650px) {
+	.FooterMobile {
+		display: flex;
+		width: 100%;
+	}
+	.FooterDesktop {
+		display: none;
+	}
+}

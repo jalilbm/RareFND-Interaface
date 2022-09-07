@@ -41,8 +41,6 @@ export default function About() {
 					color: "white",
 					fontWeight: "bold",
 					marginLeft: "5%",
-					fontFamily:
-						"Cambria, Cochin, Georgia, Times, 'Times New Roman', serif",
 				}}
 			>
 				Our Programs

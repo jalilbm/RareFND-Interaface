@@ -1,57 +1,41 @@
-
-.aboutpage .AboutBody{
-  margin-top:2%;
-  color:white;
-  padding: 60px;
-  top:0;
-  width: 90%;
-  padding: 2%;
-
+.aboutpage .AboutBody {
+	margin-top: 2%;
+	color: white;
+	padding: 60px;
+	top: 0;
+	width: 90%;
+	padding: 2%;
 }
-.aboutpage .quote{
-  font-size: 24px;
-  text-align: center;
-  margin-top: 1%;
-  color:white;
-  padding: 1%;
-  width:60%;
-  min-width: 250px;
-  font-family: "'Cinzel','Times New Roman'";
-  font-weight: bold;
-  font-size: medium;
+.aboutpage .quote {
+	font-size: 24px;
+	text-align: center;
+	margin-top: 1%;
+	color: white;
+	padding: 1%;
+	width: 60%;
+	min-width: 250px;
+	font-weight: bold;
+	font-size: medium;
 }
 .aboutpage blockquote::before {
-  content: open-quote;
+	content: open-quote;
 }
 .aboutpage blockquote::after {
-  content: close-quote;
+	content: close-quote;
 }
 .aboutpage blockquote {
-  quotes: "“" "”" "‘" "’";
+	quotes: "“" "”" "‘" "’";
 }
 
-.aboutpage .contacttitle{
-  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+.aboutpage a,
+a:hover,
+a:focus,
+a:active {
+	color: white;
 }
-.aboutpage a, a:hover, a:focus, a:active {
- 
-  color: white;
+.aboutpage figcaption {
+	font-size: smaller;
 }
-.aboutpage figcaption{
-  font-size: smaller;
+.aboutpage .contact {
+	margin: 5vw;
 }
-.aboutpage .contact{
-  margin:5vw
-
-}
-
-
-
-
-
-
-
-
-
-
-

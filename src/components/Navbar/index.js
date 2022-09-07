@@ -5,21 +5,27 @@ import Image from "react-bootstrap/Image";
 import rarefnd_logo from "../../assets/logos/rarefnd_logo.png";
 import "./index.css";
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Web3ConnectButton from "../Web3ConnectButton/index";
-import { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import AuthContext from "../../Context/AuthContext";
-import avatar from "../../assets/logos/user.png";
+import ReactSlick from "../ReactSlick/index";
+
+const navdata = [
+	"Comics & Illustration",
+	"Film",
+	"Food & Craft",
+	"Games",
+	"Music",
+	"Publishing",
+];
 
 function NavBar() {
-	const [sowCategories, setShowCategories] = useState(false);
 	const [categoriesData, setCategoriesData] = useState({});
-	const [expanded, setExpanded] = useState(false);
 	const [showNavItems, setShowNavItems] = useState(false);
-	const handleNavClick = () => {
-		setShowNavItems(false);
-	};
+	const navigate = useNavigate();
+
 	const { user, logOut } = useContext(AuthContext);
 	useEffect(() => {
 		axios
@@ -28,127 +34,177 @@ function NavBar() {
 	}, []);
 
 	return (
-		<Navbar
-		
-			id="nav-bar"
-			collapseOnSelect
-			expand="lg"
-			bg="transparent"
-			variant="dark"
-			className="navbar"
-			sticky="top"
-			style={{ fontFamily: "'Poppins', sans-serif" }}
-		>
-			<Link to="/home" style={{ marginLeft: "40px" }}>
-				<Image src={rarefnd_logo} className="logo" />
-			</Link>
-			<button
-				className="navbar-toggler"
-				type="button"
-				onClick={() => {
-					setShowNavItems(!showNavItems);
-				}}
-				style={{ marginRight: "10px" }}
-				onMouseDown={(e) => e.preventDefault()}
+		<div>
+			<Navbar 
+				id="nav-bar"
+				collapseOnSelect
+				expand="lg"
+				variant="dark"
+				className="navbar"
+				sticky="top"
 			>
-				<span className="navbar-toggler-icon" />
-			</button>
-			<div
-				className={`collapse navbar-collapse  ${
-					showNavItems ? "show" : ""
-				} w-100`}
-				id="navbarCollapse"
-				style={{ marginLeft: "40px" }}
-			>
-				<Nav className="mx-auto">
-					{Array.from(categoriesData).map((data, idx) => {
-						if (data.name.toLowerCase() !== "all") {
-							return (
-								<Nav.Link
-									as={Link}
-									to={
-										"/category/" + data.name.replace(new RegExp(" ", "g"), "-")
-									}
-									style={{ textTransform: "capitalize" }}
-									onClick={() => setShowNavItems(!showNavItems)}
-									className="nav-bar-item mx-3"
-									// syle={{
-									// 	width: "",
-									// }}
-								>
-									{data.name}
-								</Nav.Link>
-							);
-						}
-					})}
-					<Nav.Link
-						as={Link}
-						to="/category/all"
-						style={{ textTransform: "capitalize" }}
-						onClick={() => setShowNavItems(!showNavItems)}
-						className="nav-bar-item"
-					>
-						All Categories
-					</Nav.Link>
-				</Nav>
-				<div style={{ marginRight: "20px", display: "flex" }}>
-					{user ? (
-						<Button
-							variant="outline-warning"
-							className="btn-log-in"
-							as={Link}
-							to="/logout"
-							style={{ marginRight: "10px", flex: "4" }}
-							onMouseDown={logOut}
-							onClick={() => setShowNavItems(!showNavItems)}
-						>
-							Log Out
-						</Button>
-					) : (
-						<>
-							<Button
-								variant="outline-warning"
-								className="btn-log-in"
-								as={Link}
-								to="/login"
-								style={{ marginRight: "10px", flex: "4" }}
-								onMouseDown={(e) => e.preventDefault()}
-								onClick={() => setShowNavItems(!showNavItems)}
-							>
-								Log In
-							</Button>
+				<div className="row topNavRow mx-auto" >
+					<div className="col-12 col-md-4 TopLargeleftSec">
+						<div className="ConnectBtnLarge">
+							<Web3ConnectButton />
 							<Button
 								variant="warning"
 								as={Link}
-								to="/signup"
+								to="/start-project"
 								className="btn-signup"
-								style={{ marginRight: "10px", flex: "4" }}
+								style={{ marginRight: "10px",fontFamily: "'Poppins', sans-serif" }}
 								onMouseDown={(e) => e.preventDefault()}
-								onClick={() => setShowNavItems(!showNavItems)}
 							>
-								Sign Up
+								Start a Project
 							</Button>
-						</>
-					)}
-					<Web3ConnectButton />
-
-					{user && (
-						<div className="user-avatar" style={{ flex: "4" }}>
-							<img
-								className="user-avatar-image"
-								src={avatar}
-								alt="Avatar"
-								style={{
-									height: "40px",
-									marginLeft: "10px",
-									cursor: "pointer",
-								}}
-							></img>
 						</div>
-					)}
+					</div>
+					<div className="col-12 col-md-4 TopLargeMiddleSec ">
+						<Link to="/home" style={{ marginLeft: "40px" }}>
+							<Image src={rarefnd_logo} className="logo" />
+						</Link>
+					</div>
+					<div className="col-12 col-md-4 TopLargeRightSec">
+						<div
+							className="CollapsButtonsDivLarge"
+							style={{ marginRight: "20px" }}
+						>
+							{user ? (
+								<Button
+									variant="outline-warning"
+									className="btn-log-in"
+									as={Link}
+									to="/logout"
+									style={{ marginRight: "10px" ,fontFamily: "'Poppins', sans-serif"}}
+									onMouseDown={logOut}
+									onClick={() => setShowNavItems(!showNavItems)}
+								>
+									Log Out
+								</Button>
+							) : (
+								<>
+									<Button
+										variant="outline-warning"
+										className="btn-log-in"
+										as={Link}
+										to="/login"
+										style={{ marginRight: "10px",fontFamily: "'Poppins', sans-serif" }}
+										onMouseDown={(e) => e.preventDefault()}
+										onClick={() => setShowNavItems(!showNavItems)}
+									>
+										Log In
+									</Button>
+									<Button
+										variant="warning"
+										as={Link}
+										to="/signup"
+										className="btn-signup"
+										style={{ marginRight: "10px",fontFamily: "'Poppins', sans-serif" }}
+										onMouseDown={(e) => e.preventDefault()}
+										onClick={() => setShowNavItems(!showNavItems)}
+									>
+										Sign Up
+									</Button>
+								</>
+							)}
+						</div>
+						<div className="row mobileShowButtons">
+							<div
+								className="col-md-12"
+								style={{
+									display: "flex",
+									justifyContent: "space-between",
+								}}
+							>
+								<div style={{ display: "flex" }}>
+									<Web3ConnectButton />
+									<button
+										style={{
+											fontSize: "0.7rem",
+											textDecoration: "Underline",
+											textUnderlineOffset: "3px",
+										}}
+										as={Link}
+										to="/start-project"
+										onMouseDown={(e) => e.preventDefault()}
+										onClick={() => navigate("/start-project")}
+									>
+										Start a Project
+									</button>
+								</div>
+								<div>
+									<button
+										style={{ fontSize: "0.7rem" }}
+										as={Link}
+										onClick={() => navigate("/login")}
+										to="/login"
+									>
+										Log In
+									</button>
+									<button
+										style={{ fontSize: "0.7rem" }}
+										as={Link}
+										onClick={() => navigate("/signup")}
+										to="/signup"
+									>
+										Sign Up
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>
-		</Navbar>
+				<div className="row webNavLinks">
+				<div><img src="https://assets-global.website-files.com/612f5131b9c94ecd0fe9c722/612f5131b9c94e2c0ee9ca3d_drops.svg" className="decor"/></div>	
+					<Nav
+					  
+						className="mx-auto mainNavbar"
+						style={{
+							display: "flex",
+							justifyContent: "center",
+						}}
+					>
+						{Array.from(categoriesData).map((data, idx) => {
+							if (data.name.toLowerCase() !== "all") {
+								return (
+									<Nav.Link
+									
+										as={Link}
+										to={
+											"/category/" +
+											data.name.replace(new RegExp(" ", "g"), "-")
+										}
+										style={{ textTransform: "capitalize" }}
+										onClick={() => setShowNavItems(!showNavItems)}
+										className="nav-bar-item "
+									>
+										{data.name}
+									</Nav.Link>
+								);
+							}
+						})}
+						<div className="ExtraNavItems">
+							{navdata.map((item) => {
+								return (
+									<Nav.Link
+										as={Link}
+										to="/commingSoon"
+										style={{ textTransform: "capitalize" }}
+										onClick={() => setShowNavItems(!showNavItems)}
+										className="nav-bar-item"
+									>
+										{item}
+									</Nav.Link>
+								);
+							})}
+						</div>
+					</Nav>
+				</div>
+				<div className="ResponsiveNav">
+					<ReactSlick />
+				</div>
+			</Navbar>
+		</div>
 	);
 }
 

@@ -32,7 +32,6 @@ export default function ProjectCard(props) {
 							<Card.Title
 								style={{
 									fontSize: "xx-large",
-									fontFamily: "Times, 'Times New Roman', serif",
 								}}
 							>
 								{props.title}

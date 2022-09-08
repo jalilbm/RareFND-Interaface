@@ -1,11 +1,11 @@
-.HomeCrowdfunding {
-	font-weight: 200;
-	line-height: 1.5;
-}
-.display-1 {
-	font-family: Avenir, sans-serif;
+.rise-button:hover {
+	-webkit-transform: translateY(-3px);
+	transform: translateY(-3px);
+	transition: transform 500ms;
+	box-shadow: 0 12px 16px 0 rgb(167, 165, 165);
 }
 
-.HomeCarousel {
-	font-family: Avenir, sans-serif;
+.top-caption h1 {
+	color: #3d3d3d;
+	font-size: 4rem;
 }

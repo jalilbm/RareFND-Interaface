@@ -49,7 +49,7 @@ export default function Main() {
 				<Route exact path="/about" element={<About />} />
 				<Route exact path="/programs" element={<Programs />} />
 				<Route exact path="/login" element={!user ? <Login /> : <Home />} />
-				<Route exact path="/commingSoon" element={<CommingSoon />} />
+				<Route exact path="/coming-soon" element={<CommingSoon />} />
 				<Route exact path="/signup" element={<Signup />} />
 				<Route
 					exact

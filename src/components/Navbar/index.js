@@ -14,141 +14,217 @@ import avatar from "../../assets/logos/user.png";
 import ReactSlick from "../../components/ReactSlick";
 
 function NavBar() {
-	const [sowCategories, setShowCategories] = useState(false);
 	const [categoriesData, setCategoriesData] = useState({});
-	const [expanded, setExpanded] = useState(false);
-	const [showNavItems, setShowNavItems] = useState(false);
-	const handleNavClick = () => {
-		setShowNavItems(false);
-	};
 	const { user, logOut } = useContext(AuthContext);
 	useEffect(() => {
 		axios
-			.get("https://rarefndapi.herokuapp.com/api/category/")
+			.get("http://127.0.0.1:8000/api/category/")
 			.then((response) => setCategoriesData(response.data.categories));
 	}, []);
 
 	return (
-		<div
-			style={{
-				display: "flex",
-				alignItems: "center",
-				justifyContent: "center",
-			}}
-		>
-			<Navbar
-				id="nav-bar"
-				expand="lg"
-				bg="white"
-				className="navbar"
-				style={{ position: "relative" }}
+		<div>
+			<div
+				style={{
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "center",
+				}}
 			>
-				<div
-					style={{
-						display: "flex",
-						width: "100%",
-						// gap: "1rem",
-						// padding: "0 1rem 0 1rem",
-					}}
-				>
-					<div
-						style={{
-							display: "flex",
-							gap: "1rem",
-							padding: "0 1rem 0 1rem",
-						}}
-					>
-						<div className="nav-bar-btn-wrapper">
-							<Web3ConnectButton />
-						</div>
-						<div className="nav-bar-btn-wrapper">
-							<Button
-								variant="warning"
-								onMouseDown={(e) => e.preventDefault()}
+				<div className="main-nav-bar">
+					<div className="home-nav--bar">
+						<div
+							style={{
+								display: "flex",
+								width: "100%",
+							}}
+						>
+							<div
 								style={{
-									whiteSpace: "nowrap",
-									textAlign: "center",
-									width: "155px",
+									display: "flex",
+									gap: "1rem",
+									padding: "0 1rem 0 1rem",
 								}}
-								// onClick={props.nextTabFunction}
 							>
-								Start Project
-							</Button>
+								<div className="nav-bar-btn-wrapper nav-bar-btn">
+									<Web3ConnectButton />
+								</div>
+								<div className="nav-bar-btn-wrapper">
+									<Button
+										className="nav-bar-btn"
+										variant="warning"
+										onMouseDown={(e) => e.preventDefault()}
+										style={{
+											whiteSpace: "nowrap",
+											textAlign: "center",
+											width: "155px",
+										}}
+										// onClick={props.nextTabFunction}
+									>
+										Start Project
+									</Button>
+								</div>
+							</div>
+
+							<div className="w-100 text-center">
+								<Link to="/home">
+									<Image src={rarefnd_logo} className="logo" />
+								</Link>
+							</div>
+
+							<div
+								style={{
+									display: "flex",
+									gap: "1rem",
+									padding: "0 1rem 0 1rem",
+								}}
+							>
+								{user ? (
+									<div className="nav-bar-btn-wrapper">
+										<Button
+											className="nav-bar-btn"
+											variant="outline-warning"
+											as={Link}
+											to="/logout"
+											style={{
+												whiteSpace: "nowrap",
+												textAlign: "center",
+												width: "155px",
+											}}
+											onMouseDown={logOut}
+										>
+											Log Out
+										</Button>
+									</div>
+								) : (
+									<>
+										<div className="nav-bar-btn-wrapper">
+											<Button
+												className="nav-bar-btn"
+												variant="outline-warning"
+												as={Link}
+												to="/login"
+												style={{
+													whiteSpace: "nowrap",
+													textAlign: "center",
+													width: "155px",
+												}}
+												onMouseDown={(e) => e.preventDefault()}
+											>
+												Log In
+											</Button>
+										</div>
+										<div className="nav-bar-btn-wrapper">
+											<Button
+												className="nav-bar-btn"
+												variant="warning"
+												as={Link}
+												to="/signup"
+												style={{
+													whiteSpace: "nowrap",
+													textAlign: "center",
+													width: "155px",
+												}}
+												onMouseDown={(e) => e.preventDefault()}
+											>
+												Sign Up
+											</Button>
+										</div>
+									</>
+								)}
+							</div>
+						</div>
+						<div>
+							<img
+								src="https://assets-global.website-files.com/612f5131b9c94ecd0fe9c722/612f5131b9c94e2c0ee9ca3d_drops.svg"
+								className="decor"
+							/>
 						</div>
 					</div>
-
-					<div className="w-100 text-center">
-						<Link to="/home">
-							<Image src={rarefnd_logo} className="logo" />
-						</Link>
-					</div>
-
-					<div
-						style={{ display: "flex", gap: "1rem", padding: "0 1rem 0 1rem" }}
-					>
-						{user ? (
-							<div className="nav-bar-btn-wrapper">
+					<div className="control-btns-menu">
+						<hr className="separator-line mx-auto" />
+						<div className="control-btns-menu-content">
+							<div className="control-menu-sub-btns">
+								{user ? (
+									<div className="nav-bar-btn-wrapper">
+										<Button
+											className="nav-bar-btn-mob"
+											variant="outline-warning"
+											as={Link}
+											to="/logout"
+											style={{
+												whiteSpace: "nowrap",
+												textAlign: "center",
+												// width: "155px",
+											}}
+											onMouseDown={logOut}
+										>
+											Log Out
+										</Button>
+									</div>
+								) : (
+									<>
+										<div className="nav-bar-btn-wrapper">
+											<Button
+												className="nav-bar-btn-mob"
+												variant="outline-warning"
+												as={Link}
+												to="/login"
+												style={{
+													whiteSpace: "nowrap",
+													textAlign: "center",
+													// width: "155px",
+												}}
+												onMouseDown={(e) => e.preventDefault()}
+											>
+												Log In
+											</Button>
+										</div>
+										<div className="nav-bar-btn-wrapper">
+											<Button
+												className="nav-bar-btn-mob"
+												variant="warning"
+												as={Link}
+												to="/signup"
+												style={{
+													whiteSpace: "nowrap",
+													textAlign: "center",
+													// width: "155px",
+												}}
+												onMouseDown={(e) => e.preventDefault()}
+											>
+												Sign Up
+											</Button>
+										</div>
+									</>
+								)}
+							</div>
+							<div className="control-menu-sub-btns">
 								<Button
-									variant="outline-warning"
-									as={Link}
-									to="/logout"
+									className="nav-bar-btn-mob"
+									variant="warning"
+									onMouseDown={(e) => e.preventDefault()}
 									style={{
 										whiteSpace: "nowrap",
 										textAlign: "center",
-										width: "155px",
+										// width: "155px",
 									}}
-									onMouseDown={logOut}
+									// onClick={props.nextTabFunction}
 								>
-									Log Out
+									Start Project
 								</Button>
+								<div className="nav-bar-btn-wrapper nav-bar-btn-mob">
+									<Web3ConnectButton />
+								</div>
 							</div>
-						) : (
-							<>
-								<div className="nav-bar-btn-wrapper">
-									<Button
-										variant="outline-warning"
-										as={Link}
-										to="/login"
-										style={{
-											whiteSpace: "nowrap",
-											textAlign: "center",
-											width: "155px",
-										}}
-										onMouseDown={(e) => e.preventDefault()}
-									>
-										Log In
-									</Button>
-								</div>
-								<div className="nav-bar-btn-wrapper">
-									<Button
-										variant="warning"
-										as={Link}
-										to="/signup"
-										className="btn-signup"
-										style={{
-											whiteSpace: "nowrap",
-											textAlign: "center",
-											width: "155px",
-										}}
-										onMouseDown={(e) => e.preventDefault()}
-									>
-										Sign Up
-									</Button>
-								</div>
-							</>
-						)}
+						</div>
+						<hr className="separator-line mx-auto" />
 					</div>
 				</div>
-				<div>
-					<img
-						src="https://assets-global.website-files.com/612f5131b9c94ecd0fe9c722/612f5131b9c94e2c0ee9ca3d_drops.svg"
-						className="decor"
-					/>
-				</div>
-			</Navbar>
-			{/* <div className="ResponsiveNav">
-				<ReactSlick />
-			</div> */}
+			</div>
+			<div className="ResponsiveNav">
+				<ReactSlick categoriesData={categoriesData} />
+			</div>
 		</div>
 	);
 }

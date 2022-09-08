@@ -1,11 +1,21 @@
-.navbar {
+/* For desktop: */
+.main-nav-bar {
 	width: 95%;
+	border-radius: 0.5rem;
+	margin-top: 10px;
+	background-color: white;
+	box-shadow: 0 5px 18px 0 #8e8c7b;
+	/* height: 60px; */
+	padding: 0;
+	position: relative;
+}
+
+.home-nav--bar {
+	width: 100%;
 	border-radius: 0.5rem;
 	display: flex;
 	padding-top: 0.2rem;
-	margin: 0%;
-	background-color: white;
-	box-shadow: 0 5px 18px 0 #8e8c7b;
+	background-color: transparent;
 	height: 60px;
 }
 
@@ -26,4 +36,51 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+.control-btns-menu {
+	display: none;
+}
+
+@media screen and (max-width: 900px) {
+	.nav-bar-btn {
+		display: none;
+	}
+	.separator-line {
+		width: 90%;
+	}
+
+	.control-btns-menu {
+		margin-top: -15px;
+		display: block;
+	}
+
+	.control-btns-menu-content {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0 5% 0 5%;
+	}
+
+	.control-menu-sub-btns {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.6em;
+	}
+
+	.connect-wallet-btn {
+		font-size: 12px;
+		padding: 0.1em 0.5em 0.1em 0.5em;
+	}
+	.nav-bar-btn-mob {
+		font-size: 12px;
+		padding: 0em 0em 0em 0em;
+		border: 0;
+		background-color: transparent;
+		color: grey;
+	}
+	.nav-bar-btn-mob:hover {
+		background-color: transparent;
+	}
 }

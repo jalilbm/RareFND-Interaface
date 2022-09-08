@@ -124,21 +124,26 @@ export default function Web3ConnectButton() {
 	}
 
 	useEffect(() => {
+		const tmp = document.getElementsByClassName("connect-wallet-btn");
 		if (walletAddress && chainId !== "0x38") {
-			document.getElementById("connect-btn").textContent =
-				"Connect to Binance Smart Chain";
-			document.getElementById("connect-btn").className = "btn btn-danger";
-			document.getElementById("connect-btn").disabled = false;
+			for (let i = 0; i < tmp.length; i++) {
+				tmp[i].textContent = "Connect to BSC";
+				tmp[i].className = "btn btn-danger connect-wallet-btn";
+				tmp[i].disabled = false;
+			}
 		} else if (walletAddress && chainId === "0x38") {
-			document.getElementById("connect-btn").innerHTML =
-				walletAddress.slice(0, 6) + "....." + walletAddress.slice(-4);
-			document.getElementById("connect-btn").className =
-				"btn btn-outline-light";
-			document.getElementById("connect-btn").disabled = true;
+			for (let i = 0; i < tmp.length; i++) {
+				tmp[i].textContent =
+					walletAddress.slice(0, 6) + "....." + walletAddress.slice(-4);
+				tmp[i].className = "btn btn-outline-light connect-wallet-btn";
+				tmp[i].disabled = true;
+			}
 		} else {
-			document.getElementById("connect-btn").textContent = "Connect to Wallet";
-			document.getElementById("connect-btn").className = "btn btn-light";
-			document.getElementById("connect-btn").disabled = false;
+			for (let i = 0; i < tmp.length; i++) {
+				tmp[i].textContent = "Connect Wallet";
+				tmp[i].className = "btn btn-light connect-wallet-btn";
+				tmp[i].disabled = false;
+			}
 		}
 
 		if (connection?.on) {
@@ -169,8 +174,8 @@ export default function Web3ConnectButton() {
 	return (
 		<Button
 			id="connect-btn"
-			variant="dark"
-			// className="btn-wallet"
+			variant="light"
+			className="connect-wallet-btn"
 			onClick={connectWallet}
 			style={{
 				whiteSpace: "nowrap",
@@ -178,7 +183,7 @@ export default function Web3ConnectButton() {
 				color: "black",
 			}}
 		>
-			Connect to Wallet
+			Connect Wallet
 		</Button>
 	);
 }

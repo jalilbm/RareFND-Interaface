@@ -141,7 +141,7 @@ export default function Footer() {
 							<a
 								href="https://www.facebook.com/therat.finance/"
 								target="_blank"
-								className="text-decoration-none"
+								className="text-decoration-none "
 								rel="noreferrer"
 							>
 								<CDBBtn flat color="warning" className=" border-0 p-2 ">
@@ -151,7 +151,7 @@ export default function Footer() {
 							<a
 								href="https://twitter.com/rare_fnd"
 								target="_blank"
-								className="text-decoration-none"
+								className="text-decoration-none "
 								rel="noreferrer"
 							>
 								<CDBBtn flat color="warning" className=" border-0 mx-3 p-2">
@@ -171,7 +171,7 @@ export default function Footer() {
 							<a
 								href="https://t.me/RareFnd"
 								target="_blank"
-								className="text-decoration-none"
+								className="text-decoration-none "
 								rel="noreferrer"
 							>
 								<CDBBtn flat color="warning" className=" mx-3 border-0 p-2">
@@ -181,7 +181,7 @@ export default function Footer() {
 							<a
 								href="https://www.linkedin.com/company/the-rare-antiquities-token/"
 								target="_blank"
-								className="text-decoration-none"
+								className="text-decoration-none "
 								rel="noreferrer"
 							>
 								<CDBBtn flat color="warning" className="border-0 p-2">

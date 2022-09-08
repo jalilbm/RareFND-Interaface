@@ -15,12 +15,16 @@ export default function Basics(props) {
 	const [countries, setCountries] = useState([{}]);
 
 	useEffect(() => {
-		axios.get("http://127.0.0.1:8000/api/category/").then((response) => {
-			setCategories(response.data.categories);
-		});
-		axios.get("http://127.0.0.1:8000/api/country/").then((response) => {
-			setCountries(response.data.categories);
-		});
+		axios
+			.get("http://rarefndapi.herokuapp.com/api/category/")
+			.then((response) => {
+				setCategories(response.data.categories);
+			});
+		axios
+			.get("http://rarefndapi.herokuapp.com/api/country/")
+			.then((response) => {
+				setCountries(response.data.categories);
+			});
 	}, []);
 
 	const handleChange = (e) => {
@@ -32,7 +36,9 @@ export default function Basics(props) {
 		document.getElementById("subcategories-dropdown").textContent =
 			"Choose Subcategory";
 		axios
-			.get(`http://localhost:8000/api/category/${category}/subcategories/`)
+			.get(
+				`http://rarefndapi.herokuapp.com/api/category/${category}/subcategories/`
+			)
 			.then((response) => {
 				setSubCategories(response.data.subcategories);
 			});

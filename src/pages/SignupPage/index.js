@@ -51,7 +51,7 @@ export default function () {
 		if (Object.keys(formErrors).length === 0 && isSubmit) {
 			console.log(formValues);
 			axios
-				.post("http://127.0.0.1:8000/api/user/signup/", {
+				.post("http://rarefndapi.herokuapp.com/api/user/signup/", {
 					username: formValues.username,
 					email: formValues.email,
 					password: formValues.password,
@@ -72,7 +72,7 @@ export default function () {
 		if (formValues.username) {
 			axios
 				.get(
-					`http://127.0.0.1:8000/api/unique/username/${
+					`http://rarefndapi.herokuapp.com/api/unique/username/${
 						document.getElementById("username").value
 					}/`
 				)
@@ -104,7 +104,7 @@ export default function () {
 		if (formValues.email) {
 			axios
 				.get(
-					`http://127.0.0.1:8000/api/unique/email/${
+					`http://rarefndapi.herokuapp.com/api/unique/email/${
 						document.getElementById("email").value
 					}/`
 				)

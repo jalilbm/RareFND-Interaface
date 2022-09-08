@@ -14,7 +14,7 @@ export default function Project(props) {
 
 	useEffect(() => {
 		axios
-			.get(`http://127.0.0.1:8000/api/incentives/${projectId}/`)
+			.get(`http://rarefndapi.herokuapp.com/api/incentives/${projectId}/`)
 			.then((response) => {
 				if (response.status === 200)
 					setIncentivesData(response.data.incentives);
@@ -29,7 +29,7 @@ export default function Project(props) {
 	}, []);
 	useEffect(() => {
 		axios
-			.get(`http://127.0.0.1:8000/api/project/${projectId}/`)
+			.get(`http://rarefndapi.herokuapp.com/api/project/${projectId}/`)
 			.then((response) => {
 				setProjectData(response.data);
 			});

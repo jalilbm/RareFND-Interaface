@@ -34,12 +34,14 @@ export default function ContributeBtn(props) {
 	const tokenAddress = token_info.token_address;
 
 	useEffect(() => {
-		axios.get(`http://127.0.0.1:8000/api/project/${id}/`).then((response) => {
-			setProjectData(response.data);
-			setProjectLive(response.data.live);
-			setStakingAddress(response.data.staking_address);
-			setStaking_abi(JSON.parse(response.data.staking_abi));
-		});
+		axios
+			.get(`http://rarefndapi.herokuapp.com/api/project/${id}/`)
+			.then((response) => {
+				setProjectData(response.data);
+				setProjectLive(response.data.live);
+				setStakingAddress(response.data.staking_address);
+				setStaking_abi(JSON.parse(response.data.staking_abi));
+			});
 	}, []);
 
 	const getAllowance = async (token_) => {
@@ -80,10 +82,13 @@ export default function ContributeBtn(props) {
 					);
 					await tx.wait();
 					setPending(false);
-					axios.post("http://127.0.0.1:8000/api/pending_contribution/", {
-						hash: tx.hash,
-						project: id,
-					});
+					axios.post(
+						"http://rarefndapi.herokuapp.com/api/pending_contribution/",
+						{
+							hash: tx.hash,
+							project: id,
+						}
+					);
 					document.getElementById(
 						"transaction-status"
 					).textContent = `Transaction hash: ${tx.hash}`;

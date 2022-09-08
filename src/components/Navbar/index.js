@@ -18,7 +18,7 @@ function NavBar() {
 	const { user, logOut } = useContext(AuthContext);
 	useEffect(() => {
 		axios
-			.get("http://127.0.0.1:8000/api/category/")
+			.get("http://rarefndapi.herokuapp.com/api/category/")
 			.then((response) => setCategoriesData(response.data.categories));
 	}, []);
 
@@ -80,22 +80,40 @@ function NavBar() {
 								}}
 							>
 								{user ? (
-									<div className="nav-bar-btn-wrapper">
-										<Button
-											className="nav-bar-btn"
-											variant="outline-warning"
-											as={Link}
-											to="/logout"
-											style={{
-												whiteSpace: "nowrap",
-												textAlign: "center",
-												width: "155px",
-											}}
-											onMouseDown={logOut}
-										>
-											Log Out
-										</Button>
-									</div>
+									<>
+										<div className="nav-bar-btn-wrapper">
+											<Button
+												className="nav-bar-btn"
+												variant="outline-warning"
+												as={Link}
+												to="/logout"
+												style={{
+													whiteSpace: "nowrap",
+													textAlign: "center",
+													width: "155px",
+												}}
+												onMouseDown={logOut}
+											>
+												Log Out
+											</Button>
+										</div>
+										<div className="nav-bar-btn-wrapper">
+											<Button
+												className="nav-bar-btn"
+												variant="outline-warning"
+												as={Link}
+												to="/dashboard"
+												style={{
+													whiteSpace: "nowrap",
+													textAlign: "center",
+													width: "155px",
+												}}
+												onMouseDown={logOut}
+											>
+												Dashboard
+											</Button>
+										</div>
+									</>
 								) : (
 									<>
 										<div className="nav-bar-btn-wrapper">
@@ -146,22 +164,40 @@ function NavBar() {
 						<div className="control-btns-menu-content">
 							<div className="control-menu-sub-btns">
 								{user ? (
-									<div className="nav-bar-btn-wrapper">
-										<Button
-											className="nav-bar-btn-mob"
-											variant="outline-warning"
-											as={Link}
-											to="/logout"
-											style={{
-												whiteSpace: "nowrap",
-												textAlign: "center",
-												// width: "155px",
-											}}
-											onMouseDown={logOut}
-										>
-											Log Out
-										</Button>
-									</div>
+									<>
+										<div className="nav-bar-btn-wrapper">
+											<Button
+												className="nav-bar-btn-mob"
+												variant="outline-warning"
+												as={Link}
+												to="/logout"
+												style={{
+													whiteSpace: "nowrap",
+													textAlign: "center",
+													// width: "155px",
+												}}
+												onMouseDown={logOut}
+											>
+												Log Out
+											</Button>
+										</div>
+										<div className="nav-bar-btn-wrapper">
+											<Button
+												className="nav-bar-btn-mob"
+												variant="outline-warning"
+												as={Link}
+												to="/dashboard"
+												style={{
+													whiteSpace: "nowrap",
+													textAlign: "center",
+													width: "155px",
+												}}
+												onMouseDown={logOut}
+											>
+												Dashboard
+											</Button>
+										</div>
+									</>
 								) : (
 									<>
 										<div className="nav-bar-btn-wrapper">

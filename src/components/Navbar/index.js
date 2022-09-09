@@ -108,7 +108,6 @@ function NavBar() {
 													textAlign: "center",
 													width: "155px",
 												}}
-												onMouseDown={logOut}
 											>
 												Dashboard
 											</Button>
@@ -191,7 +190,6 @@ function NavBar() {
 													whiteSpace: "nowrap",
 													textAlign: "center",
 												}}
-												onMouseDown={logOut}
 											>
 												Dashboard
 											</Button>

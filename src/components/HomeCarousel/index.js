@@ -4,8 +4,11 @@ import "bootstrap/dist/css/bootstrap.css";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import "./index.css";
+import { useState, useEffect, useContext } from "react";
+import AuthContext from "../../Context/AuthContext";
 
 export default function HomeCarousel() {
+	const { user } = useContext(AuthContext);
 	return (
 		<Carousel fade controls={false} indicators={false}>
 			<Carousel.Item
@@ -22,7 +25,12 @@ export default function HomeCarousel() {
 				/>
 				<Carousel.Caption
 					className="top-caption"
-					style={{ position: "absolute", top: "80px" }}
+					style={{
+						position: "absolute",
+						top: "80px",
+						width: "100%",
+						left: "0px",
+					}}
 				>
 					<h1 style={{ fontWeight: "900" }}>Rare Find Then Fund</h1>
 					<br />
@@ -40,37 +48,59 @@ export default function HomeCarousel() {
 					</p>
 					<br />
 					<br />
-
-					<Button
-						variant="warning"
-						className="rise-button"
-						size="lg"
-						style={{
-							fontFamily: "'Poppins', sans-serif",
-							color: "#1b1b1b",
-							height: "3.7rem",
-							fontSize: "1.4rem",
-							minHeight: "3rem",
-							padding: "0.5rem 2rem",
-							borderRadius: "0.75rem",
-						}}
-					>
-						<strong>Sign up</strong> - it's Free
-					</Button>
-					<br />
-					<p style={{ color: "#3d3d3d" }}>
-						Or,{" "}
-						<Link
+					{!user ? (
+						<>
+							<Button
+								variant="warning"
+								className="rise-button"
+								size="lg"
+								to="/signup"
+								style={{
+									fontFamily: "'Poppins', sans-serif",
+									color: "#1b1b1b",
+									height: "3.7rem",
+									fontSize: "1.4rem",
+									minHeight: "3rem",
+									padding: "0.5rem 2rem",
+									borderRadius: "0.75rem",
+								}}
+							>
+								<strong>Sign up</strong> - it's Free
+							</Button>
+							<br />
+							<p style={{ color: "#3d3d3d" }}>
+								Or,{" "}
+								<Link
+									to="/start-project"
+									style={{
+										lineHeight: "3",
+										textDecoration: "underline",
+										color: "#3d3d3d",
+									}}
+								>
+									Start a project!
+								</Link>
+							</p>
+						</>
+					) : (
+						<Button
+							variant="warning"
+							className="rise-button"
+							size="lg"
 							to="/start-project"
 							style={{
-								lineHeight: "3",
-								textDecoration: "underline",
-								color: "#3d3d3d",
+								fontFamily: "'Poppins', sans-serif",
+								color: "#1b1b1b",
+								height: "3.7rem",
+								fontSize: "1.4rem",
+								minHeight: "3rem",
+								padding: "0.5rem 2rem",
+								borderRadius: "0.75rem",
 							}}
 						>
-							Start a project!
-						</Link>
-					</p>
+							<strong>Start Project</strong> - it's Free
+						</Button>
+					)}
 				</Carousel.Caption>
 			</Carousel.Item>
 		</Carousel>

@@ -13,7 +13,7 @@ export default function ProjectCurrentContributions() {
 	useEffect(() => {
 		let interval = setInterval(() => {
 			axios
-				.get(`http://rarefndapi.herokuapp.com/api/project/${id}/`)
+				.get(`http://c217-139-28-218-172.ngrok.io/api/project/${id}/`)
 				.then((response) => response.data)
 				.then((data) => {
 					setprojectData(data);

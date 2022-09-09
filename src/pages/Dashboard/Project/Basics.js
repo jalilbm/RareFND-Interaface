@@ -16,12 +16,12 @@ export default function Basics(props) {
 
 	useEffect(() => {
 		axios
-			.get("http://rarefndapi.herokuapp.com/api/category/")
+			.get("http://c217-139-28-218-172.ngrok.io/api/category/")
 			.then((response) => {
 				setCategories(response.data.categories);
 			});
 		axios
-			.get("http://rarefndapi.herokuapp.com/api/country/")
+			.get("http://c217-139-28-218-172.ngrok.io/api/country/")
 			.then((response) => {
 				setCountries(response.data.categories);
 			});
@@ -37,7 +37,7 @@ export default function Basics(props) {
 			"Choose Subcategory";
 		axios
 			.get(
-				`http://rarefndapi.herokuapp.com/api/category/${category}/subcategories/`
+				`http://c217-139-28-218-172.ngrok.io/api/category/${category}/subcategories/`
 			)
 			.then((response) => {
 				setSubCategories(response.data.subcategories);

@@ -18,7 +18,7 @@ export default function ProjectCard(props) {
 				<Col md={6}>
 					<Card.Img
 						variant="left"
-						src={"http://rarefndapi.herokuapp.com" + props.image}
+						src={"http://c217-139-28-218-172.ngrok.io" + props.image}
 						style={{
 							width: "100%",
 							height: props.image_height,

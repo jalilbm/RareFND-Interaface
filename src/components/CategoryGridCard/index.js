@@ -23,7 +23,7 @@ export default function CategoryGridCard(props) {
 						<CategoryProjectCard
 							head={_.head}
 							title={_.title}
-							image={"http://rarefndapi.herokuapp.com" + _.thumbnail}
+							image={"http://c217-139-28-218-172.ngrok.io" + _.thumbnail}
 							project_id={_.id}
 						/>
 					</Col>

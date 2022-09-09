@@ -51,7 +51,7 @@ export default function () {
 		if (Object.keys(formErrors).length === 0 && isSubmit) {
 			console.log(formValues);
 			axios
-				.post("http://rarefndapi.herokuapp.com/api/user/signup/", {
+				.post("http://c217-139-28-218-172.ngrok.io/api/user/signup/", {
 					username: formValues.username,
 					email: formValues.email,
 					password: formValues.password,
@@ -72,7 +72,7 @@ export default function () {
 		if (formValues.username) {
 			axios
 				.get(
-					`http://rarefndapi.herokuapp.com/api/unique/username/${
+					`http://c217-139-28-218-172.ngrok.io/api/unique/username/${
 						document.getElementById("username").value
 					}/`
 				)
@@ -104,7 +104,7 @@ export default function () {
 		if (formValues.email) {
 			axios
 				.get(
-					`http://rarefndapi.herokuapp.com/api/unique/email/${
+					`http://c217-139-28-218-172.ngrok.io/api/unique/email/${
 						document.getElementById("email").value
 					}/`
 				)

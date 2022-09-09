@@ -18,7 +18,7 @@ function NavBar() {
 	const { user, logOut } = useContext(AuthContext);
 	useEffect(() => {
 		axios
-			.get("http://rarefndapi.herokuapp.com/api/category/")
+			.get("http://c217-139-28-218-172.ngrok.io/api/category/")
 			.then((response) => setCategoriesData(response.data.categories));
 	}, []);
 
@@ -190,7 +190,6 @@ function NavBar() {
 												style={{
 													whiteSpace: "nowrap",
 													textAlign: "center",
-													width: "155px",
 												}}
 												onMouseDown={logOut}
 											>

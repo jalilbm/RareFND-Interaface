@@ -23,14 +23,14 @@ export default function Category() {
 	}, [location.pathname]);
 	useEffect(() => {
 		axios
-			.get("http://rarefndapi.herokuapp.com/api/category/")
+			.get("http://c217-139-28-218-172.ngrok.io/api/category/")
 			.then((response) => {
 				const data = response.data.categories;
 				for (let i = 0; i < data.length; i++) {
 					if (data[i].name.toLowerCase() === categoryName.toLowerCase()) {
 						setCategoryData({
 							title: data[i].name,
-							image: "http://rarefndapi.herokuapp.com" + data[i].image,
+							image: "http://c217-139-28-218-172.ngrok.io" + data[i].image,
 						});
 						break;
 					}
@@ -39,7 +39,7 @@ export default function Category() {
 			.then(() => {
 				axios
 					.get(
-						`http://rarefndapi.herokuapp.com/api/project/category/${categoryName}/`
+						`http://c217-139-28-218-172.ngrok.io/api/project/category/${categoryName}/`
 					)
 					.then((response) => {
 						setCategoryProjects(response.data.projects);

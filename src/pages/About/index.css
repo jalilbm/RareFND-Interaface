@@ -27,15 +27,14 @@
 	quotes: "“" "”" "‘" "’";
 }
 
-.aboutpage a,
-a:hover,
-a:focus,
-a:active {
-	color: white;
-}
+
 .aboutpage figcaption {
 	font-size: smaller;
 }
 .aboutpage .contact {
 	margin: 5vw;
 }
+
+
+
+

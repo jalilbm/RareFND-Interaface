@@ -1,0 +1,10 @@
+ol.alpha{font-weight: bold;}
+ol.alpha {
+  counter-reset: alpha
+}
+ol.alpha > li:before {
+  counter-increment: alpha;
+  content:"(" counter(alpha, lower-alpha)") "
+}
+ol li {
+  list-style: none;}

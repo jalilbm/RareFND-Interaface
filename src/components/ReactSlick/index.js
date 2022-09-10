@@ -99,7 +99,10 @@ export default function ReactSlick(props) {
 										display: "flex",
 										alignItems: "center",
 										justifyContent: "center",
-										gap: "200px",
+										
+										
+										
+	      						
 									}}
 								>
 									<h3

@@ -11,7 +11,7 @@ function DropDown(props) {
 		}
 	};
 
-	handleClick = (eventKey, event) => {
+	const handleClick = (eventKey, event) => {
 		event.persist();
 		console.log(eventKey);
 		console.log(event);
@@ -46,4 +46,4 @@ function DropDown(props) {
 	);
 }
 
-export default BasicExample;
+export default DropDown;

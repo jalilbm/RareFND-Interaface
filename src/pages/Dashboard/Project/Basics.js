@@ -179,7 +179,7 @@ export default function Basics(props) {
 									: []
 							}
 							function_={handleSubCategories}
-							handleSelect = 
+							// handleSelect =
 						/>
 					</div>
 					<br></br>

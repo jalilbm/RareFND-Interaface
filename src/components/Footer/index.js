@@ -67,6 +67,12 @@ export default function Footer() {
 									>
 										Contacts
 									</Link>
+									<Link
+										className="text-decoration-none text-secondary"
+										to="/legal"
+									>
+										Legal Disclaimer
+									</Link>
 								</CDBBox>
 							</CDBBox>
 							<CDBBox className="mt-1">

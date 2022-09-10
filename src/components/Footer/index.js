@@ -109,7 +109,7 @@ export default function Footer() {
 											className="text-decoration-none text-secondary"
 											to="/login"
 										>
-											Log In
+											Login
 										</Link>
 									)}
 								</CDBBox>
@@ -310,7 +310,7 @@ export default function Footer() {
 													className="text-decoration-none text-secondary"
 													to="/login"
 												>
-													Log In
+													Login
 												</Link>
 											)}
 										</CDBBox>

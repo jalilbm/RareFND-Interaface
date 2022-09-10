@@ -82,12 +82,18 @@ export default function () {
 							...reatTimeFormErrors,
 							username: "Username already exists",
 						});
-					} else if (document.getElementById("username").value.length < 5) {
+					} else if (
+						document.getElementById("username") &&
+						document.getElementById("username").value.length < 5
+					) {
 						setReatTimeFormErrors({
 							...reatTimeFormErrors,
 							username: "Username must be more than 5 characters",
 						});
-					} else if (document.getElementById("username").value.length > 20) {
+					} else if (
+						document.getElementById("username") &&
+						document.getElementById("username").value.length > 20
+					) {
 						setReatTimeFormErrors({
 							...reatTimeFormErrors,
 							username: "Username cannot exceed more than 20 characters",

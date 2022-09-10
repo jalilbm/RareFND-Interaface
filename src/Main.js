@@ -55,13 +55,8 @@ export default function Main() {
 				<Route exact path="/signup" element={<Signup />} />
 				<Route
 					exact
-					path="/start-project"
-					element={<PrivateRoute Component={StartProject} />}
-				/>
-				<Route
-					exact
 					path="/dashboard"
-					element={<PrivateRoute Component={DashboardHome} />}
+					element={<PrivateRoute Component={Profile} />}
 				/>
 				<Route
 					exact
@@ -73,11 +68,11 @@ export default function Main() {
 					path="/dashboard/profile"
 					element={<PrivateRoute Component={Profile} />}
 				/>
-				<Route
+				{/* <Route
 					exact
 					path="/dashboard/stats"
 					element={<PrivateRoute Component={Stats} />}
-				/>
+				/> */}
 			</Routes>
 		</div>
 	);

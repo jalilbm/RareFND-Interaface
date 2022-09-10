@@ -51,7 +51,7 @@ export default function CreateProjectNavBar(props) {
 														id="dashboard-rules-SPAN_11"
 														style={{ pointerEvents: "none" }}
 													>
-														✍️
+														🖊️
 													</span>
 												</div>
 												Basics
@@ -72,7 +72,7 @@ export default function CreateProjectNavBar(props) {
 														id="dashboard-rules-SPAN_16"
 														style={{ pointerEvents: "none" }}
 													>
-														📊
+														🤔
 													</span>
 												</div>
 												Funding
@@ -93,7 +93,7 @@ export default function CreateProjectNavBar(props) {
 														id="dashboard-rules-SPAN_21"
 														style={{ pointerEvents: "none" }}
 													>
-														🎁
+														🏆
 													</span>
 												</div>
 												Rewards
@@ -114,7 +114,7 @@ export default function CreateProjectNavBar(props) {
 														id="dashboard-rules-SPAN_26"
 														style={{ pointerEvents: "none" }}
 													>
-														📖
+														🫶
 													</span>
 												</div>
 												Story
@@ -135,7 +135,7 @@ export default function CreateProjectNavBar(props) {
 														id="dashboard-rules-SPAN_31"
 														style={{ pointerEvents: "none" }}
 													>
-														👥
+														👤
 													</span>
 												</div>
 												People
@@ -156,7 +156,7 @@ export default function CreateProjectNavBar(props) {
 														id="dashboard-rules-SPAN_36"
 														style={{ pointerEvents: "none" }}
 													>
-														💰
+														💵
 													</span>
 												</div>
 												Payment

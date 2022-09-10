@@ -1,7 +1,7 @@
 import Dropdown from "react-bootstrap/Dropdown";
 import "./index.scss";
 
-function BasicExample(props) {
+function DropDown(props) {
 	const handleClickedItem = (e) => {
 		e.preventDefault();
 		const value = e.target.textContent;
@@ -11,8 +11,14 @@ function BasicExample(props) {
 		}
 	};
 
+	handleClick = (eventKey, event) => {
+		event.persist();
+		console.log(eventKey);
+		console.log(event);
+	};
+
 	return (
-		<Dropdown className="drop-down">
+		<Dropdown className="drop-down" onSelect={handleClickedItem}>
 			<Dropdown.Toggle
 				className="dropdown"
 				id={props.id}

@@ -89,12 +89,17 @@ export default function Basics(props) {
 						</p>
 						<input
 							className="atomic-text-input w-100"
-							id="project-name"
+							id="projectTitle"
 							maxlength="60"
-							name="title"
+							name="projectTitle"
 							placeholder="Aloe Bud: Self-care pocket companion for iOS"
 							type="text"
-							onChange={handleChange}
+							value={
+								props.projectData &&
+								props.projectData["basics"] &&
+								props.projectData["basics"].projectTitle
+							}
+							onChange={(event) => props.updateProjectData(event, "basics")}
 						/>
 					</div>
 					<br></br>
@@ -103,16 +108,21 @@ export default function Basics(props) {
 							marginBottom: "3px",
 						}}
 					>
-						Subtitle
+						Head
 					</p>
 					<div className="input-with-title">
 						<textarea
 							className="atomic-text-input w-100 h-50"
-							id="project-description"
+							id="projectHead"
 							maxlength="135"
-							name="description"
+							name="projectHead"
 							placeholder="Gently brings awareness to self-care activities, using encouraging push notifications, rather than guilt or shame."
-							onChange={handleChange}
+							value={
+								props.projectData &&
+								props.projectData["basics"] &&
+								props.projectData["basics"].projectHead
+							}
+							onChange={(event) => props.updateProjectData(event, "basics")}
 						></textarea>
 					</div>
 				</Col>
@@ -160,7 +170,7 @@ export default function Basics(props) {
 						</p>
 						<DropDown
 							title="Choose Category"
-							id="categories-dropdown"
+							id="projectCategory"
 							options={
 								categories
 									? categories.map((category) => {
@@ -169,6 +179,7 @@ export default function Basics(props) {
 									: []
 							}
 							function_={handleSubCategories}
+							handleSelect = 
 						/>
 					</div>
 					<br></br>
@@ -177,7 +188,7 @@ export default function Basics(props) {
 							marginBottom: "3px",
 						}}
 					>
-						Sub Category
+						Subcategory
 					</p>
 					<div className="input-with-title">
 						<DropDown
@@ -225,12 +236,17 @@ export default function Basics(props) {
 						</p>
 						<input
 							className="atomic-text-input w-100"
-							id="project-name"
-							maxlength="60"
-							name="title"
+							id="projectAddress"
+							maxlength="150"
+							name="projectAddress"
 							placeholder="DMCC Crypto Centre, 48th Floor, Almas Tower, JLT"
 							type="text"
-							onChange={handleChange}
+							value={
+								props.projectData &&
+								props.projectData["basics"] &&
+								props.projectData["basics"].projectAddress
+							}
+							onChange={(event) => props.updateProjectData(event, "basics")}
 						/>
 					</div>
 					<br></br>

@@ -1,7 +1,8 @@
 import "./Profile.css";
 import PhoneInput from "react-phone-input-2";
+import { Button, Row } from "react-bootstrap";
 
-export default function Profile() {
+export default function Profile(props) {
 	return (
 		<div className="container rounded bg-white mt-5 mb-5">
 			<div className="row">
@@ -100,6 +101,19 @@ export default function Profile() {
 					</div>
 				</div>
 			</div>
+			<Row style={{ padding: "3vw", width: "100%" }}>
+				<div style={{ textAlign: "right" }}>
+					<Button
+						variant="warning"
+						onMouseDown={(e) => e.preventDefault()}
+						size="md"
+						onClick={props.nextTabFunction}
+						style={{ borderRadius: "0px", width: "150px" }}
+					>
+						Next
+					</Button>
+				</div>
+			</Row>
 		</div>
 	);
 }

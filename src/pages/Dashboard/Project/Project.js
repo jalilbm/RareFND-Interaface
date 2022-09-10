@@ -15,15 +15,21 @@ export default function DashboardProjects() {
 		"create-project-tab-1"
 	);
 	const [renderTab, setRenderTab] = useState(<Basics />);
+	const [projectData, setProjectData] = useState({});
+
+	const updateProjectData = (event, source) => {
+		let { name, value } = event.target;
+		setProjectData({
+			...projectData,
+			[source]: { ...projectData[source], [name]: value },
+		});
+		console.log(projectData);
+	};
 
 	const changeTab = (value) => {
 		setSelectedTab(value);
 
 		if (selectedNavItem !== value) {
-			console.log(
-				"cnlajdnlcasd",
-				document.getElementById(selectedNavItem).className
-			);
 			if (selectedNavItem) {
 				document.getElementById(selectedNavItem).className = document
 					.getElementById(selectedNavItem)
@@ -45,7 +51,11 @@ export default function DashboardProjects() {
 		switch (selectedTab) {
 			case "create-project-tab-1":
 				setRenderTab(
-					<Basics nextTabFunction={() => changeTab("create-project-tab-2")} />
+					<Basics
+						nextTabFunction={() => changeTab("create-project-tab-2")}
+						projectData={projectData}
+						updateProjectData={updateProjectData}
+					/>
 				);
 				break;
 			case "create-project-tab-2":
@@ -64,7 +74,9 @@ export default function DashboardProjects() {
 				);
 				break;
 			case "create-project-tab-5":
-				setRenderTab(<Profile />);
+				setRenderTab(
+					<Profile nextTabFunction={() => changeTab("create-project-tab-6")} />
+				);
 				break;
 			case "create-project-tab-6":
 				setRenderTab(<Payment />);
@@ -73,7 +85,7 @@ export default function DashboardProjects() {
 				setRenderTab(<Basics />);
 				break;
 		}
-	}, [selectedTab]);
+	}, [selectedTab, projectData]);
 	return (
 		<div className="dashboard-projects">
 			<SideBar />

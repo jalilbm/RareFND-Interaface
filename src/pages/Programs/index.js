@@ -141,7 +141,7 @@ export default function About() {
 												type="button"
 												className="btn-warning"
 												size="lg"
-												to="/start-project"
+												to="/dashboard/projects"
 											>
 												Start Project {""}
 											</Button>

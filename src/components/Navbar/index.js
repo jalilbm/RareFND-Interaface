@@ -50,19 +50,21 @@ function NavBar() {
 									<Web3ConnectButton />
 								</div>
 								<div className="nav-bar-btn-wrapper">
-									<Button
-										className="nav-bar-btn"
-										variant="warning"
-										onMouseDown={(e) => e.preventDefault()}
-										style={{
-											whiteSpace: "nowrap",
-											textAlign: "center",
-											width: "155px",
-										}}
-										// onClick={props.nextTabFunction}
-									>
-										Start Project
-									</Button>
+									<Link to="/dashboard/projects">
+										<Button
+											className="nav-bar-btn"
+											variant="warning"
+											onMouseDown={(e) => e.preventDefault()}
+											style={{
+												whiteSpace: "nowrap",
+												textAlign: "center",
+												width: "155px",
+											}}
+											// onClick={props.nextTabFunction}
+										>
+											Start Project
+										</Button>
+									</Link>
 								</div>
 							</div>
 
@@ -103,6 +105,7 @@ function NavBar() {
 												variant="outline-warning"
 												as={Link}
 												to="/dashboard"
+												onMouseDown={(e) => e.preventDefault()}
 												style={{
 													whiteSpace: "nowrap",
 													textAlign: "center",
@@ -128,7 +131,7 @@ function NavBar() {
 												}}
 												onMouseDown={(e) => e.preventDefault()}
 											>
-												Log In
+												Login
 											</Button>
 										</div>
 										<div className="nav-bar-btn-wrapper">
@@ -185,6 +188,7 @@ function NavBar() {
 												className="nav-bar-btn-mob"
 												variant="outline-warning"
 												as={Link}
+												onMouseDown={(e) => e.preventDefault()}
 												to="/dashboard"
 												style={{
 													whiteSpace: "nowrap",
@@ -210,7 +214,7 @@ function NavBar() {
 												}}
 												onMouseDown={(e) => e.preventDefault()}
 											>
-												Log In
+												Login
 											</Button>
 										</div>
 										<div className="nav-bar-btn-wrapper">
@@ -233,19 +237,19 @@ function NavBar() {
 								)}
 							</div>
 							<div className="control-menu-sub-btns">
-								<Button
-									className="nav-bar-btn-mob"
-									variant="warning"
-									onMouseDown={(e) => e.preventDefault()}
-									style={{
-										whiteSpace: "nowrap",
-										textAlign: "center",
-										// width: "155px",
-									}}
-									// onClick={props.nextTabFunction}
-								>
-									Start Project
-								</Button>
+								<Link to="/dashboard/projects">
+									<Button
+										className="nav-bar-btn-mob"
+										variant="warning"
+										onMouseDown={(e) => e.preventDefault()}
+										style={{
+											whiteSpace: "nowrap",
+											textAlign: "center",
+										}}
+									>
+										Start Project
+									</Button>
+								</Link>
 								<div className="nav-bar-btn-wrapper nav-bar-btn-mob">
 									<Web3ConnectButton />
 								</div>

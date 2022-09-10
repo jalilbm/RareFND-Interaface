@@ -152,9 +152,9 @@ export default function ContributeBtn(props) {
 			>
 				<Row
 					className="mx-auto no-gutters jumbotron d-flex align-items-center"
-					style={{ height: "60px", width: "98%" }}
+					style={{ padding: "0 1em 0 1em" }}
 				>
-					<Col>
+					<Col style={{ padding: "0" }}>
 						<input
 							id="contribute-amount"
 							className="bg-black"
@@ -166,10 +166,11 @@ export default function ContributeBtn(props) {
 								border: "none",
 								width: "100%",
 								height: "100%",
-								fontSize: "28px",
+								fontSize: "1.5rem",
 								color: "white",
 								fontFamily: "'Kaisei Opti', sans-serif",
 								outline: "none",
+								paddingLeft: "0",
 							}}
 						></input>
 					</Col>

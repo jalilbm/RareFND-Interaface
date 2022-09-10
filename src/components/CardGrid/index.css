@@ -1,5 +1,13 @@
 .no-image-card-text {
-  width: 80ch;
+	width: 80ch;
 }
 
-
+.resizeme {
+	resize: both;
+	margin: 0;
+	padding: 0;
+	height: 75px;
+	width: 500px;
+	background-color: lightblue;
+	overflow: hidden;
+}

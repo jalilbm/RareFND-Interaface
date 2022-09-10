@@ -106,8 +106,11 @@ export default function Funding(props) {
 								alignItems: "center",
 							}}
 						>
-							<p style={{ margin: "0px" }}>Upload File (.xlsx, csv):</p>
-							<UploadButton title="Select File" accepted_formats=".xlsx, csv" />
+							<p style={{ margin: "0px" }}>Upload File (.xlsx, .csv):</p>
+							<UploadButton
+								title="Select File"
+								accepted_formats=".xlsx, .csv"
+							/>
 						</div>
 					</div>
 				</Col>

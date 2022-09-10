@@ -11,98 +11,108 @@ export default function HomeCarousel() {
 	const { user } = useContext(AuthContext);
 	return (
 		<Carousel fade controls={false} indicators={false}>
-			<Carousel.Item
-				style={{ width: "100%", position: "relative", height: "100%" }}
+			<div
+				style={{
+					height: "80vh",
+					minHeight: "600px",
+				}}
 			>
 				<div
-					className="d-block w-100"
-					alt="Third slide"
+					className="w-100 h-100"
 					style={{
-						height: "92vh",
-						minHeight: "600px",
-						objectFit: "cover",
-					}}
-				/>
-				<Carousel.Caption
-					className="top-caption"
-					style={{
-						position: "absolute",
-						top: "80px",
-						width: "100%",
-						left: "0px",
+						display: "flex",
+						alignItems: "center",
+						justifyContent: "center",
 					}}
 				>
-					<h1 style={{ fontWeight: "900" }}>Rare Find Then Fund</h1>
-					<br />
-					<br />
-					<p
-						style={{
-							color: "#3d3d3d",
-							lineHeight: "1.8",
-							fontSize: "1.125rem",
-						}}
-					>
-						The only crowdfunding platform that pays YOU to start your
-						fundraising journey! For a limited time only kickstart your campaign
-						with 10% completely free to help your reach your target!
-					</p>
-					<br />
-					<br />
-					{!user ? (
-						<>
-							<Button
-								variant="warning"
-								className="rise-button"
-								size="lg"
-								to="/signup"
+					<div>
+						<h1 style={{ fontWeight: "900", textAlign: "center" }}>
+							Rare Find Then Fund
+						</h1>
+						<br />
+						<br />
+						<div>
+							<p
+								className="mx-auto"
 								style={{
-									fontFamily: "'Poppins', sans-serif",
-									color: "#1b1b1b",
-									height: "3.7rem",
-									fontSize: "1.4rem",
-									minHeight: "3rem",
-									padding: "0.5rem 2rem",
-									borderRadius: "0.75rem",
+									color: "#3d3d3d",
+									lineHeight: "1.8",
+									fontSize: "1.125rem",
+									maxWidth: "900px",
+									textAlign: "center",
 								}}
 							>
-								<strong>Sign up</strong> - it's Free
-							</Button>
-							<br />
-							<p style={{ color: "#3d3d3d" }}>
-								Or,{" "}
-								<Link
-									to="/start-project"
-									style={{
-										lineHeight: "3",
-										textDecoration: "underline",
-										color: "#3d3d3d",
-									}}
-								>
-									Start a project!
-								</Link>
+								The only crowdfunding platform that pays YOU to start your
+								fundraising journey! For a limited time only kickstart your
+								campaign with 10% completely free to help your reach your
+								target!
 							</p>
-						</>
-					) : (
-						<Button
-							variant="warning"
-							className="rise-button"
-							size="lg"
-							to="/start-project"
-							style={{
-								fontFamily: "'Poppins', sans-serif",
-								color: "#1b1b1b",
-								height: "3.7rem",
-								fontSize: "1.4rem",
-								minHeight: "3rem",
-								padding: "0.5rem 2rem",
-								borderRadius: "0.75rem",
-							}}
-						>
-							<strong>Start Project</strong> - it's Free
-						</Button>
-					)}
-				</Carousel.Caption>
-			</Carousel.Item>
+						</div>
+						<br />
+						<br />
+						<div className="text-center">
+							{!user ? (
+								<>
+									<Link to="/signup">
+										<Button
+											variant="warning"
+											className="rise-button"
+											size="lg"
+											onMouseDown={(e) => e.preventDefault()}
+											style={{
+												fontFamily: "'Poppins', sans-serif",
+												color: "#1b1b1b",
+												height: "3.7rem",
+												fontSize: "1.4rem",
+												minHeight: "3rem",
+												padding: "0.5rem 2rem",
+												borderRadius: "0.75rem",
+											}}
+										>
+											<strong>Sign up</strong> - it's Free
+										</Button>
+									</Link>
+									<br />
+									<p style={{ color: "#3d3d3d" }}>
+										Or,{" "}
+										<Link
+											to="/dashboard/projects"
+											style={{
+												lineHeight: "3",
+												textDecoration: "underline",
+												color: "#3d3d3d",
+											}}
+										>
+											Start a project!
+										</Link>
+									</p>
+								</>
+							) : (
+								<Link to="/dashboard/projects">
+									<Button
+										variant="warning"
+										className="rise-button"
+										size="lg"
+										to="/dashboard/projects"
+										onMouseDown={(e) => e.preventDefault()}
+										style={{
+											fontFamily: "'Poppins', sans-serif",
+											color: "#1b1b1b",
+											height: "3.7rem",
+											fontSize: "1.4rem",
+											minHeight: "3rem",
+											padding: "0.5rem 2rem",
+											borderRadius: "0.75rem",
+										}}
+									>
+										<strong>Start Project</strong> - it's Free
+									</Button>
+								</Link>
+							)}
+						</div>
+					</div>
+				</div>
+			</div>
 		</Carousel>
 	);
 }

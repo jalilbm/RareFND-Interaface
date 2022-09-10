@@ -1,6 +1,7 @@
 import SideBar from "../../../components/DashboardSideBare";
 import "./project.scss";
 import Basics from "./Basics";
+import Profile from "./Profile";
 import Funding from "./Funding";
 import Rewards from "./Rewards";
 import Story from "./Story";
@@ -63,9 +64,7 @@ export default function DashboardProjects() {
 				);
 				break;
 			case "create-project-tab-5":
-				setRenderTab(
-					<Basics nextTabFunction={() => changeTab("create-project-tab-6")} />
-				);
+				setRenderTab(<Profile />);
 				break;
 			case "create-project-tab-6":
 				setRenderTab(<Payment />);

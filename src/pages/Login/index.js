@@ -79,7 +79,7 @@ export default function (props) {
 					</div>
 					<div className="d-grid gap-2 mt-3">
 						<button type="submit" className="btn btn-warning">
-							Submit
+							Login
 						</button>
 					</div>
 					<p className="text-right mt-2">

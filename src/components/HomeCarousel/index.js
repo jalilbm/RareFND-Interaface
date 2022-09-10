@@ -3,14 +3,16 @@ import main from "../../assets/carousel/main.jpeg";
 import "bootstrap/dist/css/bootstrap.css";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
+import Image from "react-bootstrap/Image";
 import "./index.css";
+import Bitcoin from "../../assets/assets/carousel/Bitcoin.png";
 import { useState, useEffect, useContext } from "react";
 import AuthContext from "../../Context/AuthContext";
 
 export default function HomeCarousel() {
 	const { user } = useContext(AuthContext);
 	return (
-		<Carousel fade controls={false} indicators={false}>
+		<Carousel fade controls={false} indicators={false} className="parent_home_caroussel">
 			<div
 				style={{
 					height: "80vh",
@@ -113,6 +115,7 @@ export default function HomeCarousel() {
 					</div>
 				</div>
 			</div>
+			<Image src={Bitcoin} className="home_beauty"/>
 		</Carousel>
 	);
 }

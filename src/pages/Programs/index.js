@@ -38,7 +38,7 @@ export default function About() {
 			<h1
 				className="mt-4"
 				style={{
-					color: "white",
+					color: "#3d3d3d",
 					fontWeight: "bold",
 					marginLeft: "5%",
 				}}
@@ -57,23 +57,19 @@ export default function About() {
 					>
 						<Tab
 							style={{
-								maxWidth: "200px",
+								maxWidth: "300px",
 								width: "50%",
-								color: "white",
-								fontFamily: "'Calibri', sans-serif",
-								fontWeight: "bold",
-								fontSize: "15px",
+								color: "#3d3d3d",
+								fontSize: "18px",
 							}}
 							label="Charity Fundraising"
 						/>
 						<Tab
 							style={{
-								maxWidth: "200px",
+								maxWidth: "300px",
 								width: "50%",
-								color: "white",
-								fontFamily: "'Calibri', sans-serif",
-								fontWeight: "bold",
-								fontSize: "15px",
+								color: "#3d3d3d",
+								fontSize: "18px",
 							}}
 							label="Startups Fundraising"
 						/>

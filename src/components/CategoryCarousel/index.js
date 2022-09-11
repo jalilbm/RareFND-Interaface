@@ -23,6 +23,7 @@ export default function CategoryCarousel(props) {
 						style={{
 							color: "white",
 							fontSize: "9vw",
+							fontWeight: "600",
 						}}
 					>
 						{props.title}

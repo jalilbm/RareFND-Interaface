@@ -4,7 +4,6 @@ import ContributeBtn from "../Web3ContributeButton";
 
 export default function index(props) {
 	const included_incentives = props.included_incentives.split(";");
-	console.log("asfasdfas", included_incentives);
 	return (
 		<div
 			className="incentive border-1 mx-auto w-100"

@@ -22,7 +22,6 @@ import CommingSoon from "./components/CommingSoon/CommingSoon";
 export default function Main() {
 	const { pathname, hash, key } = useLocation();
 	let { user } = useContext(AuthContext);
-	console.log(user);
 	useEffect(() => {
 		// if not a hash link, scroll to top
 		if (hash === "") {

@@ -28,7 +28,6 @@ export const AuthProvider = ({ children }) => {
 				password: password,
 			})
 			.then((response) => {
-				console.log(response);
 				if (response.status === 200) {
 					setAuthTokens(response.data);
 					setUser(jwt_decode(response.data.access));
@@ -56,7 +55,6 @@ export const AuthProvider = ({ children }) => {
 			})
 			.then((response) => {
 				if (response.status === 200) {
-					console.log(response.data);
 					setAuthTokens(response.data);
 					setUser(jwt_decode(response.data.access));
 					localStorage.setItem("authTokens", JSON.stringify(response.data));

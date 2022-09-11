@@ -58,7 +58,6 @@ export default function ContributeBtn(props) {
 			setStaking(staking);
 			isReadyToContribute();
 
-			console.log("allow---", walletAddress);
 			getAllowance(token_);
 		}
 	}, [provider, walletAddress, stakingAddress]);
@@ -67,11 +66,9 @@ export default function ContributeBtn(props) {
 		let contribution_amount =
 			document.getElementById("contribute-amount").value;
 		if (!regexp.test(contribution_amount)) {
-			console.log(contribution_amount);
 			return alert("Invalid Contribution Amount");
 		} else {
 			await isReadyToContribute();
-			console.log(walletAddress, chainId);
 			if (!walletAddress || (walletAddress && chainId !== "0x38")) {
 				document.querySelector("#connect-btn").click();
 			} else if (walletAddress && chainId === "0x38") {
@@ -109,7 +106,6 @@ export default function ContributeBtn(props) {
 	async function approve() {
 		let approveTx;
 		setPending(true);
-		console.log("token", token);
 		approveTx = await token?.approve(
 			stakingAddress,
 			ethers.constants.MaxInt256

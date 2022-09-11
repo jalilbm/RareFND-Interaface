@@ -7,6 +7,7 @@ import "react-phone-input-2/lib/style.css";
 import axios from "axios";
 import { ProviderContext } from "../../web3/ProviderContext";
 import { Link } from "react-router-dom";
+import DialogPopup from "../../components/DialogPopup";
 
 var regexp = /^[\s()+-]*([0-9][\s()+-]*){6,20}$/;
 function isValidPhonenumber(value) {
@@ -19,7 +20,8 @@ export default function () {
 	const initialValues = { email: "", password: "" };
 	const [formValues, setFormValues] = useState(initialValues);
 	const [formErrors, setFormErrors] = useState({});
-	const [reatTimeFormErrors, setReatTimeFormErrors] = useState({});
+	const [accountCreated, setAccountCreated] = useState(false);
+	const [realTimeFormErrors, setRealTimeFormErrors] = useState({});
 	const [isSubmit, setIsSubmit] = useState(false);
 	const [walletAddress, setWalletAddress] = useState();
 	const { provider, setProvider } = useContext(ProviderContext);
@@ -42,14 +44,12 @@ export default function () {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		setFormErrors({ ...reatTimeFormErrors, ...validate(formValues) });
+		setFormErrors({ ...realTimeFormErrors, ...validate(formValues) });
 		setIsSubmit(true);
 	};
 
 	useEffect(() => {
-		console.log(Object.keys(formErrors).length, formErrors);
 		if (Object.keys(formErrors).length === 0 && isSubmit) {
-			console.log(formValues);
 			axios
 				.post("http://c217-139-28-218-172.ngrok.io/api/user/signup/", {
 					username: formValues.username,
@@ -62,7 +62,7 @@ export default function () {
 				})
 				.then((response) => {
 					if (response.status === 200) {
-						alert("user created");
+						setAccountCreated(true);
 					}
 				});
 		}
@@ -78,28 +78,28 @@ export default function () {
 				)
 				.then(function (response) {
 					if (!response.data.valid) {
-						setReatTimeFormErrors({
-							...reatTimeFormErrors,
+						setRealTimeFormErrors({
+							...realTimeFormErrors,
 							username: "Username already exists",
 						});
 					} else if (
 						document.getElementById("username") &&
 						document.getElementById("username").value.length < 5
 					) {
-						setReatTimeFormErrors({
-							...reatTimeFormErrors,
+						setRealTimeFormErrors({
+							...realTimeFormErrors,
 							username: "Username must be more than 5 characters",
 						});
 					} else if (
 						document.getElementById("username") &&
 						document.getElementById("username").value.length > 20
 					) {
-						setReatTimeFormErrors({
-							...reatTimeFormErrors,
+						setRealTimeFormErrors({
+							...realTimeFormErrors,
 							username: "Username cannot exceed more than 20 characters",
 						});
 					} else {
-						delete reatTimeFormErrors.username;
+						delete realTimeFormErrors.username;
 						forceUpdate();
 					}
 				});
@@ -116,17 +116,17 @@ export default function () {
 				)
 				.then(function (response) {
 					if (!response.data.valid) {
-						setReatTimeFormErrors({
-							...reatTimeFormErrors,
+						setRealTimeFormErrors({
+							...realTimeFormErrors,
 							email: "Email already exists",
 						});
 					} else if (!regex.test(document.getElementById("email").value)) {
-						setReatTimeFormErrors({
-							...reatTimeFormErrors,
+						setRealTimeFormErrors({
+							...realTimeFormErrors,
 							email: "This is not a valid email format!",
 						});
 					} else {
-						delete reatTimeFormErrors.email;
+						delete realTimeFormErrors.email;
 					}
 				});
 		}
@@ -189,7 +189,7 @@ export default function () {
 							value={formValues.username}
 							onChange={handleChange}
 						/>
-						<p className="text-danger">{reatTimeFormErrors.username}</p>
+						<p className="text-danger">{realTimeFormErrors.username}</p>
 					</div>
 					<div className="form-group mt-3">
 						<label>
@@ -204,7 +204,7 @@ export default function () {
 							value={formValues.email}
 							onChange={handleChange}
 						/>
-						<p className="text-danger">{reatTimeFormErrors.email}</p>
+						<p className="text-danger">{realTimeFormErrors.email}</p>
 					</div>
 					<div className="form-group mt-3">
 						<label>
@@ -306,6 +306,15 @@ export default function () {
 					</p>
 				</div>
 			</form>
+			{accountCreated && (
+				<DialogPopup
+					title="Verify your email"
+					description="You will receive an email confirmation, please check your spam section too, 
+					and follow the instructions to verify your account."
+					show={true}
+					function_={() => setAccountCreated(false)}
+				/>
+			)}
 		</div>
 	);
 }

@@ -6,7 +6,6 @@ import Web3ContributeButton from "../Web3ContributeButton";
 import "./index.css";
 
 export default function ProjectCard(props) {
-	console.log(props.image);
 	return (
 		<Card
 			className={

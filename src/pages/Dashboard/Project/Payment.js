@@ -20,8 +20,6 @@ export default function Story(props) {
 			});
 	}, []);
 
-	const showPopup = () => {};
-
 	const addUBORow = () => {
 		const rowId = UBOsArray.length + 1;
 		let newRow = (
@@ -468,18 +466,23 @@ export default function Story(props) {
 				</Row>
 				<Row style={{ padding: "3vw", width: "100%" }}>
 					<div style={{ textAlign: "right" }}>
-						<Button
-							variant="warning"
-							onMouseDown={(e) => e.preventDefault()}
-							size="md"
-							onClick={showPopup}
-							style={{ borderRadius: "0px", width: "150px" }}
-						>
-							Finish
-						</Button>
+						<DialogPopup
+							button={
+								<Button
+									variant="warning"
+									onMouseDown={(e) => e.preventDefault()}
+									size="md"
+									style={{ borderRadius: "0px", width: "150px" }}
+								>
+									Finish
+								</Button>
+							}
+							title="Project submitted"
+							description="Your project has been submitted and it will be soon reviewed by one of our team members, 
+							stay tunned, we will contact you soon!"
+						/>
 					</div>
 				</Row>
-				<DialogPopup />
 			</div>
 		</div>
 	);

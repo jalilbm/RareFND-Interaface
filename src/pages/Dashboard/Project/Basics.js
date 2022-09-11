@@ -12,7 +12,17 @@ export default function Basics(props) {
 	const [categories, setCategories] = useState([{}]);
 	const [subCategories, setSubCategories] = useState([{}]);
 	const [category, setCategory] = useState(null);
-	const [countries, setCountries] = useState([{}]);
+	const [countries, setCountries] = useState([
+		{ name: "India" },
+		{ name: "Kingdom of Bahrain" },
+		{ name: "Kingdom of Saudi Arabia" },
+		{ name: "State of Kuwait" },
+		{ name: "Sultanate of Oman" },
+		{ name: "State of Qatar" },
+		{ name: "United Arab Emirates" },
+		{ name: "United Kingdom" },
+		{ name: "United States of America" },
+	]);
 
 	useEffect(() => {
 		axios
@@ -20,11 +30,11 @@ export default function Basics(props) {
 			.then((response) => {
 				setCategories(response.data.categories);
 			});
-		axios
-			.get("https://rarefndapi.herokuapp.com/api/country/")
-			.then((response) => {
-				setCountries(response.data.categories);
-			});
+		// axios
+		// 	.get("https://rarefndapi.herokuapp.com/api/country/")
+		// 	.then((response) => {
+		// 		setCountries(response.data.categories);
+		// 	});
 	}, []);
 
 	useEffect(() => {
@@ -271,13 +281,9 @@ export default function Basics(props) {
 						<DropDown
 							title="Choose a country"
 							id="projectCountry"
-							options={
-								subCategories
-									? countries.map((subcategory) => {
-											if (subcategory.name != "All") return subcategory.name;
-									  })
-									: []
-							}
+							options={countries.map((country) => {
+								if (country.name != "All") return country.name;
+							})}
 							function_={(event) => props.updateProjectData(event, "basics")}
 						/>
 					</div>

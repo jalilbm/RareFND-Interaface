@@ -9,16 +9,26 @@ import Calendar from "../../../components/Calendar";
 import DialogPopup from "../../../components/DialogPopup";
 
 export default function Story(props) {
-	const [countries, setCountries] = useState([{}]);
+	const [countries, setCountries] = useState([
+		{ name: "India" },
+		{ name: "Kingdom of Bahrain" },
+		{ name: "Kingdom of Saudi Arabia" },
+		{ name: "State of Kuwait" },
+		{ name: "Sultanate of Oman" },
+		{ name: "State of Qatar" },
+		{ name: "United Arab Emirates" },
+		{ name: "United Kingdom" },
+		{ name: "United States of America" },
+	]);
 	const [UBOsArray, setUBOsArray] = useState([]);
 
-	useEffect(() => {
-		axios
-			.get("https://rarefndapi.herokuapp.com/api/country/")
-			.then((response) => {
-				setCountries(response.data.categories);
-			});
-	}, []);
+	// useEffect(() => {
+	// 	axios
+	// 		.get("https://rarefndapi.herokuapp.com/api/country/")
+	// 		.then((response) => {
+	// 			setCountries(response.data.categories);
+	// 		});
+	// }, []);
 
 	const addUBORow = () => {
 		const rowId = UBOsArray.length + 1;

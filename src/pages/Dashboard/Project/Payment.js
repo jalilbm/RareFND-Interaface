@@ -14,7 +14,7 @@ export default function Story(props) {
 
 	useEffect(() => {
 		axios
-			.get("http://c217-139-28-218-172.ngrok.io/api/country/")
+			.get("https://rarefndapi.herokuapp.com/api/country/")
 			.then((response) => {
 				setCountries(response.data.categories);
 			});

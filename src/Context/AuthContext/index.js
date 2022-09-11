@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
 
 	const loginUser = async (email, password) => {
 		axios
-			.post("http://c217-139-28-218-172.ngrok.io/api/auth/token/", {
+			.post("https://rarefndapi.herokuapp.com/api/auth/token/", {
 				email: email,
 				password: password,
 			})
@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
 
 	const updateToken = async () => {
 		axios
-			.post("http://c217-139-28-218-172.ngrok.io/api/auth/token/refresh/", {
+			.post("https://rarefndapi.herokuapp.com/api/auth/token/refresh/", {
 				refresh: authTokens.refresh,
 			})
 			.then((response) => {

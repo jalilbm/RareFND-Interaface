@@ -13,7 +13,7 @@ export default function Project(props) {
 
 	useEffect(() => {
 		axios
-			.get(`http://c217-139-28-218-172.ngrok.io/api/incentives/${projectId}/`)
+			.get(`https://rarefndapi.herokuapp.com/api/incentives/${projectId}/`)
 			.then((response) => {
 				if (response.status === 200)
 					setIncentivesData(response.data.incentives);
@@ -22,7 +22,7 @@ export default function Project(props) {
 
 	useEffect(() => {
 		axios
-			.get(`http://c217-139-28-218-172.ngrok.io/api/project/${projectId}/`)
+			.get(`https://rarefndapi.herokuapp.com/api/project/${projectId}/`)
 			.then((response) => {
 				setProjectData(response.data);
 			});

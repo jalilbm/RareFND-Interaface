@@ -6,6 +6,7 @@ import DropDown from "../../../components/DropDown";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Calendar from "../../../components/Calendar";
+import DialogPopup from "../../../components/DialogPopup";
 
 export default function Story(props) {
 	const [countries, setCountries] = useState([{}]);
@@ -18,6 +19,8 @@ export default function Story(props) {
 				setCountries(response.data.categories);
 			});
 	}, []);
+
+	const showPopup = () => {};
 
 	const addUBORow = () => {
 		const rowId = UBOsArray.length + 1;
@@ -469,13 +472,14 @@ export default function Story(props) {
 							variant="warning"
 							onMouseDown={(e) => e.preventDefault()}
 							size="md"
-							// onClick={props.nextTabFunction}
+							onClick={showPopup}
 							style={{ borderRadius: "0px", width: "150px" }}
 						>
 							Finish
 						</Button>
 					</div>
 				</Row>
+				<DialogPopup />
 			</div>
 		</div>
 	);

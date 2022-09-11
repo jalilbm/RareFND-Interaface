@@ -1,5 +1,4 @@
 import CategoryProjectCard from "../../components/CategoryProjectCard";
-import CategoryCarousel from "../CategoryCarousel";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
@@ -9,7 +8,6 @@ export default function CategoryGridCard(props) {
 			className="CategoryGridCard mb-5"
 			style={{ minHeight: window.innerHeight }}
 		>
-			<CategoryCarousel image={props.image} title={props.title} />
 			<Row
 				xs={1}
 				s={2}

@@ -1,21 +1,21 @@
+import { useEffect, useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import "./index.scss";
 
 function DropDown(props) {
-	const handleClickedItem = (e) => {
-		e.preventDefault();
-		const value = e.target.textContent;
-		document.getElementById(props.id).textContent = value;
+	const [selectedItem, setSelectedItem] = useState();
+
+	const handleClickedItem = (eventKey) => {
+		document.getElementById(props.id).textContent = eventKey;
+		setSelectedItem(eventKey);
 		if (props.function_) {
-			props.function_(value);
+			props.function_({ target: { name: props.id, value: eventKey } });
 		}
 	};
 
-	const handleClick = (eventKey, event) => {
-		event.persist();
-		console.log(eventKey);
-		console.log(event);
-	};
+	useEffect(() => {
+		document.getElementById(props.id).textContent = selectedItem || props.title;
+	}, [selectedItem]);
 
 	return (
 		<Dropdown className="drop-down" onSelect={handleClickedItem}>
@@ -35,7 +35,7 @@ function DropDown(props) {
 						child && (
 							<Dropdown.Item
 								className="drop-menu-item warning"
-								onClick={handleClickedItem}
+								eventKey={child}
 							>
 								{child}
 							</Dropdown.Item>

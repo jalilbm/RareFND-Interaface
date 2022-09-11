@@ -2,6 +2,7 @@ import CategoryGridCard from "../../components/CategoryGridCard";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import CategoryCarousel from "../../components/CategoryCarousel";
 
 export default function Category() {
 	const [categoryData, setCategoryData] = useState({});
@@ -48,11 +49,8 @@ export default function Category() {
 	}, [categoryName]);
 	return (
 		<div>
-			<CategoryGridCard
-				image={categoryData.image}
-				title={categoryData.title}
-				categoryProjects={categoryProjects}
-			/>
+			<CategoryCarousel image={categoryData.image} title={categoryData.title} />
+			<CategoryGridCard categoryProjects={categoryProjects} />
 		</div>
 	);
 }

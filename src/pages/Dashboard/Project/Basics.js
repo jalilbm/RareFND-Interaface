@@ -11,7 +11,7 @@ import { useState, useEffect } from "react";
 export default function Basics(props) {
 	const [categories, setCategories] = useState([{}]);
 	const [subCategories, setSubCategories] = useState([{}]);
-	const [basicsData, setBasicsData] = useState([{}]);
+	const [category, setCategory] = useState(null);
 	const [countries, setCountries] = useState([{}]);
 
 	useEffect(() => {
@@ -27,23 +27,33 @@ export default function Basics(props) {
 			});
 	}, []);
 
-	const handleChange = (e) => {
-		const { name, value } = e.target;
-		setBasicsData({ ...basicsData, [name]: value });
-	};
-
-	const handleSubCategories = (category) => {
-		document.getElementById("subcategories-dropdown").textContent =
-			"Choose Subcategory";
-		axios
-			.get(
-				`http://c217-139-28-218-172.ngrok.io/api/category/${category}/subcategories/`
-			)
-			.then((response) => {
-				setSubCategories(response.data.subcategories);
-			});
-		return subCategories;
-	};
+	useEffect(() => {
+		if (
+			props.projectData &&
+			props.projectData["basics"] &&
+			props.projectData["basics"].projectCategory &&
+			props.projectData["basics"].projectCategory !== category
+		) {
+			document.getElementById("projectSubcategory").textContent =
+				"Choose a subcategory";
+			axios
+				.get(
+					`http://c217-139-28-218-172.ngrok.io/api/category/${props.projectData["basics"].projectCategory}/subcategories/`
+				)
+				.then((response) => {
+					setSubCategories(response.data.subcategories);
+					if (response.data.subcategories.length == 0) {
+						document.getElementById("projectSubcategory").textContent =
+							"No Subcategories";
+						props.updateProjectData(
+							{ target: { projectSubcategory: null } },
+							"basics"
+						);
+					}
+				});
+			setCategory(props.projectData["basics"].projectCategory);
+		}
+	}, [props.projectData]);
 
 	return (
 		<div className="DashboardCreateProjectBasics">
@@ -178,8 +188,7 @@ export default function Basics(props) {
 									  })
 									: []
 							}
-							function_={handleSubCategories}
-							// handleSelect =
+							function_={(event) => props.updateProjectData(event, "basics")}
 						/>
 					</div>
 					<br></br>
@@ -193,7 +202,7 @@ export default function Basics(props) {
 					<div className="input-with-title">
 						<DropDown
 							title="Choose Subcategory"
-							id="subcategories-dropdown"
+							id="projectSubcategory"
 							options={
 								subCategories
 									? subCategories.map((subcategory) => {
@@ -201,6 +210,7 @@ export default function Basics(props) {
 									  })
 									: []
 							}
+							function_={(event) => props.updateProjectData(event, "basics")}
 						/>
 					</div>
 				</Col>
@@ -260,7 +270,7 @@ export default function Basics(props) {
 					<div className="input-with-title">
 						<DropDown
 							title="Choose a country"
-							id="countries-dropdown"
+							id="projectCountry"
 							options={
 								subCategories
 									? countries.map((subcategory) => {
@@ -268,6 +278,7 @@ export default function Basics(props) {
 									  })
 									: []
 							}
+							function_={(event) => props.updateProjectData(event, "basics")}
 						/>
 					</div>
 				</Col>

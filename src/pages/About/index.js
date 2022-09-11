@@ -13,8 +13,8 @@ import { Col, Row } from "react-bootstrap";
 export default function About() {
   const form = useRef();
 
-  const sendEmail = (e) => {
-    e.preventDefault();
+	const sendEmail = (e) => {
+		e.preventDefault();
 
     emailjs
       .sendForm(

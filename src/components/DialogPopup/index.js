@@ -1,15 +1,15 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
+
 function ModalDialog(props) {
-	const [isShow, invokeModal] = React.useState(false);
+	const [isShow, invokeModal] = React.useState(props.show);
 	const initModal = () => {
+		if (props.function_) props.function_();
 		return invokeModal(!isShow);
 	};
 	return (
 		<>
-			<Button variant="success" onClick={initModal}>
-				Open Modal
-			</Button>
+			{props.button && <div onClick={initModal}>{props.button}</div>}
 			<Modal show={isShow}>
 				<Modal.Header closeButton onClick={initModal}>
 					<Modal.Title>{props.title}</Modal.Title>

@@ -25,7 +25,6 @@ export default function (props) {
 
 	useEffect(() => {
 		if (Object.keys(formErrors).length === 0 && isSubmit) {
-			console.log(formValues);
 			loginUser(formValues.email, formValues.password);
 		}
 	}, [formErrors]);

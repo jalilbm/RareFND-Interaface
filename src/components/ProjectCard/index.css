@@ -1,16 +1,17 @@
 .row.vertical-divider {
-  overflow: hidden;
+	overflow: hidden;
+	height: 100%;
 }
 .row.vertical-divider > div[class^="col-"] {
-  text-align: center;
-  padding-bottom: 100px;
-  margin-bottom: -100px;
-  border-left: 2px solid #FFC007;
-  border-right: 2px solid #FFC007;
+	text-align: center;
+	/* padding-bottom: 100px; */
+	/* margin-bottom: -100px; */
+	border-left: 2px solid #ffc007;
+	border-right: 2px solid #ffc007;
 }
 .row.vertical-divider div[class^="col-"]:first-child {
-  border-left: none;
+	border-left: none;
 }
 .row.vertical-divider div[class^="col-"]:last-child {
-  border-right: none;
+	border-right: none;
 }

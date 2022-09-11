@@ -18,6 +18,8 @@ export default function Legal() {
 							color: "#3d3d3d",
 							lineHeight: "1.8",
 							fontWeight: "500",
+							fontSize: "38px",
+							textAlign: "center",
 						}}
 					>
 						Please read the entirety of this "Legal Disclaimer" section

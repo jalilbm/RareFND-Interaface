@@ -137,13 +137,18 @@ export default function ContributeBtn(props) {
 	return (
 		<div
 			className="contribution-details align-self-end text-center w-70 mx-auto"
-			style={{ marginTop: "auto" }}
+			style={{
+				display: "flex",
+				alignItems: "center",
+				justifyContent: "center",
+			}}
 		>
 			<div
 				style={{
 					border: "3px solid",
 					borderColor: "#FEC008",
 					borderRadius: "12px",
+					maxWidth: "500px",
 				}}
 			>
 				<Row
@@ -153,17 +158,17 @@ export default function ContributeBtn(props) {
 					<Col style={{ padding: "0" }}>
 						<input
 							id="contribute-amount"
-							className="bg-black"
 							placeholder="0.00 FND"
 							autoComplete="off"
 							type="text"
-							pattern="(^[0-9]{0,2}$)|(^[0-9]{0,2}\.[0-9]{0,5}$)"
+							pattern="(^[0-9]{0,1000}$)|(^[0-9]{0,10000}\.[0-9]{0,18}$)"
 							style={{
+								backgroundColor: "transparent",
 								border: "none",
 								width: "100%",
 								height: "100%",
 								fontSize: "1.5rem",
-								color: "white",
+								color: "black",
 								fontFamily: "'Kaisei Opti', sans-serif",
 								outline: "none",
 								paddingLeft: "0",

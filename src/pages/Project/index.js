@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 import ProjectCard from "../../components/ProjectCard";
 
 export default function Project(props) {
-	const [height, setHeight] = useState({});
 	const [projectData, setProjectData] = useState({});
 	const [incentivesData, setIncentivesData] = useState(null);
 
@@ -22,12 +21,6 @@ export default function Project(props) {
 	}, []);
 
 	useEffect(() => {
-		setHeight(window.innerHeight);
-		window.addEventListener("resize", () => setHeight(window.innerHeight));
-		return () =>
-			window.removeEventListener("resize", () => setHeight(window.innerHeight));
-	}, []);
-	useEffect(() => {
 		axios
 			.get(`http://c217-139-28-218-172.ngrok.io/api/project/${projectId}/`)
 			.then((response) => {
@@ -40,9 +33,7 @@ export default function Project(props) {
 				image={projectData.thumbnail}
 				title={projectData.title}
 				text={projectData.head}
-				backgroudColor="black"
 				projectLive={projectData.live}
-				image_height={height / 1.8}
 				staking_address={projectData.staking_address}
 			/>
 			<ProjectCurrentContributions />

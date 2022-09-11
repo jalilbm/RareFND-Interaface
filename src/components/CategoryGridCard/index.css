@@ -1,29 +1,29 @@
 .categorygrid {
-  text-transform: uppercase;
-  color: #656969;
-  font-size: 1.3rem;
-  line-height: 1.8rem;
+	text-transform: uppercase;
+	color: #656969;
+	font-size: 1.3rem;
+	line-height: 1.8rem;
 }
 .descript {
-  padding-top: 1rem;
-  margin-bottom: 1.8rem;
-  color: #656969;
-  font-size: 1.3rem;
-  width: 700px;
+	padding-top: 1rem;
+	margin-bottom: 1.8rem;
+	color: #656969;
+	font-size: 1.3rem;
+	width: 700px;
 }
 
 .vl {
-  position: absolute;
-  left: -10%;
-  top: -5%;
-  border-left: 1px solid #a4a9a9;
-  height: 600px;
-  width: 600px;
+	position: absolute;
+	left: 0%;
+	top: -5%;
+	border-left: 1px solid #a4a9a9;
+	height: 600px;
+	width: 600px;
 }
 @media screen and (max-width: 750px) {
-  .vl {
-    transform: rotate(90deg);
-    left: 3%;
-    top: -10%;
-  }
+	.vl {
+		transform: rotate(90deg);
+		left: 3%;
+		top: -10%;
+	}
 }

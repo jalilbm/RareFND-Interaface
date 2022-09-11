@@ -34,7 +34,14 @@
 .aboutpage .contact {
 	margin: 5vw;
 }
-
+.contact{
+	position: relative;
+}
+@media screen and (max-width: 1300px) {
+	.contact_image{
+		display: none;
+	}
+}
 
 
 

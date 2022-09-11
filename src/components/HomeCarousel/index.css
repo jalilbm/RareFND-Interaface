@@ -1,21 +1,22 @@
 .rise-button:hover {
-	-webkit-transform: translateY(-3px);
-	transform: translateY(-3px);
-	transition: transform 500ms;
-	box-shadow: 0 12px 16px 0 rgb(167, 165, 165);
+  -webkit-transform: translateY(-3px);
+  transform: translateY(-3px);
+  transition: transform 500ms;
+  box-shadow: 0 12px 16px 0 rgb(167, 165, 165);
+}
+.rise-button {
+  position: relative;
 }
 
 .top-caption h1 {
-	color: #3d3d3d;
-	font-size: 4rem;
+  color: #3d3d3d;
+  font-size: 4rem;
 }
-.parent_home_caroussel{
-	position: relative;
+.parent_home_caroussel {
+  position: relative;
 }
-.home_beauty{
-	position: absolute;
-	top: 78%;
-	left: 80%;
-	width: 150px;
-	height: 150px;
+@media screen and (max-width: 800px) {
+  .chart_image {
+    display: none;
+  }
 }

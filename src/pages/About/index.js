@@ -6,12 +6,22 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import Image from "react-bootstrap/Image";
 import "./index.css";
 import Contact_us from "../../assets/assets/carousel/Contact_us.png";
-import React, { useRef } from "react";
+import React, { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import { Col, Row } from "react-bootstrap";
+import DialogPopup from "../../components/DialogPopup";
 
 export default function About() {
 	const form = useRef();
+	const [emailSentPopup, setEmailSentPopup] = useState(false);
+	const [dialogPopupData, setDialogPopupData] = useState({
+		title: "",
+		body: "",
+	});
+
+	const closePopup = () => {
+		setEmailSentPopup(true);
+	};
 
 	const sendEmail = (e) => {
 		e.preventDefault();
@@ -27,9 +37,19 @@ export default function About() {
 				(result) => {
 					console.log(result.text);
 					console.log("message sent succesfully");
+					setDialogPopupData({
+						title: "Email sent successfully",
+						body: "We have received your concern, and a team member will reach out to you soon.",
+					});
+					setEmailSentPopup(true);
 				},
 				(error) => {
 					console.log(error.text);
+					setDialogPopupData({
+						title: "Email was not sent successfully",
+						body: "For some reason we couldn't receive your email, please contact us in our Telegram channel on the left.",
+					});
+					setEmailSentPopup(true);
 				}
 			);
 	};
@@ -157,6 +177,14 @@ export default function About() {
 					</Col>
 				</Row>
 			</section>
+			{emailSentPopup && (
+				<DialogPopup
+					title={dialogPopupData.title}
+					description={dialogPopupData.body}
+					show={true}
+					function_={() => setEmailSentPopup(false)}
+				/>
+			)}
 		</div>
 	);
 }

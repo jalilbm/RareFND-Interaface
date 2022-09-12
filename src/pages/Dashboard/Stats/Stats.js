@@ -5,7 +5,7 @@ export default function DashboardStats() {
 	return (
 		<div className="dashboard-stats">
 			<SideBar />
-			<div className="dashboard-stats-container">Stats</div>
+			<div className="dashboard-stats-container">Coming Soon</div>
 		</div>
 	);
 }

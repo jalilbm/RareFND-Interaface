@@ -21,18 +21,18 @@ export default function SideBar() {
 							<span>Projects</span>
 						</li>
 					</Link>
-					<Link to="/dashboard/stats" style={{ textDecoration: "none" }}>
+					{/* <Link to="/dashboard/stats" style={{ textDecoration: "none" }}>
 						<li>
 							<AssessmentIcon className="dashboard-icon" />
 							<span>Stats</span>
 						</li>
-					</Link>
+					</Link> */}
 				</ul>
 			</div>
-			<div className="bottom">
+			{/* <div className="bottom">
 				<div className="dashboard-color-option"></div>
 				<div className="dashboard-color-option"></div>
-			</div>
+			</div> */}
 		</div>
 	);
 }

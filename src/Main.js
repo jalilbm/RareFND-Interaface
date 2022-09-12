@@ -71,11 +71,11 @@ export default function Main() {
 					path="/dashboard/profile"
 					element={<PrivateRoute Component={Profile} />}
 				/>
-				{/* <Route
+				<Route
 					exact
 					path="/dashboard/stats"
 					element={<PrivateRoute Component={Stats} />}
-				/> */}
+				/>
 			</Routes>
 		</div>
 	);

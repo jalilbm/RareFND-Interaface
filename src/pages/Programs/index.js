@@ -25,8 +25,8 @@ export default function About() {
 
 	return (
 		<div>
-			<CategoryCarousel image={AboutUs} title="Programs" />
-			<div
+			<CategoryCarousel image={AboutUs} title="About Us" />
+			{/* <div
 				className="mt-5"
 				style={{
 					border: " 2px solid #FAD02C",
@@ -34,8 +34,8 @@ export default function About() {
 					minWidth: "60px",
 					marginLeft: "5%",
 				}}
-			></div>
-			<h1
+			></div> */}
+			{/* <h1
 				className="mt-4"
 				style={{
 					color: "#3d3d3d",
@@ -43,9 +43,9 @@ export default function About() {
 					marginLeft: "5%",
 				}}
 			>
-				Our Programs
-			</h1>
-			<Box>
+				Our Initiatives
+			</h1> */}
+			{/* <Box>
 				<Box className="w-100">
 					<Tabs
 						value={tabIndex}
@@ -62,7 +62,7 @@ export default function About() {
 								color: "#3d3d3d",
 								fontSize: "18px",
 							}}
-							label="Charity Fundraising"
+							label="Our team"
 						/>
 						<Tab
 							style={{
@@ -71,7 +71,7 @@ export default function About() {
 								color: "#3d3d3d",
 								fontSize: "18px",
 							}}
-							label="Startups Fundraising"
+							label="Our community"
 						/>
 					</Tabs>
 				</Box>
@@ -103,32 +103,54 @@ export default function About() {
 										{tabIndex === 0 ? (
 											<>
 												<p>
-													RareFnd campaigns make ideas into reality. It’s where
-													creators share new visions for creative work with the
-													communities that will come together to fund them.
+													The Rare FND organization is a non-profit organization
+													made up of rare individuals who are experts in their
+													field that when combined form a rare force to help
+													support the ecosystem of all involved with Rare FND.
 												</p>
 												<p>
-													Some of these creators, like Critical Role, TLC, and
-													The Smithsonian Institution already had huge fanbases.
-													But many projects have been as small-scale as a
-													limited run of silent meditation vinyls or as
-													up-and-coming as early versions of Issa Rae's Insecure
-													and Phoebe Waller-Bridge’s Fleabag.
+													With governmental advisors to philanthropists to
+													industry experts across a range of sectors we aim to
+													provide the support needed to build the best possible
+													community for all campaigns on our platform to give
+													exposure to that Rare Find and ensure that they can
+													complete their Rare Fund.
 												</p>
-												<p>
-													No matter what, creators always control how the work
-													comes together—no 100-page grant applications, no
-													donors demanding you modify your message, no
-													last-minute edits from investors. When backers chip in
-													funding and help spread the word, they too become part
-													of these independent works.
-												</p>{" "}
 											</>
 										) : (
 											<>
-												<p>ikram</p>
-												<p>jalil</p>
-												<p>ania</p>
+												<p>
+													Through the utilization of our huge community, you get
+													an extension to your own marketing campaigns. With
+													Rare FND partnerships with influencers across all
+													social media platforms your crowdfunding campaign gets
+													exposure through each and every one of our influencer
+													partnerships meaning that you reach millions of users
+													just by using by platform.
+												</p>
+												<p>
+													Not only that but we have our own strong community in
+													our own social media platforms who can also support
+													your crowdfunding campaign through a range of
+													different engagements.
+												</p>
+												<p>
+													Our community members can also help your campaign even
+													more! Through holding our native community token
+													members can vote on their favourite crowdfunding
+													charities or start-ups they would like to receive
+													extra exposure.
+												</p>
+												<p>
+													Your crowdfunding campaign starts with our community
+													as well as your own, so as your campaign grows within
+													our community then so does your own.
+												</p>
+												<h5>Whitepaper:</h5>
+												<p>
+													Download our technical documentation relating to the
+													Rare FND native token here.
+												</p>
 											</>
 										)}
 
@@ -148,7 +170,67 @@ export default function About() {
 						</Box>
 					}
 				</Box>
-			</Box>
+			</Box> */}
+			<div
+				style={{
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "center",
+				}}
+			>
+				<div
+					style={{
+						backgroundColor: "white",
+						padding: "5vw",
+						marginTop: "30px",
+						marginBottom: "30px",
+						width: "90%",
+					}}
+				>
+					<h2>Our team</h2>
+					<p>
+						The Rare FND organization is a non-profit organization made up of
+						rare individuals who are experts in their field that when combined
+						form a rare force to help support the ecosystem of all involved with
+						Rare FND. With governmental advisors to philanthropists to industry
+						experts across a range of sectors we aim to provide the support
+						needed to build the best possible community for all campaigns on our
+						platform to give exposure to that Rare Find and ensure that they can
+						complete their Rare Fund.
+					</p>
+					<h2>Our community</h2>
+					<p>
+						Through the utilization of our huge community, you get an extension
+						to your own marketing campaigns. With Rare FND partnerships with
+						influencers across all social media platforms your crowdfunding
+						campaign gets exposure through each and every one of our influencer
+						partnerships meaning that you reach millions of users just by using
+						by platform. Not only that but we have our own strong community in
+						our own social media platforms who can also support your
+						crowdfunding campaign through a range of different engagements. Our
+						community members can also help your campaign even more! Through
+						holding our native community token members can vote on their
+						favourite crowdfunding charities or start-ups they would like to
+						receive extra exposure. Your crowdfunding campaign starts with our
+						community as well as your own, so as your campaign grows within our
+						community then so does your own.
+						<br />
+						<br />
+						<h5>Whitepaper</h5>
+						<br />
+						Download our technical documentation relating to the Rare FND native
+						token{" "}
+						<a
+							href="https://rarefnd-bucket.s3.amazonaws.com/RareFNDData/Rare_FND_Whitepaper_v2.1.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIATCFZ6A4SVN5M5FON%2F20220912%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20220912T021435Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=0056ec9b1795616a181963acfaf2c248bf2a8e840a67d06fe89376df020b2339"
+							target="_blank"
+							rel="noreferrer"
+						>
+							here
+						</a>
+						.
+					</p>
+				</div>
+			</div>
 		</div>
 	);
 }

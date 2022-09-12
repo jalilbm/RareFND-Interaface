@@ -31,7 +31,7 @@ export default function Category() {
 					if (data[i].name.toLowerCase() === categoryName.toLowerCase()) {
 						setCategoryData({
 							title: data[i].name,
-							image: "https://rarefndapi.herokuapp.com" + data[i].image,
+							image: data[i].image,
 						});
 						break;
 					}

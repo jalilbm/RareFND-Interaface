@@ -4,15 +4,6 @@ import Slider from "react-slick";
 import "./index.css";
 
 export default function ReactSlick(props) {
-	const Mobilenavdata = [
-		"Comics & Illustration",
-		"Film",
-		"Food & Craft",
-		"Games",
-		"Music",
-		"Publishing",
-	];
-
 	const categories = props.categoriesData;
 
 	var settings = {
@@ -99,10 +90,6 @@ export default function ReactSlick(props) {
 										display: "flex",
 										alignItems: "center",
 										justifyContent: "center",
-										
-										
-										
-	      						
 									}}
 								>
 									<h3
@@ -118,34 +105,6 @@ export default function ReactSlick(props) {
 								</div>
 							</Link>
 						);
-				})}
-				{Mobilenavdata.map((item, index) => {
-					return (
-						<Link to={"/coming-soon"} className="category-link">
-							<div
-								key={index}
-								className="hover-underline-animation"
-								style={{
-									display: "flex",
-									alignItems: "center",
-									justifyContent: "center",
-									gap: "200px",
-								}}
-							>
-								<h3
-									className="mx-auto"
-									style={{
-										color: "dark",
-										fontSize: "1rem",
-										width: "max-content",
-									}}
-								>
-									{" "}
-									{item}
-								</h3>
-							</div>
-						</Link>
-					);
 				})}
 			</Slider>
 		</div>

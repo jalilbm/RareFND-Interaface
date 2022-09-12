@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Programs from "./pages/Programs";
 import About from "./pages/About";
 import Login from "./pages/Login";
+import TermsOfService from "./pages/TermsOfService";
 import Legal from "./pages/LegalDisclaimer";
 import Signup from "./pages/SignupPage";
 import StartProject from "./pages/StartProject";
@@ -18,6 +19,7 @@ import Stats from "./pages/Dashboard/Stats/Stats.js";
 import Profile from "./pages/Dashboard/Profile/Profile.js";
 import DashboardProject from "./pages/Dashboard/Project/Project.js";
 import CommingSoon from "./components/CommingSoon/CommingSoon";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 export default function Main() {
 	const { pathname, hash, key } = useLocation();
@@ -52,6 +54,8 @@ export default function Main() {
 				<Route exact path="/login" element={!user ? <Login /> : <Home />} />
 				<Route exact path="/coming-soon" element={<CommingSoon />} />
 				<Route exact path="/signup" element={<Signup />} />
+				<Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
+				<Route exact path="/terms-of-service" element={<TermsOfService />} />
 				<Route
 					exact
 					path="/dashboard"

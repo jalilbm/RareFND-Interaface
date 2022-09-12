@@ -26,202 +26,7 @@ export default function Footer() {
 							justifyContent="between"
 							className="flex-wrap"
 						>
-							<CDBBox>
-								<Link to="/" className="align-items-center text-dark">
-									<img alt="logo" src={RareFnd} width="90px" />
-								</Link>
-								<p className="my-3 text-secondary" style={{ width: "250px" }}>
-									<span className="fw-bold">ADDRESS: </span>
-									<a
-										target="_blank"
-										href="https://maps.app.goo.gl/zaKNmoRAopMUHWDi9"
-										className="my-3 text-secondary"
-										style={{ width: "250px" }}
-									>
-										DMCC Crypto Centre, 48th Floor, Almas Tower, JLT, UAE PO BOX
-										48800.
-									</a>
-								</p>
-							</CDBBox>
-							<CDBBox className="mt-1">
-								<p className="h5" style={{ fontWeight: "600" }}>
-									RareFnd
-								</p>
-								<CDBBox
-									flex="column"
-									display="flex"
-									style={{ cursor: "pointer", padding: "0" }}
-								>
-									<Link className="text-decoration-none text-secondary" to="/">
-										Home
-									</Link>
-									<Link
-										className="text-decoration-none text-secondary"
-										to="/about"
-									>
-										About Us
-									</Link>
-									<Link
-										className="text-decoration-none text-secondary"
-										to="/about#contacts"
-									>
-										Contacts
-									</Link>
-									<Link
-										className="text-decoration-none text-secondary"
-										to="/legal"
-									>
-										Legal Disclaimer
-									</Link>
-								</CDBBox>
-							</CDBBox>
-							<CDBBox className="mt-1">
-								<p className="h5" style={{ fontWeight: "600" }}>
-									Help & Support
-								</p>
-								<CDBBox
-									display="flex"
-									flex="column"
-									style={{ cursor: "pointer", padding: "0" }}
-								>
-									<Link
-										className="text-decoration-none text-secondary"
-										to="/about#contacts"
-									>
-										Support
-									</Link>
-									<Link
-										className="text-decoration-none text-secondary"
-										to="/signup"
-									>
-										Sign Up
-									</Link>
-									{user ? (
-										<Link
-											className="text-decoration-none text-secondary"
-											to="/logout"
-											onMouseDown={logOut}
-										>
-											Log Out
-										</Link>
-									) : (
-										<Link
-											className="text-decoration-none text-secondary"
-											to="/login"
-										>
-											Login
-										</Link>
-									)}
-								</CDBBox>
-							</CDBBox>
-							<CDBBox className="mt-1">
-								<p className="h5" style={{ fontWeight: "600" }}>
-									Our services
-								</p>
-								<CDBBox
-									display="flex"
-									flex="column"
-									style={{ cursor: "pointer", padding: "0" }}
-								>
-									<Link
-										className="text-decoration-none text-secondary"
-										to="/programs#1"
-									>
-										Startaps Fundraising
-									</Link>
-									<Link
-										className="text-decoration-none text-secondary"
-										to="/programs#0"
-									>
-										Charities Fundraising
-									</Link>
-								</CDBBox>
-							</CDBBox>
-						</CDBBox>
-						<CDBBox
-							display="flex"
-							justifyContent="center"
-							style={{ width: "100%" }}
-							className="mx-auto mt-3"
-						>
-							<a
-								href="https://www.facebook.com/therat.finance/"
-								target="_blank"
-								className="text-decoration-none "
-								rel="noreferrer"
-							>
-								<CDBBtn flat color="warning" className=" border-0 p-2 ">
-									<CDBIcon fab icon="facebook-f" />
-								</CDBBtn>
-							</a>
-							<a
-								href="https://twitter.com/rare_fnd"
-								target="_blank"
-								className="text-decoration-none "
-								rel="noreferrer"
-							>
-								<CDBBtn flat color="warning" className=" border-0 mx-3 p-2">
-									<CDBIcon fab icon="twitter" />
-								</CDBBtn>
-							</a>
-							<a
-								href="https://www.instagram.com/rarefnd/"
-								target="_blank"
-								className="text-decoration-none"
-								rel="noreferrer"
-							>
-								<CDBBtn flat color="warning" className=" border-0 p-2">
-									<CDBIcon fab icon="instagram" />
-								</CDBBtn>
-							</a>
-							<a
-								href="https://t.me/RareFnd"
-								target="_blank"
-								className="text-decoration-none "
-								rel="noreferrer"
-							>
-								<CDBBtn flat color="warning" className=" mx-3 border-0 p-2">
-									<CDBIcon fab icon="telegram" />
-								</CDBBtn>
-							</a>
-							<a
-								href="https://www.linkedin.com/company/the-rare-antiquities-token/"
-								target="_blank"
-								className="text-decoration-none "
-								rel="noreferrer"
-							>
-								<CDBBtn flat color="warning" className="border-0 p-2">
-									<CDBIcon fab icon="linkedin-in" />
-								</CDBBtn>
-							</a>
-						</CDBBox>
-						<small className="text-center mt-2">
-							&copy; RareFnd, 2022. All rights reserved.
-						</small>
-					</CDBBox>
-				</CDBFooter>
-			</div>
-			<div className="FooterMobile">
-				<CDBFooter className="shadow bg-white">
-					<CDBBox
-						display="flex"
-						flex="column"
-						className="mx-auto py-3 p-0"
-						style={{ width: "90%" }}
-					>
-						<CDBBox
-							display="flex"
-							justifyContent="between"
-							className="flex-wrap"
-						>
-							<Row
-								style={{
-									width: "100%",
-									justifyContent: "Space-between",
-									paddinTop: "20px",
-									paddingBottom: "20px",
-								}}
-							>
+							<Row style={{ width: "100%" }}>
 								<Col lg={3} md={12}>
 									<CDBBox>
 										<Link to="/" className="align-items-center text-dark">
@@ -229,11 +34,12 @@ export default function Footer() {
 										</Link>
 										<p
 											className="my-3 text-secondary"
-											style={{ width: "250px" }}
+											style={{ width: "20vw" }}
 										>
 											<span className="fw-bold">ADDRESS: </span>
 											<a
 												target="_blank"
+												rel="noreferrer"
 												href="https://maps.app.goo.gl/zaKNmoRAopMUHWDi9"
 												className="my-3 text-secondary"
 												style={{ width: "250px" }}
@@ -244,10 +50,10 @@ export default function Footer() {
 										</p>
 									</CDBBox>
 								</Col>
-								<Col lg={3} md={12} className="FooterCol">
+								<Col lg={3} md={12}>
 									<CDBBox className="mt-1">
 										<p className="h5" style={{ fontWeight: "600" }}>
-											RareFnd
+											About
 										</p>
 										<CDBBox
 											flex="column"
@@ -256,15 +62,21 @@ export default function Footer() {
 										>
 											<Link
 												className="text-decoration-none text-secondary"
-												to="/"
+												to="/programs#1"
 											>
-												Home
+												About Us
 											</Link>
 											<Link
 												className="text-decoration-none text-secondary"
-												to="/about"
+												to="#"
 											>
-												About Us
+												Updates
+											</Link>
+											<Link
+												className="text-decoration-none text-secondary"
+												to="#"
+											>
+												Events
 											</Link>
 											<Link
 												className="text-decoration-none text-secondary"
@@ -275,10 +87,10 @@ export default function Footer() {
 										</CDBBox>
 									</CDBBox>
 								</Col>
-								<Col lg={3} md={12} className="FooterCol">
+								<Col lg={3} md={12}>
 									<CDBBox className="mt-1">
 										<p className="h5" style={{ fontWeight: "600" }}>
-											Help & Support
+											Help Centre
 										</p>
 										<CDBBox
 											display="flex"
@@ -316,10 +128,10 @@ export default function Footer() {
 										</CDBBox>
 									</CDBBox>
 								</Col>
-								<Col lg={3} md={12} className="FooterCol">
+								<Col lg={3} md={12}>
 									<CDBBox className="mt-1">
 										<p className="h5" style={{ fontWeight: "600" }}>
-											Our services
+											Partnerships
 										</p>
 										<CDBBox
 											display="flex"
@@ -328,15 +140,33 @@ export default function Footer() {
 										>
 											<Link
 												className="text-decoration-none text-secondary"
-												to="/programs#1"
+												to="/"
 											>
-												Startaps Fundraising
+												Crypto Industry Partners
 											</Link>
 											<Link
 												className="text-decoration-none text-secondary"
-												to="/programs#0"
+												to="/"
 											>
-												Charities Fundraising
+												Media Partners
+											</Link>
+											<Link
+												className="text-decoration-none text-secondary"
+												to="/"
+											>
+												Non Profit Industry Partners
+											</Link>
+											<Link
+												className="text-decoration-none text-secondary"
+												to="/"
+											>
+												Incubator Partners
+											</Link>
+											<Link
+												className="text-decoration-none text-secondary"
+												to="/about#contacts"
+											>
+												Partner with Us
 											</Link>
 										</CDBBox>
 									</CDBBox>
@@ -352,8 +182,8 @@ export default function Footer() {
 							<a
 								href="https://www.facebook.com/therat.finance/"
 								target="_blank"
-								className="text-decoration-none"
 								rel="noreferrer"
+								className="text-decoration-none "
 							>
 								<CDBBtn flat color="warning" className=" border-0 p-2 ">
 									<CDBIcon fab icon="facebook-f" />
@@ -362,7 +192,7 @@ export default function Footer() {
 							<a
 								href="https://twitter.com/rare_fnd"
 								target="_blank"
-								className="text-decoration-none"
+								className="text-decoration-none "
 								rel="noreferrer"
 							>
 								<CDBBtn flat color="warning" className=" border-0 mx-3 p-2">
@@ -382,7 +212,7 @@ export default function Footer() {
 							<a
 								href="https://t.me/RareFnd"
 								target="_blank"
-								className="text-decoration-none"
+								className="text-decoration-none "
 								rel="noreferrer"
 							>
 								<CDBBtn flat color="warning" className=" mx-3 border-0 p-2">
@@ -392,7 +222,7 @@ export default function Footer() {
 							<a
 								href="https://www.linkedin.com/company/the-rare-antiquities-token/"
 								target="_blank"
-								className="text-decoration-none"
+								className="text-decoration-none "
 								rel="noreferrer"
 							>
 								<CDBBtn flat color="warning" className="border-0 p-2">
@@ -401,8 +231,39 @@ export default function Footer() {
 							</a>
 						</CDBBox>
 						<small className="text-center mt-2">
-							&copy; RareFnd, 2022. All rights reserved.
+							&copy; RareFnd, 2022. All rights reserved.{" "}
 						</small>
+						<hr />
+						<div
+							style={{
+								display: "flex",
+								alignItems: "center",
+								justifyContent: "center",
+							}}
+						>
+							<p>
+								<Link
+									className="text-decoration-none text-secondary"
+									to="/legal"
+								>
+									Legal Disclaimer
+								</Link>{" "}
+								|{" "}
+								<Link
+									className="text-decoration-none text-secondary"
+									to="/privacy-policy"
+								>
+									Privacy Policy
+								</Link>{" "}
+								|{" "}
+								<Link
+									className="text-decoration-none text-secondary"
+									to="/terms-of-service"
+								>
+									Terms of Service
+								</Link>
+							</p>
+						</div>
 					</CDBBox>
 				</CDBFooter>
 			</div>

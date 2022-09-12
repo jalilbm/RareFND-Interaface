@@ -1,5 +1,5 @@
 import CategoryCarousel from "../../components/CategoryCarousel";
-import AboutUs from "../../assets/carousel/AboutUs.jpg";
+import legalPapersCover from "../../assets/carousel/legal-papers.jpg";
 import { Link } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./index.css";
@@ -7,7 +7,7 @@ import "./index.css";
 export default function Legal() {
 	return (
 		<div className="aboutpage" style={{ marginBottom: "2%" }}>
-			<CategoryCarousel image={AboutUs} title="Legal Disclaimer" />
+			<CategoryCarousel image={legalPapersCover} title="Legal Disclaimer" />
 			<section
 				className="AboutBody bg-white text-black mx-auto"
 				style={{ height: "100%" }}

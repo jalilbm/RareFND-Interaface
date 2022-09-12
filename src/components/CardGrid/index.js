@@ -176,6 +176,8 @@ function HomeCards() {
 						variant="warning"
 						size="lg"
 						className="rise-button"
+						target="_blank"
+						rel="noreferrer"
 						style={{
 							width: "50%",
 							fontSize: "3vw",
@@ -192,6 +194,8 @@ function HomeCards() {
 
 					<Button
 						href="https://t.me/RareFnd"
+						target="_blank"
+						rel="noreferrer"
 						variant="light"
 						size="lg"
 						className="rise-button"

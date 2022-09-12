@@ -22,7 +22,7 @@ function HomeCards() {
 							title="Key Partnerships"
 							text="Key partnerships to be announced with some of the leading names in the industry across the charity space.
             Stay tuned to our socials as some of the biggest partnerships in the crowdfunding space are to be announced, and you have the chance to get involved too!"
-							buttonHref="/about"
+							buttonHref="/about-us"
 							buttonText="Learn more"
 							imageLeft={false}
 							horizontal={true}
@@ -46,7 +46,7 @@ function HomeCards() {
 							title="The Only Crowdfunding Platform That Pays You To Crowdfund"
 							text="Start crowdfunding with Rare Fnd today and we will give you 10% towards your crowdfunding target!
             Not only that but reach your target quicker with 240% APY on all contributions."
-							buttonHref="/programs"
+							buttonHref="/about-us"
 							buttonText="Learn more"
 							imageLeft={true}
 							horizontal={true}

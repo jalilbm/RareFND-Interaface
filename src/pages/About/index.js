@@ -34,41 +34,7 @@ export default function About() {
 			);
 	};
 	return (
-		<div className="aboutpage">
-			<CategoryCarousel image={AboutUs} title="About Us" />
-			<section className="quote  text-black mx-auto bg-warning">
-				<blockquote>
-					It is the long history of humankind (and animal kind, too) those who
-					learned to collaborate and improvise most effectively have prevailed.
-				</blockquote>
-				<figcaption>&mdash; Charles Darwin</figcaption>
-			</section>
-			<section
-				className="AboutBody bg-white text-black mx-auto"
-				style={{ height: "100%" }}
-			>
-				<div style={{ padding: "3vw", textIndent: "20px" }}>
-					<p>
-						RareFnd campaigns make ideas into reality. It’s where creators share
-						new visions for creative work with the communities that will come
-						together to fund them.
-					</p>
-					<p>
-						Some of these creators, like Critical Role, TLC, and The Smithsonian
-						Institution already had huge fanbases. But many projects have been
-						as small-scale as a limited run of silent meditation vinyls or as
-						up-and-coming as early versions of Issa Rae's Insecure and Phoebe
-						Waller-Bridge’s Fleabag.
-					</p>
-					<p>
-						No matter what, creators always control how the work comes
-						together—no 100-page grant applications, no donors demanding you
-						modify your message, no last-minute edits from investors. When
-						backers chip in funding and help spread the word, they too become
-						part of these independent works.
-					</p>
-				</div>
-			</section>
+		<div className="aboutpage mt-5">
 			<section className="contact text-light" id="contacts">
 				<Row>
 					<Col md={6} style={{ color: "#3d3d3d", position: "relative" }}>

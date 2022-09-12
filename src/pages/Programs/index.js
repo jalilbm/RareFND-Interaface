@@ -216,7 +216,7 @@ export default function About() {
 						community then so does your own.
 						<br />
 						<br />
-						<h5>Whitepaper</h5>
+						<h2>Whitepaper</h2>
 						<br />
 						Download our technical documentation relating to the Rare FND native
 						token{" "}

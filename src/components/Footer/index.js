@@ -62,7 +62,7 @@ export default function Footer() {
 										>
 											<Link
 												className="text-decoration-none text-secondary"
-												to="/programs#1"
+												to="/about-us"
 											>
 												About Us
 											</Link>
@@ -80,7 +80,7 @@ export default function Footer() {
 											</Link>
 											<Link
 												className="text-decoration-none text-secondary"
-												to="/about#contacts"
+												to="#"
 											>
 												Contacts
 											</Link>
@@ -99,7 +99,7 @@ export default function Footer() {
 										>
 											<Link
 												className="text-decoration-none text-secondary"
-												to="/about#contacts"
+												to="/contact-us"
 											>
 												Support
 											</Link>
@@ -164,7 +164,7 @@ export default function Footer() {
 											</Link>
 											<Link
 												className="text-decoration-none text-secondary"
-												to="/about#contacts"
+												to="/contact-us"
 											>
 												Partner with Us
 											</Link>

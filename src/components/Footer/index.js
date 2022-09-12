@@ -80,7 +80,7 @@ export default function Footer() {
 											</Link>
 											<Link
 												className="text-decoration-none text-secondary"
-												to="#"
+												to="/contact-us"
 											>
 												Contacts
 											</Link>

@@ -10,9 +10,10 @@ import "./index.css";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import axios from "axios";
 
 export default function About() {
-	const [rareFndData, setRareFndData] = useState();
+	const [rareFndData, setRareFndData] = useState({});
 	const location = useLocation();
 
 	useEffect(() => {
@@ -23,13 +24,13 @@ export default function About() {
 			});
 	}, []);
 
-	useEffect(() => {
-		if (location.hash) setTabIndex(parseInt(location.hash.replace("#", "")));
-	}, [location.hash]);
+	// useEffect(() => {
+	// 	if (location.hash) setTabIndex(parseInt(location.hash.replace("#", "")));
+	// }, [location.hash]);
 
-	const handleChange = (event, newTabInex) => {
-		setTabIndex(newTabInex);
-	};
+	// const handleChange = (event, newTabInex) => {
+	// 	setTabIndex(newTabInex);
+	// };
 
 	return (
 		<div>
@@ -228,11 +229,7 @@ export default function About() {
 						<br />
 						Download our technical documentation relating to the Rare FND native
 						token{" "}
-						<a
-							href={rareFndData["white_paper"]}
-							target="_blank"
-							rel="noreferrer"
-						>
+						<a href={rareFndData.white_paper} target="_blank" rel="noreferrer">
 							here
 						</a>
 						.

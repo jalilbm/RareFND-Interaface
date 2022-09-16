@@ -167,7 +167,8 @@ export default function () {
 
 		if (walletAddress)
 			setFormValues({ ...formValues, walletAddress: walletAddress });
-		else errors.walletAddress = "Please connect using your wallet";
+		// else errors.walletAddress = "Please connect using your wallet";
+		else setFormValues({ ...formValues, walletAddress: None });
 
 		return errors;
 	};
@@ -292,7 +293,9 @@ export default function () {
 									"....." +
 									walletAddress.slice(-10)}
 							</p>
-						) : null}
+						) : (
+							<p>No wallet connected</p>
+						)}
 						<p className="text-danger">{formErrors.walletAddress}</p>
 					</div>
 

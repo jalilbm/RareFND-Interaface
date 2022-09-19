@@ -34,7 +34,7 @@ export default function Footer() {
 										</Link>
 										<p
 											className="my-3 text-secondary"
-											style={{ width: "20vw" }}
+											// style={{ width: "20vw" }}
 										>
 											<span className="fw-bold">ADDRESS: </span>
 											<a

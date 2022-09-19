@@ -30,7 +30,6 @@ export default function CategoryGridCard(props) {
 					style={{
 						padding: "3vw 8vw 3vw 8vw",
 						width: "100%",
-
 						height: "700px",
 					}}
 				>

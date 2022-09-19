@@ -168,7 +168,7 @@ export default function () {
 		if (walletAddress)
 			setFormValues({ ...formValues, walletAddress: walletAddress });
 		// else errors.walletAddress = "Please connect using your wallet";
-		else setFormValues({ ...formValues, walletAddress: None });
+		else setFormValues({ ...formValues, walletAddress: null });
 
 		return errors;
 	};

@@ -54,13 +54,18 @@ export default function Funding(props) {
 						</p>
 						<input
 							className="atomic-text-input w-100"
-							id="funds-amount"
+							id="projectFundsAmount"
 							maxlength="60"
-							name="title"
+							name="projectFundsAmount"
 							placeholder="$ 0.0"
 							type="text"
-							onChange={handleChange}
-							pattern="(^[0-9]{0,2}$)|(^[0-9]{0,2}\.[0-9]{0,5}$)"
+							onChange={(event) => props.updateProjectData(event, "funding")}
+							pattern="(^[0-9]{0,1000}$)|(^[0-9]{0,10000}\.[0-9]{0,18}$)"
+							value={
+								props.projectData &&
+								props.projectData["funding"] &&
+								props.projectData["funding"].projectFundsAmount
+							}
 						/>
 					</div>
 				</Col>
@@ -110,6 +115,15 @@ export default function Funding(props) {
 							<UploadButton
 								title="Select File"
 								accepted_formats=".xlsx, .csv"
+								updateProjectData={props.updateProjectData}
+								name="projectBudgetFile"
+								value={
+									props.projectData &&
+									props.projectData["funding"] &&
+									props.projectData["funding"].projectBudgetFile &&
+									props.projectData["funding"].projectBudgetFile.name
+								}
+								source="funding"
 							/>
 						</div>
 					</div>

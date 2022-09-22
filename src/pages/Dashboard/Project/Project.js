@@ -23,6 +23,7 @@ export default function DashboardProjects() {
 			...projectData,
 			[source]: { ...projectData[source], [name]: value },
 		});
+		console.log(projectData);
 	};
 
 	const changeTab = (value) => {
@@ -59,17 +60,30 @@ export default function DashboardProjects() {
 				break;
 			case "create-project-tab-2":
 				setRenderTab(
-					<Funding nextTabFunction={() => changeTab("create-project-tab-3")} />
+					<Funding
+						nextTabFunction={() => changeTab("create-project-tab-3")}
+						projectData={projectData}
+						updateProjectData={updateProjectData}
+					/>
 				);
 				break;
 			case "create-project-tab-3":
 				setRenderTab(
-					<Rewards nextTabFunction={() => changeTab("create-project-tab-4")} />
+					<Rewards
+						nextTabFunction={() => changeTab("create-project-tab-4")}
+						projectData={projectData}
+						updateProjectData={updateProjectData}
+						setProjectData={setProjectData}
+					/>
 				);
 				break;
 			case "create-project-tab-4":
 				setRenderTab(
-					<Story nextTabFunction={() => changeTab("create-project-tab-5")} />
+					<Story
+						nextTabFunction={() => changeTab("create-project-tab-5")}
+						projectData={projectData}
+						updateProjectData={updateProjectData}
+					/>
 				);
 				break;
 			case "create-project-tab-5":
@@ -78,10 +92,21 @@ export default function DashboardProjects() {
 				);
 				break;
 			case "create-project-tab-6":
-				setRenderTab(<Payment />);
+				setRenderTab(
+					<Payment
+						projectData={projectData}
+						updateProjectData={updateProjectData}
+						setProjectData={setProjectData}
+					/>
+				);
 				break;
 			default:
-				setRenderTab(<Basics />);
+				setRenderTab(
+					<Basics
+						projectData={projectData}
+						updateProjectData={updateProjectData}
+					/>
+				);
 				break;
 		}
 	}, [selectedTab, projectData]);

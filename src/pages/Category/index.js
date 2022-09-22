@@ -24,7 +24,7 @@ export default function Category() {
 	}, [location.pathname]);
 	useEffect(() => {
 		axios
-			.get("https://rarefndapi.herokuapp.com/api/category/")
+			.get(process.env.REACT_APP_BASE_URL + "/api/category/")
 			.then((response) => {
 				const data = response.data.categories;
 				for (let i = 0; i < data.length; i++) {
@@ -40,7 +40,8 @@ export default function Category() {
 			.then(() => {
 				axios
 					.get(
-						`https://rarefndapi.herokuapp.com/api/project/category/${categoryName}/`
+						process.env.REACT_APP_BASE_URL +
+							`/api/project/category/${categoryName}/`
 					)
 					.then((response) => {
 						setCategoryProjects(response.data.projects);

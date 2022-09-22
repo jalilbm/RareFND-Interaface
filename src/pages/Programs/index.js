@@ -18,7 +18,7 @@ export default function About() {
 
 	useEffect(() => {
 		axios
-			.get("https://rarefndapi.herokuapp.com/api/rarefnd/data/")
+			.get(process.env.REACT_APP_BASE_URL + "/api/rarefnd/data/")
 			.then((response) => {
 				setRareFndData(response.data);
 			});

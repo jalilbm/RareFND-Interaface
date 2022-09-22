@@ -26,12 +26,12 @@ export default function Basics(props) {
 
 	useEffect(() => {
 		axios
-			.get("https://rarefndapi.herokuapp.com/api/category/")
+			.get(process.env.REACT_APP_BASE_URL + "/api/category/")
 			.then((response) => {
 				setCategories(response.data.categories);
 			});
 		// axios
-		// 	.get("https://rarefndapi.herokuapp.com/api/country/")
+		// 	.get(process.env.REACT_APP_BASE_URL + "/api/country/")
 		// 	.then((response) => {
 		// 		setCountries(response.data.categories);
 		// 	});
@@ -48,7 +48,8 @@ export default function Basics(props) {
 				"Choose a subcategory";
 			axios
 				.get(
-					`https://rarefndapi.herokuapp.com/api/category/${props.projectData["basics"].projectCategory}/subcategories/`
+					process.env.REACT_APP_BASE_URL +
+						`/api/category/${props.projectData["basics"].projectCategory}/subcategories/`
 				)
 				.then((response) => {
 					setSubCategories(response.data.subcategories);
@@ -199,6 +200,11 @@ export default function Basics(props) {
 									: []
 							}
 							function_={(event) => props.updateProjectData(event, "basics")}
+							value={
+								props.projectData &&
+								props.projectData["basics"] &&
+								props.projectData["basics"].projectCategory
+							}
 						/>
 					</div>
 					<br></br>
@@ -221,6 +227,32 @@ export default function Basics(props) {
 									: []
 							}
 							function_={(event) => props.updateProjectData(event, "basics")}
+							value={
+								props.projectData &&
+								props.projectData["basics"] &&
+								props.projectData["basics"].projectSubcategory
+							}
+						/>
+					</div>
+					<br></br>
+					<p
+						style={{
+							marginBottom: "3px",
+						}}
+					>
+						Type
+					</p>
+					<div className="input-with-title">
+						<DropDown
+							title="Choose Project Type"
+							id="projectType"
+							options={["Startup Fundraising", "Charity"]}
+							function_={(event) => props.updateProjectData(event, "basics")}
+							value={
+								props.projectData &&
+								props.projectData["basics"] &&
+								props.projectData["basics"].projectType
+							}
 						/>
 					</div>
 				</Col>
@@ -285,6 +317,11 @@ export default function Basics(props) {
 								if (country.name != "All") return country.name;
 							})}
 							function_={(event) => props.updateProjectData(event, "basics")}
+							value={
+								props.projectData &&
+								props.projectData["basics"] &&
+								props.projectData["basics"].projectCountry
+							}
 						/>
 					</div>
 				</Col>
@@ -321,10 +358,21 @@ export default function Basics(props) {
 								alignItems: "center",
 							}}
 						>
-							<p style={{ margin: "0px" }}>Upload Image:</p>
+							<p style={{ margin: "0px" }}>
+								Upload Image (.gif,.jpg,.jpeg,.png):
+							</p>
 							<UploadButton
 								title="Select image"
 								accepted_formats=".gif,.jpg,.jpeg,.png"
+								updateProjectData={props.updateProjectData}
+								name="projectImageFile"
+								value={
+									props.projectData &&
+									props.projectData["basics"] &&
+									props.projectData["basics"].projectImageFile &&
+									props.projectData["basics"].projectImageFile.name
+								}
+								source="basics"
 							/>
 						</div>
 					</div>
@@ -362,7 +410,16 @@ export default function Basics(props) {
 						Launch date:
 					</p>
 					<div className="input-with-title">
-						<Calendar />
+						<Calendar
+							updateProjectData={props.updateProjectData}
+							name="projectLaunchDate"
+							value={
+								props.projectData &&
+								props.projectData["basics"] &&
+								props.projectData["basics"].projectLaunchDate
+							}
+							source="basics"
+						/>
 					</div>
 				</Col>
 			</Row>
@@ -395,7 +452,16 @@ export default function Basics(props) {
 						Deadline date:
 					</p>
 					<div className="input-with-title">
-						<Calendar />
+						<Calendar
+							updateProjectData={props.updateProjectData}
+							name="projectDeadlineDate"
+							value={
+								props.projectData &&
+								props.projectData["basics"] &&
+								props.projectData["basics"].projectDeadlineDate
+							}
+							source="basics"
+						/>
 					</div>
 				</Col>
 			</Row>

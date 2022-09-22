@@ -13,7 +13,7 @@ export default function Project(props) {
 
 	useEffect(() => {
 		axios
-			.get(`https://rarefndapi.herokuapp.com/api/incentives/${projectId}/`)
+			.get(process.env.REACT_APP_BASE_URL + `/api/incentives/${projectId}/`)
 			.then((response) => {
 				if (response.status === 200)
 					setIncentivesData(response.data.incentives);
@@ -22,7 +22,7 @@ export default function Project(props) {
 
 	useEffect(() => {
 		axios
-			.get(`https://rarefndapi.herokuapp.com/api/project/${projectId}/`)
+			.get(process.env.REACT_APP_BASE_URL + `/api/project/${projectId}/`)
 			.then((response) => {
 				setProjectData(response.data);
 			});

@@ -1,10 +1,34 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import useFileUpload from "react-use-file-upload";
 
 const UploadButton = (props) => {
 	const { handleDragDropEvent, setFiles } = useFileUpload();
+	const [file, setFile] = useState();
+
+	useEffect(() => {
+		if (props.updateProjectData)
+			file &&
+				props.updateProjectData(
+					{ target: { name: props.name, value: file } },
+					props.source
+				);
+		else if (file && props.function_) {
+			props.function_(
+				{ target: { name: props.name, value: file } },
+				props.rowId
+			);
+		}
+	}, [file]);
 
 	const inputRef = useRef();
+
+	let fileName = props.value
+		? props.value
+		: props.valueFunction
+		? props.valueFunction(props.name, props.rowId)
+		: "";
+
+	if (fileName.length > 10) fileName = fileName.slice(0, 10) + "...";
 
 	return (
 		<div css={{}}>
@@ -19,28 +43,38 @@ const UploadButton = (props) => {
 						setFiles(e, "a");
 					}}
 				>
-					<button
-						onClick={() => inputRef.current.click()}
+					<div
 						style={{
-							backgroundColor: "transparent",
-							border: "1.5px solid #fad02c",
+							display: "flex",
+							alignItems: "center",
+							justifyContent: "center",
 						}}
 					>
-						{props.title}
-					</button>
+						<button
+							onClick={() => inputRef.current.click()}
+							style={{
+								backgroundColor: "transparent",
+								border: "1.5px solid #fad02c",
+							}}
+						>
+							{props.title}
+						</button>
 
-					{/* Hide the crappy looking default HTML input */}
-					<input
-						ref={inputRef}
-						type="file"
-						// multiple
-						style={{ display: "none" }}
-						accept={props.accepted_formats}
-						onChange={(e) => {
-							setFiles(e, "a");
-							inputRef.current.value = null;
-						}}
-					/>
+						{/* Hide the crappy looking default HTML input */}
+						<input
+							ref={inputRef}
+							type="file"
+							style={{ display: "none" }}
+							accept={props.accepted_formats}
+							onChange={(e) => {
+								e.preventDefault();
+								setFile(e.target.files[0]);
+								setFiles(e, "a");
+								inputRef.current.value = null;
+							}}
+						/>
+						<p style={{ margin: "0px", padding: "0 0 0 10px" }}>{fileName}</p>
+					</div>
 				</div>
 			</div>
 		</div>

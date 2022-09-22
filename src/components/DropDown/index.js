@@ -14,7 +14,8 @@ function DropDown(props) {
 	};
 
 	useEffect(() => {
-		document.getElementById(props.id).textContent = selectedItem || props.title;
+		document.getElementById(props.id).textContent =
+			selectedItem || props.value || props.title;
 	}, [selectedItem]);
 
 	return (

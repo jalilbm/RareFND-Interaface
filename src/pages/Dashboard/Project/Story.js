@@ -5,6 +5,14 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import Button from "react-bootstrap/Button";
 
 export default function Story(props) {
+	const handleChange = (event, editor) => {
+		const data = editor.getData();
+		props.updateProjectData(
+			{ target: { name: "projectStory", value: data } },
+			"story"
+		);
+	};
+
 	return (
 		<div className="DashboardCreateProjectStory">
 			<DashboardCreateProjectItemHead
@@ -23,15 +31,16 @@ export default function Story(props) {
 				<div>
 					<CKEditor
 						editor={ClassicEditor}
-						data=""
+						data={
+							props.projectData &&
+							props.projectData["story"] &&
+							props.projectData["story"].projectStory
+						}
 						onReady={(editor) => {
 							// You can store the "editor" and use when it is needed.
 							console.log("Editor is ready to use!", editor);
 						}}
-						onChange={(event, editor) => {
-							const data = editor.getData();
-							console.log({ event, editor, data });
-						}}
+						onChange={(event, editor) => handleChange(event, editor)}
 						onBlur={(event, editor) => {
 							console.log("Blur.", editor);
 						}}

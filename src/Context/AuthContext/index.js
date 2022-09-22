@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
 
 	const loginUser = async (email, password) => {
 		axios
-			.post("https://rarefndapi.herokuapp.com/api/auth/token/", {
+			.post(process.env.REACT_APP_BASE_URL + "/api/auth/token/", {
 				email: email,
 				password: password,
 			})
@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
 
 	const updateToken = async () => {
 		axios
-			.post("https://rarefndapi.herokuapp.com/api/auth/token/refresh/", {
+			.post(process.env.REACT_APP_BASE_URL + "/api/auth/token/refresh/", {
 				refresh: authTokens.refresh,
 			})
 			.then((response) => {

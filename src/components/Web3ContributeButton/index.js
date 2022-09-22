@@ -35,7 +35,7 @@ export default function ContributeBtn(props) {
 
 	useEffect(() => {
 		axios
-			.get(`https://rarefndapi.herokuapp.com/api/project/${id}/`)
+			.get(process.env.REACT_APP_BASE_URL + `/api/project/${id}/`)
 			.then((response) => {
 				setProjectData(response.data);
 				setProjectLive(response.data.live);
@@ -80,7 +80,7 @@ export default function ContributeBtn(props) {
 					await tx.wait();
 					setPending(false);
 					axios.post(
-						"https://rarefndapi.herokuapp.com/api/pending_contribution/",
+						process.env.REACT_APP_BASE_URL + "/api/pending_contribution/",
 						{
 							hash: tx.hash,
 							project: id,

@@ -13,7 +13,7 @@ export default function ProjectCurrentContributions() {
 	useEffect(() => {
 		let interval = setInterval(() => {
 			axios
-				.get(`https://rarefndapi.herokuapp.com/api/project/${id}/`)
+				.get(process.env.REACT_APP_BASE_URL + `/api/project/${id}/`)
 				.then((response) => response.data)
 				.then((data) => {
 					setprojectData(data);

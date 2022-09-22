@@ -18,7 +18,7 @@ function NavBar() {
 	const { user, logOut } = useContext(AuthContext);
 	useEffect(() => {
 		axios
-			.get("https://rarefndapi.herokuapp.com/api/category/")
+			.get(process.env.REACT_APP_BASE_URL + "/api/category/")
 			.then((response) => setCategoriesData(response.data.categories));
 	}, []);
 

@@ -51,7 +51,7 @@ export default function () {
 	useEffect(() => {
 		if (Object.keys(formErrors).length === 0 && isSubmit) {
 			axios
-				.post("https://rarefndapi.herokuapp.com/api/user/signup/", {
+				.post(process.env.REACT_APP_BASE_URL + "/api/user/signup/", {
 					username: formValues.username,
 					email: formValues.email,
 					password: formValues.password,
@@ -72,9 +72,8 @@ export default function () {
 		if (formValues.username) {
 			axios
 				.get(
-					`https://rarefndapi.herokuapp.com/api/unique/username/${
-						document.getElementById("username").value
-					}/`
+					process.env.REACT_APP_BASE_URL +
+						`/api/unique/username/${document.getElementById("username").value}/`
 				)
 				.then(function (response) {
 					if (!response.data.valid) {
@@ -110,9 +109,8 @@ export default function () {
 		if (formValues.email) {
 			axios
 				.get(
-					`https://rarefndapi.herokuapp.com/api/unique/email/${
-						document.getElementById("email").value
-					}/`
+					process.env.REACT_APP_BASE_URL +
+						`/api/unique/email/${document.getElementById("email").value}/`
 				)
 				.then(function (response) {
 					if (!response.data.valid) {
@@ -284,9 +282,7 @@ export default function () {
 					</div>
 
 					<div className="form-group mt-3">
-						<label>
-							Wallet Address <span className="text-danger">*</span>
-						</label>
+						<label>Wallet Address</label>
 						{walletAddress ? (
 							<p className="text-success mt-2">
 								{walletAddress.slice(0, 10) +

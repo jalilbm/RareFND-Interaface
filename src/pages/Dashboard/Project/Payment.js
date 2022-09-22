@@ -3,7 +3,7 @@ import DashboardCreateProjectItemHead from "../../../components/DashboardCreateP
 import Button from "react-bootstrap/Button";
 import UploadButton from "../../../components/UploadButton";
 import DropDown from "../../../components/DropDown";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Calendar from "../../../components/Calendar";
 import DialogPopup from "../../../components/DialogPopup";
@@ -21,14 +21,69 @@ export default function Story(props) {
 		{ name: "United States of America" },
 	]);
 	const [UBOsArray, setUBOsArray] = useState([]);
+	const projectDataRef = useRef(props.projectData);
+	projectDataRef.current = props.projectData;
 
 	// useEffect(() => {
 	// 	axios
-	// 		.get("https://rarefndapi.herokuapp.com/api/country/")
+	// 		.get(process.env.REACT_APP_BASE_URL + "/api/country/")
 	// 		.then((response) => {
 	// 			setCountries(response.data.categories);
 	// 		});
 	// }, []);
+
+	const handleInputChanges = (e, rowId) => {
+		const { name, value } = e.target;
+		let projectData_ = { ...projectDataRef.current };
+		projectData_["payment"]["UBOs"][rowId] = {
+			...projectData_["payment"]["UBOs"][rowId],
+			[name]: value,
+		};
+
+		console.log(projectData_);
+		props.setProjectData(projectData_);
+	};
+
+	const handleFinish = () => {
+		const tokens = JSON.parse(localStorage.getItem("authTokens"));
+		const access = tokens.access;
+		axios.post(
+			process.env.REACT_APP_BASE_URL + "/api/project/add/",
+			projectDataRef.current,
+			{
+				headers: {
+					Authorization: `Bearer ${access}`,
+				},
+			}
+		);
+	};
+
+	const getUploadedFileName = (file, rowId) => {
+		if (file == "idFile") {
+			if (
+				projectDataRef.current &&
+				projectDataRef.current["payment"] &&
+				projectDataRef.current["payment"][`UBOs`] &&
+				projectDataRef.current["payment"][`UBOs`][`${rowId}`] &&
+				projectDataRef.current["payment"][`UBOs`][`${rowId}`]["idFile"]
+			)
+				return projectDataRef.current["payment"][`UBOs`][`${rowId}`]["idFile"]
+					.name;
+			else return "No file";
+		} else if (file == "proofOfAddress") {
+			if (
+				projectDataRef.current &&
+				projectDataRef.current["payment"] &&
+				projectDataRef.current["payment"][`UBOs`] &&
+				projectDataRef.current["payment"][`UBOs`][`${rowId}`] &&
+				projectDataRef.current["payment"][`UBOs`][`${rowId}`]["proofOfAddress"]
+			)
+				return projectDataRef.current["payment"][`UBOs`][`${rowId}`][
+					"proofOfAddress"
+				].name;
+			else return "No file";
+		}
+	};
 
 	const addUBORow = () => {
 		const rowId = UBOsArray.length + 1;
@@ -48,10 +103,19 @@ export default function Story(props) {
 							className="atomic-text-input w-100"
 							id={`ubo-${rowId}-full-name`}
 							maxlength="100"
-							name={`ubo-${rowId}-full-name`}
+							name={`fullName`}
 							placeholder={`UBO ${rowId} - full name`}
 							type="text"
-							// onChange={handleChange}
+							onChange={(e) => handleInputChanges(e, `${rowId}`)}
+							value={
+								projectDataRef.current &&
+								projectDataRef.current["payment"] &&
+								projectDataRef.current["payment"]["UBOs"] &&
+								projectDataRef.current["payment"]["UBOs"][`${rowId}`] &&
+								projectDataRef.current["payment"]["UBOs"][`${rowId}`][
+									"fullName"
+								]
+							}
 						/>
 					</div>
 				</Row>
@@ -69,10 +133,19 @@ export default function Story(props) {
 								className="atomic-text-input w-100"
 								id={`ubo-${rowId}-position`}
 								maxlength="100"
-								name={`ubo-${rowId}-position`}
-								placeholder={`UBO ${rowId} - full name`}
+								name={`position`}
+								placeholder={`UBO ${rowId} - position`}
 								type="text"
-								// onChange={handleChange}
+								onChange={(e) => handleInputChanges(e, `${rowId}`)}
+								value={
+									projectDataRef.current &&
+									projectDataRef.current["payment"] &&
+									projectDataRef.current["payment"]["UBOs"] &&
+									projectDataRef.current["payment"]["UBOs"][`${rowId}`] &&
+									projectDataRef.current["payment"]["UBOs"][`${rowId}`][
+										"position"
+									]
+								}
 							/>
 						</div>
 					</Col>
@@ -83,10 +156,25 @@ export default function Story(props) {
 									marginBottom: "3px",
 								}}
 							>
-								{`UBO ${rowId} - full name`}
+								{`UBO ${rowId} - Date of Birth`}
 							</p>
 							<div className="input-with-title">
-								<Calendar />
+								<Calendar
+									setProjectData={props.setProjectData}
+									projectDataRef={projectDataRef}
+									rowId={rowId}
+									name="dateOfBirth"
+									source="payment"
+									value={
+										projectDataRef.current &&
+										projectDataRef.current["payment"] &&
+										projectDataRef.current["payment"][`UBOs`] &&
+										projectDataRef.current["payment"][`UBOs`][`${rowId}`] &&
+										projectDataRef.current["payment"][`UBOs`][`${rowId}`][
+											"dateOfBirth"
+										]
+									}
+								/>
 							</div>
 						</div>
 					</Col>
@@ -109,6 +197,10 @@ export default function Story(props) {
 								<UploadButton
 									title="Select File"
 									accepted_formats=".jpg, .jpeg, .png, .pdf"
+									name="idFile"
+									function_={handleInputChanges}
+									rowId={rowId}
+									valueFunction={getUploadedFileName}
 								/>
 							</div>
 						</div>
@@ -130,6 +222,10 @@ export default function Story(props) {
 								<UploadButton
 									title="Select File"
 									accepted_formats=".jpg, .jpeg, .png, .pdf"
+									name="proofOfAddress"
+									function_={handleInputChanges}
+									rowId={rowId}
+									valueFunction={getUploadedFileName}
 								/>
 							</div>
 						</div>
@@ -139,11 +235,45 @@ export default function Story(props) {
 			</div>
 		);
 		setUBOsArray([...UBOsArray, newRow]);
+
+		let projectData_ = { ...projectDataRef.current };
+		if (
+			projectData_ &&
+			projectData_["payment"] &&
+			projectData_["payment"][`UBOs`] &&
+			projectData_["payment"][`UBOs`][`${rowId}`]
+		)
+			return null;
+		projectData_["payment"]["UBOs"] = {
+			...projectData_["payment"]["UBOs"],
+			[`${rowId}`]: {
+				fullName: null,
+				position: null,
+				dateOfBirth: null,
+				idFile: null,
+				proofOfAddress: null,
+			},
+		};
+
+		props.setProjectData(projectData_);
+
+		console.log(projectData_);
 	};
+
+	if (
+		projectDataRef.current &&
+		projectDataRef.current["payment"] &&
+		projectDataRef.current["payment"][`UBOs`] &&
+		Object.keys(projectDataRef.current["payment"][`UBOs`]).length >
+			UBOsArray.length
+	) {
+		addUBORow();
+	}
+
 	return (
 		<div className="DashboardCreateProjectFunding">
 			<DashboardCreateProjectItemHead
-				title="Verify your details and link a bank account"
+				title="Verify your details"
 				head="Confirm who’s raising funds and receiving them if this project reaches its funding goal. 
         Double-check your information—you agree the details you provide are true and acknowledge they can’t be changed once submitted."
 			/>
@@ -162,12 +292,19 @@ export default function Story(props) {
 								</p>
 								<input
 									className="atomic-text-input w-100"
-									id="company-name"
+									id="companyName"
 									maxlength="60"
-									name="company-name"
+									name="companyName"
 									placeholder="Enter your company name"
 									type="text"
-									// onChange={handleChange}
+									value={
+										props.projectData &&
+										props.projectData["payment"] &&
+										props.projectData["payment"].companyName
+									}
+									onChange={(event) =>
+										props.updateProjectData(event, "payment")
+									}
 								/>
 							</div>
 						</Col>
@@ -182,12 +319,19 @@ export default function Story(props) {
 								</p>
 								<input
 									className="atomic-text-input w-100"
-									id="nature-of-business"
+									id="natureOfBusiness"
 									maxlength="60"
-									name="nature-of-business"
+									name="natureOfBusiness"
 									placeholder="Enter your nature of business"
 									type="text"
-									// onChange={handleChange}
+									value={
+										props.projectData &&
+										props.projectData["payment"] &&
+										props.projectData["payment"].natureOfBusiness
+									}
+									onChange={(event) =>
+										props.updateProjectData(event, "payment")
+									}
 								/>
 							</div>
 						</Col>
@@ -204,12 +348,19 @@ export default function Story(props) {
 								</p>
 								<input
 									className="atomic-text-input w-100"
-									id="company-address"
+									id="companyAddress"
 									maxlength="200"
-									name="company-address"
+									name="companyAddress"
 									placeholder="Enter your company address"
 									type="text"
-									// onChange={handleChange}
+									value={
+										props.projectData &&
+										props.projectData["payment"] &&
+										props.projectData["payment"].companyAddress
+									}
+									onChange={(event) =>
+										props.updateProjectData(event, "payment")
+									}
 								/>
 							</div>
 						</Col>
@@ -224,12 +375,19 @@ export default function Story(props) {
 								</p>
 								<input
 									className="atomic-text-input w-100"
-									id="company-city"
+									id="companyCity"
 									maxlength="60"
-									name="company-city"
+									name="companyCity"
 									placeholder="Enter your company city"
 									type="text"
-									// onChange={handleChange}
+									value={
+										props.projectData &&
+										props.projectData["payment"] &&
+										props.projectData["payment"].companyCity
+									}
+									onChange={(event) =>
+										props.updateProjectData(event, "payment")
+									}
 								/>
 							</div>
 						</Col>
@@ -246,12 +404,19 @@ export default function Story(props) {
 								</p>
 								<input
 									className="atomic-text-input w-100"
-									id="company-zip-code"
+									id="companyZipCode"
 									maxlength="50"
-									name="company-zip-code"
+									name="companyZipCode"
 									placeholder="Enter your company address zip code"
 									type="text"
-									// onChange={handleChange}
+									value={
+										props.projectData &&
+										props.projectData["payment"] &&
+										props.projectData["payment"].companyZipCode
+									}
+									onChange={(event) =>
+										props.updateProjectData(event, "payment")
+									}
 								/>
 							</div>
 						</Col>
@@ -271,6 +436,14 @@ export default function Story(props) {
 										options={countries.map((subcategory) => {
 											if (subcategory.name != "All") return subcategory.name;
 										})}
+										function_={(event) =>
+											props.updateProjectData(event, "payment")
+										}
+										value={
+											props.projectData &&
+											props.projectData["payment"] &&
+											props.projectData["payment"].projectCountry
+										}
 									/>
 								</div>
 							</div>
@@ -287,7 +460,16 @@ export default function Story(props) {
 									Incorporation date:
 								</p>
 								<div className="input-with-title">
-									<Calendar />
+									<Calendar
+										updateProjectData={props.updateProjectData}
+										name="projectIncorporationDate"
+										value={
+											props.projectData &&
+											props.projectData["payment"] &&
+											props.projectData["payment"].projectIncorporationDate
+										}
+										source="payment"
+									/>
 								</div>
 							</div>
 						</Col>
@@ -302,12 +484,19 @@ export default function Story(props) {
 								</p>
 								<input
 									className="atomic-text-input w-100"
-									id="company-reg-num"
+									id="companyRegistrationNumber"
 									maxlength="80"
-									name="company-reg-num"
+									name="companyRegistrationNumber"
 									placeholder="Company Reg No"
 									type="text"
-									// onChange={handleChange}
+									value={
+										props.projectData &&
+										props.projectData["payment"] &&
+										props.projectData["payment"].companyRegistrationNumber
+									}
+									onChange={(event) =>
+										props.updateProjectData(event, "payment")
+									}
 								/>
 							</div>
 						</Col>
@@ -322,12 +511,19 @@ export default function Story(props) {
 								</p>
 								<input
 									className="atomic-text-input w-100"
-									id="company-est-annual-turnover"
+									id="companyEstimatedAnnualTurnover"
 									maxlength="80"
-									name="company-est-annual-turnover"
+									name="companyEstimatedAnnualTurnover"
 									placeholder="Estimated annual turnover"
 									type="text"
-									// onChange={handleChange}
+									value={
+										props.projectData &&
+										props.projectData["payment"] &&
+										props.projectData["payment"].companyEstimatedAnnualTurnover
+									}
+									onChange={(event) =>
+										props.updateProjectData(event, "payment")
+									}
 								/>
 							</div>
 						</Col>
@@ -345,10 +541,18 @@ export default function Story(props) {
 								<div className="input-with-title">
 									<DropDown
 										title="Choose a country"
-										id="countries-dropdown"
+										id="projectTaxCountry"
 										options={countries.map((subcategory) => {
 											if (subcategory.name != "All") return subcategory.name;
 										})}
+										function_={(event) =>
+											props.updateProjectData(event, "payment")
+										}
+										value={
+											props.projectData &&
+											props.projectData["payment"] &&
+											props.projectData["payment"].projectTaxCountry
+										}
 									/>
 								</div>
 							</div>
@@ -364,12 +568,19 @@ export default function Story(props) {
 								</p>
 								<input
 									className="atomic-text-input w-100"
-									id="tax-id-number"
+									id="taxIdNumber"
 									maxlength="80"
-									name="tax-id-number"
+									name="taxIdNumber"
 									placeholder="Company tax identification number"
 									type="text"
-									// onChange={handleChange}
+									value={
+										props.projectData &&
+										props.projectData["payment"] &&
+										props.projectData["payment"].taxIdNumber
+									}
+									onChange={(event) =>
+										props.updateProjectData(event, "payment")
+									}
 								/>
 							</div>
 						</Col>
@@ -386,12 +597,19 @@ export default function Story(props) {
 								</p>
 								<input
 									className="atomic-text-input w-100"
-									id="white-paper-url"
+									id="whitePaperUrl"
 									maxlength="200"
-									name="white-paper-url"
+									name="whitePaperUrl"
 									placeholder="Company White paper URL"
 									type="text"
-									// onChange={handleChange}
+									value={
+										props.projectData &&
+										props.projectData["payment"] &&
+										props.projectData["payment"].whitePaperUrl
+									}
+									onChange={(event) =>
+										props.updateProjectData(event, "payment")
+									}
 								/>
 							</div>
 						</Col>
@@ -406,12 +624,19 @@ export default function Story(props) {
 								</p>
 								<input
 									className="atomic-text-input w-100"
-									id="tokenomics-url"
+									id="tokenomicsUrl"
 									maxlength="80"
-									name="tokenomics-url"
+									name="tokenomicsUrl"
 									placeholder="Company Tokenomics URL"
 									type="text"
-									// onChange={handleChange}
+									value={
+										props.projectData &&
+										props.projectData["payment"] &&
+										props.projectData["payment"].tokenomicsUrl
+									}
+									onChange={(event) =>
+										props.updateProjectData(event, "payment")
+									}
 								/>
 							</div>
 						</Col>
@@ -434,6 +659,15 @@ export default function Story(props) {
 									<UploadButton
 										title="Select File"
 										accepted_formats=".jpg, .jpeg, .png, .pdf"
+										updateProjectData={props.updateProjectData}
+										name="certificateOfIncumbency"
+										value={
+											props.projectData &&
+											props.projectData["payment"] &&
+											props.projectData["payment"].certificateOfIncumbency &&
+											props.projectData["payment"].certificateOfIncumbency.name
+										}
+										source="payment"
 									/>
 								</div>
 							</div>
@@ -454,6 +688,15 @@ export default function Story(props) {
 									<UploadButton
 										title="Select File"
 										accepted_formats=".jpg, .jpeg, .png, .pdf"
+										updateProjectData={props.updateProjectData}
+										name="companyStructureChart"
+										value={
+											props.projectData &&
+											props.projectData["payment"] &&
+											props.projectData["payment"].companyStructureChart &&
+											props.projectData["payment"].companyStructureChart.name
+										}
+										source="payment"
 									/>
 								</div>
 							</div>
@@ -483,6 +726,8 @@ export default function Story(props) {
 									onMouseDown={(e) => e.preventDefault()}
 									size="md"
 									style={{ borderRadius: "0px", width: "150px" }}
+									onClick={handleFinish}
+									function_={handleFinish}
 								>
 									Finish
 								</Button>

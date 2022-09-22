@@ -88,7 +88,7 @@ export default function index(props) {
 						<input
 							autoComplete="off"
 							type="text"
-							pattern="(^[0-9]{0,2}$)|(^[0-9]{0,2}\.[0-9]{0,5}$)"
+							pattern="(^[0-9]{0,1000}$)|(^[0-9]{0,10000}\.[0-9]{0,18}$)"
 							placeholder={" $  " + `+${props.price}`}
 							style={{ outline: "none", border: "none" }}
 							className="w-100 h-100"

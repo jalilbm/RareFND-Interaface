@@ -28,7 +28,7 @@ export default function About() {
 
 		emailjs
 			.sendForm(
-				"service_afejnhj",
+				"service_hd5j04r",
 				"template_gktw9ca",
 				form.current,
 				"OHpPnX-MUtF6ELUyq"
@@ -36,7 +36,7 @@ export default function About() {
 			.then(
 				(result) => {
 					console.log(result.text);
-					console.log("message sent succesfully");
+					console.log("message sent successfully");
 					setDialogPopupData({
 						title: "Email sent successfully",
 						body: "We have received your concern, and a team member will reach out to you soon.",

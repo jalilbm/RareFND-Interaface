@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Programs from "./pages/Programs";
 import About from "./pages/About";
 import Login from "./pages/Login";
+import Partners from "./pages/Partners";
 import TermsOfService from "./pages/TermsOfService";
 import Legal from "./pages/LegalDisclaimer";
 import Signup from "./pages/SignupPage";
@@ -51,6 +52,7 @@ export default function Main() {
 				<Route exact path="/contact-us" element={<About />} />
 				<Route exact path="/legal" element={<Legal />} />
 				<Route exact path="/about-us" element={<Programs />} />
+				<Route exact path="/partners" element={<Partners />} />
 				<Route exact path="/login" element={!user ? <Login /> : <Home />} />
 				<Route exact path="/coming-soon" element={<CommingSoon />} />
 				<Route exact path="/signup" element={<Signup />} />

@@ -10,6 +10,7 @@ import React, { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import { Col, Row } from "react-bootstrap";
 import DialogPopup from "../../components/DialogPopup";
+import FAQ from "../../components/FAQ";
 
 export default function About() {
 	const form = useRef();
@@ -55,6 +56,21 @@ export default function About() {
 	};
 	return (
 		<div className="aboutpage mt-5">
+			<section className="contact text-light" id="faq">
+				<Row>
+					<FAQ />
+				</Row>
+			</section>
+			<Row className="contact text-light">
+				<div
+					className="mt-5"
+					style={{
+						border: " 2px solid #FAD02C",
+						width: "10%",
+						minWidth: "60px",
+					}}
+				></div>
+			</Row>
 			<section className="contact text-light" id="contacts">
 				<Row>
 					<Col md={6} style={{ color: "#3d3d3d", position: "relative" }}>

@@ -5,6 +5,9 @@ function ModalDialog(props) {
 	const [isShow, invokeModal] = React.useState(props.show);
 	const initModal = () => {
 		if (props.function_) props.function_();
+		if (isShow) {
+			props.closeFunction();
+		}
 		return invokeModal(!isShow);
 	};
 	return (

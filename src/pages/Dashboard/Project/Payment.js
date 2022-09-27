@@ -20,6 +20,10 @@ export default function Story(props) {
 		{ name: "United Kingdom" },
 		{ name: "United States of America" },
 	]);
+	const [popUpData, setPopUpData] = useState({
+		title: "Please Wait...",
+		description: "",
+	});
 	const [UBOsArray, setUBOsArray] = useState([]);
 	const projectDataRef = useRef(props.projectData);
 	projectDataRef.current = props.projectData;
@@ -47,15 +51,41 @@ export default function Story(props) {
 	const handleFinish = () => {
 		const tokens = JSON.parse(localStorage.getItem("authTokens"));
 		const access = tokens.access;
-		axios.post(
-			process.env.REACT_APP_BASE_URL + "/api/project/add/",
-			projectDataRef.current,
-			{
-				headers: {
-					Authorization: `Bearer ${access}`,
-				},
-			}
-		);
+		axios
+			.post(
+				process.env.REACT_APP_BASE_URL + "/api/project/add/",
+				projectDataRef.current,
+				{
+					headers: {
+						Authorization: `Bearer ${access}`,
+						// Accept: "application/json, text/plain, */*",
+						"Content-Type": "multipart/form-data",
+					},
+				}
+			)
+			.then((response) => {
+				console.log("adsfasdf", response.status);
+				if (response.status === 201) {
+					setPopUpData({
+						title: "Project submitted",
+						description:
+							"Your project has been submitted and it will be soon reviewed by one of our team members, stay tunned, we will contact you soon!",
+					});
+				} else {
+					setPopUpData({
+						title: "Something Went Wrong!",
+						description:
+							"Your Project was not submitted successfully, please verify that you have entered all the necessary data and supplied all the necessary files",
+					});
+				}
+			})
+			.catch((error) => {
+				setPopUpData({
+					title: "Something Went Wrong!",
+					description:
+						"Your Project was not submitted successfully, please verify that you have entered all the necessary data and supplied all the necessary files",
+				});
+			});
 	};
 
 	const getUploadedFileName = (file, rowId) => {
@@ -70,16 +100,18 @@ export default function Story(props) {
 				return projectDataRef.current["payment"][`UBOs`][`${rowId}`]["idFile"]
 					.name;
 			else return "No file";
-		} else if (file == "proofOfAddress") {
+		} else if (file == "proofOfAddressFile") {
 			if (
 				projectDataRef.current &&
 				projectDataRef.current["payment"] &&
 				projectDataRef.current["payment"][`UBOs`] &&
 				projectDataRef.current["payment"][`UBOs`][`${rowId}`] &&
-				projectDataRef.current["payment"][`UBOs`][`${rowId}`]["proofOfAddress"]
+				projectDataRef.current["payment"][`UBOs`][`${rowId}`][
+					"proofOfAddressFile"
+				]
 			)
 				return projectDataRef.current["payment"][`UBOs`][`${rowId}`][
-					"proofOfAddress"
+					"proofOfAddressFile"
 				].name;
 			else return "No file";
 		}
@@ -222,7 +254,7 @@ export default function Story(props) {
 								<UploadButton
 									title="Select File"
 									accepted_formats=".jpg, .jpeg, .png, .pdf"
-									name="proofOfAddress"
+									name="proofOfAddressFile"
 									function_={handleInputChanges}
 									rowId={rowId}
 									valueFunction={getUploadedFileName}
@@ -251,7 +283,7 @@ export default function Story(props) {
 				position: null,
 				dateOfBirth: null,
 				idFile: null,
-				proofOfAddress: null,
+				proofOfAddressFile: null,
 			},
 		};
 
@@ -727,14 +759,15 @@ export default function Story(props) {
 									size="md"
 									style={{ borderRadius: "0px", width: "150px" }}
 									onClick={handleFinish}
-									function_={handleFinish}
 								>
 									Finish
 								</Button>
 							}
-							title="Project submitted"
-							description="Your project has been submitted and it will be soon reviewed by one of our team members, 
-							stay tunned, we will contact you soon!"
+							title={popUpData.title}
+							description={popUpData.description}
+							closeFunction={() => {
+								setPopUpData({ title: "Please Wait...", description: "" });
+							}}
 						/>
 					</div>
 				</Row>

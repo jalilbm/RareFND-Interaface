@@ -109,6 +109,7 @@ export default function Basics(props) {
 							Title
 						</p>
 						<input
+							required
 							className="atomic-text-input w-100"
 							id="projectTitle"
 							maxlength="60"
@@ -133,6 +134,7 @@ export default function Basics(props) {
 					</p>
 					<div className="input-with-title">
 						<textarea
+							required
 							className="atomic-text-input w-100 h-50"
 							id="projectHead"
 							maxlength="135"
@@ -287,6 +289,7 @@ export default function Basics(props) {
 							Address
 						</p>
 						<input
+							required
 							className="atomic-text-input w-100"
 							id="projectAddress"
 							maxlength="150"

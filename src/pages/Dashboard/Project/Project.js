@@ -15,7 +15,13 @@ export default function DashboardProjects() {
 		"create-project-tab-1"
 	);
 	const [renderTab, setRenderTab] = useState(<Basics />);
-	const [projectData, setProjectData] = useState({});
+	const [projectData, setProjectData] = useState({
+		basics: {},
+		funding: {},
+		story: {},
+		payment: {},
+		rewards: {},
+	});
 
 	const updateProjectData = (event, source) => {
 		let { name, value } = event.target;

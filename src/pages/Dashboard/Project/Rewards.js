@@ -181,9 +181,9 @@ export default function Funding(props) {
 			[`${rowId}`]: {
 				incentiveTitle: null,
 				incentiveDescription: null,
-				estimatedDelivery: null,
-				availableItems: null,
-				requiredContributionAmount: null,
+				incentiveEstimatedDelivery: null,
+				availableIncentives: null,
+				incentivePrice: null,
 				includedIncentives: [],
 			},
 		};

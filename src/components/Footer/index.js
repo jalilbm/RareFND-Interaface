@@ -99,7 +99,9 @@ export default function Footer() {
 										>
 											<Link
 												className="text-decoration-none text-secondary"
-												to="/contact-us"
+												target="_blank"
+												rel="noreferrer"
+												href="https://rarefnd.zendesk.com/hc/en-gb"
 											>
 												Support
 											</Link>
@@ -140,7 +142,7 @@ export default function Footer() {
 										>
 											<Link
 												className="text-decoration-none text-secondary"
-												to="/"
+												to="/partners#crypto-partners"
 											>
 												Crypto Industry Partners
 											</Link>

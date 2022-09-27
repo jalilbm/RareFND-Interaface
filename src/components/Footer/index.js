@@ -97,14 +97,14 @@ export default function Footer() {
 											flex="column"
 											style={{ cursor: "pointer", padding: "0" }}
 										>
-											<Link
+											<a
 												className="text-decoration-none text-secondary"
 												target="_blank"
 												rel="noreferrer"
 												href="https://rarefnd.zendesk.com/hc/en-gb"
 											>
 												Support
-											</Link>
+											</a>
 											<Link
 												className="text-decoration-none text-secondary"
 												to="/signup"

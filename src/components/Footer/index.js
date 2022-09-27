@@ -78,12 +78,14 @@ export default function Footer() {
 											>
 												Events
 											</Link>
-											<Link
+											<a
 												className="text-decoration-none text-secondary"
-												to="/contact-us"
+												target="_blank"
+												rel="noreferrer"
+												href="https://rarefnd.zendesk.com/hc/en-gb"
 											>
 												Contacts
-											</Link>
+											</a>
 										</CDBBox>
 									</CDBBox>
 								</Col>
@@ -164,12 +166,14 @@ export default function Footer() {
 											>
 												Incubator Partners
 											</Link>
-											<Link
+											<a
 												className="text-decoration-none text-secondary"
-												to="/contact-us"
+												target="_blank"
+												rel="noreferrer"
+												href="https://rarefnd.zendesk.com/hc/en-gb"
 											>
 												Partner with Us
-											</Link>
+											</a>
 										</CDBBox>
 									</CDBBox>
 								</Col>

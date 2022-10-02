@@ -208,7 +208,7 @@ export default function Funding(props) {
 				title="Add your rewards"
 				head="Offer simple, meaningful ways to bring backers closer to your project and celebrate it coming to life."
 			/>
-			<Row style={{ padding: "3vw", width: "100%" }}>
+			<Row style={{ padding: "3vw", margin: "0px" }}>
 				{Object.keys(rewardsArray).map((item, i) => rewardsArray[item])}
 				<Button
 					variant="warning"
@@ -220,17 +220,39 @@ export default function Funding(props) {
 					Add Incentive
 				</Button>
 			</Row>
-			<Row style={{ padding: "3vw", width: "100%" }}>
-				<div style={{ textAlign: "right" }}>
-					<Button
-						variant="warning"
-						onMouseDown={(e) => e.preventDefault()}
-						size="md"
-						onClick={props.nextTabFunction}
-						style={{ borderRadius: "0px", width: "150px" }}
-					>
-						Next
-					</Button>
+			<Row style={{ padding: "3vw", margin: "0px" }}>
+				<div style={{ display: "flex", justifyContent: "space-between" }}>
+					<div style={{ textAlign: "left" }}>
+						<Button
+							variant="warning"
+							onMouseDown={(e) => e.preventDefault()}
+							size="md"
+							onClick={props.previousTabFunction}
+							style={{
+								borderRadius: "0px",
+								width: "8vw",
+								minWidth: "100px",
+							}}
+						>
+							Previous
+						</Button>
+					</div>
+
+					<div style={{ textAlign: "right" }}>
+						<Button
+							variant="warning"
+							onMouseDown={(e) => e.preventDefault()}
+							size="md"
+							onClick={props.nextTabFunction}
+							style={{
+								borderRadius: "0px",
+								width: "8vw",
+								minWidth: "100px",
+							}}
+						>
+							Next
+						</Button>
+					</div>
 				</div>
 			</Row>
 		</div>

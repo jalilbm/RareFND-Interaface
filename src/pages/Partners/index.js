@@ -30,7 +30,7 @@ export default function Partners() {
 				breakpoint: 1100,
 				settings: {
 					slidesToShow: 2,
-					slidesToScroll: 3,
+					slidesToScroll: 2,
 					initialSlide: 2,
 					dots: false,
 				},
@@ -39,7 +39,7 @@ export default function Partners() {
 				breakpoint: 480,
 				settings: {
 					slidesToShow: 1,
-					slidesToScroll: 2,
+					slidesToScroll: 1,
 					dots: false,
 				},
 			},
@@ -104,31 +104,3 @@ export default function Partners() {
 		</div>
 	);
 }
-
-// const onChange = (key) => {
-// 	console.log(key);
-// };
-
-// const App = () => (
-// 	<div style={{ width: "100%" }}>
-// 		<Row className="justify-content-md-center w-100">
-// 			<Col lg={3} md={4} sm={6} xs={12}>
-// 				<Card_ />
-// 			</Col>
-// 			<Col lg={3} md={4} sm={6} xs={12}>
-// 				<Card_ />
-// 			</Col>
-// 			<Col lg={3} md={4} sm={6} xs={12}>
-// 				<Card_ />
-// 			</Col>
-// 			<Col lg={3} md={4} sm={6} xs={12}>
-// 				<Card_ />
-// 			</Col>
-// 			<Col lg={3} md={4} sm={6} xs={12}>
-// 				<Card_ />
-// 			</Col>
-// 		</Row>
-// 	</div>
-// );
-
-// export default App;

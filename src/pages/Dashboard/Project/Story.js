@@ -19,7 +19,7 @@ export default function Story(props) {
 				title="Introduce your project"
 				head="Tell people why they should be excited about your project. Get specific but be clear and be brief."
 			/>
-			<Row style={{ padding: "3vw", width: "100%" }}>
+			<Row style={{ padding: "3vw", margin: "0px" }}>
 				<h4>Project description</h4>
 				<p style={{ marginBottom: "40px" }}>
 					Describe what you're raising funds to do, why you care about it, how
@@ -50,17 +50,39 @@ export default function Story(props) {
 					/>
 				</div>
 			</Row>
-			<Row style={{ padding: "3vw", width: "100%" }}>
-				<div style={{ textAlign: "right" }}>
-					<Button
-						variant="warning"
-						onMouseDown={(e) => e.preventDefault()}
-						size="md"
-						onClick={props.nextTabFunction}
-						style={{ borderRadius: "0px", width: "150px" }}
-					>
-						Next
-					</Button>
+			<Row style={{ padding: "3vw", margin: "0px" }}>
+				<div style={{ display: "flex", justifyContent: "space-between" }}>
+					<div style={{ textAlign: "left" }}>
+						<Button
+							variant="warning"
+							onMouseDown={(e) => e.preventDefault()}
+							size="md"
+							onClick={props.previousTabFunction}
+							style={{
+								borderRadius: "0px",
+								width: "8vw",
+								minWidth: "100px",
+							}}
+						>
+							Previous
+						</Button>
+					</div>
+
+					<div style={{ textAlign: "right" }}>
+						<Button
+							variant="warning"
+							onMouseDown={(e) => e.preventDefault()}
+							size="md"
+							onClick={props.nextTabFunction}
+							style={{
+								borderRadius: "0px",
+								width: "8vw",
+								minWidth: "100px",
+							}}
+						>
+							Next
+						</Button>
+					</div>
 				</div>
 			</Row>
 		</div>

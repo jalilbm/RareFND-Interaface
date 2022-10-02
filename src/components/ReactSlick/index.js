@@ -7,11 +7,9 @@ export default function ReactSlick(props) {
 	const categories = props.categoriesData;
 
 	var settings = {
-		dots: true,
-		infinite: false,
 		speed: 500,
 		slidesToShow: 8,
-		slidesToScroll: 3,
+		slidesToScroll: 1,
 		initialSlide: 0,
 		dots: false,
 		responsive: [
@@ -19,27 +17,21 @@ export default function ReactSlick(props) {
 				breakpoint: 1280,
 				settings: {
 					slidesToShow: 6,
-					slidesToScroll: 3,
-					infinite: false,
-					dots: false,
+					slidesToScroll: 6,
 				},
 			},
 			{
 				breakpoint: 980,
 				settings: {
 					slidesToShow: 5,
-					slidesToScroll: 3,
-					infinite: false,
-					dots: false,
+					slidesToScroll: 5,
 				},
 			},
 			{
 				breakpoint: 820,
 				settings: {
 					slidesToShow: 4,
-					slidesToScroll: 3,
-					infinite: false,
-					dots: false,
+					slidesToScroll: 4,
 				},
 			},
 			{
@@ -47,16 +39,13 @@ export default function ReactSlick(props) {
 				settings: {
 					slidesToShow: 3,
 					slidesToScroll: 3,
-					initialSlide: 2,
-					dots: false,
 				},
 			},
 			{
 				breakpoint: 480,
 				settings: {
 					slidesToShow: 3,
-					slidesToScroll: 2,
-					dots: false,
+					slidesToScroll: 3,
 				},
 			},
 			{
@@ -64,7 +53,7 @@ export default function ReactSlick(props) {
 				settings: {
 					slidesToShow: 2,
 					slidesToScroll: 2,
-					dots: false,
+					initialSlide: 1,
 				},
 			},
 		],

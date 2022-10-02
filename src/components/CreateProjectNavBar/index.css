@@ -15,3 +15,9 @@
 #dashboard-rules-NAV_1 {
 	box-shadow: 0 2px 6px 0 rgb(0 0 0 / 17%);
 }
+
+@media screen and (max-width: 770px) {
+	#dashboard-rules-NAV_1 {
+		display: none !important;
+	}
+}

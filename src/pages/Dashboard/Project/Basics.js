@@ -19,6 +19,7 @@ export default function Basics(props) {
 		{ name: "State of Kuwait" },
 		{ name: "Sultanate of Oman" },
 		{ name: "State of Qatar" },
+		{ name: "Uganda" },
 		{ name: "United Arab Emirates" },
 		{ name: "United Kingdom" },
 		{ name: "United States of America" },
@@ -72,7 +73,12 @@ export default function Basics(props) {
 				title="Start with the basics"
 				head="Make it easy for people to learn about your project."
 			/>
-			<Row style={{ padding: "3vw", width: "100%" }}>
+			<Row
+				style={{
+					padding: "3vw",
+					margin: "0px",
+				}}
+			>
 				<Col md={6}>
 					<div className="grid-col-12 grid-col-4-lg hide block-md">
 						<h2
@@ -151,7 +157,7 @@ export default function Basics(props) {
 				</Col>
 			</Row>
 			<hr />
-			<Row style={{ padding: "3vw", width: "100%" }}>
+			<Row style={{ padding: "3vw", margin: "0px" }}>
 				<Col md={6}>
 					<div className="grid-col-12 grid-col-4-lg hide block-md">
 						<h2
@@ -260,7 +266,7 @@ export default function Basics(props) {
 				</Col>
 			</Row>
 			<hr />
-			<Row style={{ padding: "3vw", width: "100%" }}>
+			<Row style={{ padding: "3vw", margin: "0px" }}>
 				<Col md={6}>
 					<div className="grid-col-12 grid-col-4-lg hide block-md">
 						<h2
@@ -330,7 +336,7 @@ export default function Basics(props) {
 				</Col>
 			</Row>
 			<hr />
-			<Row style={{ padding: "3vw", width: "100%" }}>
+			<Row style={{ padding: "3vw", margin: "0px" }}>
 				<Col md={6}>
 					<div className="grid-col-12 grid-col-4-lg hide block-md">
 						<h2
@@ -382,7 +388,7 @@ export default function Basics(props) {
 				</Col>
 			</Row>
 			<hr />
-			<Row style={{ padding: "3vw", width: "100%" }}>
+			<Row style={{ padding: "3vw", margin: "0px" }}>
 				<Col md={6}>
 					<div className="grid-col-12 grid-col-4-lg hide block-md">
 						<h2
@@ -427,7 +433,7 @@ export default function Basics(props) {
 				</Col>
 			</Row>
 			<hr />
-			<Row style={{ padding: "3vw", width: "100%" }}>
+			<Row style={{ padding: "3vw", margin: "0px" }}>
 				<Col md={6}>
 					<div className="grid-col-12 grid-col-4-lg hide block-md">
 						<h2
@@ -468,14 +474,18 @@ export default function Basics(props) {
 					</div>
 				</Col>
 			</Row>
-			<Row style={{ padding: "3vw", width: "100%" }}>
+			<Row style={{ padding: "3vw", margin: "0px" }}>
 				<div style={{ textAlign: "right" }}>
 					<Button
 						variant="warning"
 						onMouseDown={(e) => e.preventDefault()}
 						size="md"
 						onClick={props.nextTabFunction}
-						style={{ borderRadius: "0px", width: "150px" }}
+						style={{
+							borderRadius: "0px",
+							width: "8vw",
+							minWidth: "100px",
+						}}
 					>
 						Next
 					</Button>

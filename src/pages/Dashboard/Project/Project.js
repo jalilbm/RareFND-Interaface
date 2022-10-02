@@ -68,6 +68,7 @@ export default function DashboardProjects() {
 				setRenderTab(
 					<Funding
 						nextTabFunction={() => changeTab("create-project-tab-3")}
+						previousTabFunction={() => changeTab("create-project-tab-1")}
 						projectData={projectData}
 						updateProjectData={updateProjectData}
 					/>
@@ -77,6 +78,7 @@ export default function DashboardProjects() {
 				setRenderTab(
 					<Rewards
 						nextTabFunction={() => changeTab("create-project-tab-4")}
+						previousTabFunction={() => changeTab("create-project-tab-2")}
 						projectData={projectData}
 						updateProjectData={updateProjectData}
 						setProjectData={setProjectData}
@@ -87,6 +89,7 @@ export default function DashboardProjects() {
 				setRenderTab(
 					<Story
 						nextTabFunction={() => changeTab("create-project-tab-5")}
+						previousTabFunction={() => changeTab("create-project-tab-3")}
 						projectData={projectData}
 						updateProjectData={updateProjectData}
 					/>
@@ -94,7 +97,10 @@ export default function DashboardProjects() {
 				break;
 			case "create-project-tab-5":
 				setRenderTab(
-					<Profile nextTabFunction={() => changeTab("create-project-tab-6")} />
+					<Profile
+						nextTabFunction={() => changeTab("create-project-tab-6")}
+						previousTabFunction={() => changeTab("create-project-tab-4")}
+					/>
 				);
 				break;
 			case "create-project-tab-6":
@@ -103,6 +109,7 @@ export default function DashboardProjects() {
 						projectData={projectData}
 						updateProjectData={updateProjectData}
 						setProjectData={setProjectData}
+						previousTabFunction={() => changeTab("create-project-tab-5")}
 					/>
 				);
 				break;
@@ -111,13 +118,14 @@ export default function DashboardProjects() {
 					<Basics
 						projectData={projectData}
 						updateProjectData={updateProjectData}
+						nextTabFunction={() => changeTab("create-project-tab-2")}
 					/>
 				);
 				break;
 		}
 	}, [selectedTab, projectData]);
 	return (
-		<div className="dashboard-projects">
+		<div className="dashboard-projects w-100">
 			<SideBar />
 			<div className="dashboard-projects-container">
 				<CreateProjectNavBar changeTab={changeTab} selectedTab={selectedTab} />

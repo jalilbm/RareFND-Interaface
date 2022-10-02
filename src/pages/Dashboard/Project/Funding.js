@@ -18,7 +18,7 @@ export default function Funding(props) {
 				title="Let’s talk about money"
 				head="Plan and manage your project’s finances."
 			/>
-			<Row style={{ padding: "3vw", width: "100%" }}>
+			<Row style={{ padding: "3vw", margin: "0px" }}>
 				<Col md={6}>
 					<div className="grid-col-12 grid-col-4-lg hide block-md">
 						<h2
@@ -71,7 +71,7 @@ export default function Funding(props) {
 				</Col>
 			</Row>
 			<hr />
-			<Row style={{ padding: "3vw", width: "100%" }}>
+			<Row style={{ padding: "3vw", margin: "0px" }}>
 				<Col md={6}>
 					<div className="grid-col-12 grid-col-4-lg hide block-md">
 						<h2
@@ -129,17 +129,39 @@ export default function Funding(props) {
 					</div>
 				</Col>
 			</Row>
-			<Row style={{ padding: "3vw", width: "100%" }}>
-				<div style={{ textAlign: "right" }}>
-					<Button
-						variant="warning"
-						onMouseDown={(e) => e.preventDefault()}
-						size="md"
-						onClick={props.nextTabFunction}
-						style={{ borderRadius: "0px", width: "150px" }}
-					>
-						Next
-					</Button>
+			<Row style={{ padding: "3vw", margin: "0px" }}>
+				<div style={{ display: "flex", justifyContent: "space-between" }}>
+					<div style={{ textAlign: "left" }}>
+						<Button
+							variant="warning"
+							onMouseDown={(e) => e.preventDefault()}
+							// size="md"
+							onClick={props.previousTabFunction}
+							style={{
+								borderRadius: "0px",
+								width: "8vw",
+								minWidth: "100px",
+							}}
+						>
+							Previous
+						</Button>
+					</div>
+
+					<div style={{ textAlign: "right" }}>
+						<Button
+							variant="warning"
+							onMouseDown={(e) => e.preventDefault()}
+							size="md"
+							onClick={props.nextTabFunction}
+							style={{
+								borderRadius: "0px",
+								width: "8vw",
+								minWidth: "100px",
+							}}
+						>
+							Next
+						</Button>
+					</div>
 				</div>
 			</Row>
 		</div>

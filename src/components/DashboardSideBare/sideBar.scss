@@ -4,6 +4,10 @@
 	min-height: 100vh;
 	background-color: white;
 
+	@media screen and (max-width: 750px) {
+		flex: 0;
+	}
+
 	.center {
 		ul {
 			list-style: none;
@@ -15,6 +19,7 @@
 				align-items: center;
 				cursor: pointer;
 				padding: 15px;
+
 				&:hover {
 					background-color: #fef4cb;
 				}
@@ -28,6 +33,10 @@
 					font-weight: bold;
 					color: #212529;
 					margin-left: 5%;
+
+					@media screen and (max-width: 750px) {
+						display: none;
+					}
 				}
 			}
 		}

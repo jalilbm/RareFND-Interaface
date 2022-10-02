@@ -16,6 +16,7 @@ export default function Story(props) {
 		{ name: "State of Kuwait" },
 		{ name: "Sultanate of Oman" },
 		{ name: "State of Qatar" },
+		{ name: "Uganda" },
 		{ name: "United Arab Emirates" },
 		{ name: "United Kingdom" },
 		{ name: "United States of America" },
@@ -58,7 +59,6 @@ export default function Story(props) {
 				{
 					headers: {
 						Authorization: `Bearer ${access}`,
-						// Accept: "application/json, text/plain, */*",
 						"Content-Type": "multipart/form-data",
 					},
 				}
@@ -122,7 +122,7 @@ export default function Story(props) {
 		let newRow = (
 			<div style={{ marginBottom: "20px" }} id={`row-${rowId}`}>
 				<h3>{`UBO ${rowId} details`}</h3>
-				<Row style={{ marginBottom: "20px", width: "100%" }}>
+				<Row style={{ marginBottom: "20px", margin: "0px" }}>
 					<div className="input-with-title">
 						<p
 							style={{
@@ -151,7 +151,7 @@ export default function Story(props) {
 						/>
 					</div>
 				</Row>
-				<Row style={{ marginBottom: "20px", width: "100%" }}>
+				<Row style={{ marginBottom: "20px", margin: "0px" }}>
 					<Col md={6}>
 						<div className="input-with-title">
 							<p
@@ -211,7 +211,7 @@ export default function Story(props) {
 						</div>
 					</Col>
 				</Row>
-				<Row style={{ marginBottom: "20px", width: "100%" }}>
+				<Row style={{ marginBottom: "20px", margin: "0px" }}>
 					<Col md={6}>
 						<div className="input-with-title h-100">
 							<div
@@ -303,16 +303,16 @@ export default function Story(props) {
 	}
 
 	return (
-		<div className="DashboardCreateProjectFunding">
+		<div className="DashboardCreateProjectPayment" style={{ width: "100%" }}>
 			<DashboardCreateProjectItemHead
 				title="Verify your details"
 				head="Confirm who’s raising funds and receiving them if this project reaches its funding goal. 
         Double-check your information—you agree the details you provide are true and acknowledge they can’t be changed once submitted."
 			/>
 			<div>
-				<Row style={{ padding: "3vw", width: "100%" }}>
+				<Row style={{ padding: "3vw", margin: "0px" }}>
 					<h1 style={{ marginBottom: "30px" }}>Company Details</h1>
-					<Row style={{ marginBottom: "20px", width: "100%" }}>
+					<Row style={{ marginBottom: "20px", margin: "0px" }}>
 						<Col md={6}>
 							<div className="input-with-title">
 								<p
@@ -368,7 +368,7 @@ export default function Story(props) {
 							</div>
 						</Col>
 					</Row>
-					<Row style={{ marginBottom: "20px", width: "100%" }}>
+					<Row style={{ marginBottom: "20px", margin: "0px" }}>
 						<Col md={6}>
 							<div className="input-with-title">
 								<p
@@ -424,7 +424,7 @@ export default function Story(props) {
 							</div>
 						</Col>
 					</Row>
-					<Row style={{ marginBottom: "20px", width: "100%" }}>
+					<Row style={{ marginBottom: "20px", margin: "0px" }}>
 						<Col md={6}>
 							<div className="input-with-title">
 								<p
@@ -481,7 +481,7 @@ export default function Story(props) {
 							</div>
 						</Col>
 					</Row>
-					<Row style={{ marginBottom: "20px", width: "100%" }}>
+					<Row style={{ marginBottom: "20px", margin: "0px" }}>
 						<Col lg={4}>
 							<div className="input-with-title">
 								<p
@@ -560,7 +560,7 @@ export default function Story(props) {
 							</div>
 						</Col>
 					</Row>
-					<Row style={{ marginBottom: "20px", width: "100%" }}>
+					<Row style={{ marginBottom: "20px", margin: "0px" }}>
 						<Col md={6}>
 							<div className="input-with-title">
 								<p
@@ -617,7 +617,7 @@ export default function Story(props) {
 							</div>
 						</Col>
 					</Row>
-					<Row style={{ marginBottom: "20px", width: "100%" }}>
+					<Row style={{ marginBottom: "20px", margin: "0px" }}>
 						<Col md={6}>
 							<div className="input-with-title">
 								<p
@@ -673,7 +673,7 @@ export default function Story(props) {
 							</div>
 						</Col>
 					</Row>
-					<Row style={{ marginBottom: "20px", width: "100%" }}>
+					<Row style={{ marginBottom: "20px", margin: "0px" }}>
 						<Col md={6}>
 							<div className="input-with-title h-100">
 								<div
@@ -736,7 +736,7 @@ export default function Story(props) {
 					</Row>
 				</Row>
 				<hr />
-				<Row style={{ padding: "3vw", width: "100%" }}>
+				<Row style={{ padding: "3vw", margin: "0px" }}>
 					<h1 style={{ marginBottom: "30px" }}>UBOs Details</h1>
 					{UBOsArray.map((item) => item)}
 					<Button
@@ -749,26 +749,49 @@ export default function Story(props) {
 						Add UBO
 					</Button>
 				</Row>
-				<Row style={{ padding: "3vw", width: "100%" }}>
-					<div style={{ textAlign: "right" }}>
-						<DialogPopup
-							button={
-								<Button
-									variant="warning"
-									onMouseDown={(e) => e.preventDefault()}
-									size="md"
-									style={{ borderRadius: "0px", width: "150px" }}
-									onClick={handleFinish}
-								>
-									Finish
-								</Button>
-							}
-							title={popUpData.title}
-							description={popUpData.description}
-							closeFunction={() => {
-								setPopUpData({ title: "Please Wait...", description: "" });
-							}}
-						/>
+
+				<Row style={{ padding: "3vw", margin: "0px" }}>
+					<div style={{ display: "flex", justifyContent: "space-between" }}>
+						<div style={{ textAlign: "left" }}>
+							<Button
+								variant="warning"
+								onMouseDown={(e) => e.preventDefault()}
+								size="md"
+								onClick={props.previousTabFunction}
+								style={{
+									borderRadius: "0px",
+									width: "8vw",
+									minWidth: "100px",
+								}}
+							>
+								Previous
+							</Button>
+						</div>
+
+						<div style={{ textAlign: "right" }}>
+							<DialogPopup
+								button={
+									<Button
+										variant="warning"
+										onMouseDown={(e) => e.preventDefault()}
+										size="md"
+										style={{
+											borderRadius: "0px",
+											width: "8vw",
+											minWidth: "100px",
+										}}
+										onClick={handleFinish}
+									>
+										Finish
+									</Button>
+								}
+								title={popUpData.title}
+								description={popUpData.description}
+								closeFunction={() => {
+									setPopUpData({ title: "Please Wait...", description: "" });
+								}}
+							/>
+						</div>
 					</div>
 				</Row>
 			</div>

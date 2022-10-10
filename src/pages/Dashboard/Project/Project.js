@@ -29,7 +29,6 @@ export default function DashboardProjects() {
 			...projectData,
 			[source]: { ...projectData[source], [name]: value },
 		});
-		console.log(projectData);
 	};
 
 	const changeTab = (value) => {

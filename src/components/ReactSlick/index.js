@@ -8,7 +8,7 @@ export default function ReactSlick(props) {
 
 	var settings = {
 		speed: 500,
-		slidesToShow: 8,
+		slidesToShow: 9,
 		slidesToScroll: 1,
 		initialSlide: 0,
 		dots: false,

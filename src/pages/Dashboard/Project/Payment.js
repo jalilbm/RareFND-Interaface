@@ -8,34 +8,26 @@ import axios from "axios";
 import Calendar from "../../../components/Calendar";
 import DialogPopup from "../../../components/DialogPopup";
 
-export default function Story(props) {
-	const [countries, setCountries] = useState([
-		{ name: "India" },
-		{ name: "Kingdom of Bahrain" },
-		{ name: "Kingdom of Saudi Arabia" },
-		{ name: "State of Kuwait" },
-		{ name: "Sultanate of Oman" },
-		{ name: "State of Qatar" },
-		{ name: "Uganda" },
-		{ name: "United Arab Emirates" },
-		{ name: "United Kingdom" },
-		{ name: "United States of America" },
-	]);
+export default function Payment(props) {
+	const [countries, setCountries] = useState([]);
 	const [popUpData, setPopUpData] = useState({
 		title: "Please Wait...",
 		description: "",
 	});
-	const [UBOsArray, setUBOsArray] = useState([]);
 	const projectDataRef = useRef(props.projectData);
 	projectDataRef.current = props.projectData;
 
-	// useEffect(() => {
-	// 	axios
-	// 		.get(process.env.REACT_APP_BASE_URL + "/api/country/")
-	// 		.then((response) => {
-	// 			setCountries(response.data.categories);
-	// 		});
-	// }, []);
+	useEffect(() => {
+		axios
+			.get(process.env.REACT_APP_BASE_URL + "/api/eligible_country/")
+			.then((response) => {
+				let eligible_countries = response.data.eligible_countries;
+				eligible_countries.sort(
+					(a, b) => parseFloat(a.nicename) - parseFloat(b.nicename)
+				);
+				setCountries(eligible_countries);
+			});
+	}, []);
 
 	const handleInputChanges = (e, rowId) => {
 		const { name, value } = e.target;
@@ -45,7 +37,6 @@ export default function Story(props) {
 			[name]: value,
 		};
 
-		console.log(projectData_);
 		props.setProjectData(projectData_);
 	};
 
@@ -64,7 +55,6 @@ export default function Story(props) {
 				}
 			)
 			.then((response) => {
-				console.log("adsfasdf", response.status);
 				if (response.status === 201) {
 					setPopUpData({
 						title: "Project submitted",
@@ -118,164 +108,10 @@ export default function Story(props) {
 	};
 
 	const addUBORow = () => {
-		const rowId = UBOsArray.length + 1;
-		let newRow = (
-			<div style={{ marginBottom: "20px" }} id={`row-${rowId}`}>
-				<h3>{`UBO ${rowId} details`}</h3>
-				<Row style={{ marginBottom: "20px", margin: "0px" }}>
-					<div className="input-with-title">
-						<p
-							style={{
-								marginBottom: "3px",
-							}}
-						>
-							{`UBO ${rowId} - full name`}
-						</p>
-						<input
-							className="atomic-text-input w-100"
-							id={`ubo-${rowId}-full-name`}
-							maxlength="100"
-							name={`fullName`}
-							placeholder={`UBO ${rowId} - full name`}
-							type="text"
-							onChange={(e) => handleInputChanges(e, `${rowId}`)}
-							value={
-								projectDataRef.current &&
-								projectDataRef.current["payment"] &&
-								projectDataRef.current["payment"]["UBOs"] &&
-								projectDataRef.current["payment"]["UBOs"][`${rowId}`] &&
-								projectDataRef.current["payment"]["UBOs"][`${rowId}`][
-									"fullName"
-								]
-							}
-						/>
-					</div>
-				</Row>
-				<Row style={{ marginBottom: "20px", margin: "0px" }}>
-					<Col md={6}>
-						<div className="input-with-title">
-							<p
-								style={{
-									marginBottom: "3px",
-								}}
-							>
-								{`UBO ${rowId} - position`}
-							</p>
-							<input
-								className="atomic-text-input w-100"
-								id={`ubo-${rowId}-position`}
-								maxlength="100"
-								name={`position`}
-								placeholder={`UBO ${rowId} - position`}
-								type="text"
-								onChange={(e) => handleInputChanges(e, `${rowId}`)}
-								value={
-									projectDataRef.current &&
-									projectDataRef.current["payment"] &&
-									projectDataRef.current["payment"]["UBOs"] &&
-									projectDataRef.current["payment"]["UBOs"][`${rowId}`] &&
-									projectDataRef.current["payment"]["UBOs"][`${rowId}`][
-										"position"
-									]
-								}
-							/>
-						</div>
-					</Col>
-					<Col md={6}>
-						<div className="input-with-title">
-							<p
-								style={{
-									marginBottom: "3px",
-								}}
-							>
-								{`UBO ${rowId} - Date of Birth`}
-							</p>
-							<div className="input-with-title">
-								<Calendar
-									setProjectData={props.setProjectData}
-									projectDataRef={projectDataRef}
-									rowId={rowId}
-									name="dateOfBirth"
-									source="payment"
-									value={
-										projectDataRef.current &&
-										projectDataRef.current["payment"] &&
-										projectDataRef.current["payment"][`UBOs`] &&
-										projectDataRef.current["payment"][`UBOs`][`${rowId}`] &&
-										projectDataRef.current["payment"][`UBOs`][`${rowId}`][
-											"dateOfBirth"
-										]
-									}
-								/>
-							</div>
-						</div>
-					</Col>
-				</Row>
-				<Row style={{ marginBottom: "20px", margin: "0px" }}>
-					<Col md={6}>
-						<div className="input-with-title h-100">
-							<div
-								className="h-100"
-								style={{
-									display: "flex",
-									gap: "20px",
-									alignItems: "center",
-								}}
-							>
-								<p style={{ margin: "0px" }}>
-									{`UBO ${rowId} - Upload passport or ID Card`} (.jpg, .jpeg,
-									.png, .pdf):
-								</p>
-								<UploadButton
-									title="Select File"
-									accepted_formats=".jpg, .jpeg, .png, .pdf"
-									name="idFile"
-									function_={handleInputChanges}
-									rowId={rowId}
-									valueFunction={getUploadedFileName}
-								/>
-							</div>
-						</div>
-					</Col>
-					<Col md={6}>
-						<div className="input-with-title h-100">
-							<div
-								className="h-100"
-								style={{
-									display: "flex",
-									gap: "20px",
-									alignItems: "center",
-								}}
-							>
-								<p style={{ margin: "0px" }}>
-									{`UBO ${rowId} - Upload proof of address`} (.jpg, .jpeg, .png,
-									.pdf):
-								</p>
-								<UploadButton
-									title="Select File"
-									accepted_formats=".jpg, .jpeg, .png, .pdf"
-									name="proofOfAddressFile"
-									function_={handleInputChanges}
-									rowId={rowId}
-									valueFunction={getUploadedFileName}
-								/>
-							</div>
-						</div>
-					</Col>
-				</Row>
-				<hr />
-			</div>
-		);
-		setUBOsArray([...UBOsArray, newRow]);
-
 		let projectData_ = { ...projectDataRef.current };
-		if (
-			projectData_ &&
-			projectData_["payment"] &&
-			projectData_["payment"][`UBOs`] &&
-			projectData_["payment"][`UBOs`][`${rowId}`]
-		)
-			return null;
+		if (!projectData_["payment"]["UBOs"]) projectData_["payment"]["UBOs"] = {};
+		const rowId = Object.keys(projectData_["payment"]["UBOs"]).length + 1;
+
 		projectData_["payment"]["UBOs"] = {
 			...projectData_["payment"]["UBOs"],
 			[`${rowId}`]: {
@@ -289,18 +125,7 @@ export default function Story(props) {
 
 		props.setProjectData(projectData_);
 
-		console.log(projectData_);
 	};
-
-	if (
-		projectDataRef.current &&
-		projectDataRef.current["payment"] &&
-		projectDataRef.current["payment"][`UBOs`] &&
-		Object.keys(projectDataRef.current["payment"][`UBOs`]).length >
-			UBOsArray.length
-	) {
-		addUBORow();
-	}
 
 	return (
 		<div className="DashboardCreateProjectPayment" style={{ width: "100%" }}>
@@ -310,9 +135,15 @@ export default function Story(props) {
         Double-check your information—you agree the details you provide are true and acknowledge they can’t be changed once submitted."
 			/>
 			<div>
-				<Row style={{ padding: "3vw", margin: "0px" }}>
+				<Row style={{ padding: "3vw", marginLeft: "0px", marginRight: "0px" }}>
 					<h1 style={{ marginBottom: "30px" }}>Company Details</h1>
-					<Row style={{ marginBottom: "20px", margin: "0px" }}>
+					<Row
+						style={{
+							marginBottom: "20px",
+							marginLeft: "0px",
+							marginRight: "0px",
+						}}
+					>
 						<Col md={6}>
 							<div className="input-with-title">
 								<p
@@ -325,7 +156,7 @@ export default function Story(props) {
 								<input
 									className="atomic-text-input w-100"
 									id="companyName"
-									maxlength="60"
+									maxLength="60"
 									name="companyName"
 									placeholder="Enter your company name"
 									type="text"
@@ -352,7 +183,7 @@ export default function Story(props) {
 								<input
 									className="atomic-text-input w-100"
 									id="natureOfBusiness"
-									maxlength="60"
+									maxLength="60"
 									name="natureOfBusiness"
 									placeholder="Enter your nature of business"
 									type="text"
@@ -368,7 +199,13 @@ export default function Story(props) {
 							</div>
 						</Col>
 					</Row>
-					<Row style={{ marginBottom: "20px", margin: "0px" }}>
+					<Row
+						style={{
+							marginBottom: "20px",
+							marginLeft: "0px",
+							marginRight: "0px",
+						}}
+					>
 						<Col md={6}>
 							<div className="input-with-title">
 								<p
@@ -381,7 +218,7 @@ export default function Story(props) {
 								<input
 									className="atomic-text-input w-100"
 									id="companyAddress"
-									maxlength="200"
+									maxLength="200"
 									name="companyAddress"
 									placeholder="Enter your company address"
 									type="text"
@@ -408,7 +245,7 @@ export default function Story(props) {
 								<input
 									className="atomic-text-input w-100"
 									id="companyCity"
-									maxlength="60"
+									maxLength="60"
 									name="companyCity"
 									placeholder="Enter your company city"
 									type="text"
@@ -424,7 +261,13 @@ export default function Story(props) {
 							</div>
 						</Col>
 					</Row>
-					<Row style={{ marginBottom: "20px", margin: "0px" }}>
+					<Row
+						style={{
+							marginBottom: "20px",
+							marginLeft: "0px",
+							marginRight: "0px",
+						}}
+					>
 						<Col md={6}>
 							<div className="input-with-title">
 								<p
@@ -437,7 +280,7 @@ export default function Story(props) {
 								<input
 									className="atomic-text-input w-100"
 									id="companyZipCode"
-									maxlength="50"
+									maxLength="50"
 									name="companyZipCode"
 									placeholder="Enter your company address zip code"
 									type="text"
@@ -464,24 +307,28 @@ export default function Story(props) {
 								<div className="input-with-title">
 									<DropDown
 										title="Choose a country"
-										id="countries-dropdown"
-										options={countries.map((subcategory) => {
-											if (subcategory.name != "All") return subcategory.name;
-										})}
+										id="companyCountry"
+										options={countries.map((country) => country.nicename)}
 										function_={(event) =>
 											props.updateProjectData(event, "payment")
 										}
 										value={
 											props.projectData &&
 											props.projectData["payment"] &&
-											props.projectData["payment"].projectCountry
+											props.projectData["payment"].companyCountry
 										}
 									/>
 								</div>
 							</div>
 						</Col>
 					</Row>
-					<Row style={{ marginBottom: "20px", margin: "0px" }}>
+					<Row
+						style={{
+							marginBottom: "20px",
+							marginLeft: "0px",
+							marginRight: "0px",
+						}}
+					>
 						<Col lg={4}>
 							<div className="input-with-title">
 								<p
@@ -517,7 +364,7 @@ export default function Story(props) {
 								<input
 									className="atomic-text-input w-100"
 									id="companyRegistrationNumber"
-									maxlength="80"
+									maxLength="80"
 									name="companyRegistrationNumber"
 									placeholder="Company Reg No"
 									type="text"
@@ -544,7 +391,7 @@ export default function Story(props) {
 								<input
 									className="atomic-text-input w-100"
 									id="companyEstimatedAnnualTurnover"
-									maxlength="80"
+									maxLength="80"
 									name="companyEstimatedAnnualTurnover"
 									placeholder="Estimated annual turnover"
 									type="text"
@@ -560,7 +407,13 @@ export default function Story(props) {
 							</div>
 						</Col>
 					</Row>
-					<Row style={{ marginBottom: "20px", margin: "0px" }}>
+					<Row
+						style={{
+							marginBottom: "20px",
+							marginLeft: "0px",
+							marginRight: "0px",
+						}}
+					>
 						<Col md={6}>
 							<div className="input-with-title">
 								<p
@@ -574,9 +427,7 @@ export default function Story(props) {
 									<DropDown
 										title="Choose a country"
 										id="projectTaxCountry"
-										options={countries.map((subcategory) => {
-											if (subcategory.name != "All") return subcategory.name;
-										})}
+										options={countries.map((country) => country.nicename)}
 										function_={(event) =>
 											props.updateProjectData(event, "payment")
 										}
@@ -601,7 +452,7 @@ export default function Story(props) {
 								<input
 									className="atomic-text-input w-100"
 									id="taxIdNumber"
-									maxlength="80"
+									maxLength="80"
 									name="taxIdNumber"
 									placeholder="Company tax identification number"
 									type="text"
@@ -617,7 +468,13 @@ export default function Story(props) {
 							</div>
 						</Col>
 					</Row>
-					<Row style={{ marginBottom: "20px", margin: "0px" }}>
+					<Row
+						style={{
+							marginBottom: "20px",
+							marginLeft: "0px",
+							marginRight: "0px",
+						}}
+					>
 						<Col md={6}>
 							<div className="input-with-title">
 								<p
@@ -630,7 +487,7 @@ export default function Story(props) {
 								<input
 									className="atomic-text-input w-100"
 									id="whitePaperUrl"
-									maxlength="200"
+									maxLength="200"
 									name="whitePaperUrl"
 									placeholder="Company White paper URL"
 									type="text"
@@ -657,7 +514,7 @@ export default function Story(props) {
 								<input
 									className="atomic-text-input w-100"
 									id="tokenomicsUrl"
-									maxlength="80"
+									maxLength="80"
 									name="tokenomicsUrl"
 									placeholder="Company Tokenomics URL"
 									type="text"
@@ -673,7 +530,13 @@ export default function Story(props) {
 							</div>
 						</Col>
 					</Row>
-					<Row style={{ marginBottom: "20px", margin: "0px" }}>
+					<Row
+						style={{
+							marginBottom: "20px",
+							marginLeft: "0px",
+							marginRight: "0px",
+						}}
+					>
 						<Col md={6}>
 							<div className="input-with-title h-100">
 								<div
@@ -736,9 +599,189 @@ export default function Story(props) {
 					</Row>
 				</Row>
 				<hr />
-				<Row style={{ padding: "3vw", margin: "0px" }}>
+				<Row style={{ padding: "3vw", marginLeft: "0px", marginRight: "0px" }}>
 					<h1 style={{ marginBottom: "30px" }}>UBOs Details</h1>
-					{UBOsArray.map((item) => item)}
+					{
+						///////////
+						props.projectData &&
+							props.projectData["payment"] &&
+							props.projectData["payment"]["UBOs"] &&
+							Object.keys(props.projectData["payment"]["UBOs"]).map(
+								(item, i) => {
+									return (
+										<div style={{ marginBottom: "20px" }} id={`row-${item}`}>
+											<h3>{`UBO ${item} details`}</h3>
+											<Row
+												style={{
+													marginBottom: "20px",
+													marginLeft: "0px",
+													marginRight: "0px",
+												}}
+											>
+												<div className="input-with-title">
+													<p
+														style={{
+															marginBottom: "3px",
+														}}
+													>
+														{`UBO ${item} - full name`}
+													</p>
+													<input
+														className="atomic-text-input w-100"
+														id={`ubo-${item}-full-name`}
+														maxLength="100"
+														name={`fullName`}
+														placeholder={`UBO ${item} - full name`}
+														type="text"
+														onChange={(e) => handleInputChanges(e, `${item}`)}
+														value={
+															projectDataRef.current &&
+															projectDataRef.current["payment"] &&
+															projectDataRef.current["payment"]["UBOs"] &&
+															projectDataRef.current["payment"]["UBOs"][
+																`${item}`
+															] &&
+															projectDataRef.current["payment"]["UBOs"][
+																`${item}`
+															]["fullName"]
+														}
+													/>
+												</div>
+											</Row>
+											<Row
+												style={{
+													marginBottom: "20px",
+													marginLeft: "0px",
+													marginRight: "0px",
+												}}
+											>
+												<Col md={6}>
+													<div className="input-with-title">
+														<p
+															style={{
+																marginBottom: "3px",
+															}}
+														>
+															{`UBO ${item} - position`}
+														</p>
+														<input
+															className="atomic-text-input w-100"
+															id={`ubo-${item}-position`}
+															maxLength="100"
+															name={`position`}
+															placeholder={`UBO ${item} - position`}
+															type="text"
+															onChange={(e) => handleInputChanges(e, `${item}`)}
+															value={
+																projectDataRef.current &&
+																projectDataRef.current["payment"] &&
+																projectDataRef.current["payment"]["UBOs"] &&
+																projectDataRef.current["payment"]["UBOs"][
+																	`${item}`
+																] &&
+																projectDataRef.current["payment"]["UBOs"][
+																	`${item}`
+																]["position"]
+															}
+														/>
+													</div>
+												</Col>
+												<Col md={6}>
+													<div className="input-with-title">
+														<p
+															style={{
+																marginBottom: "3px",
+															}}
+														>
+															{`UBO ${item} - Date of Birth`}
+														</p>
+														<div className="input-with-title">
+															<Calendar
+																setProjectData={props.setProjectData}
+																projectDataRef={projectDataRef}
+																rowId={item}
+																name="dateOfBirth"
+																source="payment"
+																value={
+																	projectDataRef.current &&
+																	projectDataRef.current["payment"] &&
+																	projectDataRef.current["payment"][`UBOs`] &&
+																	projectDataRef.current["payment"][`UBOs`][
+																		`${item}`
+																	] &&
+																	projectDataRef.current["payment"][`UBOs`][
+																		`${item}`
+																	]["dateOfBirth"]
+																}
+															/>
+														</div>
+													</div>
+												</Col>
+											</Row>
+											<Row
+												style={{
+													marginBottom: "20px",
+													marginLeft: "0px",
+													marginRight: "0px",
+												}}
+											>
+												<Col md={6}>
+													<div className="input-with-title h-100">
+														<div
+															className="h-100"
+															style={{
+																display: "flex",
+																gap: "20px",
+																alignItems: "center",
+															}}
+														>
+															<p style={{ margin: "0px" }}>
+																{`UBO ${item} - Upload passport or ID Card`}{" "}
+																(.jpg, .jpeg, .png, .pdf):
+															</p>
+															<UploadButton
+																title="Select File"
+																accepted_formats=".jpg, .jpeg, .png, .pdf"
+																name="idFile"
+																function_={handleInputChanges}
+																rowId={item}
+																valueFunction={getUploadedFileName}
+															/>
+														</div>
+													</div>
+												</Col>
+												<Col md={6}>
+													<div className="input-with-title h-100">
+														<div
+															className="h-100"
+															style={{
+																display: "flex",
+																gap: "20px",
+																alignItems: "center",
+															}}
+														>
+															<p style={{ margin: "0px" }}>
+																{`UBO ${item} - Upload proof of address`} (.jpg,
+																.jpeg, .png, .pdf):
+															</p>
+															<UploadButton
+																title="Select File"
+																accepted_formats=".jpg, .jpeg, .png, .pdf"
+																name="proofOfAddressFile"
+																function_={handleInputChanges}
+																rowId={item}
+																valueFunction={getUploadedFileName}
+															/>
+														</div>
+													</div>
+												</Col>
+											</Row>
+											<hr />
+										</div>
+									);
+								}
+							)
+					}
 					<Button
 						variant="warning"
 						size="lg"
@@ -750,7 +793,7 @@ export default function Story(props) {
 					</Button>
 				</Row>
 
-				<Row style={{ padding: "3vw", margin: "0px" }}>
+				<Row style={{ padding: "3vw", marginLeft: "0px", marginRight: "0px" }}>
 					<div style={{ display: "flex", justifyContent: "space-between" }}>
 						<div style={{ textAlign: "left" }}>
 							<Button

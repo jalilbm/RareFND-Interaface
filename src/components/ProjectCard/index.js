@@ -49,11 +49,15 @@ export default function ProjectCard(props) {
 									</Card.Text>
 								</p>
 								<div style={{ marginTop: "auto" }}>
-									<Web3ContributeButton
-										staking_address={props.staking_address}
-										staking_abi={props.staking_abi}
-										projectLive={props.projectLive}
-									/>
+									{props.projectLive ? (
+										<Web3ContributeButton
+											staking_address={props.staking_address}
+											staking_abi={props.staking_abi}
+											projectLive={props.projectLive}
+										/>
+									) : (
+										<div></div>
+									)}
 								</div>
 							</div>
 						</Card.Body>

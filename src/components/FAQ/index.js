@@ -11,9 +11,7 @@ const text = `
 `;
 
 const FAQ = () => {
-	const onChange = (key) => {
-		console.log(key);
-	};
+	const onChange = (key) => {};
 
 	return (
 		<div className="faq-section">

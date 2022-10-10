@@ -32,7 +32,7 @@ const Card_ = (props) => (
 				}}
 				cover={
 					<img
-						alt="example"
+						alt="partner"
 						src={props.image}
 						style={{ borderRadius: "0.5rem 0.5rem 0 0" }}
 					/>

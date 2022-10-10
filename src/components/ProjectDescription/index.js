@@ -41,6 +41,7 @@ export default function ProjectDescription(props) {
 								price={_.price}
 								reserved={_.reserved}
 								project={_.project}
+								projectLive={props.projectLive}
 							/>
 						))}
 				</Col>

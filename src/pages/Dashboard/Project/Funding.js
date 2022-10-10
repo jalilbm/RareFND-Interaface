@@ -18,7 +18,7 @@ export default function Funding(props) {
 				title="Let’s talk about money"
 				head="Plan and manage your project’s finances."
 			/>
-			<Row style={{ padding: "3vw", margin: "0px" }}>
+			<Row style={{ padding: "3vw", marginLeft: "0px", marginRight: "0px" }}>
 				<Col md={6}>
 					<div className="grid-col-12 grid-col-4-lg hide block-md">
 						<h2
@@ -55,7 +55,7 @@ export default function Funding(props) {
 						<input
 							className="atomic-text-input w-100"
 							id="projectFundsAmount"
-							maxlength="60"
+							maxLength="60"
 							name="projectFundsAmount"
 							placeholder="$ 0.0"
 							type="text"
@@ -71,7 +71,7 @@ export default function Funding(props) {
 				</Col>
 			</Row>
 			<hr />
-			<Row style={{ padding: "3vw", margin: "0px" }}>
+			<Row style={{ padding: "3vw", marginLeft: "0px", marginRight: "0px" }}>
 				<Col md={6}>
 					<div className="grid-col-12 grid-col-4-lg hide block-md">
 						<h2
@@ -129,7 +129,7 @@ export default function Funding(props) {
 					</div>
 				</Col>
 			</Row>
-			<Row style={{ padding: "3vw", margin: "0px" }}>
+			<Row style={{ padding: "3vw", marginLeft: "0px", marginRight: "0px" }}>
 				<div style={{ display: "flex", justifyContent: "space-between" }}>
 					<div style={{ textAlign: "left" }}>
 						<Button

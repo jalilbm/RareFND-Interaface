@@ -1,35 +1,58 @@
 import SideBar from "../../../components/DashboardSideBare";
+import DialogPopup from "../../../components/DialogPopup";
 import "./profile.scss";
 import PhoneInput from "react-phone-input-2";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import useAxios from "../../../utils/useAxios/useAxios";
 
 export default function DashboardProfile() {
 	const location = useLocation();
 	const [userData, setUserData] = useState({});
+	let api = useAxios();
 
 	useEffect(() => {
-		const tokens = JSON.parse(localStorage.getItem("authTokens"));
-		const access = tokens.access;
-
-		axios
-			.get(process.env.REACT_APP_BASE_URL + "/api/user/profile_info/", {
-				headers: {
-					Authorization: `Bearer ${access}`,
-				},
-			})
-			.then((response) => {
-				console.log(response.data);
-				setUserData(response.data);
-			});
+		api.get("/api/user/profile_info/").then((response) => {
+			setUserData(response.data);
+		});
 	}, []);
+
+	const handleChanges = (event) => {
+		const { name, value } = event.target;
+		if (userData) {
+			setUserData({
+				...userData,
+				[name]: value,
+			});
+		}
+	};
+
+	const saveProfile = () => {
+		let tmp = userData;
+		if (!`${userData.phone}`.includes("+")) {
+			tmp = { ...tmp, phone: `+${userData.phone}` };
+		}
+
+		api.put("/api/user/update/", tmp).then((response) => {
+			if (response.status === 200) {
+				window.alert("Account Updated");
+				// <DialogPopup
+				// 	title="Account Updated"
+				// 	description="Your account information have been updated successfully"
+				// 	show={true}
+				// 	// function_={() => setAccountCreated(false)}
+				// />;
+				// console.log("fjluisdhfjoiadjhfugyks");
+			}
+		});
+	};
 
 	return (
 		<div className="dashboard-profile">
 			{location.pathname !== "/dashboard/projects" && <SideBar />}
 			<div className="dashboard-profile-container">
-				<div className="row">
+				<div className="row" style={{ width: "100%" }}>
 					<div className="col-md-5 border-right">
 						<div className="d-flex flex-column align-items-center text-center p-3 py-5">
 							<img
@@ -55,17 +78,21 @@ export default function DashboardProfile() {
 								<div className="col-md-6">
 									<label className="labels">Name</label>
 									<input
+										name="first_name"
 										type="text"
 										className="form-control"
 										value={userData && userData.first_name}
+										onChange={handleChanges}
 									/>
 								</div>
 								<div className="col-md-6">
 									<label className="labels">last name</label>
 									<input
+										name="last_name"
 										type="text"
 										className="form-control"
 										value={userData && userData.last_name}
+										onChange={handleChanges}
 									/>
 								</div>
 							</div>
@@ -74,17 +101,21 @@ export default function DashboardProfile() {
 								<div className="col-md-6">
 									<label className="labels">Email</label>
 									<input
+										name="email"
 										type="text"
 										className="form-control"
 										value={userData && userData.email}
+										onChange={handleChanges}
 									/>
 								</div>
 								<div className="col-md-6">
 									<label className="labels">Username</label>
 									<input
+										name="username"
 										type="text"
 										className="form-control"
 										value={userData && userData.username}
+										onChange={handleChanges}
 									/>
 								</div>
 							</div>
@@ -98,9 +129,12 @@ export default function DashboardProfile() {
 										classNameName="mt-1"
 										inputStyle={{ width: "100%" }}
 										value={userData && userData.phone}
-										// onChange={(value) =>
-										// 	setFormValues({ ...formValues, phone: value })
-										// }
+										onChange={(value) =>
+											setUserData({
+												...userData,
+												phone: `${value}`,
+											})
+										}
 										inputProps={{
 											name: "phone",
 											// required: true,
@@ -113,6 +147,7 @@ export default function DashboardProfile() {
 								<button
 									className="btn btn-primary profile-button"
 									type="button"
+									onClick={saveProfile}
 								>
 									Save Profile
 								</button>

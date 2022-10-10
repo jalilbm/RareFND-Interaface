@@ -41,6 +41,7 @@ export default function Project(props) {
 				description={projectData.description}
 				projectId={projectData.id}
 				incentivesData={incentivesData}
+				projectLive={projectData.live}
 			/>
 		</div>
 	);

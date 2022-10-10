@@ -13,169 +13,18 @@ export default function Funding(props) {
 	projectDataRef.current = props.projectData;
 
 	const handleInputChanges = (e, rowId) => {
-		const { name, value } = e.target;
+		let { id, name, value } = e.target;
 		let projectData_ = { ...projectDataRef.current };
 		projectData_["rewards"][rowId] = {
 			...projectData_["rewards"][rowId],
 			[name]: value,
 		};
-
-		console.log(projectData_);
 		props.setProjectData(projectData_);
 	};
 
 	const addRewardRow = () => {
-		const rowId = Object.keys(rewardsArray).length + 1;
-		let newRow = (
-			<div style={{ marginBottom: "20px" }} id={`row-${rowId}`}>
-				<Row>
-					<Col>
-						<h3>{`Incentive ${rowId}`}</h3>
-						<div className="input-with-title">
-							<p
-								style={{
-									marginBottom: "3px",
-								}}
-							>
-								Incentive Title
-							</p>
-							<input
-								className="atomic-text-input w-100"
-								id="incentiveTitle"
-								maxlength="60"
-								name="incentiveTitle"
-								placeholder="Title"
-								type="text"
-								onChange={(e) => handleInputChanges(e, `${rowId}`)}
-								value={
-									props.projectData &&
-									props.projectData["rewards"] &&
-									props.projectData["rewards"][`${rowId}`] &&
-									props.projectData["rewards"][`${rowId}`]["incentiveTitle"]
-								}
-							/>
-						</div>
-						<div className="input-with-title">
-							<p
-								style={{
-									marginBottom: "3px",
-								}}
-							>
-								Incentive description
-							</p>
-							<textarea
-								className="atomic-text-input w-100 h-50"
-								id="incentiveDescription"
-								maxlength="135"
-								name="incentiveDescription"
-								placeholder="Gently brings awareness to self-care activities, using encouraging push notifications, rather than guilt or shame."
-								onChange={(e) => handleInputChanges(e, `${rowId}`)}
-								value={
-									props.projectData &&
-									props.projectData["rewards"] &&
-									props.projectData["rewards"][`${rowId}`] &&
-									props.projectData["rewards"][`${rowId}`][
-										"incentiveDescription"
-									]
-								}
-							></textarea>
-						</div>
-						<p
-							style={{
-								marginBottom: "3px",
-							}}
-						>
-							Estimated delivery
-						</p>
-						<div className="input-with-title">
-							<Calendar
-								setProjectData={props.setProjectData}
-								projectDataRef={projectDataRef}
-								rowId={rowId}
-								name="incentiveEstimatedDelivery"
-								value={
-									props.projectData &&
-									props.projectData["rewards"] &&
-									props.projectData["rewards"][`${rowId}`] &&
-									props.projectData["rewards"][`${rowId}`][
-										"incentiveEstimatedDelivery"
-									]
-								}
-								source="rewards"
-							/>
-						</div>
-						<div className="input-with-title">
-							<p
-								style={{
-									marginBottom: "3px",
-								}}
-							>
-								Available items
-							</p>
-							<input
-								className="atomic-text-input w-100"
-								id="availableIncentives"
-								maxlength="60"
-								name="availableIncentives"
-								placeholder="0"
-								type="text"
-								onChange={(e) => handleInputChanges(e, `${rowId}`)}
-								value={
-									props.projectData &&
-									props.projectData["rewards"] &&
-									props.projectData["rewards"][`${rowId}`] &&
-									props.projectData["rewards"][`${rowId}`][
-										"availableIncentives"
-									]
-								}
-							/>
-						</div>
-						<div className="input-with-title">
-							<p
-								style={{
-									marginBottom: "3px",
-								}}
-							>
-								Required contribution amount
-							</p>
-							<input
-								className="atomic-text-input w-100"
-								id="incentivePrice"
-								maxlength="60"
-								name="incentivePrice"
-								placeholder="$ 0.0"
-								type="text"
-								onChange={(e) => handleInputChanges(e, `${rowId}`)}
-								value={
-									props.projectData &&
-									props.projectData["rewards"] &&
-									props.projectData["rewards"][`${rowId}`] &&
-									props.projectData["rewards"][`${rowId}`]["incentivePrice"]
-								}
-							/>
-						</div>
-					</Col>
-					<Col>
-						<ExtensibleInputs
-							title="Incentive includes:"
-							className="incentive-input"
-							maxLength={40}
-							placeholder="Free ticket to a cinema movie"
-							projectDataRef={projectDataRef}
-							setProjectData={props.setProjectData}
-							rowId={`${rowId}`}
-							style={{ width: "100%" }}
-						/>
-					</Col>
-				</Row>
-				<hr />
-			</div>
-		);
-		setRewardsArray({ ...rewardsArray, [rowId]: newRow });
-
 		let projectData_ = { ...projectDataRef.current };
-		if (projectData_["rewards"] && projectData_["rewards"][`${rowId}`])
-			return null;
+		const rowId = Object.keys(projectData_["rewards"]).length + 1;
 		projectData_["rewards"] = {
 			...projectData_["rewards"],
 			[`${rowId}`]: {
@@ -184,23 +33,13 @@ export default function Funding(props) {
 				incentiveEstimatedDelivery: null,
 				availableIncentives: null,
 				incentivePrice: null,
-				includedIncentives: [],
+				incentives: [],
 			},
 		};
 
 		props.setProjectData(projectData_);
 
-		console.log(projectData_);
 	};
-
-	if (
-		projectDataRef.current &&
-		projectDataRef.current["rewards"] &&
-		Object.keys(projectDataRef.current["rewards"]).length >
-			Object.keys(rewardsArray).length
-	) {
-		return addRewardRow();
-	}
 
 	return (
 		<div className="DashboardCreateProjectRewards">
@@ -208,8 +47,154 @@ export default function Funding(props) {
 				title="Add your rewards"
 				head="Offer simple, meaningful ways to bring backers closer to your project and celebrate it coming to life."
 			/>
-			<Row style={{ padding: "3vw", margin: "0px" }}>
-				{Object.keys(rewardsArray).map((item, i) => rewardsArray[item])}
+			<Row style={{ padding: "3vw", marginLeft: "0px", marginRight: "0px" }}>
+				{Object.keys(props.projectData["rewards"]).map((item, i) => {
+					return (
+						<div style={{ marginBottom: "20px" }} id={`row-${item}`}>
+							<Row>
+								<Col>
+									<h3>{`Incentive ${item}`}</h3>
+									<div className="input-with-title">
+										<p
+											style={{
+												marginBottom: "3px",
+											}}
+										>
+											Incentive Title
+										</p>
+										<input
+											className="atomic-text-input w-100"
+											id={`incentiveTitle${item}`}
+											maxLength="60"
+											name={`incentiveTitle`}
+											placeholder="Title"
+											type="text"
+											onChange={(e) => handleInputChanges(e, `${item}`)}
+											value={
+												props.projectData &&
+												props.projectData.rewards &&
+												props.projectData.rewards[`${item}`] &&
+												props.projectData.rewards[`${item}`].incentiveTitle
+											}
+										/>
+									</div>
+									<div className="input-with-title">
+										<p
+											style={{
+												marginBottom: "3px",
+											}}
+										>
+											Incentive description
+										</p>
+										<textarea
+											className="atomic-text-input w-100 h-50"
+											id={`incentiveDescription${item}`}
+											maxLength="135"
+											name={`incentiveDescription`}
+											placeholder="Gently brings awareness to self-care activities, using encouraging push notifications, rather than guilt or shame."
+											onChange={(e) => handleInputChanges(e, `${item}`)}
+											value={
+												props.projectData &&
+												props.projectData.rewards &&
+												props.projectData.rewards[`${item}`] &&
+												props.projectData.rewards[`${item}`]
+													.incentiveDescription
+											}
+										></textarea>
+									</div>
+									<p
+										style={{
+											marginBottom: "3px",
+										}}
+									>
+										Estimated delivery
+									</p>
+									<div className="input-with-title">
+										<Calendar
+											setProjectData={props.setProjectData}
+											projectDataRef={projectDataRef}
+											rowId={item}
+											name="incentiveEstimatedDelivery"
+											value={
+												props.projectData &&
+												props.projectData["rewards"] &&
+												props.projectData["rewards"][`${item}`] &&
+												props.projectData["rewards"][`${item}`][
+													"incentiveEstimatedDelivery"
+												]
+											}
+											source="rewards"
+										/>
+									</div>
+									<div className="input-with-title">
+										<p
+											style={{
+												marginBottom: "3px",
+											}}
+										>
+											Available items
+										</p>
+										<input
+											className="atomic-text-input w-100"
+											id={`availableIncentives${item}`}
+											maxLength="60"
+											name={`availableIncentives`}
+											placeholder="0"
+											type="text"
+											onChange={(e) => handleInputChanges(e, `${item}`)}
+											value={
+												props.projectData &&
+												props.projectData["rewards"] &&
+												props.projectData["rewards"][`${item}`] &&
+												props.projectData["rewards"][`${item}`][
+													"availableIncentives"
+												]
+											}
+										/>
+									</div>
+									<div className="input-with-title">
+										<p
+											style={{
+												marginBottom: "3px",
+											}}
+										>
+											Required contribution amount
+										</p>
+										<input
+											className="atomic-text-input w-100"
+											id={`incentivePrice${item}`}
+											name="incentivePrice"
+											placeholder="$ 0.0"
+											type="text"
+											onChange={(e) => handleInputChanges(e, `${item}`)}
+											value={
+												props.projectData &&
+												props.projectData["rewards"] &&
+												props.projectData["rewards"][`${item}`] &&
+												props.projectData["rewards"][`${item}`][
+													"incentivePrice"
+												]
+											}
+										/>
+									</div>
+								</Col>
+								<Col>
+									<ExtensibleInputs
+										title="Incentive includes:"
+										className="incentive-input"
+										maxLength={40}
+										placeholder="Free ticket to a cinema movie"
+										projectDataRef={projectDataRef}
+										setProjectData={props.setProjectData}
+										rowId={`${item}`}
+										style={{ width: "100%" }}
+									/>
+								</Col>
+							</Row>
+							<hr />
+						</div>
+					);
+				})}
 				<Button
 					variant="warning"
 					size="lg"
@@ -220,7 +205,7 @@ export default function Funding(props) {
 					Add Incentive
 				</Button>
 			</Row>
-			<Row style={{ padding: "3vw", margin: "0px" }}>
+			<Row style={{ padding: "3vw", marginLeft: "0px", marginRight: "0px" }}>
 				<div style={{ display: "flex", justifyContent: "space-between" }}>
 					<div style={{ textAlign: "left" }}>
 						<Button

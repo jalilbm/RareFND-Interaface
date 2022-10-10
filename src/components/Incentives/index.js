@@ -3,7 +3,7 @@ import { Col, Row } from "react-bootstrap";
 import ContributeBtn from "../Web3ContributeButton";
 
 export default function index(props) {
-	const included_incentives = props.included_incentives.split(";");
+	const included_incentives = props.included_incentives;
 	return (
 		<div
 			className="incentive border-1 mx-auto w-100"
@@ -41,9 +41,6 @@ export default function index(props) {
 				<br />
 				{new Date(props.estimated_delivery).toDateString()}
 			</p>
-			{/* <p className="estimated-delivery-date" style={{ fontSize: "14px" }}>
-				
-			</p> */}
 			<Row>
 				<Col>
 					<div
@@ -106,6 +103,7 @@ export default function index(props) {
 							border: "none",
 							width: "100%",
 						}}
+						disabled={!props.projectLive}
 					>
 						CONTINUE
 					</Button>

@@ -4,6 +4,7 @@ import Card_ from "./card.js";
 import React, { Component } from "react";
 import Slider from "react-slick";
 import metapolis from "../../assets/logos/metapolis.jpeg";
+import safemoon from "../../assets/logos/safemoon.jpeg";
 import hacken from "../../assets/logos/Hacken.jpeg";
 import bsc from "../../assets/logos/bsc.svg";
 import FCFPay from "../../assets/logos/FCFPay.png";
@@ -97,6 +98,13 @@ export default function Partners() {
 						</div>
 						<div>
 							<Card_ image={Embr} title="Embr" description="www.joinembr.com" />
+						</div>
+						<div>
+							<Card_
+								image={safemoon}
+								title="Safemoon"
+								description="swap.safemoon.com/"
+							/>
 						</div>
 					</Slider>
 				</div>

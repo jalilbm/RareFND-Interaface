@@ -55,47 +55,34 @@ export const AuthProvider = ({ children }) => {
 			})
 			.then((response) => {
 				if (response.status === 200) {
-					console.log("updateToken TRUE");
 					setAuthTokens(response.data);
 					setUser(jwt_decode(response.data.access));
 					localStorage.setItem("authTokens", JSON.stringify(response.data));
 				} else {
-					console.log("updateToken FALSE");
 					logOut();
 				}
 			})
-			.catch((error) => {
-				console.log("updateToken ERROR", error);
-			});
+			.catch((error) => {});
 		if (loading) {
 			setLoading(false);
 		}
 	};
 	let contextData = {
-		loginUser: loginUser,
 		user: user,
-		logOut: logOut,
 		authTokens: authTokens,
+		setAuthTokens: setAuthTokens,
+		setUser: setUser,
+		loginUser: loginUser,
+		logOut: logOut,
 	};
 
 	useEffect(() => {
 		if (authTokens) {
-			if (loading) {
-				console.log("loading");
-				updateToken();
-			}
-			let interval = setInterval(() => {
-				if (authTokens) {
-					updateToken();
-				}
-				// }, 1000 * 60 * 4);
-			}, 1000 * 5);
-
-			return () => clearInterval(interval);
-		} else {
-			setLoading(false);
+			setUser(jwt_decode(authTokens.access));
 		}
-	}, [authTokens, contextData]);
+		setLoading(false);
+	}, [authTokens, loading]);
+
 	return (
 		<AuthContext.Provider value={contextData}>
 			{loading ? null : children}

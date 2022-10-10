@@ -12,18 +12,7 @@ export default function Basics(props) {
 	const [categories, setCategories] = useState([{}]);
 	const [subCategories, setSubCategories] = useState([{}]);
 	const [category, setCategory] = useState(null);
-	const [countries, setCountries] = useState([
-		{ name: "India" },
-		{ name: "Kingdom of Bahrain" },
-		{ name: "Kingdom of Saudi Arabia" },
-		{ name: "State of Kuwait" },
-		{ name: "Sultanate of Oman" },
-		{ name: "State of Qatar" },
-		{ name: "Uganda" },
-		{ name: "United Arab Emirates" },
-		{ name: "United Kingdom" },
-		{ name: "United States of America" },
-	]);
+	const [countries, setCountries] = useState([]);
 
 	useEffect(() => {
 		axios
@@ -31,11 +20,15 @@ export default function Basics(props) {
 			.then((response) => {
 				setCategories(response.data.categories);
 			});
-		// axios
-		// 	.get(process.env.REACT_APP_BASE_URL + "/api/country/")
-		// 	.then((response) => {
-		// 		setCountries(response.data.categories);
-		// 	});
+		axios
+			.get(process.env.REACT_APP_BASE_URL + "/api/eligible_country/")
+			.then((response) => {
+				let eligible_countries = response.data.eligible_countries;
+				eligible_countries.sort(
+					(a, b) => parseFloat(a.nicename) - parseFloat(b.nicename)
+				);
+				setCountries(eligible_countries);
+			});
 	}, []);
 
 	useEffect(() => {
@@ -55,8 +48,9 @@ export default function Basics(props) {
 				.then((response) => {
 					setSubCategories(response.data.subcategories);
 					if (response.data.subcategories.length == 0) {
-						document.getElementById("projectSubcategory").textContent =
-							"No Subcategories";
+						if (document.getElementById("projectSubcategory"))
+							document.getElementById("projectSubcategory").textContent =
+								"No Subcategories";
 						props.updateProjectData(
 							{ target: { projectSubcategory: null } },
 							"basics"
@@ -118,7 +112,7 @@ export default function Basics(props) {
 							required
 							className="atomic-text-input w-100"
 							id="projectTitle"
-							maxlength="60"
+							maxLength="60"
 							name="projectTitle"
 							placeholder="Aloe Bud: Self-care pocket companion for iOS"
 							type="text"
@@ -143,7 +137,7 @@ export default function Basics(props) {
 							required
 							className="atomic-text-input w-100 h-50"
 							id="projectHead"
-							maxlength="135"
+							maxLength="135"
 							name="projectHead"
 							placeholder="Gently brings awareness to self-care activities, using encouraging push notifications, rather than guilt or shame."
 							value={
@@ -157,7 +151,7 @@ export default function Basics(props) {
 				</Col>
 			</Row>
 			<hr />
-			<Row style={{ padding: "3vw", margin: "0px" }}>
+			<Row style={{ padding: "3vw", marginLeft: "0px", marginRight: "0px" }}>
 				<Col md={6}>
 					<div className="grid-col-12 grid-col-4-lg hide block-md">
 						<h2
@@ -266,7 +260,7 @@ export default function Basics(props) {
 				</Col>
 			</Row>
 			<hr />
-			<Row style={{ padding: "3vw", margin: "0px" }}>
+			<Row style={{ padding: "3vw", marginLeft: "0px", marginRight: "0px" }}>
 				<Col md={6}>
 					<div className="grid-col-12 grid-col-4-lg hide block-md">
 						<h2
@@ -298,7 +292,7 @@ export default function Basics(props) {
 							required
 							className="atomic-text-input w-100"
 							id="projectAddress"
-							maxlength="150"
+							maxLength="150"
 							name="projectAddress"
 							placeholder="DMCC Crypto Centre, 48th Floor, Almas Tower, JLT"
 							type="text"
@@ -322,9 +316,7 @@ export default function Basics(props) {
 						<DropDown
 							title="Choose a country"
 							id="projectCountry"
-							options={countries.map((country) => {
-								if (country.name != "All") return country.name;
-							})}
+							options={countries.map((country) => country.nicename)}
 							function_={(event) => props.updateProjectData(event, "basics")}
 							value={
 								props.projectData &&
@@ -336,7 +328,7 @@ export default function Basics(props) {
 				</Col>
 			</Row>
 			<hr />
-			<Row style={{ padding: "3vw", margin: "0px" }}>
+			<Row style={{ padding: "3vw", marginLeft: "0px", marginRight: "0px" }}>
 				<Col md={6}>
 					<div className="grid-col-12 grid-col-4-lg hide block-md">
 						<h2
@@ -388,7 +380,7 @@ export default function Basics(props) {
 				</Col>
 			</Row>
 			<hr />
-			<Row style={{ padding: "3vw", margin: "0px" }}>
+			<Row style={{ padding: "3vw", marginLeft: "0px", marginRight: "0px" }}>
 				<Col md={6}>
 					<div className="grid-col-12 grid-col-4-lg hide block-md">
 						<h2
@@ -433,7 +425,7 @@ export default function Basics(props) {
 				</Col>
 			</Row>
 			<hr />
-			<Row style={{ padding: "3vw", margin: "0px" }}>
+			<Row style={{ padding: "3vw", marginLeft: "0px", marginRight: "0px" }}>
 				<Col md={6}>
 					<div className="grid-col-12 grid-col-4-lg hide block-md">
 						<h2
@@ -474,7 +466,7 @@ export default function Basics(props) {
 					</div>
 				</Col>
 			</Row>
-			<Row style={{ padding: "3vw", margin: "0px" }}>
+			<Row style={{ padding: "3vw", marginLeft: "0px", marginRight: "0px" }}>
 				<div style={{ textAlign: "right" }}>
 					<Button
 						variant="warning"

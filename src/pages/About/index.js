@@ -36,7 +36,6 @@ export default function About() {
 			)
 			.then(
 				(result) => {
-					console.log(result.text);
 					console.log("message sent successfully");
 					setDialogPopupData({
 						title: "Email sent successfully",

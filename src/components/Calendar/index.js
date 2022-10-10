@@ -20,7 +20,6 @@ export default function MyApp(props) {
 				[props.name]: value,
 			};
 
-			console.log(projectData_);
 			props.setProjectData(projectData_);
 		} else if (props.setProjectData && value && props.source === "payment") {
 			let projectData_ = { ...props.projectDataRef.current };
@@ -29,7 +28,6 @@ export default function MyApp(props) {
 				[props.name]: value,
 			};
 
-			console.log(projectData_);
 			props.setProjectData(projectData_);
 		}
 	}, [value]);

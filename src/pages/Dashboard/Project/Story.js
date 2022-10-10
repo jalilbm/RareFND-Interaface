@@ -19,7 +19,7 @@ export default function Story(props) {
 				title="Introduce your project"
 				head="Tell people why they should be excited about your project. Get specific but be clear and be brief."
 			/>
-			<Row style={{ padding: "3vw", margin: "0px" }}>
+			<Row style={{ padding: "3vw", marginLeft: "0px", marginRight: "0px" }}>
 				<h4>Project description</h4>
 				<p style={{ marginBottom: "40px" }}>
 					Describe what you're raising funds to do, why you care about it, how
@@ -38,19 +38,14 @@ export default function Story(props) {
 						}
 						onReady={(editor) => {
 							// You can store the "editor" and use when it is needed.
-							console.log("Editor is ready to use!", editor);
 						}}
 						onChange={(event, editor) => handleChange(event, editor)}
-						onBlur={(event, editor) => {
-							console.log("Blur.", editor);
-						}}
-						onFocus={(event, editor) => {
-							console.log("Focus.", editor);
-						}}
+						onBlur={(event, editor) => {}}
+						onFocus={(event, editor) => {}}
 					/>
 				</div>
 			</Row>
-			<Row style={{ padding: "3vw", margin: "0px" }}>
+			<Row style={{ padding: "3vw", marginLeft: "0px", marginRight: "0px" }}>
 				<div style={{ display: "flex", justifyContent: "space-between" }}>
 					<div style={{ textAlign: "left" }}>
 						<Button

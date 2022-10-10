@@ -9,7 +9,9 @@ export default function Profile_(props) {
 			<div className="dashboard-profile-container">
 				<div className="container rounded bg-white mt-5 mb-5">
 					<Profile />
-					<Row style={{ padding: "3vw", margin: "0px" }}>
+					<Row
+						style={{ padding: "3vw", marginLeft: "0px", marginRight: "0px" }}
+					>
 						<div style={{ display: "flex", justifyContent: "space-between" }}>
 							<div style={{ textAlign: "left" }}>
 								<Button

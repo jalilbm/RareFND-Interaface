@@ -19,5 +19,7 @@
 	.drop-menu {
 		width: 100%;
 		border-radius: 0px;
+		max-height: 30vh;
+		overflow-y: scroll;
 	}
 }

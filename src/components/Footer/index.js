@@ -44,8 +44,8 @@ export default function Footer() {
 												className="my-3 text-secondary"
 												style={{ width: "250px" }}
 											>
-												DMCC Crypto Centre, 48th Floor, Almas Tower, JLT, UAE PO
-												BOX 48800.
+												RARE FND LIMITED, 86-90 Paul Street, London, England,
+												EC2A 4NE (14325862)
 											</a>
 										</p>
 									</CDBBox>

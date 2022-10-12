@@ -30,6 +30,7 @@ export default function ProjectDescription(props) {
 					></div>
 				</Col>
 				<Col md={4}>
+					<h1 className="text-center">Incentives</h1>
 					{incentivesData &&
 						Array.from(incentivesData).map((_, idx) => (
 							<Incentives

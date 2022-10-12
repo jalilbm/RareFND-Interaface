@@ -14,7 +14,17 @@ export default function ProjectCard(props) {
 	let api = useAxios();
 	let { user } = useContext(AuthContext);
 	const [subscribed, setSubscribed] = useState(false);
+	const [subscribeButtonText, setSubscribeButtonText] = useState("");
+	const [numberOfSubscribers, setNumberOfSubscribers] = useState(0);
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (subscribed) {
+			setSubscribeButtonText("Subscribed");
+		} else {
+			setSubscribeButtonText("Subscribe to project");
+		}
+	}, [subscribed]);
 
 	useEffect(() => {
 		if (props.projectId && user)
@@ -33,29 +43,14 @@ export default function ProjectCard(props) {
 	const subscribeToProject = () => {
 		if (user) {
 			api
-				.get(`/api/project/checked_subscribed/${props.projectId}/`)
+				.put(`/api/project/subscribe/`, { projectId: props.projectId })
 				.then((response) => {
 					if (response.status === 200) {
-						setSubscribed(response.data.subscribed);
-						return response.data.subscribed;
+						window.alert("Subscribed successfully");
+						setSubscribed(true);
+						document.getElementById("subscribe-btn").textContent = "Subscribed";
 					} else {
-						console.log(response);
-						window.alert("Something went wrong please refresh");
-						return true;
-					}
-				})
-				.then((response) => {
-					if (!response) {
-						api
-							.put(`/api/project/subscribe/`, { projectId: props.projectId })
-							.then((response) => {
-								if (response.status === 200) {
-									window.alert("Subscribed successfully");
-									setSubscribed(true);
-								} else {
-									window.alert("Couldn't subscribe");
-								}
-							});
+						window.alert("Couldn't subscribe, please try again in few seconds");
 					}
 				});
 		} else {
@@ -113,20 +108,23 @@ export default function ProjectCard(props) {
 											projectLive={props.projectLive}
 										/>
 									) : (
-										<Button
-											id="subscribe-btn"
-											variant="warning"
-											size="lg"
-											style={{
-												width: "100%",
-												fontSize: "2vh",
-												maxHeight: "100%",
-											}}
-											onClick={subscribeToProject}
-											disabled={subscribed}
-										>
-											Subscribe to project
-										</Button>
+										<div>
+											<Button
+												id="subscribe-btn"
+												variant="warning"
+												size="lg"
+												style={{
+													width: "100%",
+													fontSize: "2vh",
+													maxHeight: "100%",
+												}}
+												onClick={subscribeToProject}
+												disabled={subscribed}
+											>
+												{subscribeButtonText}
+											</Button>
+											<p style={{ marginTop: "10px" }}></p>
+										</div>
 									)}
 								</div>
 							</div>

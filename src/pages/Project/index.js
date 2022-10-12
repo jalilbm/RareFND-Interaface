@@ -37,7 +37,7 @@ export default function Project(props) {
 				projectLive={projectData.live}
 				staking_address={projectData.staking_address}
 			/>
-			<ProjectCurrentContributions />
+			{projectData.live && <ProjectCurrentContributions />}
 			<ProjectDescription
 				description={projectData.description}
 				projectId={projectData.id}

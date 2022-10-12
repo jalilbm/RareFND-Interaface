@@ -6,10 +6,15 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import useAxios from "../../../utils/useAxios/useAxios";
+import validator from "validator";
+import { ErrorSharp } from "@mui/icons-material";
 
-export default function DashboardProfile() {
+export default function DashboardProfile(props) {
 	const location = useLocation();
 	const [userData, setUserData] = useState({});
+	const [errors, setErrors] = useState({});
+	const [formErrors, setFormErrors] = useState({});
+	const [submitted, setSubmitted] = useState(false);
 	let api = useAxios();
 
 	useEffect(() => {
@@ -20,6 +25,9 @@ export default function DashboardProfile() {
 
 	const handleChanges = (event) => {
 		const { name, value } = event.target;
+		let tmp = { ...formErrors };
+		delete tmp[name];
+		setFormErrors({ ...tmp });
 		if (userData) {
 			setUserData({
 				...userData,
@@ -29,24 +37,77 @@ export default function DashboardProfile() {
 	};
 
 	const saveProfile = () => {
+		if (Object.keys(formErrors).length > 0) {
+			setSubmitted(!submitted);
+		}
 		let tmp = userData;
-		if (!`${userData.phone}`.includes("+")) {
+		if (userData.phone !== "" && !`${userData.phone}`.includes("+")) {
 			tmp = { ...tmp, phone: `+${userData.phone}` };
 		}
+		setUserData({ ...tmp });
+		if (!tmp.username) {
+			setFormErrors({
+				...useAxios,
+				email: "Email required",
+			});
+			return;
+		}
 
-		api.put("/api/user/update/", tmp).then((response) => {
-			if (response.status === 200) {
-				window.alert("Account Updated");
-				// <DialogPopup
-				// 	title="Account Updated"
-				// 	description="Your account information have been updated successfully"
-				// 	show={true}
-				// 	// function_={() => setAccountCreated(false)}
-				// />;
-				// console.log("fjluisdhfjoiadjhfugyks");
-			}
-		});
+		if (!tmp.email) {
+			setFormErrors({
+				...useAxios,
+				email: "Email required",
+			});
+			return;
+		}
+
+		api
+			.get(
+				process.env.REACT_APP_BASE_URL + `/api/unique/username/${tmp.username}/`
+			)
+			.then((response) => {
+				if (!response.data || !response.data.valid) {
+					setFormErrors({
+						...useAxios,
+						username: "Username already exists",
+					});
+				}
+			})
+			.then(() => {
+				api
+					.get(
+						process.env.REACT_APP_BASE_URL + `/api/unique/email/${tmp.email}/`
+					)
+
+					.then((response) => {
+						if (!response.data || !response.data.valid) {
+							setFormErrors({
+								...useAxios,
+								email: "Email already exists",
+							});
+						}
+					})
+					.then(() => {
+						setSubmitted(!submitted);
+					});
+			});
 	};
+
+	useEffect(() => {
+		if (Object.keys(userData).length > 0) {
+			if (Object.keys(formErrors).length === 0) {
+				api.put("/api/user/update/", userData).then((response) => {
+					if (response.status === 200) {
+						window.alert("Account Updated");
+					} else {
+						window.alert(JSON.stringify(response.response.data.errors));
+					}
+				});
+			} else {
+				window.alert("Error");
+			}
+		}
+	}, [submitted]);
 
 	return (
 		<div className="dashboard-profile">
@@ -76,7 +137,9 @@ export default function DashboardProfile() {
 							</div>
 							<div className="row mt-2">
 								<div className="col-md-6">
-									<label className="labels">Name</label>
+									<label className="labels">
+										First name<span className="required-asterisk">*</span>
+									</label>
 									<input
 										name="first_name"
 										type="text"
@@ -86,7 +149,9 @@ export default function DashboardProfile() {
 									/>
 								</div>
 								<div className="col-md-6">
-									<label className="labels">last name</label>
+									<label className="labels">
+										Last name<span className="required-asterisk">*</span>
+									</label>
 									<input
 										name="last_name"
 										type="text"
@@ -99,7 +164,9 @@ export default function DashboardProfile() {
 
 							<div className="row mt-2">
 								<div className="col-md-6">
-									<label className="labels">Email</label>
+									<label className="labels">
+										Email<span className="required-asterisk">*</span>
+									</label>
 									<input
 										name="email"
 										type="text"
@@ -107,9 +174,14 @@ export default function DashboardProfile() {
 										value={userData && userData.email}
 										onChange={handleChanges}
 									/>
+									<p id="email-validity" className="invalid-input-p">
+										{formErrors.email}
+									</p>
 								</div>
 								<div className="col-md-6">
-									<label className="labels">Username</label>
+									<label className="labels">
+										Username<span className="required-asterisk">*</span>
+									</label>
 									<input
 										name="username"
 										type="text"
@@ -117,6 +189,9 @@ export default function DashboardProfile() {
 										value={userData && userData.username}
 										onChange={handleChanges}
 									/>
+									<p id="username-validity" className="invalid-input-p">
+										{formErrors.username}
+									</p>
 								</div>
 							</div>
 
@@ -129,18 +204,33 @@ export default function DashboardProfile() {
 										classNameName="mt-1"
 										inputStyle={{ width: "100%" }}
 										value={userData && userData.phone}
-										onChange={(value) =>
+										onChange={(value) => {
+											const isValidPhoneNumber = validator.isMobilePhone(value);
+											const phone = "phone";
+											if (!isValidPhoneNumber) {
+												setFormErrors({
+													...errors,
+													phone: "Invalid phone number",
+												});
+											} else if (formErrors["phone"]) {
+												let tmp = { ...formErrors };
+												delete tmp[phone];
+												setFormErrors({ ...tmp });
+											}
 											setUserData({
 												...userData,
 												phone: `${value}`,
-											})
-										}
+											});
+										}}
 										inputProps={{
 											name: "phone",
 											// required: true,
 											autoFocus: true,
 										}}
 									/>
+									<p id="phone-number-validity" className="invalid-input-p">
+										{formErrors.phone}
+									</p>
 								</div>
 							</div>
 							<div className="mt-5 text-center">

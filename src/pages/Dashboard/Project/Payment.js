@@ -7,6 +7,8 @@ import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Calendar from "../../../components/Calendar";
 import DialogPopup from "../../../components/DialogPopup";
+import useAxios from "../../../utils/useAxios/useAxios";
+import closeIcon from "../../../assets/closeIcon.png";
 
 export default function Payment(props) {
 	const [countries, setCountries] = useState([]);
@@ -16,6 +18,20 @@ export default function Payment(props) {
 	});
 	const projectDataRef = useRef(props.projectData);
 	projectDataRef.current = props.projectData;
+	let api = useAxios({
+		headers: {
+			"content-type": "multipart/form-data",
+		},
+	});
+
+	const removeUBO = (event, item) => {
+		event.preventDefault();
+		console.log(item);
+		let tmp = { ...projectDataRef.current };
+		delete tmp.payment.UBOs[item];
+		console.log(tmp, `${item}`, tmp.payment.UBOs[`${item}`]);
+		props.setProjectData(tmp);
+	};
 
 	useEffect(() => {
 		axios
@@ -43,16 +59,16 @@ export default function Payment(props) {
 	const handleFinish = () => {
 		const tokens = JSON.parse(localStorage.getItem("authTokens"));
 		const access = tokens.access;
-		axios
+		api
 			.post(
 				process.env.REACT_APP_BASE_URL + "/api/project/add/",
-				projectDataRef.current,
-				{
-					headers: {
-						Authorization: `Bearer ${access}`,
-						"Content-Type": "multipart/form-data",
-					},
-				}
+				projectDataRef.current
+				// {
+				// 	headers: {
+				// 		Authorization: `Bearer ${access}`,
+				// 		"Content-Type": "multipart/form-data",
+				// 	},
+				// }
 			)
 			.then((response) => {
 				if (response.status === 201) {
@@ -64,8 +80,9 @@ export default function Payment(props) {
 				} else {
 					setPopUpData({
 						title: "Something Went Wrong!",
-						description:
-							"Your Project was not submitted successfully, please verify that you have entered all the necessary data and supplied all the necessary files",
+						description: `Your Project was not submitted successfully, please verify that you have entered all the necessary data and supplied all the necessary files. The server error was: ${JSON.stringify(
+							response.response.data.errors
+						)}`,
 					});
 				}
 			})
@@ -124,7 +141,6 @@ export default function Payment(props) {
 		};
 
 		props.setProjectData(projectData_);
-
 	};
 
 	return (
@@ -151,7 +167,7 @@ export default function Payment(props) {
 										marginBottom: "3px",
 									}}
 								>
-									Company Name
+									Company Name<span className="required-asterisk">*</span>
 								</p>
 								<input
 									className="atomic-text-input w-100"
@@ -178,7 +194,7 @@ export default function Payment(props) {
 										marginBottom: "3px",
 									}}
 								>
-									Nature of Business
+									Nature of Business<span className="required-asterisk">*</span>
 								</p>
 								<input
 									className="atomic-text-input w-100"
@@ -213,7 +229,7 @@ export default function Payment(props) {
 										marginBottom: "3px",
 									}}
 								>
-									Address
+									Address<span className="required-asterisk">*</span>
 								</p>
 								<input
 									className="atomic-text-input w-100"
@@ -240,7 +256,7 @@ export default function Payment(props) {
 										marginBottom: "3px",
 									}}
 								>
-									City
+									City<span className="required-asterisk">*</span>
 								</p>
 								<input
 									className="atomic-text-input w-100"
@@ -275,7 +291,7 @@ export default function Payment(props) {
 										marginBottom: "3px",
 									}}
 								>
-									Zip Code
+									Zip Code<span className="required-asterisk">*</span>
 								</p>
 								<input
 									className="atomic-text-input w-100"
@@ -302,7 +318,7 @@ export default function Payment(props) {
 										marginBottom: "3px",
 									}}
 								>
-									Country
+									Country<span className="required-asterisk">*</span>
 								</p>
 								<div className="input-with-title">
 									<DropDown
@@ -336,7 +352,7 @@ export default function Payment(props) {
 										marginBottom: "3px",
 									}}
 								>
-									Incorporation date:
+									Incorporation date<span className="required-asterisk">*</span>
 								</p>
 								<div className="input-with-title">
 									<Calendar
@@ -359,7 +375,8 @@ export default function Payment(props) {
 										marginBottom: "3px",
 									}}
 								>
-									Company Registration Number:
+									Company Registration Number
+									<span className="required-asterisk">*</span>
 								</p>
 								<input
 									className="atomic-text-input w-100"
@@ -373,6 +390,7 @@ export default function Payment(props) {
 										props.projectData["payment"] &&
 										props.projectData["payment"].companyRegistrationNumber
 									}
+									pattern="(^[0-9]{0,1000}$)|(^[0-9]{0,10000}\.[0-9]{0,18}$)"
 									onChange={(event) =>
 										props.updateProjectData(event, "payment")
 									}
@@ -387,6 +405,7 @@ export default function Payment(props) {
 									}}
 								>
 									Estimated annual turnover
+									<span className="required-asterisk">*</span>
 								</p>
 								<input
 									className="atomic-text-input w-100"
@@ -421,7 +440,7 @@ export default function Payment(props) {
 										marginBottom: "3px",
 									}}
 								>
-									Tax Country
+									Tax Country<span className="required-asterisk">*</span>
 								</p>
 								<div className="input-with-title">
 									<DropDown
@@ -448,6 +467,7 @@ export default function Payment(props) {
 									}}
 								>
 									Tax identification number
+									<span className="required-asterisk">*</span>
 								</p>
 								<input
 									className="atomic-text-input w-100"
@@ -455,6 +475,7 @@ export default function Payment(props) {
 									maxLength="80"
 									name="taxIdNumber"
 									placeholder="Company tax identification number"
+									pattern="(^[0-9]{0,1000}$)|(^[0-9]{0,10000}\.[0-9]{0,18}$)"
 									type="text"
 									value={
 										props.projectData &&
@@ -482,7 +503,7 @@ export default function Payment(props) {
 										marginBottom: "3px",
 									}}
 								>
-									White paper URL
+									White paper URL<span className="required-asterisk">*</span>
 								</p>
 								<input
 									className="atomic-text-input w-100"
@@ -509,7 +530,7 @@ export default function Payment(props) {
 										marginBottom: "3px",
 									}}
 								>
-									Tokenomics URL
+									Tokenomics URL<span className="required-asterisk">*</span>
 								</p>
 								<input
 									className="atomic-text-input w-100"
@@ -549,7 +570,7 @@ export default function Payment(props) {
 								>
 									<p style={{ margin: "0px" }}>
 										Upload certificate of incumbency/incorporation (.jpg, .jpeg,
-										.png, .pdf):
+										.png, .pdf)<span className="required-asterisk">*</span>
 									</p>
 									<UploadButton
 										title="Select File"
@@ -578,7 +599,8 @@ export default function Payment(props) {
 									}}
 								>
 									<p style={{ margin: "0px" }}>
-										Upload company structure chart (.jpg, .jpeg, .png, .pdf):
+										Upload company structure chart (.jpg, .jpeg, .png, .pdf)
+										<span className="required-asterisk">*</span>
 									</p>
 									<UploadButton
 										title="Select File"
@@ -609,7 +631,22 @@ export default function Payment(props) {
 							Object.keys(props.projectData["payment"]["UBOs"]).map(
 								(item, i) => {
 									return (
-										<div style={{ marginBottom: "20px" }} id={`row-${item}`}>
+										<div
+											style={{ marginBottom: "20px", position: "relative" }}
+											id={`row-${item}`}
+										>
+											<div
+												style={{ position: "absolute", right: "0", top: "0" }}
+											>
+												<img
+													src={closeIcon}
+													style={{
+														width: "30px",
+														cursor: "pointer",
+													}}
+													onClick={(e) => removeUBO(e, `${item}`)}
+												/>
+											</div>
 											<h3>{`UBO ${item} details`}</h3>
 											<Row
 												style={{
@@ -625,6 +662,7 @@ export default function Payment(props) {
 														}}
 													>
 														{`UBO ${item} - full name`}
+														<span className="required-asterisk">*</span>
 													</p>
 													<input
 														className="atomic-text-input w-100"
@@ -663,6 +701,7 @@ export default function Payment(props) {
 															}}
 														>
 															{`UBO ${item} - position`}
+															<span className="required-asterisk">*</span>
 														</p>
 														<input
 															className="atomic-text-input w-100"
@@ -694,6 +733,7 @@ export default function Payment(props) {
 															}}
 														>
 															{`UBO ${item} - Date of Birth`}
+															<span className="required-asterisk">*</span>
 														</p>
 														<div className="input-with-title">
 															<Calendar
@@ -737,7 +777,8 @@ export default function Payment(props) {
 														>
 															<p style={{ margin: "0px" }}>
 																{`UBO ${item} - Upload passport or ID Card`}{" "}
-																(.jpg, .jpeg, .png, .pdf):
+																(.jpg, .jpeg, .png, .pdf)
+																<span className="required-asterisk">*</span>
 															</p>
 															<UploadButton
 																title="Select File"
@@ -762,7 +803,8 @@ export default function Payment(props) {
 														>
 															<p style={{ margin: "0px" }}>
 																{`UBO ${item} - Upload proof of address`} (.jpg,
-																.jpeg, .png, .pdf):
+																.jpeg, .png, .pdf)
+																<span className="required-asterisk">*</span>
 															</p>
 															<UploadButton
 																title="Select File"

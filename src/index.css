@@ -57,6 +57,14 @@ textarea:invalid {
 	width: 100%;
 }
 
+.invalid-input-p {
+	color: red;
+}
+
+.required-asterisk {
+	color: red;
+}
+
 .hover-img * {
 	box-sizing: border-box;
 	transition: all 0.45s ease;

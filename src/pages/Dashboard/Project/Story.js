@@ -3,8 +3,14 @@ import DashboardCreateProjectItemHead from "../../../components/DashboardCreateP
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import Button from "react-bootstrap/Button";
+import useAxios from "../../../utils/useAxios/useAxios";
 
 export default function Story(props) {
+	let api = useAxios({
+		headers: {
+			"content-type": "multipart/form-data",
+		},
+	});
 	const handleChange = (event, editor) => {
 		const data = editor.getData();
 		props.updateProjectData(
@@ -13,6 +19,51 @@ export default function Story(props) {
 		);
 	};
 
+	function uploadAdapter(loader) {
+		return {
+			upload: () => {
+				return new Promise((resolve, reject) => {
+					// const body = new FormData();
+					loader.file.then((file) => {
+						api
+							.post("/api/project/ckeditor/upload_image", {
+								ckeditorFile: file,
+							})
+							.then((res) => {
+								resolve({
+									default: res.data.url,
+								});
+							})
+							.catch((err) => {
+								reject(err);
+							});
+
+						// body.append("files", file);
+						// fetch(`${API_URL}/${UPLOAD_ENDPOINT}`, {
+						// 	method: "post",
+						// 	body: body,
+						// 	// mode: "no-cors"
+						// })
+						// 	.then((res) => res.json())
+						// 	.then((res) => {
+						// 		resolve({
+						// 			default: `${API_URL}/${res.filename}`,
+						// 		});
+						// 	})
+						// .catch((err) => {
+						// 	reject(err);
+						// });
+					});
+				});
+			},
+		};
+	}
+	function uploadPlugin(editor) {
+		editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
+			return uploadAdapter(loader);
+		};
+	}
+
 	return (
 		<div className="DashboardCreateProjectStory">
 			<DashboardCreateProjectItemHead
@@ -20,7 +71,9 @@ export default function Story(props) {
 				head="Tell people why they should be excited about your project. Get specific but be clear and be brief."
 			/>
 			<Row style={{ padding: "3vw", marginLeft: "0px", marginRight: "0px" }}>
-				<h4>Project description</h4>
+				<h4>
+					Project description<span className="required-asterisk">*</span>
+				</h4>
 				<p style={{ marginBottom: "40px" }}>
 					Describe what you're raising funds to do, why you care about it, how
 					you plan to make it happen, and who you are. Your description should
@@ -31,13 +84,16 @@ export default function Story(props) {
 				<div>
 					<CKEditor
 						editor={ClassicEditor}
+						config={{
+							extraPlugins: [uploadPlugin],
+						}}
 						data={
 							props.projectData &&
 							props.projectData["story"] &&
 							props.projectData["story"].projectStory
 						}
 						onReady={(editor) => {
-							// You can store the "editor" and use when it is needed.
+							console.log("Editor ready");
 						}}
 						onChange={(event, editor) => handleChange(event, editor)}
 						onBlur={(event, editor) => {}}

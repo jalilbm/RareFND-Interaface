@@ -15,24 +15,78 @@ export default function DashboardProjects() {
 		"create-project-tab-1"
 	);
 	const [renderTab, setRenderTab] = useState(<Basics />);
-	const [projectData, setProjectData] = useState({
-		basics: {},
-		funding: {},
-		story: {},
-		payment: {},
-		rewards: {},
-	});
+	const [projectData, setProjectData] = useState(
+		JSON.parse(localStorage.getItem("createProjectData")) || {
+			basics: {},
+			funding: {},
+			story: {},
+			payment: {},
+			rewards: {},
+		}
+	);
+	const [formErrors, setFormErrors] = useState({});
 
 	const updateProjectData = (event, source) => {
 		let { name, value } = event.target;
+		if (name === "projectTitle") {
+			if (value === "") {
+				setFormErrors({
+					...formErrors,
+					projectTitle: "Project Title is required!",
+				});
+			} else {
+				let tmp = { ...formErrors };
+				delete tmp["projectTitle"];
+				setFormErrors(tmp);
+			}
+		} else if (name === "projectHead") {
+			if (value === "") {
+				setFormErrors({
+					...formErrors,
+					projectHead: "Project Head is required!",
+				});
+			} else {
+				let tmp = { ...formErrors };
+				delete tmp["projectHead"];
+				setFormErrors(tmp);
+			}
+		} else if (name === "projectAddress") {
+			if (value === "") {
+				setFormErrors({
+					...formErrors,
+					projectAddress: "Project Address is required!",
+				});
+			} else {
+				let tmp = { ...formErrors };
+				delete tmp["projectAddress"];
+				setFormErrors(tmp);
+			}
+		} else if (name === "projectFundsAmount") {
+			if (value === "") {
+				setFormErrors({
+					...formErrors,
+					projectFundsAmount: "Project Funds Amount is required!",
+				});
+			} else {
+				let tmp = { ...formErrors };
+				delete tmp["projectFundsAmount"];
+				setFormErrors(tmp);
+			}
+		}
 		setProjectData({
 			...projectData,
 			[source]: { ...projectData[source], [name]: value },
 		});
+
+		console.log(projectData);
 	};
 
+	useEffect(() => {
+		localStorage.setItem("createProjectData", JSON.stringify(projectData));
+	}, [projectData]);
+
 	const changeTab = (value) => {
-		setSelectedTab(value);
+		setSelectedTab(value, formErrors);
 
 		if (selectedNavItem !== value) {
 			if (selectedNavItem) {
@@ -60,6 +114,8 @@ export default function DashboardProjects() {
 						nextTabFunction={() => changeTab("create-project-tab-2")}
 						projectData={projectData}
 						updateProjectData={updateProjectData}
+						formErrors={formErrors}
+						setFormErrors={setFormErrors}
 					/>
 				);
 				break;
@@ -70,6 +126,8 @@ export default function DashboardProjects() {
 						previousTabFunction={() => changeTab("create-project-tab-1")}
 						projectData={projectData}
 						updateProjectData={updateProjectData}
+						formErrors={formErrors}
+						setFormErrors={setFormErrors}
 					/>
 				);
 				break;
@@ -81,6 +139,8 @@ export default function DashboardProjects() {
 						projectData={projectData}
 						updateProjectData={updateProjectData}
 						setProjectData={setProjectData}
+						formErrors={formErrors}
+						setFormErrors={setFormErrors}
 					/>
 				);
 				break;
@@ -91,6 +151,8 @@ export default function DashboardProjects() {
 						previousTabFunction={() => changeTab("create-project-tab-3")}
 						projectData={projectData}
 						updateProjectData={updateProjectData}
+						formErrors={formErrors}
+						setFormErrors={setFormErrors}
 					/>
 				);
 				break;
@@ -99,6 +161,8 @@ export default function DashboardProjects() {
 					<Profile
 						nextTabFunction={() => changeTab("create-project-tab-6")}
 						previousTabFunction={() => changeTab("create-project-tab-4")}
+						formErrors={formErrors}
+						setFormErrors={setFormErrors}
 					/>
 				);
 				break;
@@ -109,6 +173,8 @@ export default function DashboardProjects() {
 						updateProjectData={updateProjectData}
 						setProjectData={setProjectData}
 						previousTabFunction={() => changeTab("create-project-tab-5")}
+						formErrors={formErrors}
+						setFormErrors={setFormErrors}
 					/>
 				);
 				break;
@@ -118,6 +184,8 @@ export default function DashboardProjects() {
 						projectData={projectData}
 						updateProjectData={updateProjectData}
 						nextTabFunction={() => changeTab("create-project-tab-2")}
+						formErrors={formErrors}
+						setFormErrors={setFormErrors}
 					/>
 				);
 				break;

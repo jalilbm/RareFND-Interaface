@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Button from "react-bootstrap/Button";
 import Calendar from "../../../components/Calendar";
 import ExtensibleInputs from "../../../components/ExtensibleInputs";
+import closeIcon from "../../../assets/closeIcon.png";
 
 export default function Funding(props) {
 	const [rewardsArray, setRewardsArray] = useState({});
@@ -22,6 +23,15 @@ export default function Funding(props) {
 		props.setProjectData(projectData_);
 	};
 
+	const removeIncentive = (event, item) => {
+		event.preventDefault();
+		console.log(item);
+		let tmp = { ...projectDataRef.current };
+		delete tmp.rewards[item];
+		console.log(tmp, `${item}`, tmp.rewards[`${item}`]);
+		props.setProjectData(tmp);
+	};
+
 	const addRewardRow = () => {
 		let projectData_ = { ...projectDataRef.current };
 		const rowId = Object.keys(projectData_["rewards"]).length + 1;
@@ -38,7 +48,6 @@ export default function Funding(props) {
 		};
 
 		props.setProjectData(projectData_);
-
 	};
 
 	return (
@@ -50,7 +59,20 @@ export default function Funding(props) {
 			<Row style={{ padding: "3vw", marginLeft: "0px", marginRight: "0px" }}>
 				{Object.keys(props.projectData["rewards"]).map((item, i) => {
 					return (
-						<div style={{ marginBottom: "20px" }} id={`row-${item}`}>
+						<div
+							style={{ marginBottom: "20px", position: "relative" }}
+							id={`row-${item}`}
+						>
+							<div style={{ position: "absolute", right: "0", top: "0" }}>
+								<img
+									src={closeIcon}
+									style={{
+										width: "30px",
+										cursor: "pointer",
+									}}
+									onClick={(e) => removeIncentive(e, `${item}`)}
+								/>
+							</div>
 							<Row>
 								<Col>
 									<h3>{`Incentive ${item}`}</h3>
@@ -61,6 +83,7 @@ export default function Funding(props) {
 											}}
 										>
 											Incentive Title
+											<span className="required-asterisk">*</span>
 										</p>
 										<input
 											className="atomic-text-input w-100"
@@ -85,6 +108,7 @@ export default function Funding(props) {
 											}}
 										>
 											Incentive description
+											<span className="required-asterisk">*</span>
 										</p>
 										<textarea
 											className="atomic-text-input w-100 h-50"
@@ -108,6 +132,7 @@ export default function Funding(props) {
 										}}
 									>
 										Estimated delivery
+										<span className="required-asterisk">*</span>
 									</p>
 									<div className="input-with-title">
 										<Calendar
@@ -133,6 +158,7 @@ export default function Funding(props) {
 											}}
 										>
 											Available items
+											<span className="required-asterisk">*</span>
 										</p>
 										<input
 											className="atomic-text-input w-100"
@@ -142,6 +168,7 @@ export default function Funding(props) {
 											placeholder="0"
 											type="text"
 											onChange={(e) => handleInputChanges(e, `${item}`)}
+											pattern="(^[0-9]{0,1000}$)|(^[0-9]{0,10000}\.[0-9]{0,18}$)"
 											value={
 												props.projectData &&
 												props.projectData["rewards"] &&
@@ -159,6 +186,7 @@ export default function Funding(props) {
 											}}
 										>
 											Required contribution amount
+											<span className="required-asterisk">*</span>
 										</p>
 										<input
 											className="atomic-text-input w-100"
@@ -167,6 +195,7 @@ export default function Funding(props) {
 											placeholder="$ 0.0"
 											type="text"
 											onChange={(e) => handleInputChanges(e, `${item}`)}
+											pattern="(^[0-9]{0,1000}$)|(^[0-9]{0,10000}\.[0-9]{0,18}$)"
 											value={
 												props.projectData &&
 												props.projectData["rewards"] &&

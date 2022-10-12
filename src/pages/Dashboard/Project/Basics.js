@@ -106,10 +106,9 @@ export default function Basics(props) {
 								marginBottom: "3px",
 							}}
 						>
-							Title
+							Title<span className="required-asterisk">*</span>
 						</p>
 						<input
-							required
 							className="atomic-text-input w-100"
 							id="projectTitle"
 							maxLength="60"
@@ -123,6 +122,9 @@ export default function Basics(props) {
 							}
 							onChange={(event) => props.updateProjectData(event, "basics")}
 						/>
+						<p className="invalid-input-p">
+							{props.formErrors && props.formErrors.projectTitle}
+						</p>
 					</div>
 					<br></br>
 					<p
@@ -130,11 +132,10 @@ export default function Basics(props) {
 							marginBottom: "3px",
 						}}
 					>
-						Head
+						Head<span className="required-asterisk">*</span>
 					</p>
 					<div className="input-with-title">
 						<textarea
-							required
 							className="atomic-text-input w-100 h-50"
 							id="projectHead"
 							maxLength="135"
@@ -147,6 +148,9 @@ export default function Basics(props) {
 							}
 							onChange={(event) => props.updateProjectData(event, "basics")}
 						></textarea>
+						<p className="invalid-input-p">
+							{props.formErrors && props.formErrors.projectHead}
+						</p>
 					</div>
 				</Col>
 			</Row>
@@ -189,11 +193,12 @@ export default function Basics(props) {
 								marginBottom: "3px",
 							}}
 						>
-							Category
+							Category<span className="required-asterisk">*</span>
 						</p>
 						<DropDown
 							title="Choose Category"
 							id="projectCategory"
+							name="projectCategory"
 							options={
 								categories
 									? categories.map((category) => {
@@ -221,6 +226,7 @@ export default function Basics(props) {
 						<DropDown
 							title="Choose Subcategory"
 							id="projectSubcategory"
+							name="projectSubcategory"
 							options={
 								subCategories
 									? subCategories.map((subcategory) => {
@@ -242,12 +248,13 @@ export default function Basics(props) {
 							marginBottom: "3px",
 						}}
 					>
-						Type
+						Type<span className="required-asterisk">*</span>
 					</p>
 					<div className="input-with-title">
 						<DropDown
 							title="Choose Project Type"
 							id="projectType"
+							name="projectType"
 							options={["Startup Fundraising", "Charity"]}
 							function_={(event) => props.updateProjectData(event, "basics")}
 							value={
@@ -286,10 +293,9 @@ export default function Basics(props) {
 								marginBottom: "3px",
 							}}
 						>
-							Address
+							Address<span className="required-asterisk">*</span>
 						</p>
 						<input
-							required
 							className="atomic-text-input w-100"
 							id="projectAddress"
 							maxLength="150"
@@ -303,6 +309,9 @@ export default function Basics(props) {
 							}
 							onChange={(event) => props.updateProjectData(event, "basics")}
 						/>
+						<p className="invalid-input-p">
+							{props.formErrors && props.formErrors.projectAddress}
+						</p>
 					</div>
 					<br></br>
 					<p
@@ -310,7 +319,7 @@ export default function Basics(props) {
 							marginBottom: "3px",
 						}}
 					>
-						Country
+						Country<span className="required-asterisk">*</span>
 					</p>
 					<div className="input-with-title">
 						<DropDown
@@ -360,7 +369,8 @@ export default function Basics(props) {
 							}}
 						>
 							<p style={{ margin: "0px" }}>
-								Upload Image (.gif,.jpg,.jpeg,.png):
+								Upload Image (.gif,.jpg,.jpeg,.png)
+								<span className="required-asterisk">*</span>
 							</p>
 							<UploadButton
 								title="Select image"
@@ -408,7 +418,7 @@ export default function Basics(props) {
 							marginBottom: "3px",
 						}}
 					>
-						Launch date:
+						Launch date<span className="required-asterisk">*</span>
 					</p>
 					<div className="input-with-title">
 						<Calendar
@@ -450,7 +460,7 @@ export default function Basics(props) {
 							marginBottom: "3px",
 						}}
 					>
-						Deadline date:
+						Deadline date<span className="required-asterisk">*</span>
 					</p>
 					<div className="input-with-title">
 						<Calendar

@@ -28,7 +28,8 @@ const UploadButton = (props) => {
 		? props.valueFunction(props.name, props.rowId)
 		: "";
 
-	if (fileName.length > 10) fileName = fileName.slice(0, 10) + "...";
+	if (fileName && fileName.length > 10)
+		fileName = fileName.slice(0, 10) + "...";
 
 	return (
 		<div css={{}}>

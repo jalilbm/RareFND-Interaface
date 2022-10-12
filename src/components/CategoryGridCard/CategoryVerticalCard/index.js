@@ -19,12 +19,12 @@ export default function CategoryVerticalCard(props) {
 			</div>
 			<div style={{ width: "90%" }}>
 				<h3>
-					<Link to="" className="subnav_link">
+					<Link to={`/project/${props.project_id}`} className="subnav_link">
 						{props.title}
 					</Link>
 				</h3>
 				<p style={{ width: "100%" }}>{props.description}</p>
-				<p style={{ width: "100%" }}>By: {props.project_owner}</p>
+				{/* <p style={{ width: "100%" }}>By: {props.project_owner}</p> */}
 			</div>
 		</div>
 	);

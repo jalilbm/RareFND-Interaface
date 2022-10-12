@@ -29,7 +29,7 @@ export default function CategoryHorizontalCard(props) {
 								{props.title}
 							</Link>
 						</h5>
-						<p>By: {props.project_owner}</p>
+						{/* <p>By: {props.project_owner}</p> */}
 					</div>
 				</Col>
 			</Row>

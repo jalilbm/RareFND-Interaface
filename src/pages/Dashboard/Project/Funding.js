@@ -51,6 +51,7 @@ export default function Funding(props) {
 							}}
 						>
 							Goal amount (in US dollars)
+							<span className="required-asterisk">*</span>
 						</p>
 						<input
 							className="atomic-text-input w-100"
@@ -68,6 +69,9 @@ export default function Funding(props) {
 							}
 						/>
 					</div>
+					<p className="invalid-input-p">
+						{props.formErrors && props.formErrors.projectFundsAmount}
+					</p>
 				</Col>
 			</Row>
 			<hr />

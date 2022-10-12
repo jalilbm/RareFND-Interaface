@@ -32,6 +32,7 @@ export default function Project(props) {
 			<ProjectCard
 				image={projectData.thumbnail}
 				title={projectData.title}
+				projectId={projectData.id}
 				text={projectData.head}
 				projectLive={projectData.live}
 				staking_address={projectData.staking_address}

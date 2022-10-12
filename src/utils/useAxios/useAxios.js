@@ -6,13 +6,16 @@ import AuthContext from "../../Context/AuthContext";
 
 const baseURL = process.env.REACT_APP_BASE_URL;
 
-const useAxios = () => {
+export default function useAxios(props) {
 	const { authTokens, setUser, setAuthTokens, logOut } =
 		useContext(AuthContext);
 
 	const axiosInstance = axios.create({
 		baseURL,
-		headers: { Authorization: `Bearer ${authTokens?.access}` },
+		headers:
+			props && props.headers
+				? { ...props.headers, Authorization: `Bearer ${authTokens?.access}` }
+				: { Authorization: `Bearer ${authTokens?.access}` },
 	});
 
 	axiosInstance.interceptors.request.use(async (req) => {
@@ -37,12 +40,10 @@ const useAxios = () => {
 	axiosInstance.interceptors.response.use(
 		(response) => response,
 		(error) => {
-			logOut();
+			if (error.response.status === 401) logOut();
 			return error;
 		}
 	);
 
 	return axiosInstance;
-};
-
-export default useAxios;
+}

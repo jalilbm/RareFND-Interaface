@@ -8,7 +8,13 @@ import axios from "axios";
 import token_info from "../../token.json";
 import { useParams } from "react-router";
 import { ProviderContext } from "../../web3/ProviderContext";
-import { formatUsd, formatFnd, sendTx, DECIMALS } from "../../utils/Helpers";
+import {
+  formatUsd,
+  formatFnd,
+  sendTx,
+  USDT_DECIMALS,
+  popupError,
+} from "../../utils/Helpers";
 import { TARGET_CHAIN } from "../../utils/Helpers";
 
 var regexp = /^\d+(\.\d{1,18})?$/;
@@ -91,6 +97,10 @@ export default function ContributeBtn(props) {
   }, [provider, walletAddress, stakingAddress]);
 
   async function stake() {
+    if (!allowance || allowance <= 0) {
+      popupError("You should first approve before you can pay in FND!");
+      return;
+    }
     let contribution_amount =
       document.getElementById("contribute-amount").value;
     if (!regexp.test(contribution_amount)) {
@@ -103,8 +113,8 @@ export default function ContributeBtn(props) {
         try {
           setPending(true);
           const tx = () =>
-            staking?.stake(
-              ethers.utils.parseUnits(contribution_amount, DECIMALS)
+            staking?.stakeUsd(
+              ethers.utils.parseUnits(contribution_amount, USDT_DECIMALS)
             );
           const status = await sendTx(tx, "You have successfully staked!");
           setPending(false);
@@ -173,8 +183,8 @@ export default function ContributeBtn(props) {
       )}
       {!!stakingData && (
         <div>
-          {formatFnd(stakingData[2])} FND Total Contributed ($
-          {formatUsd(stakingData[3])})
+          ${formatUsd(stakingData[3])} Total Contributed (
+          {formatFnd(stakingData[2])} FND)
         </div>
       )}
       <div
@@ -200,7 +210,7 @@ export default function ContributeBtn(props) {
             <Col style={{ padding: "0" }}>
               <input
                 id="contribute-amount"
-                placeholder="0.00 FND"
+                placeholder="$100"
                 autoComplete="off"
                 type="text"
                 pattern="(^[0-9]{0,1000}$)|(^[0-9]{0,10000}\.[0-9]{0,18}$)"
@@ -220,10 +230,11 @@ export default function ContributeBtn(props) {
           </Row>
         </div>
       </div>
+
       <div
         className="align-self-end text-center w-70 mx-auto"
         style={{
-          padding: 20,
+          padding: 5,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -233,39 +244,58 @@ export default function ContributeBtn(props) {
           className="mx-auto no-gutters jumbotron d-flex align-items-center"
           style={{ padding: "0 1em 0 1em", width: "50%" }}
         >
-          <Col className="p-2 w-30" style={{ width: "40%" }}>
-            {allowance > 0 ? (
-              <Button
-                id="contribute-btn"
-                variant="warning"
-                // classNmae="btn-wallet align-self-end"
-                size="lg"
-                style={{ width: "100%", fontSize: "2vh", maxHeight: "100%" }}
-                onClick={() => stake()}
-                disabled={
-                  !stakingOptions ||
-                  !stakingOptions[7] ||
-                  !readyToContribute ||
-                  pending
-                }
-              >
-                Contribute
-              </Button>
-            ) : (
-              <Button
-                id="approve-btn"
-                variant="warning"
-                // classNmae="btn-wallet align-self-end"
-                size="lg"
-                style={{ width: "100%", fontSize: "2vh", maxHeight: "100%" }}
-                onClick={() => approve()}
-                disabled={!provider || !projectLive || pending}
-              >
-                Approve
-              </Button>
-            )}
+          <Col className="p-1 w-30" style={{ width: "40%" }}>
+            <Button
+              id="contribute-usd-btn"
+              variant="warning"
+              // classNmae="btn-wallet align-self-end"
+              size="lg"
+              style={{ width: "100%", fontSize: "2vh", maxHeight: "100%" }}
+              // onClick={() => stake()}
+              disabled={
+                !stakingOptions ||
+                !stakingOptions[7] ||
+                !readyToContribute ||
+                pending
+              }
+            >
+              Pay $
+            </Button>
           </Col>
-          <Col className="p-0 w-20" style={{ width: "10%" }}>
+          <Col className="p-1 w-20" style={{ width: "10%" }}>
+            <Button
+              id="contribute-fnd-btn"
+              variant="warning"
+              // classNmae="btn-wallet align-self-end"
+              size="lg"
+              style={{ width: "100%", fontSize: "2vh", maxHeight: "100%" }}
+              onClick={() => stake()}
+              disabled={
+                !stakingOptions ||
+                !stakingOptions[7] ||
+                !readyToContribute ||
+                pending
+              }
+            >
+              Pay FND
+            </Button>
+          </Col>
+        </Row>
+      </div>
+      <div
+        className="align-self-end text-center w-70 mx-auto"
+        style={{
+          padding: 5,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Row
+          className="mx-auto no-gutters jumbotron d-flex align-items-center"
+          style={{ padding: "0 1em 0 1em", width: "50%" }}
+        >
+          <Col className="p-1 w-30" style={{ width: "10%" }}>
             <Button
               id="claim-btn"
               variant="warning"
@@ -275,12 +305,24 @@ export default function ContributeBtn(props) {
                 width: "100%",
                 fontSize: "2vh",
                 maxHeight: "100%",
-                padding: 10,
               }}
               onClick={() => claim()}
               disabled={!stakingOptions || !stakingOptions[6]}
             >
               Claim
+            </Button>
+          </Col>
+          <Col className="p-1 w-30" style={{ width: "40%" }}>
+            <Button
+              id="approve-btn"
+              variant="warning"
+              // classNmae="btn-wallet align-self-end"
+              size="lg"
+              style={{ width: "100%", fontSize: "2vh", maxHeight: "100%" }}
+              onClick={() => approve()}
+              disabled={allowance > 0 || !provider || !projectLive || pending}
+            >
+              Approve
             </Button>
           </Col>
         </Row>

@@ -3,6 +3,7 @@ import "izitoast/dist/css/iziToast.css";
 
 export const TARGET_CHAIN = "0x38";
 export const DECIMALS = 18;
+export const USDT_DECIMALS = 18;
 
 export function formatDecimalPrice(price, digits) {
   const re = RegExp(`^-?\\d*\\.?0*\\d{0,${digits}}`);
@@ -20,7 +21,7 @@ export function formatFnd(num) {
 }
 
 export function formatUsd(num) {
-  return withCommas(formatDecimalPrice(+num / 10 ** 18, 2));
+  return withCommas(formatDecimalPrice(+num / 10 ** USDT_DECIMALS, 2));
 }
 
 function extractWeb3Error(err) {
@@ -74,4 +75,11 @@ export async function sendTx(tx, okMsg, value) {
       });
       return false;
     });
+}
+
+export function popupError(message) {
+  iziToast.error({
+    message,
+    position: "bottomLeft",
+  });
 }

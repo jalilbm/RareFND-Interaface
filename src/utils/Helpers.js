@@ -1,8 +1,8 @@
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.css";
 
-export const TARGET_CHAIN = "0x61";
-export const DECIMALS = 9;
+export const TARGET_CHAIN = "0x38";
+export const DECIMALS = 18;
 
 export function formatDecimalPrice(price, digits) {
   const re = RegExp(`^-?\\d*\\.?0*\\d{0,${digits}}`);

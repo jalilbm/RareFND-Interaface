@@ -22,7 +22,7 @@ export default function ProjectDescription(props) {
 			}}
 		>
 			<Row>
-				<Col md={incentivesData.length > 0 ? 8 : 12}>
+				<Col md={incentivesData && incentivesData.length > 0 ? 8 : 12}>
 					<div
 						dangerouslySetInnerHTML={{ __html: props.description }}
 						style={{
@@ -30,7 +30,7 @@ export default function ProjectDescription(props) {
 						}}
 					></div>
 				</Col>
-				{incentivesData.length > 0 && (
+				{incentivesData && incentivesData.length > 0 && (
 					<Col md={4}>
 						<h1 className="text-center">Incentives</h1>
 						{incentivesData &&

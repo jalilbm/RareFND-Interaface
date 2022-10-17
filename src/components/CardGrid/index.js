@@ -7,9 +7,9 @@ import Container from "react-bootstrap/Container";
 import "animate.css/animate.min.css";
 import { AnimationOnScroll } from "react-animation-on-scroll";
 import star from "../../assets/carousel/star.png";
-import partnerShip from "../../assets/assets/carousel/Partnership-amico.png";
+import partnerShip from "../../assets/carousel/Partnership-amico.png";
 import Button from "react-bootstrap/Button";
-import CroudFunding from "../../assets/assets/carousel/Investment data-amico.png";
+import CroudFunding from "../../assets/carousel/Investment data-amico.png";
 import "./index.css";
 function HomeCards() {
 	return (

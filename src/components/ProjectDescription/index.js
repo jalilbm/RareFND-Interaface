@@ -7,6 +7,7 @@ import Col from "react-bootstrap/esm/Col";
 export default function ProjectDescription(props) {
 	let incentivesData = props.incentivesData;
 	if (incentivesData) {
+		console.log("incentivesData", incentivesData);
 		incentivesData.sort(function (a, b) {
 			var x = a.price;
 			var y = b.price;
@@ -21,7 +22,7 @@ export default function ProjectDescription(props) {
 			}}
 		>
 			<Row>
-				<Col md={8}>
+				<Col md={incentivesData.length > 0 ? 8 : 12}>
 					<div
 						dangerouslySetInnerHTML={{ __html: props.description }}
 						style={{
@@ -29,23 +30,25 @@ export default function ProjectDescription(props) {
 						}}
 					></div>
 				</Col>
-				<Col md={4}>
-					<h1 className="text-center">Incentives</h1>
-					{incentivesData &&
-						Array.from(incentivesData).map((_, idx) => (
-							<Incentives
-								title={_.title}
-								description={_.description}
-								included_incentives={_.included_incentives}
-								estimated_delivery={_.estimated_delivery}
-								available_items={_.available_items}
-								price={_.price}
-								reserved={_.reserved}
-								project={_.project}
-								projectLive={props.projectLive}
-							/>
-						))}
-				</Col>
+				{incentivesData.length > 0 && (
+					<Col md={4}>
+						<h1 className="text-center">Incentives</h1>
+						{incentivesData &&
+							Array.from(incentivesData).map((_, idx) => (
+								<Incentives
+									title={_.title}
+									description={_.description}
+									included_incentives={_.included_incentives}
+									estimated_delivery={_.estimated_delivery}
+									available_items={_.available_items}
+									price={_.price}
+									reserved={_.reserved}
+									project={_.project}
+									projectLive={props.projectLive}
+								/>
+							))}
+					</Col>
+				)}
 			</Row>
 		</div>
 	);

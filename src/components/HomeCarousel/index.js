@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import Image from "react-bootstrap/Image";
 import "./index.css";
-import chart from "../../assets/assets/carousel/chart.svg";
+import chart from "../../assets/carousel/chart.svg";
 import { useState, useEffect, useContext } from "react";
 import AuthContext from "../../Context/AuthContext";
 

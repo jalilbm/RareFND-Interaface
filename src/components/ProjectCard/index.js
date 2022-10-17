@@ -9,25 +9,27 @@ import useAxios from "../../utils/useAxios/useAxios";
 import { useState, useEffect, useContext } from "react";
 import AuthContext from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import comingSoon from "../../assets/coming-soon.png";
+import comingSoon2 from "../../assets/coming-soon-2.png";
 
 export default function ProjectCard(props) {
 	let api = useAxios();
 	let { user } = useContext(AuthContext);
 	const [subscribed, setSubscribed] = useState(false);
 	const [subscribeButtonText, setSubscribeButtonText] = useState("");
-	const [numberOfSubscribers, setNumberOfSubscribers] = useState(0);
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (subscribed) {
 			setSubscribeButtonText("Subscribed");
 		} else {
-			setSubscribeButtonText("Subscribe to project");
+			setSubscribeButtonText("Remind me when live");
 		}
 	}, [subscribed]);
 
 	useEffect(() => {
-		if (props.projectId && user)
+		if (props.projectId && user && props.numberOfSubscribers) {
+			console.log(props.numberOfSubscribers);
 			api
 				.get(`/api/project/checked_subscribed/${props.projectId}/`)
 				.then((response) => {
@@ -38,6 +40,7 @@ export default function ProjectCard(props) {
 						window.alert("Something went wrong please refresh");
 					}
 				});
+		}
 	}, [props.projectId]);
 
 	const subscribeToProject = () => {
@@ -84,8 +87,19 @@ export default function ProjectCard(props) {
 									height: "100%",
 									margin: "0 200 0 200",
 									padding: "5%",
+									position: "relative",
 								}}
 							>
+								{!props.projectLive && (
+									// <div style={{ position: "absolute", top: "0", left: "0" }}>
+									// 	<img src={comingSoon} style={{ width: "100px" }} />
+									// </div>
+									<div
+										style={{ position: "absolute", top: "-5px", right: "-5px" }}
+									>
+										<img src={comingSoon2} style={{ width: "7rem" }} />
+									</div>
+								)}
 								<h1>
 									<Card.Title
 										style={{
@@ -123,7 +137,10 @@ export default function ProjectCard(props) {
 											>
 												{subscribeButtonText}
 											</Button>
-											<p style={{ marginTop: "10px" }}></p>
+											<p style={{ marginTop: "10px" }}>
+												{props.numberOfSubscribers &&
+													`${props.numberOfSubscribers} Subscribers`}
+											</p>
 										</div>
 									)}
 								</div>

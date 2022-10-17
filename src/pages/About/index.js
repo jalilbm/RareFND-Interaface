@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import Image from "react-bootstrap/Image";
 import "./index.css";
-import Contact_us from "../../assets/assets/carousel/Contact_us.png";
+import Contact_us from "../../assets/carousel/Contact_us.png";
 import React, { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import { Col, Row } from "react-bootstrap";

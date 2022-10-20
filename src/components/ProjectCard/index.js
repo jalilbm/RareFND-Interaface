@@ -9,8 +9,7 @@ import useAxios from "../../utils/useAxios/useAxios";
 import { useState, useEffect, useContext } from "react";
 import AuthContext from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import comingSoon from "../../assets/coming-soon.png";
-import comingSoon2 from "../../assets/coming-soon-2.png";
+import comingSoon from "../../assets/coming-soon-2.png";
 
 export default function ProjectCard(props) {
 	let api = useAxios();
@@ -91,13 +90,10 @@ export default function ProjectCard(props) {
 								}}
 							>
 								{!props.projectLive && (
-									// <div style={{ position: "absolute", top: "0", left: "0" }}>
-									// 	<img src={comingSoon} style={{ width: "100px" }} />
-									// </div>
 									<div
 										style={{ position: "absolute", top: "-5px", right: "-5px" }}
 									>
-										<img src={comingSoon2} style={{ width: "7rem" }} />
+										<img src={comingSoon} style={{ width: "7rem" }} />
 									</div>
 								)}
 								<h1>

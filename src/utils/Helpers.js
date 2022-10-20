@@ -36,8 +36,10 @@ function extractWeb3Error(err) {
 }
 
 export async function sendTx(tx, okMsg, value) {
+	let txHash = "";
 	const postTx = await tx()
 		.then((tx) => {
+			txHash = tx.hash;
 			return tx;
 		})
 		.catch((err) => {
@@ -53,7 +55,7 @@ export async function sendTx(tx, okMsg, value) {
 	}
 
 	iziToast.info({
-		message: "Waiting for transaction to be resolved...",
+		message: "Waiting for your donation to complete...",
 		timeout: 30000,
 		position: "bottomLeft",
 	});
@@ -65,7 +67,7 @@ export async function sendTx(tx, okMsg, value) {
 				message: okMsg,
 				position: "bottomLeft",
 			});
-			return true;
+			return { valid: true, hash: txHash };
 		})
 		.catch((err) => {
 			iziToast.destroy();
@@ -73,7 +75,7 @@ export async function sendTx(tx, okMsg, value) {
 				message: extractWeb3Error(err),
 				position: "bottomLeft",
 			});
-			return false;
+			return { valid: false, hash: txHash };
 		});
 }
 

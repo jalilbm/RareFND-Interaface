@@ -63,7 +63,10 @@ export default function ReactSlick(props) {
 		<div className="navSlider" style={{ marginBottom: "15px" }}>
 			<Slider {...settings}>
 				{Object.keys(categories).map((item, index) => {
-					if (categories[item].name !== "All")
+					if (
+						categories[item].name !== "All" &&
+						categories[item].name !== "Test"
+					)
 						return (
 							<Link
 								to={

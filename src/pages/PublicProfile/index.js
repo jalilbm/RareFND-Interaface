@@ -33,8 +33,7 @@ export default function PublicProfile() {
 							<h1>{profileInfo.username}</h1>
 						</div>
 						<div className="centerDiv">
-							<p className="m-2">{profileInfo.first_name}</p>
-							<p className="m-2">{profileInfo.last_name}</p>
+							<p className="m-1">{`${profileInfo.first_name} ${profileInfo.last_name}`}</p>
 						</div>
 						<div className="centerDiv">
 							<p>{profileInfo.email}</p>

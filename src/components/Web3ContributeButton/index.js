@@ -252,7 +252,7 @@ export default function ContributeBtn(props) {
 							variant="warning"
 							// classNmae="btn-wallet align-self-end"
 							size="lg"
-							style={{ width: "100%", fontSize: "2vh", maxHeight: "100%" }}
+							style={{ width: "100%", fontSize: "1rem", maxHeight: "100%" }}
 							// onClick={() => stake()}
 							// disabled={
 							// 	!stakingOptions ||
@@ -271,7 +271,7 @@ export default function ContributeBtn(props) {
 							variant="warning"
 							// classNmae="btn-wallet align-self-end"
 							size="lg"
-							style={{ width: "100%", fontSize: "2vh", maxHeight: "100%" }}
+							style={{ width: "100%", fontSize: "1rem", maxHeight: "100%" }}
 							onClick={() => stake()}
 							disabled={
 								!stakingOptions ||
@@ -306,7 +306,7 @@ export default function ContributeBtn(props) {
 							size="lg"
 							style={{
 								width: "100%",
-								fontSize: "2vh",
+								fontSize: "1rem",
 								maxHeight: "100%",
 							}}
 							onClick={() => claim()}
@@ -321,7 +321,7 @@ export default function ContributeBtn(props) {
 							variant="warning"
 							// classNmae="btn-wallet align-self-end"
 							size="lg"
-							style={{ width: "100%", fontSize: "2vh", maxHeight: "100%" }}
+							style={{ width: "100%", fontSize: "1rem", maxHeight: "100%" }}
 							onClick={() => approve()}
 							disabled={allowance > 0 || !provider || !projectLive || pending}
 						>

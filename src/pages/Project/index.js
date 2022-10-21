@@ -46,6 +46,8 @@ export default function Project(props) {
 					{projectData.live && <ProjectCurrentContributions />}
 					<ProjectDescription
 						description={projectData.description}
+						ownerId={projectData.owner}
+						ownerUsername={projectData.owner_username}
 						projectId={projectData.id}
 						incentivesData={incentivesData}
 						projectLive={projectData.live}

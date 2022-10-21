@@ -8,7 +8,7 @@ import Partners from "./pages/Partners";
 import TermsOfService from "./pages/TermsOfService";
 import Legal from "./pages/LegalDisclaimer";
 import Signup from "./pages/SignupPage";
-import StartProject from "./pages/StartProject";
+import PublicProfile from "./pages/PublicProfile";
 import Project from "./pages/Project";
 import PrivateRoute from "./utils/PrivateRoute";
 import { useEffect } from "react";
@@ -58,6 +58,7 @@ export default function Main() {
 				<Route exact path="/signup" element={<Signup />} />
 				<Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
 				<Route exact path="/terms-of-service" element={<TermsOfService />} />
+				<Route exact path="/profile/:id" element={<PublicProfile />} />
 				<Route
 					exact
 					path="/dashboard"

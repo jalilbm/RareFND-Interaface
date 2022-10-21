@@ -55,7 +55,7 @@ export async function sendTx(tx, okMsg, value) {
 	}
 
 	iziToast.info({
-		message: "Waiting for your donation to complete...",
+		message: "Please wait...",
 		timeout: 30000,
 		position: "bottomLeft",
 	});

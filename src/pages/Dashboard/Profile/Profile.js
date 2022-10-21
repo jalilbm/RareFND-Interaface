@@ -127,7 +127,6 @@ export default function DashboardProfile(props) {
 							<span className="text-black-50">
 								{userData && userData.email}
 							</span>
-							<span> </span>
 						</div>
 					</div>
 					<div className="col-md-7 border-right">

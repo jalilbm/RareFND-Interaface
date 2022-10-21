@@ -58,6 +58,12 @@ textarea:invalid {
 	width: 100%;
 }
 
+.centerDiv {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .invalid-input-p {
 	color: red;
 }

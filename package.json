@@ -37,6 +37,7 @@
 		"react-router-dom": "^6.3.0",
 		"react-scripts": "^4.0.3",
 		"react-slick": "^0.29.0",
+		"react-spinners": "^0.13.6",
 		"react-use-file-upload": "^0.9.5",
 		"sass": "^1.54.5",
 		"slick-carousel": "^1.8.1",

@@ -342,10 +342,14 @@ export default function ContributeBtn(props) {
 							// classNmae="btn-wallet align-self-end"
 							size="lg"
 							style={{ width: "100%", fontSize: "1rem", maxHeight: "100%" }}
-							onClick={() => approve()}
-							disabled={allowance > 0 || !provider || !projectLive || pending}
+							onClick={
+								provider
+									? () => approve()
+									: () => document.getElementById("connect-btn").click()
+							}
+							disabled={allowance > 0 || !projectLive || pending}
 						>
-							Approve
+							{provider ? "Approve" : "Connect Wallet"}
 						</Button>
 					</Col>
 				</Row>

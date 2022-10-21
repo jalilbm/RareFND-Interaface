@@ -210,24 +210,44 @@ export default function ContributeBtn(props) {
 						style={{ padding: "0 1em 0 1em" }}
 					>
 						<Col style={{ padding: "0" }}>
-							<input
-								id="contribute-amount"
-								placeholder="$100"
-								autoComplete="off"
-								type="text"
-								pattern="(^[0-9]{0,1000}$)|(^[0-9]{0,10000}\.[0-9]{0,18}$)"
+							<div
 								style={{
-									backgroundColor: "transparent",
-									border: "none",
-									width: "100%",
-									height: "100%",
-									fontSize: "1.5rem",
-									color: "black",
-									fontFamily: "'Kaisei Opti', sans-serif",
-									outline: "none",
-									paddingLeft: "0",
+									display: "flex",
+									justifyContent: "center",
+									alignItems: "center",
 								}}
-							></input>
+							>
+								<p
+									style={{
+										padding: "0",
+										margin: "0",
+										fontSize: "1.5rem",
+										borderRight: "1px solid",
+										paddingRight: "10px",
+										borderColor: "#FEC008",
+									}}
+								>
+									$
+								</p>
+								<input
+									id="contribute-amount"
+									placeholder="100"
+									autoComplete="off"
+									type="text"
+									pattern="(^[0-9]{0,1000}$)|(^[0-9]{0,10000}\.[0-9]{0,18}$)"
+									style={{
+										backgroundColor: "transparent",
+										border: "none",
+										width: "100%",
+										height: "100%",
+										fontSize: "1.5rem",
+										color: "black",
+										fontFamily: "'Kaisei Opti', sans-serif",
+										outline: "none",
+										paddingLeft: "10px",
+									}}
+								></input>
+							</div>
 						</Col>
 					</Row>
 				</div>

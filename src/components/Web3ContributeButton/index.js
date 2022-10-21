@@ -286,22 +286,35 @@ export default function ContributeBtn(props) {
 						</Button>
 					</Col>
 					<Col className="p-1 w-20" style={{ width: "100%" }}>
-						<Button
-							id="contribute-fnd-btn"
-							variant="warning"
-							// classNmae="btn-wallet align-self-end"
-							size="lg"
-							style={{ width: "100%", fontSize: "1rem", maxHeight: "100%" }}
-							onClick={() => stake()}
-							disabled={
-								!stakingOptions ||
-								!stakingOptions[7] ||
-								!readyToContribute ||
-								pending
-							}
-						>
-							Donate FND
-						</Button>
+						{provider ? (
+							<Button
+								id="contribute-fnd-btn"
+								variant="warning"
+								// classNmae="btn-wallet align-self-end"
+								size="lg"
+								style={{ width: "100%", fontSize: "1rem", maxHeight: "100%" }}
+								onClick={() => stake()}
+								disabled={
+									!stakingOptions ||
+									!stakingOptions[7] ||
+									!readyToContribute ||
+									pending
+								}
+							>
+								Donate FND
+							</Button>
+						) : (
+							<Button
+								id="contribute-fnd-btn"
+								variant="warning"
+								// classNmae="btn-wallet align-self-end"
+								size="lg"
+								style={{ width: "100%", fontSize: "1rem", maxHeight: "100%" }}
+								onClick={() => document.getElementById("connect-btn").click()}
+							>
+								Donate FND
+							</Button>
+						)}
 					</Col>
 				</Row>
 			</div>

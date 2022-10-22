@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 export default function ProjectDescription(props) {
 	let incentivesData = props.incentivesData;
 	if (incentivesData) {
-		console.log("incentivesData", incentivesData);
 		incentivesData.sort(function (a, b) {
 			var x = a.price;
 			var y = b.price;

@@ -36,7 +36,6 @@ export default function About() {
 			)
 			.then(
 				(result) => {
-					console.log("message sent successfully");
 					setDialogPopupData({
 						title: "Email sent successfully",
 						body: "We have received your concern, and a team member will reach out to you soon.",
@@ -44,7 +43,6 @@ export default function About() {
 					setEmailSentPopup(true);
 				},
 				(error) => {
-					console.log(error.text);
 					setDialogPopupData({
 						title: "Email was not sent successfully",
 						body: "For some reason we couldn't receive your email, please contact us in our Telegram channel on the left.",

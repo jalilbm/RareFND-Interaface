@@ -25,10 +25,8 @@ export default function Funding(props) {
 
 	const removeIncentive = (event, item) => {
 		event.preventDefault();
-		console.log(item);
 		let tmp = { ...projectDataRef.current };
 		delete tmp.rewards[item];
-		console.log(tmp, `${item}`, tmp.rewards[`${item}`]);
 		props.setProjectData(tmp);
 	};
 

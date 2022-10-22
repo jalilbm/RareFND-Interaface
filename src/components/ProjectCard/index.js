@@ -28,14 +28,12 @@ export default function ProjectCard(props) {
 
 	useEffect(() => {
 		if (props.projectId && user && props.numberOfSubscribers) {
-			console.log(props.numberOfSubscribers);
 			api
 				.get(`/api/project/checked_subscribed/${props.projectId}/`)
 				.then((response) => {
 					if (response.status === 200) {
 						setSubscribed(response.data.subscribed);
 					} else {
-						console.log(response);
 						window.alert("Something went wrong please refresh");
 					}
 				});

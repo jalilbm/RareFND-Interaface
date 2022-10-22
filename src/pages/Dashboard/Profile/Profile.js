@@ -94,7 +94,7 @@ export default function DashboardProfile(props) {
 	};
 
 	useEffect(() => {
-		if (Object.keys(userData).length > 0) {
+		if (Object.keys(userData).length > 0 && submitted) {
 			if (Object.keys(formErrors).length === 0) {
 				api.put("/api/user/update/", userData).then((response) => {
 					if (response.status === 200) {
@@ -191,6 +191,20 @@ export default function DashboardProfile(props) {
 									<p id="username-validity" className="invalid-input-p">
 										{formErrors.username}
 									</p>
+								</div>
+							</div>
+							<div className="row mt-2">
+								<div className="col-md-12">
+									<label className="labels">
+										Bio<span className="required-asterisk">*</span>
+									</label>
+									<textarea
+										className="form-control"
+										name="bio"
+										type="text"
+										value={userData && userData.bio}
+										onChange={handleChanges}
+									></textarea>
 								</div>
 							</div>
 

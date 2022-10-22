@@ -98,14 +98,17 @@ export default function CategoryGridCard(props) {
 						<hr id="hor_separator" />
 						<h3 className="categorygrid">Recommended for you</h3>
 						<div className="vl"></div>
-						{props.categoryProjects.length > 0 && (
-							<CategoryHorizontalCard
-								title={props.categoryProjects[0].title}
-								project_owner="djalil"
-								src={props.categoryProjects[0].thumbnail}
-								project_id={props.categoryProjects[0].id}
-							/>
-						)}
+						{props.categoryProjects.length > 0 &&
+							Array.from(props.categoryProjects).map((_, idx) => (
+								<div>
+									<CategoryHorizontalCard
+										title={_.title}
+										project_owner="djalil"
+										src={_.thumbnail}
+										project_id={_.id}
+									/>
+								</div>
+							))}
 					</Col>
 				</Row>
 			</div>

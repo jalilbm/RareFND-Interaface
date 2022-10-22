@@ -26,10 +26,8 @@ export default function Payment(props) {
 
 	const removeUBO = (event, item) => {
 		event.preventDefault();
-		console.log(item);
 		let tmp = { ...projectDataRef.current };
 		delete tmp.payment.UBOs[item];
-		console.log(tmp, `${item}`, tmp.payment.UBOs[`${item}`]);
 		props.setProjectData(tmp);
 	};
 

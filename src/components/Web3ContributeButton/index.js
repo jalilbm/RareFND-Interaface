@@ -252,7 +252,7 @@ export default function ContributeBtn(props) {
 												backgroundColor: "transparent",
 												border: "none",
 												width: "100%",
-												minWidth: "400px",
+												minWidth: "350px",
 												minHeight: "59px",
 												height: "100%",
 												fontSize:

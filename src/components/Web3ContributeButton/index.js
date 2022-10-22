@@ -241,7 +241,7 @@ export default function ContributeBtn(props) {
 											id="contribute-amount"
 											placeholder={
 												!allowance || allowance <= 0
-													? "Please click Approve first"
+													? "Click Approve first"
 													: "100"
 											}
 											autoComplete="off"
@@ -252,11 +252,11 @@ export default function ContributeBtn(props) {
 												backgroundColor: "transparent",
 												border: "none",
 												width: "100%",
-												minWidth: "350px",
-												minHeight: "59px",
+												// minWidth: "250px",
+												// minHeight: "59px",
 												height: "100%",
 												fontSize:
-													!allowance || allowance <= 0 ? "1 rem" : "1.5rem",
+													!allowance || allowance <= 0 ? "1 rem" : "1.2rem",
 												color: !allowance || allowance <= 0 ? "red" : "black",
 												fontFamily: "'Kaisei Opti', sans-serif",
 												outline: "none",

@@ -306,7 +306,7 @@ export default function ContributeBtn(props) {
 										}
 									>
 										{!allowance || allowance <= 0
-											? "Approve Donation"
+											? "Approve donation"
 											: "Complete Donation"}
 									</Button>
 								) : (

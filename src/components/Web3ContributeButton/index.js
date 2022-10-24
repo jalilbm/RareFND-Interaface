@@ -109,7 +109,7 @@ export default function ContributeBtn(props) {
 		let contribution_amount =
 			document.getElementById("contribute-amount").value;
 		if (!regexp.test(contribution_amount)) {
-			return alert("Invalid Contribution Amount");
+			return alert("Invalid contribution amount");
 		} else {
 			await isReadyToContribute();
 			if (!walletAddress || (walletAddress && chainId !== TARGET_CHAIN)) {

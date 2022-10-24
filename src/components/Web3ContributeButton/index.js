@@ -51,7 +51,6 @@ export default function ContributeBtn(props) {
 	const getAllowance = async (token_) => {
 		const allownce = await token_.allowance(walletAddress, stakingAddress);
 		setAllowance(allownce);
-		console.log("hahahahahash", allownce);
 		setFinishedTokenInfoUpdate(true);
 	};
 
@@ -286,30 +285,70 @@ export default function ContributeBtn(props) {
 						>
 							<Col className="p-1 w-20" style={{ width: "100%" }}>
 								{provider ? (
-									<Button
-										id="contribute-fnd-btn"
-										variant="warning"
-										size="lg"
-										style={{
-											width: "100%",
-											fontSize: "1rem",
-											maxHeight: "100%",
-										}}
-										onClick={() =>
-											!allowance || allowance <= 0 ? approve() : stake()
-										}
-										disabled={
-											!stakingOptions ||
-											!stakingOptions[7] ||
-											!readyToContribute ||
-											pending
-										}
-									>
-										{!allowance || allowance <= 0
-											? "Approve Donation"
-											: "Complete Donation"}
-									</Button>
+									!allowance || allowance <= 0 ? (
+										<Button
+											id="contribute-fnd-btn"
+											variant="warning"
+											size="lg"
+											style={{
+												width: "100%",
+												fontSize: "1rem",
+												maxHeight: "100%",
+											}}
+											onClick={() => approve()}
+											disabled={allowance > 0 || !projectLive || pending}
+										>
+											Approve Donation
+										</Button>
+									) : (
+										<Button
+											id="contribute-fnd-btn"
+											variant="warning"
+											size="lg"
+											style={{
+												width: "100%",
+												fontSize: "1rem",
+												maxHeight: "100%",
+											}}
+											onClick={() => stake()}
+											disabled={
+												!stakingOptions ||
+												!stakingOptions[7] ||
+												!readyToContribute ||
+												pending
+											}
+										>
+											Complete Donation
+										</Button>
+									)
 								) : (
+									// 	<Button
+									// 		id="contribute-fnd-btn"
+									// 		variant="warning"
+									// 		size="lg"
+									// 		style={{
+									// 			width: "100%",
+									// 			fontSize: "1rem",
+									// 			maxHeight: "100%",
+									// 		}}
+									// 		onClick={() =>
+									// 			!allowance || allowance <= 0 ? approve() : stake()
+									// 		}
+									// 		disabled={
+									// 			!stakingOptions ||
+									// 			!stakingOptions[7] ||
+									// 			!readyToContribute ||
+									// 			pending
+									// 		}
+									// 	>
+									// 		{!allowance || allowance <= 0
+									// 			? `Approve Donation ${!allowance} ${
+									// 					allowance <= 0
+									// 			  } ${!stakingOptions} ${
+									// 					stakingOptions ? !stakingOptions[7] : null
+									// 			  } ${!readyToContribute} ${pending}`
+									// 			: "Complete Donation"}
+									// 	</Button>)
 									<Button
 										id="contribute-fnd-btn-2"
 										variant="warning"
@@ -379,6 +418,20 @@ export default function ContributeBtn(props) {
 								>
 									Donate by card
 								</Button>
+								{/* <Button
+									id="approve-btn"
+									variant="warning"
+									size="lg"
+									style={{ width: "100%", fontSize: "1rem", maxHeight: "100%" }}
+									onClick={
+										provider
+											? () => approve()
+											: () => document.getElementById("connect-btn").click()
+									}
+									disabled={allowance > 0 || !projectLive || pending}
+								>
+									{provider ? "Approve" : "Connect Wallet"}
+								</Button> */}
 							</Col>
 						</Row>
 					</div>

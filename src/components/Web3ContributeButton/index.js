@@ -10,10 +10,13 @@ import { useParams } from "react-router";
 import { ProviderContext } from "../../web3/ProviderContext";
 import {
   formatUsd,
+  formatUsdInput,
   formatFnd,
   sendTx,
   USDT_DECIMALS,
   popupError,
+  popupInfo,
+  switchNetwork,
 } from "../../utils/Helpers";
 import { TARGET_CHAIN } from "../../utils/Helpers";
 
@@ -34,6 +37,8 @@ export default function ContributeBtn(props) {
   const [token, setToken] = useState();
   const [staking, setStaking] = useState();
   const [allowance, setAllowance] = useState(0);
+  const [balance, setBalance] = useState(0);
+  const [usdBalance, setUsdBalance] = useState(0);
   const [projectData, setProjectData] = useState();
   const [stakingOptions, setStakingOptions] = useState();
   const [stakingData, setStakingData] = useState();
@@ -44,6 +49,12 @@ export default function ContributeBtn(props) {
   const { provider, setProvider } = useContext(ProviderContext);
   const token_abi = token_info.token_abi;
   const tokenAddress = token_info.token_address;
+
+  const [networkStatus, setNetworkStatus] = useState();
+
+  useEffect(() => {
+    switchNetwork(provider).then((status) => setNetworkStatus(status));
+  }, [networkStatus, provider]);
 
   const getAllowance = async (token_) => {
     const allownce = await token_.allowance(walletAddress, stakingAddress);
@@ -60,6 +71,13 @@ export default function ContributeBtn(props) {
     setStakingData(data);
   };
 
+  const getTokenBalance = async () => {
+    const data = await token.balanceOf(walletAddress);
+    const usd = await staking.fndToUsd(data);
+    setBalance(data);
+    setUsdBalance(usd);
+  };
+
   useEffect(() => {
     axios
       .get(process.env.REACT_APP_BASE_URL + `/api/project/${id}/`)
@@ -74,15 +92,18 @@ export default function ContributeBtn(props) {
   useEffect(() => {
     clearInterval(refreshStakingId);
     refreshStakingId = setInterval(() => {
-      if (!!staking) {
+      if (networkStatus && !!staking) {
         getStakingData(staking);
         getStakingOptions(staking);
+      }
+      if (networkStatus && !!walletAddress) {
+        getTokenBalance();
       }
     }, 5000);
   }, [staking]);
 
   useMemo(() => {
-    if (provider && stakingAddress && stakingAddress) {
+    if (provider && networkStatus && stakingAddress && stakingAddress) {
       const signer = provider.getSigner();
       const token_ = new ethers.Contract(tokenAddress, token_abi, signer);
       const staking = new ethers.Contract(stakingAddress, staking_abi, signer);
@@ -94,12 +115,19 @@ export default function ContributeBtn(props) {
       getStakingOptions(staking);
       getStakingData(staking);
     }
-  }, [provider, walletAddress, stakingAddress]);
+  }, [provider, networkStatus, walletAddress, stakingAddress]);
 
   async function stake() {
-    if (!allowance || allowance <= 0) {
-      popupError("You should first approve before you can pay in FND!");
-      return;
+    console.log(allowance);
+    if (!allowance || allowance.lte(0)) {
+      popupInfo(
+        "Please approve 2x transactions in your wallet to complete your donation!"
+      );
+      const approvalStatus = await approve();
+      if (!approvalStatus) {
+        popupError("You need to first approve the payment!");
+        return;
+      }
     }
     let contribution_amount =
       document.getElementById("contribute-amount").value;
@@ -136,11 +164,13 @@ export default function ContributeBtn(props) {
 
   async function approve() {
     setPending(true);
+    console.log(ethers.constants.MaxInt256);
     const approveTx = () =>
       token?.approve(stakingAddress, ethers.constants.MaxInt256);
     const status = await sendTx(approveTx, "You have successfully staked!");
     setPending(false);
     status && setAllowance(ethers.constants.MaxInt256);
+    return status;
   }
 
   async function claim() {
@@ -148,6 +178,11 @@ export default function ContributeBtn(props) {
     const tx = () => staking?.claim();
     await sendTx(tx, "You have successfully claimed!");
     setPending(false);
+  }
+
+  function setInputValue(usdAmount) {
+    document.getElementById("contribute-amount").value =
+      formatUsdInput(usdAmount);
   }
 
   async function isReadyToContribute() {
@@ -171,6 +206,11 @@ export default function ContributeBtn(props) {
 
   return (
     <div>
+      {!!walletAddress && (
+        <div>
+          Balance | {formatFnd(balance)} FND (${formatUsd(usdBalance || 0)})
+        </div>
+      )}
       {!!stakingOptions && stakingOptions[6] && (
         <span>
           <div>
@@ -226,6 +266,15 @@ export default function ContributeBtn(props) {
                   paddingLeft: "0",
                 }}
               ></input>
+              <Button
+                onClick={() => setInputValue(usdBalance || "0")}
+                style={{
+                  alignItems: "right",
+                  justifyContent: "right",
+                }}
+              >
+                MAX
+              </Button>
             </Col>
           </Row>
         </div>
@@ -310,19 +359,6 @@ export default function ContributeBtn(props) {
               disabled={!stakingOptions || !stakingOptions[6]}
             >
               Claim
-            </Button>
-          </Col>
-          <Col className="p-1 w-30" style={{ width: "40%" }}>
-            <Button
-              id="approve-btn"
-              variant="warning"
-              // classNmae="btn-wallet align-self-end"
-              size="lg"
-              style={{ width: "100%", fontSize: "2vh", maxHeight: "100%" }}
-              onClick={() => approve()}
-              disabled={allowance > 0 || !provider || !projectLive || pending}
-            >
-              Approve
             </Button>
           </Col>
         </Row>

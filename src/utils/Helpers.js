@@ -24,6 +24,10 @@ export function formatUsd(num) {
   return withCommas(formatDecimalPrice(+num / 10 ** USDT_DECIMALS, 2));
 }
 
+export function formatUsdInput(num) {
+  return formatDecimalPrice(+num / 10 ** USDT_DECIMALS, 2);
+}
+
 function extractWeb3Error(err) {
   const errMatch = err.message.match(/"message": "(.+)"/);
   if (errMatch && errMatch.length > 1) {
@@ -82,4 +86,45 @@ export function popupError(message) {
     message,
     position: "bottomLeft",
   });
+}
+
+export function popupInfo(message) {
+  iziToast.info({
+    message,
+    position: "bottomLeft",
+  });
+}
+
+export async function switchNetwork(provider) {
+  try {
+    await provider.provider.request({
+      method: "wallet_switchEthereumChain",
+      params: [{ chainId: TARGET_CHAIN }],
+    });
+    return true;
+  } catch (switchError) {
+    if (switchError.code === 4902) {
+      try {
+        await provider.provider.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: TARGET_CHAIN,
+              rpcUrls: ["https://bsc-dataseed.binance.org/"],
+              chainName: "Binance Smart Chain",
+              nativeCurrency: {
+                name: "Binance Token",
+                symbol: "BNB",
+                decimals: 18,
+              },
+              blockExplorerUrls: ["https://bscscan.com/"],
+            },
+          ],
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    return false;
+  }
 }

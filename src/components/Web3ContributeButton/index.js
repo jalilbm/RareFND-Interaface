@@ -253,7 +253,8 @@ export default function ContributeBtn(props) {
 												height: "100%",
 												fontSize:
 													!allowance || allowance <= 0 ? "1 rem" : "1.2rem",
-												color: !allowance || allowance <= 0 ? "red" : "black",
+												// color: !allowance || allowance <= 0 ? "red" : "black",
+												color: "black",
 												fontFamily: "'Kaisei Opti', sans-serif",
 												outline: "none",
 												paddingLeft: "10px",

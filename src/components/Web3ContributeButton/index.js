@@ -239,15 +239,11 @@ export default function ContributeBtn(props) {
 										</p>
 										<input
 											id="contribute-amount"
-											placeholder={
-												!allowance || allowance <= 0
-													? "Click Approve first"
-													: "100"
-											}
+											placeholder={"100"}
 											autoComplete="off"
 											type="text"
 											pattern="(^[0-9]{0,1000}$)|(^[0-9]{0,10000}\.[0-9]{0,18}$)"
-											disabled={!allowance || allowance <= 0}
+											// disabled={!allowance || allowance <= 0}
 											style={{
 												backgroundColor: "transparent",
 												border: "none",
@@ -307,7 +303,9 @@ export default function ContributeBtn(props) {
 											pending
 										}
 									>
-										{!allowance || allowance <= 0 ? "Approve" : "Donate FND"}
+										{!allowance || allowance <= 0
+											? "Approve Donation"
+											: "Complete Donation"}
 									</Button>
 								) : (
 									<Button

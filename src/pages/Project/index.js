@@ -40,6 +40,7 @@ export default function Project(props) {
 						projectId={projectData.id}
 						text={projectData.head}
 						projectLive={projectData.live}
+						number_of_donators={projectData.number_of_donators}
 						numberOfSubscribers={projectData.number_of_subscribed_users}
 						staking_address={projectData.staking_address}
 					/>

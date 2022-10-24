@@ -379,56 +379,33 @@ export default function ContributeBtn(props) {
 								>
 									Donate by card
 								</Button>
-								{/* <Button
-							id="approve-btn"
-							variant="warning"
-							size="lg"
-							style={{ width: "100%", fontSize: "1rem", maxHeight: "100%" }}
-							onClick={
-								provider
-									? () => approve()
-									: () => document.getElementById("connect-btn").click()
-							}
-							disabled={allowance > 0 || !projectLive || pending}
-						>
-							{provider ? "Approve" : "Connect Wallet"}
-						</Button> */}
 							</Col>
 						</Row>
 					</div>
 
-					{
-						txHash && (
-							<div
-								style={{
-									backgroundColor: "#09ce00",
-									color: "white",
-									height: "50px",
-									display: "flex",
-									justifyContent: "center",
-									alignItems: "center",
-								}}
-							>
-								<p style={{ margin: "0", padding: "0" }}>
-									Transaction Hash:{" "}
-									<a
-										href={`https://bscscan.com/tx/${txHash}`}
-										target="_blank"
-										rel="noopener"
-									>
-										{txHash}
-									</a>
-								</p>
-							</div>
-						)
-
-						// <a
-						// 	style={{ margin: "0", padding: "0" }}
-						// 	href="https://bscscan.com/tx/"
-						// >
-						// 	"Transaction Hash: " + <a href="https://bscscan.com/tx/">txHash</a>
-						// </a>
-					}
+					{txHash && (
+						<div
+							style={{
+								backgroundColor: "#09ce00",
+								color: "white",
+								height: "50px",
+								display: "flex",
+								justifyContent: "center",
+								alignItems: "center",
+							}}
+						>
+							<p style={{ margin: "0", padding: "0" }}>
+								Transaction Hash:{" "}
+								<a
+									href={`https://bscscan.com/tx/${txHash}`}
+									target="_blank"
+									rel="noopener"
+								>
+									{txHash}
+								</a>
+							</p>
+						</div>
+					)}
 				</div>
 			) : (
 				<LoadingSpinner color="#FFC115" />

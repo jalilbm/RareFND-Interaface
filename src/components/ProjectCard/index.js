@@ -83,7 +83,7 @@ export default function ProjectCard(props) {
 									backgroundColor: "white",
 									height: "100%",
 									margin: "0 200 0 200",
-									padding: "5%",
+									padding: "5% 5% 0 5%",
 									position: "relative",
 								}}
 							>
@@ -110,11 +110,16 @@ export default function ProjectCard(props) {
 								</p>
 								<div style={{ marginTop: "auto" }}>
 									{props.projectLive ? (
-										<Web3ContributeButton
-											staking_address={props.staking_address}
-											staking_abi={props.staking_abi}
-											projectLive={props.projectLive}
-										/>
+										<div>
+											<Web3ContributeButton
+												staking_address={props.staking_address}
+												staking_abi={props.staking_abi}
+												projectLive={props.projectLive}
+											/>
+											{props.number_of_donators && (
+												<p>Total of {props.number_of_donators} contributors</p>
+											)}
+										</div>
 									) : (
 										<div>
 											<Button

@@ -295,7 +295,7 @@ export default function ContributeBtn(props) {
 												maxHeight: "100%",
 											}}
 											onClick={() => approve()}
-											disabled={allowance > 0 || !projectLive || pending}
+											// disabled={allowance > 0 || !projectLive || pending}
 											disabled={true}
 										>
 											Approve Donation

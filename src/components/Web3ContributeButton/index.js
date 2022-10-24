@@ -311,7 +311,7 @@ export default function ContributeBtn(props) {
 									</Button>
 								) : (
 									<Button
-										id="contribute-fnd-btn"
+										id="contribute-fnd-btn-2"
 										variant="warning"
 										size="lg"
 										style={{

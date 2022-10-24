@@ -51,6 +51,7 @@ export default function ContributeBtn(props) {
 	const getAllowance = async (token_) => {
 		const allownce = await token_.allowance(walletAddress, stakingAddress);
 		setAllowance(allownce);
+		console.log("hahahahahash", allownce);
 		setFinishedTokenInfoUpdate(true);
 	};
 
@@ -322,7 +323,7 @@ export default function ContributeBtn(props) {
 											document.getElementById("connect-btn").click()
 										}
 									>
-										Donate FND
+										Approve Donation
 									</Button>
 								)}
 							</Col>

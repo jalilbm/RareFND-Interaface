@@ -35,7 +35,7 @@ export default function ContributeBtn(props) {
 	const [token, setToken] = useState();
 	const [staking, setStaking] = useState();
 	const [allowance, setAllowance] = useState(0);
-	const [finishedTokenInfoUpdate, setFinishedTokenInfoUpdate] = useState(false);
+	const [finishedTokenInfoUpdate, setFinishedTokenInfoUpdate] = useState(true);
 	const [projectData, setProjectData] = useState();
 	const [stakingOptions, setStakingOptions] = useState();
 	const [stakingData, setStakingData] = useState();

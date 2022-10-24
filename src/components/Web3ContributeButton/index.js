@@ -102,9 +102,8 @@ export default function ContributeBtn(props) {
 
 	async function stake() {
 		if (!allowance || allowance <= 0) {
-			// popupError("You should first approve before you can pay in FND!");
-			// return;
-			await approve();
+			popupError("You should first approve before you can pay in FND!");
+			return;
 		}
 		let contribution_amount =
 			document.getElementById("contribute-amount").value;
@@ -297,6 +296,7 @@ export default function ContributeBtn(props) {
 											}}
 											onClick={() => approve()}
 											disabled={allowance > 0 || !projectLive || pending}
+											disabled={true}
 										>
 											Approve Donation
 										</Button>

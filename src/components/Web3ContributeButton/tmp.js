@@ -51,7 +51,6 @@ export default function ContributeBtn(props) {
 	const getAllowance = async (token_) => {
 		const allownce = await token_.allowance(walletAddress, stakingAddress);
 		setAllowance(allownce);
-		console.log("hahahahahash", allownce);
 		setFinishedTokenInfoUpdate(true);
 	};
 
@@ -103,9 +102,8 @@ export default function ContributeBtn(props) {
 
 	async function stake() {
 		if (!allowance || allowance <= 0) {
-			// popupError("You should first approve before you can pay in FND!");
-			// return;
-			await approve();
+			popupError("You should first approve before you can pay in FND!");
+			return;
 		}
 		let contribution_amount =
 			document.getElementById("contribute-amount").value;
@@ -286,30 +284,71 @@ export default function ContributeBtn(props) {
 						>
 							<Col className="p-1 w-20" style={{ width: "100%" }}>
 								{provider ? (
-									<Button
-										id="contribute-fnd-btn"
-										variant="warning"
-										size="lg"
-										style={{
-											width: "100%",
-											fontSize: "1rem",
-											maxHeight: "100%",
-										}}
-										onClick={() =>
-											!allowance || allowance <= 0 ? approve() : stake()
-										}
-										disabled={
-											!stakingOptions ||
-											!stakingOptions[7] ||
-											!readyToContribute ||
-											pending
-										}
-									>
-										{!allowance || allowance <= 0
-											? "Approve Donation"
-											: "Complete Donation"}
-									</Button>
+									!allowance || allowance <= 0 ? (
+										<Button
+											id="contribute-fnd-btn"
+											variant="warning"
+											size="lg"
+											style={{
+												width: "100%",
+												fontSize: "1rem",
+												maxHeight: "100%",
+											}}
+											onClick={() => approve()}
+											disabled={allowance > 0 || !projectLive || pending}
+											// disabled={true}
+										>
+											Approve Donation
+										</Button>
+									) : (
+										<Button
+											id="contribute-fnd-btn"
+											variant="warning"
+											size="lg"
+											style={{
+												width: "100%",
+												fontSize: "1rem",
+												maxHeight: "100%",
+											}}
+											onClick={() => stake()}
+											disabled={
+												!stakingOptions ||
+												!stakingOptions[7] ||
+												!readyToContribute ||
+												pending
+											}
+										>
+											Complete Donation
+										</Button>
+									)
 								) : (
+									// 	<Button
+									// 		id="contribute-fnd-btn"
+									// 		variant="warning"
+									// 		size="lg"
+									// 		style={{
+									// 			width: "100%",
+									// 			fontSize: "1rem",
+									// 			maxHeight: "100%",
+									// 		}}
+									// 		onClick={() =>
+									// 			!allowance || allowance <= 0 ? approve() : stake()
+									// 		}
+									// 		disabled={
+									// 			!stakingOptions ||
+									// 			!stakingOptions[7] ||
+									// 			!readyToContribute ||
+									// 			pending
+									// 		}
+									// 	>
+									// 		{!allowance || allowance <= 0
+									// 			? `Approve Donation ${!allowance} ${
+									// 					allowance <= 0
+									// 			  } ${!stakingOptions} ${
+									// 					stakingOptions ? !stakingOptions[7] : null
+									// 			  } ${!readyToContribute} ${pending}`
+									// 			: "Complete Donation"}
+									// 	</Button>)
 									<Button
 										id="contribute-fnd-btn-2"
 										variant="warning"
@@ -379,56 +418,47 @@ export default function ContributeBtn(props) {
 								>
 									Donate by card
 								</Button>
-								{/* <Button
-							id="approve-btn"
-							variant="warning"
-							size="lg"
-							style={{ width: "100%", fontSize: "1rem", maxHeight: "100%" }}
-							onClick={
-								provider
-									? () => approve()
-									: () => document.getElementById("connect-btn").click()
-							}
-							disabled={allowance > 0 || !projectLive || pending}
-						>
-							{provider ? "Approve" : "Connect Wallet"}
-						</Button> */}
+								<Button
+									id="approve-btn"
+									variant="warning"
+									size="lg"
+									style={{ width: "100%", fontSize: "1rem", maxHeight: "100%" }}
+									onClick={
+										provider
+											? () => approve()
+											: () => document.getElementById("connect-btn").click()
+									}
+									disabled={allowance > 0 || !projectLive || pending}
+								>
+									{provider ? "Approve" : "Connect Wallet"}
+								</Button>
 							</Col>
 						</Row>
 					</div>
 
-					{
-						txHash && (
-							<div
-								style={{
-									backgroundColor: "#09ce00",
-									color: "white",
-									height: "50px",
-									display: "flex",
-									justifyContent: "center",
-									alignItems: "center",
-								}}
-							>
-								<p style={{ margin: "0", padding: "0" }}>
-									Transaction Hash:{" "}
-									<a
-										href={`https://bscscan.com/tx/${txHash}`}
-										target="_blank"
-										rel="noopener"
-									>
-										{txHash}
-									</a>
-								</p>
-							</div>
-						)
-
-						// <a
-						// 	style={{ margin: "0", padding: "0" }}
-						// 	href="https://bscscan.com/tx/"
-						// >
-						// 	"Transaction Hash: " + <a href="https://bscscan.com/tx/">txHash</a>
-						// </a>
-					}
+					{txHash && (
+						<div
+							style={{
+								backgroundColor: "#09ce00",
+								color: "white",
+								height: "50px",
+								display: "flex",
+								justifyContent: "center",
+								alignItems: "center",
+							}}
+						>
+							<p style={{ margin: "0", padding: "0" }}>
+								Transaction Hash:{" "}
+								<a
+									href={`https://bscscan.com/tx/${txHash}`}
+									target="_blank"
+									rel="noopener"
+								>
+									{txHash}
+								</a>
+							</p>
+						</div>
+					)}
 				</div>
 			) : (
 				<LoadingSpinner color="#FFC115" />

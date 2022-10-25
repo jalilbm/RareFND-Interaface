@@ -117,7 +117,17 @@ export default function ProjectCard(props) {
 												projectLive={props.projectLive}
 											/>
 											{props.number_of_donators && (
-												<p>Total of {props.number_of_donators} contributors</p>
+												<a
+													href={`https://bscscan.com/address/${props.staking_address}`}
+													style={{
+														textDecoration: "underline",
+														color: "black",
+													}}
+												>
+													<p>
+														Total of {props.number_of_donators} contributors
+													</p>
+												</a>
 											)}
 										</div>
 									) : (

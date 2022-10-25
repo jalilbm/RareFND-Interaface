@@ -46,7 +46,7 @@ export default function HomeCarousel() {
 								>
 									The only crowdfunding platform that pays YOU to start your
 									fundraising journey! For a limited time only kickstart your
-									campaign with 10% completely free to help your reach your
+									campaign with 10% completely free to help you reach your
 									target!
 								</p>
 							</div>

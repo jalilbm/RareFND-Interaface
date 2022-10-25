@@ -53,11 +53,11 @@ export default function ContributeBtn(props) {
 	const token_abi = token_info.token_abi;
 	const tokenAddress = token_info.token_address;
 
-  const getAllowance = async (token_) => {
-    const allownce = await token_.allowance(walletAddress, stakingAddress);
-    setAllowance(allownce);
-    setFinishedTokenInfoUpdate(true);
-  };
+	const getAllowance = async (token_) => {
+		const allownce = await token_.allowance(walletAddress, stakingAddress);
+		setAllowance(allownce);
+		setFinishedTokenInfoUpdate(true);
+	};
 
 	const getTokenBalance = async () => {
 		const data = await token.balanceOf(walletAddress);
@@ -87,33 +87,33 @@ export default function ContributeBtn(props) {
 			});
 	}, []);
 
-  useEffect(() => {
-    clearInterval(refreshStakingId);
-    refreshStakingId = setInterval(() => {
-      if (!!staking) {
-        getStakingData(staking);
-        getStakingOptions(staking);
-      }
-      if (!!walletAddress) {
-        getTokenBalance();
-      }
-    }, 5000);
-  }, [staking]);
+	useEffect(() => {
+		clearInterval(refreshStakingId);
+		refreshStakingId = setInterval(() => {
+			if (!!staking) {
+				getStakingData(staking);
+				getStakingOptions(staking);
+			}
+			if (!!walletAddress) {
+				getTokenBalance();
+			}
+		}, 5000);
+	}, [staking]);
 
-  useMemo(() => {
-    if (provider && stakingAddress && stakingAddress) {
-      const signer = provider.getSigner();
-      const token_ = new ethers.Contract(tokenAddress, token_abi, signer);
-      const staking = new ethers.Contract(stakingAddress, staking_abi, signer);
-      setToken(token_);
-      setStaking(staking);
-      isReadyToContribute();
+	useMemo(() => {
+		if (provider && stakingAddress && stakingAddress) {
+			const signer = provider.getSigner();
+			const token_ = new ethers.Contract(tokenAddress, token_abi, signer);
+			const staking = new ethers.Contract(stakingAddress, staking_abi, signer);
+			setToken(token_);
+			setStaking(staking);
+			isReadyToContribute();
 
-      getAllowance(token_);
-      getStakingOptions(staking);
-      getStakingData(staking);
-    }
-  }, [provider, walletAddress, stakingAddress]);
+			getAllowance(token_);
+			getStakingOptions(staking);
+			getStakingData(staking);
+		}
+	}, [provider, walletAddress, stakingAddress]);
 
 	async function stake() {
 		if (!allowance || allowance.lte(0)) {
@@ -326,7 +326,7 @@ export default function ContributeBtn(props) {
 						<Row
 							className="mx-auto no-gutters jumbotron d-flex align-items-center"
 							style={{
-								padding: "0 1em 0 1em",
+								padding: "0 0 0 0",
 								width: "100%",
 								maxWidth: "500px",
 							}}
@@ -384,7 +384,7 @@ export default function ContributeBtn(props) {
 						<Row
 							className="mx-auto no-gutters jumbotron d-flex align-items-center"
 							style={{
-								padding: "0 1em 0 1em",
+								padding: "0 0 0 0",
 								width: "100%",
 								maxWidth: "500px",
 							}}

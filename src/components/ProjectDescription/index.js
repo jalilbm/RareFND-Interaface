@@ -32,6 +32,7 @@ export default function ProjectDescription(props) {
 				</Col>
 				<Col md={4}>
 					<div
+						className="mx-auto"
 						style={{
 							width: "80%",
 							marginLeft: "1vw",

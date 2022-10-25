@@ -119,6 +119,8 @@ export default function ProjectCard(props) {
 											{props.number_of_donators && (
 												<a
 													href={`https://bscscan.com/address/${props.staking_address}`}
+													target="_blank"
+													rel="noreferrer"
 													style={{
 														textDecoration: "underline",
 														color: "black",

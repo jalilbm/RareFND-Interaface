@@ -5,9 +5,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin: 0px;
-	padding: 0px;
-	height: 2.5rem;
+	padding: 0.5rem 0.5rem 0.5rem 0.5rem;
 	-webkit-transition: height 0.5s;
 	transition: height 0.5s;
 	&:hover {
@@ -26,6 +24,7 @@
 				color: black;
 				height: 100%;
 				margin: 0 5px 0 0;
+				text-align: center;
 
 				&:hover {
 					text-decoration: underline !important;

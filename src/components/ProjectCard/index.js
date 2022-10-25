@@ -78,14 +78,17 @@ export default function ProjectCard(props) {
 						/>
 					</Col>
 					{window.innerWidth <= 767 && (
-						<hr
-							style={{
-								border: "3px solid",
-								color: "#FFC007",
-								margin: "10px",
-								opacity: "1",
-							}}
-						/>
+						<div style={{ width: "100%" }}>
+							<hr
+								style={{
+									border: "3px solid",
+									color: "#FFC007",
+									opacity: "1",
+									width: "100%",
+									marginLeft: "-1%",
+								}}
+							/>
+						</div>
 					)}
 					<Col md={6}>
 						<Card.Body

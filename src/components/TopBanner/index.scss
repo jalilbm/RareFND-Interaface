@@ -1,0 +1,39 @@
+.topBanner {
+	background-color: #fad02c;
+	width: 100%;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0px;
+	padding: 0px;
+	height: 2.5rem;
+	-webkit-transition: height 0.5s;
+	transition: height 0.5s;
+	&:hover {
+		height: 3rem;
+	}
+
+	a {
+		text-decoration: none;
+		height: 100;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		div {
+			p {
+				// text-align: center;
+				color: black;
+				height: 100%;
+				margin: 0 5px 0 0;
+
+				&:hover {
+					text-decoration: underline !important;
+				}
+			}
+			img {
+				width: 18px;
+			}
+		}
+	}
+}

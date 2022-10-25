@@ -62,7 +62,6 @@ export default function ContributeBtn(props) {
 	const getAllowance = async (token_) => {
 		const allownce = await token_.allowance(walletAddress, stakingAddress);
 		setAllowance(allownce);
-		console.log("hahahahahash", allownce);
 		setFinishedTokenInfoUpdate(true);
 	};
 
@@ -253,7 +252,7 @@ export default function ContributeBtn(props) {
 						>
 							<Row
 								className="mx-auto no-gutters jumbotron d-flex align-items-center"
-								style={{ padding: "0 1em 0 1em" }}
+								style={{ padding: "0 6px 0 1em" }}
 							>
 								<Col style={{ padding: "0" }}>
 									<div
@@ -299,19 +298,22 @@ export default function ContributeBtn(props) {
 											}}
 										></input>
 
-										<p
+										<Button
 											style={{
-												padding: "0",
-												margin: "0",
-												fontSize: "1.5rem",
-												borderLeft: "1px solid",
-												paddingLeft: "10px",
-												borderColor: "#FEC008",
+												// padding: "0",
+												// margin: "0",
+												// fontSize: "1.5rem",
+												// borderLeft: "1px solid",
+												// paddingLeft: "10px",
+												// borderColor: "#FEC008",
+												borderRadius: "12px",
 											}}
+											size="sm"
+											variant="outline-warning"
 											onClick={() => setInputValue(usdBalance || "0")}
 										>
 											MAX
-										</p>
+										</Button>
 									</div>
 								</Col>
 							</Row>

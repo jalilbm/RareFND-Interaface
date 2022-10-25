@@ -61,7 +61,12 @@ export default function ProjectCard(props) {
 	return (
 		<div>
 			<Card className="border-0" style={{ backgroundColor: "transparent" }}>
-				<Row className="w-100 vertical-divider">
+				<Row
+					className={`w-100${
+						window.innerWidth > 1000 ? " vertical-divider" : ""
+					}`}
+					style={{ margin: "0px" }}
+				>
 					<Col md={6}>
 						<Card.Img
 							variant="left"
@@ -69,20 +74,21 @@ export default function ProjectCard(props) {
 							style={{
 								width: "100%",
 								objectFit: "cover",
-								height:
-									window.innerHeight < window.innerWidth ? "50vh" : "50vw",
 							}}
 						/>
 					</Col>
 					<Col md={6}>
-						<Card.Body className="text-black text-center d-flex flex-column h-100">
+						<Card.Body
+							className="text-black text-center d-flex flex-column h-100"
+							style={{ paddingRight: "0", paddingLeft: "0" }}
+						>
 							<div
 								style={{
 									display: "flex",
 									flexDirection: "column",
 									backgroundColor: "white",
 									height: "100%",
-									margin: "0 200 0 200",
+									margin: window.innerWidth > 1000 ? "0 200 0 200" : "0",
 									padding: "5% 5% 0 5%",
 									position: "relative",
 								}}

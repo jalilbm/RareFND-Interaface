@@ -26,58 +26,135 @@ export default function DashboardProjects() {
 	);
 	const [formErrors, setFormErrors] = useState({});
 
+	const addInputError = (input, errorMessage) => {
+		setFormErrors({
+			...formErrors,
+			[input]: errorMessage,
+		});
+	};
+
+	const removeInputError = (input) => {
+		let tmp = { ...formErrors };
+		delete tmp[input];
+		setFormErrors(tmp);
+	};
+
+	const handleEmptyInputError = (value, input, errorMessage) => {
+		if (!value || value === "" || value === null) {
+			addInputError(input, errorMessage);
+		} else {
+			removeInputError(input);
+		}
+	};
+
+	const handleNonSelectedDropMenu = (
+		value,
+		defaultDropMenuText,
+		input,
+		errorMessage
+	) => {
+		if (value === defaultDropMenuText) {
+			addInputError(input, errorMessage);
+		} else {
+			removeInputError(input);
+		}
+	};
+
+	const handleInputErrors = (name, value) => {
+		switch (name) {
+			case "projectTitle":
+				handleEmptyInputError(
+					value,
+					"projectTitle",
+					"Project Title is required!"
+				);
+				break;
+			case "projectCategory":
+				handleNonSelectedDropMenu(
+					value,
+					"Choose Category",
+					"projectCategory",
+					"Please select a category!"
+				);
+				break;
+			case "projectType":
+				handleNonSelectedDropMenu(
+					value,
+					"Choose Project Type",
+					"projectType",
+					"Please select a project type!"
+				);
+				break;
+			case "projectCountry":
+				handleNonSelectedDropMenu(
+					value,
+					"Choose a country",
+					"projectCountry",
+					"Please select a project country!"
+				);
+				break;
+			case "projectImageFile":
+				handleEmptyInputError(
+					value,
+					"projectImageFile",
+					"Project Image is required!"
+				);
+				break;
+			case "projectHead":
+				handleEmptyInputError(
+					value,
+					"projectHead",
+					"Project Head is required!"
+				);
+				break;
+			case "projectAddress":
+				handleEmptyInputError(
+					value,
+					"projectAddress",
+					"Project Address is required!"
+				);
+				break;
+			case "projectLaunchDate":
+				handleEmptyInputError(
+					value,
+					"projectLaunchDate",
+					"Project launch date is required!"
+				);
+				break;
+			case "projectDeadlineDate":
+				handleEmptyInputError(
+					value,
+					"projectDeadlineDate",
+					"Project deadline date is required!"
+				);
+				break;
+			case "projectFundsAmount":
+				handleEmptyInputError(
+					value,
+					"projectFundsAmount",
+					"Project Funding Amount is required!"
+				);
+				break;
+		}
+	};
+
 	const updateProjectData = (event, source) => {
 		let { name, value } = event.target;
-		if (name === "projectTitle") {
-			if (value === "") {
-				setFormErrors({
-					...formErrors,
-					projectTitle: "Project Title is required!",
-				});
-			} else {
-				let tmp = { ...formErrors };
-				delete tmp["projectTitle"];
-				setFormErrors(tmp);
-			}
-		} else if (name === "projectHead") {
-			if (value === "") {
-				setFormErrors({
-					...formErrors,
-					projectHead: "Project Head is required!",
-				});
-			} else {
-				let tmp = { ...formErrors };
-				delete tmp["projectHead"];
-				setFormErrors(tmp);
-			}
-		} else if (name === "projectAddress") {
-			if (value === "") {
-				setFormErrors({
-					...formErrors,
-					projectAddress: "Project Address is required!",
-				});
-			} else {
-				let tmp = { ...formErrors };
-				delete tmp["projectAddress"];
-				setFormErrors(tmp);
-			}
-		} else if (name === "projectFundsAmount") {
-			if (value === "") {
-				setFormErrors({
-					...formErrors,
-					projectFundsAmount: "Project Funds Amount is required!",
-				});
-			} else {
-				let tmp = { ...formErrors };
-				delete tmp["projectFundsAmount"];
-				setFormErrors(tmp);
-			}
-		}
+		console.log(name, value);
+		handleInputErrors(name, value);
 		setProjectData({
 			...projectData,
 			[source]: { ...projectData[source], [name]: value },
 		});
 	};
+
+	useEffect(() => {
+		// handleInputErrors("projectCategory", "Choose Category");
+		// handleInputErrors("projectType", "Choose Project Type");
+		// handleInputErrors("projectCountry", "Choose a country");
+		// handleInputErrors("projectImageFile", null);
+		handleInputErrors("projectDeadlineDate", null);
+	}, []);
 
 	useEffect(() => {
 		localStorage.setItem("createProjectData", JSON.stringify(projectData));

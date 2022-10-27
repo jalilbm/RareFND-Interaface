@@ -66,6 +66,7 @@ textarea:invalid {
 
 .invalid-input-p {
 	color: red;
+	margin: 0;
 }
 
 .required-asterisk {

@@ -14,6 +14,8 @@ export default function Basics(props) {
 	const [category, setCategory] = useState(null);
 	const [countries, setCountries] = useState([]);
 
+	console.log("aaaaaaaa", props.formErrors);
+
 	useEffect(() => {
 		axios
 			.get(process.env.REACT_APP_BASE_URL + "/api/category/")
@@ -213,6 +215,9 @@ export default function Basics(props) {
 								props.projectData["basics"].projectCategory
 							}
 						/>
+						<p className="invalid-input-p">
+							{props.formErrors && props.formErrors.projectCategory}
+						</p>
 					</div>
 					<br></br>
 					<p
@@ -263,6 +268,9 @@ export default function Basics(props) {
 								props.projectData["basics"].projectType
 							}
 						/>
+						<p className="invalid-input-p">
+							{props.formErrors && props.formErrors.projectType}
+						</p>
 					</div>
 				</Col>
 			</Row>
@@ -333,6 +341,9 @@ export default function Basics(props) {
 								props.projectData["basics"].projectCountry
 							}
 						/>
+						<p className="invalid-input-p">
+							{props.formErrors && props.formErrors.projectCountry}
+						</p>
 					</div>
 				</Col>
 			</Row>
@@ -385,6 +396,9 @@ export default function Basics(props) {
 								}
 								source="basics"
 							/>
+							<p className="invalid-input-p">
+								{props.formErrors && props.formErrors.projectImageFile}
+							</p>
 						</div>
 					</div>
 				</Col>
@@ -431,6 +445,9 @@ export default function Basics(props) {
 							}
 							source="basics"
 						/>
+						<p className="invalid-input-p">
+							{props.formErrors && props.formErrors.projectLaunchDate}
+						</p>
 					</div>
 				</Col>
 			</Row>
@@ -473,6 +490,9 @@ export default function Basics(props) {
 							}
 							source="basics"
 						/>
+						<p className="invalid-input-p">
+							{props.formErrors && props.formErrors.projectDeadlineDate}
+						</p>
 					</div>
 				</Col>
 			</Row>

@@ -3,7 +3,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import "./index.scss";
 
 function DropDown(props) {
-	const [selectedItem, setSelectedItem] = useState();
+	const [selectedItem, setSelectedItem] = useState(null);
 
 	const handleClickedItem = (eventKey) => {
 		document.getElementById(props.id).textContent = eventKey;

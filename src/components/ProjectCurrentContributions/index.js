@@ -55,7 +55,7 @@ export default function ProjectCurrentContributions() {
 					<Row className="justify-content-md-center mt-5">
 						<Col md={6} className="text-center mt-1" style={{ color: "black" }}>
 							<div
-								className="display-6 fw-bold text-light fw-bold"
+								className="h3 fw-bold text-light fw-bold"
 								style={{
 									fontFamily: "'Kaisei Opti', sans-serif",
 									whiteSpace: "pre-line",
@@ -75,7 +75,7 @@ export default function ProjectCurrentContributions() {
 						</Col>
 						<Col md={6} className="text-center mt-1" style={{ color: "black" }}>
 							<div
-								className="display-6 fw-bold text-white fw-bold"
+								className="h3 fw-bold text-white fw-bold"
 								style={{ fontFamily: "'Kaisei Opti', sans-serif" }}
 							>
 								Rare FuND Reward

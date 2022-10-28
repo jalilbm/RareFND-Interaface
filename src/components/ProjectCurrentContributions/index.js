@@ -25,8 +25,10 @@ export default function ProjectCurrentContributions(props) {
 					) {
 						props.setProjectSuccessfullyEnded(true);
 					}
+					props.setFundingDataUpdated(true);
 				});
 		}, 1000 * 5);
+		// props.setFundingDataUpdated(true);
 		return () => clearInterval(interval);
 	}, []);
 

@@ -38,7 +38,7 @@ export default function ContributeBtn(props) {
 	const [token, setToken] = useState();
 	const [staking, setStaking] = useState();
 	const [allowance, setAllowance] = useState(0);
-	const [finishedTokenInfoUpdate, setFinishedTokenInfoUpdate] = useState(true);
+	const [finishedTokenInfoUpdate, setFinishedTokenInfoUpdate] = useState(false);
 	const [projectData, setProjectData] = useState();
 	const [stakingOptions, setStakingOptions] = useState();
 	const [stakingData, setStakingData] = useState();
@@ -56,7 +56,6 @@ export default function ContributeBtn(props) {
 	const getAllowance = async (token_) => {
 		const allownce = await token_.allowance(walletAddress, stakingAddress);
 		setAllowance(allownce);
-		setFinishedTokenInfoUpdate(true);
 	};
 
 	const getTokenBalance = async () => {
@@ -69,6 +68,7 @@ export default function ContributeBtn(props) {
 	const getStakingOptions = async (staking) => {
 		const options = await staking.getOptions();
 		setStakingOptions(options);
+		setFinishedTokenInfoUpdate(true);
 	};
 
 	const getStakingData = async (staking) => {

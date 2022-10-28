@@ -9,8 +9,13 @@ import ProjectCard from "../../components/ProjectCard";
 export default function Project(props) {
 	const [projectData, setProjectData] = useState({});
 	const [incentivesData, setIncentivesData] = useState(null);
+	// projectSuccessfullyEnded:
+	// null: didn't succeed and didn't fail,
+	// false: fundraising failed,
+	// true: fundraising successfully ended)
 	const [projectSuccessfullyEnded, setProjectSuccessfullyEnded] =
 		useState(null);
+	const [fundingDataUpdated, setFundingDataUpdated] = useState(false);
 
 	const projectId = window.location.href.split("/").at(-1);
 
@@ -28,6 +33,10 @@ export default function Project(props) {
 			.get(process.env.REACT_APP_BASE_URL + `/api/project/${projectId}/`)
 			.then((response) => {
 				setProjectData(response.data);
+				if (!response.data.live && response.data.raised_amount === 0) {
+					// means no funding data
+					setFundingDataUpdated(true);
+				}
 			});
 	}, []);
 	return (
@@ -46,10 +55,12 @@ export default function Project(props) {
 						numberOfSubscribers={projectData.number_of_subscribed_users}
 						staking_address={projectData.staking_address}
 						projectSuccessfullyEnded={projectSuccessfullyEnded}
+						fundingDataUpdated={fundingDataUpdated}
 					/>
 					{(projectData.live || projectData.raised_amount > 0) && (
 						<ProjectCurrentContributions
 							setProjectSuccessfullyEnded={setProjectSuccessfullyEnded}
+							setFundingDataUpdated={setFundingDataUpdated}
 						/>
 					)}
 					<ProjectDescription

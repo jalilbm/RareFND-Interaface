@@ -11,6 +11,7 @@ import AuthContext from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import comingSoon from "../../assets/coming-soon.png";
 import succeed from "../../assets/succeed.png";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 export default function ProjectCard(props) {
 	let api = useAxios();
@@ -112,98 +113,112 @@ export default function ProjectCard(props) {
 									position: "relative",
 								}}
 							>
-								{!props.projectLive &&
-									(props.projectSuccessfullyEnded === true ? (
-										<div
-											style={{
-												position: "absolute",
-												top: "-5px",
-												right: "-15px",
-											}}
-										>
-											<img src={succeed} style={{ width: "5rem" }} />
-										</div>
-									) : props.projectSuccessfullyEnded === false ? (
-										<></>
-									) : (
-										<div
-											style={{
-												position: "absolute",
-												top: "-5px",
-												right: "-5px",
-											}}
-										>
-											<img src={comingSoon} style={{ width: "7rem" }} />
-										</div>
-									))}
-								<h1>
-									<Card.Title
+								{props.fundingDataUpdated ? (
+									<div
 										style={{
-											fontSize: "xx-large",
+											display: "flex",
+											flexDirection: "column",
+											backgroundColor: "white",
+											height: "100%",
+											// margin: window.innerWidth > 1000 ? "0 200 0 200" : "0",
+											// padding: "5% 5% 0 5%",
+											// position: "relative",
 										}}
 									>
-										{props.title}
-									</Card.Title>
-								</h1>
-								<p>
-									<Card.Text style={{ fontSize: "larger" }}>
-										{props.text}
-									</Card.Text>
-								</p>
-								<div style={{ marginTop: "auto" }}>
-									{props.projectLive ||
-									props.projectSuccessfullyEnded === true ||
-									props.projectSuccessfullyEnded === false ? (
-										<div>
-											<Web3ContributeButton
-												staking_address={props.staking_address}
-												staking_abi={props.staking_abi}
-												projectLive={props.projectLive}
-												projectSuccessfullyEnded={
-													props.projectSuccessfullyEnded
-												}
-											/>
-											{props.number_of_donators && (
-												<a
-													href={`https://bscscan.com/address/${props.staking_address}`}
-													target="_blank"
-													rel="noreferrer"
+										{!props.projectLive &&
+											(props.projectSuccessfullyEnded === true ? (
+												<div
 													style={{
-														textDecoration: "underline",
-														color: "black",
+														position: "absolute",
+														top: "-5px",
+														right: "-15px",
 													}}
 												>
-													<p>
-														Total of {props.number_of_donators} contributors
-													</p>
-												</a>
+													<img src={succeed} style={{ width: "5rem" }} />
+												</div>
+											) : props.projectSuccessfullyEnded === false ? (
+												<></>
+											) : (
+												<div
+													style={{
+														position: "absolute",
+														top: "-5px",
+														right: "-5px",
+													}}
+												>
+													<img src={comingSoon} style={{ width: "7rem" }} />
+												</div>
+											))}
+										<h1>
+											<Card.Title
+												style={{
+													fontSize: "xx-large",
+												}}
+											>
+												{props.title}
+											</Card.Title>
+										</h1>
+										<Card.Text style={{ fontSize: "larger" }}>
+											{props.text}
+										</Card.Text>
+										<div style={{ marginTop: "auto" }}>
+											{props.projectLive ||
+											props.projectSuccessfullyEnded === true ||
+											props.projectSuccessfullyEnded === false ? (
+												<div>
+													<Web3ContributeButton
+														staking_address={props.staking_address}
+														staking_abi={props.staking_abi}
+														projectLive={props.projectLive}
+														projectSuccessfullyEnded={
+															props.projectSuccessfullyEnded
+														}
+													/>
+													{props.number_of_donators && (
+														<a
+															href={`https://bscscan.com/address/${props.staking_address}`}
+															target="_blank"
+															rel="noreferrer"
+															style={{
+																textDecoration: "underline",
+																color: "black",
+															}}
+														>
+															<p>
+																Total of {props.number_of_donators} contributors
+															</p>
+														</a>
+													)}
+												</div>
+											) : (
+												props.projectSuccessfullyEnded === null && (
+													<div>
+														<Button
+															id="subscribe-btn"
+															variant="warning"
+															size="lg"
+															style={{
+																width: "100%",
+																fontSize: "2vh",
+																maxHeight: "100%",
+															}}
+															onClick={subscribeToProject}
+															disabled={subscribed}
+														>
+															{subscribeButtonText}
+														</Button>
+														<p style={{ marginTop: "10px" }}>
+															{props.numberOfSubscribers &&
+																`${props.numberOfSubscribers} Subscribers`}
+														</p>
+													</div>
+												)
 											)}
 										</div>
-									) : (
-										props.projectSuccessfullyEnded === null && (
-											<div>
-												<Button
-													id="subscribe-btn"
-													variant="warning"
-													size="lg"
-													style={{
-														width: "100%",
-														fontSize: "2vh",
-														maxHeight: "100%",
-													}}
-													onClick={subscribeToProject}
-													disabled={subscribed}
-												>
-													{subscribeButtonText}
-												</Button>
-												<p style={{ marginTop: "10px" }}>
-													{props.numberOfSubscribers &&
-														`${props.numberOfSubscribers} Subscribers`}
-												</p>
-											</div>
-										)
-									)}
-								</div>
+									</div>
+								) : (
+									<LoadingSpinner color="#FFC115" />
+								)}
 							</div>
 						</Card.Body>
 					</Col>

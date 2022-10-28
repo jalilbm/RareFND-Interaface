@@ -14,17 +14,46 @@ export default function DashboardProjects() {
 	const [selectedNavItem, setSelectedNavItem] = useState(
 		"create-project-tab-1"
 	);
-	const [renderTab, setRenderTab] = useState(<Basics />);
 	const [projectData, setProjectData] = useState(
-		JSON.parse(localStorage.getItem("createProjectData")) || {
-			basics: {},
-			funding: {},
-			story: {},
-			payment: {},
-			rewards: {},
-		}
+		localStorage.getItem("createProjectData")
+			? JSON.parse(localStorage.getItem("createProjectData"))
+			: {
+					basics: {
+						projectTitle: "",
+						projectHead: "",
+						projectCategory: "",
+						projectSubcategory: "",
+						projectType: "",
+						projectAddress: "",
+						projectCountry: "",
+						projectImageFile: null,
+						projectLaunchDate: null,
+						projectDeadlineDate: null,
+					},
+					funding: { projectFundsAmount: "", projectBudgetFile: null },
+					rewards: {},
+					story: { projectStory: "" },
+					payment: {
+						companyName: "",
+						natureOfBusiness: "",
+						companyAddress: "",
+						companyCity: "",
+						companyZipCode: "",
+						companyCountry: "",
+						projectIncorporationDate: "",
+						companyRegistrationNumber: "",
+						companyEstimatedAnnualTurnover: "",
+						projectTaxCountry: "",
+						taxIdNumber: "",
+						whitePaperUrl: "",
+						tokenomicsUrl: "",
+						certificateOfIncumbency: null,
+						companyStructureChart: null,
+					},
+			  }
 	);
 	const [formErrors, setFormErrors] = useState({});
+	const [renderTab, setRenderTab] = useState(null);
 
 	const addInputError = (input, errorMessage) => {
 		setFormErrors({
@@ -149,11 +178,12 @@ export default function DashboardProjects() {
 	};
 
 	useEffect(() => {
+		handleInputErrors("projectTitle", "");
 		// handleInputErrors("projectCategory", "Choose Category");
 		// handleInputErrors("projectType", "Choose Project Type");
 		// handleInputErrors("projectCountry", "Choose a country");
 		// handleInputErrors("projectImageFile", null);
-		handleInputErrors("projectDeadlineDate", null);
+		// handleInputErrors("projectDeadlineDate", null);
 	}, []);
 
 	useEffect(() => {

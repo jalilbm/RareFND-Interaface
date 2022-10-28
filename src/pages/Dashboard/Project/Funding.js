@@ -57,7 +57,7 @@ export default function Funding(props) {
 							className="atomic-text-input w-100"
 							id="projectFundsAmount"
 							maxLength="60"
-							name="projectFundsAmount"
+							name="0"
 							placeholder="$ 0.0"
 							type="text"
 							onChange={(event) => props.updateProjectData(event, "funding")}

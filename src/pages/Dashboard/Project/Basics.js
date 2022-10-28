@@ -14,8 +14,6 @@ export default function Basics(props) {
 	const [category, setCategory] = useState(null);
 	const [countries, setCountries] = useState([]);
 
-	console.log("aaaaaaaa", props.formErrors);
-
 	useEffect(() => {
 		axios
 			.get(process.env.REACT_APP_BASE_URL + "/api/category/")

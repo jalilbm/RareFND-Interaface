@@ -41,9 +41,14 @@ export default function ProjectCurrentContributions() {
 							<ProgressBar
 								animated
 								variant="dark"
-								now={(usdRaisedAmount / Number(projectData.fund_amount)) * 100}
+								now={
+									((usdRaisedAmount + projectData.current_reward) /
+										Number(projectData.fund_amount)) *
+									100
+								}
 								label={`${(
-									(usdRaisedAmount / Number(projectData.fund_amount)) *
+									((usdRaisedAmount + projectData.current_reward) /
+										Number(projectData.fund_amount)) *
 									100
 								).toFixed(2)}%`}
 								className="mx-auto"

@@ -7,7 +7,7 @@ import axios from "axios";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import { useParams } from "react-router";
 
-export default function ProjectCurrentContributions() {
+export default function ProjectCurrentContributions(props) {
 	const { id } = useParams();
 	const [projectData, setProjectData] = useState(null);
 	const [usdRaisedAmount, setUsdRaisedAmount] = useState(0);
@@ -18,7 +18,13 @@ export default function ProjectCurrentContributions() {
 				.then((response) => response.data)
 				.then((data) => {
 					setProjectData(data);
-					setUsdRaisedAmount(Number(data.raised_amount));
+					setUsdRaisedAmount(Number(data.raised_amount) + data.current_reward);
+					if (
+						Number(data.raised_amount) + data.current_reward >=
+						data.fund_amount
+					) {
+						props.setProjectSuccessfullyEnded(true);
+					}
 				});
 		}, 1000 * 5);
 		return () => clearInterval(interval);
@@ -35,20 +41,15 @@ export default function ProjectCurrentContributions() {
 								style={{ fontFamily: "'Kaisei Opti', sans-serif" }}
 							>
 								{`US$ ${Number(
-									usdRaisedAmount + projectData.current_reward
+									usdRaisedAmount
 								).toLocaleString()} / ${projectData.fund_amount.toLocaleString()}`}
 							</h1>
 							<ProgressBar
 								animated
 								variant="dark"
-								now={
-									((usdRaisedAmount + projectData.current_reward) /
-										Number(projectData.fund_amount)) *
-									100
-								}
+								now={(usdRaisedAmount / Number(projectData.fund_amount)) * 100}
 								label={`${(
-									((usdRaisedAmount + projectData.current_reward) /
-										Number(projectData.fund_amount)) *
+									(usdRaisedAmount / Number(projectData.fund_amount)) *
 									100
 								).toFixed(2)}%`}
 								className="mx-auto"

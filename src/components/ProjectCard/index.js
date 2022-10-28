@@ -9,7 +9,8 @@ import useAxios from "../../utils/useAxios/useAxios";
 import { useState, useEffect, useContext } from "react";
 import AuthContext from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import comingSoon from "../../assets/coming-soon-2.png";
+import comingSoon from "../../assets/coming-soon.png";
+import succeed from "../../assets/succeed.png";
 
 export default function ProjectCard(props) {
 	let api = useAxios();
@@ -111,13 +112,30 @@ export default function ProjectCard(props) {
 									position: "relative",
 								}}
 							>
-								{!props.projectLive && (
-									<div
-										style={{ position: "absolute", top: "-5px", right: "-5px" }}
-									>
-										<img src={comingSoon} style={{ width: "7rem" }} />
-									</div>
-								)}
+								{!props.projectLive &&
+									(props.projectSuccessfullyEnded === true ? (
+										<div
+											style={{
+												position: "absolute",
+												top: "-5px",
+												right: "-15px",
+											}}
+										>
+											<img src={succeed} style={{ width: "5rem" }} />
+										</div>
+									) : props.projectSuccessfullyEnded === false ? (
+										<></>
+									) : (
+										<div
+											style={{
+												position: "absolute",
+												top: "-5px",
+												right: "-5px",
+											}}
+										>
+											<img src={comingSoon} style={{ width: "7rem" }} />
+										</div>
+									))}
 								<h1>
 									<Card.Title
 										style={{
@@ -133,12 +151,17 @@ export default function ProjectCard(props) {
 									</Card.Text>
 								</p>
 								<div style={{ marginTop: "auto" }}>
-									{props.projectLive ? (
+									{props.projectLive ||
+									props.projectSuccessfullyEnded === true ||
+									props.projectSuccessfullyEnded === false ? (
 										<div>
 											<Web3ContributeButton
 												staking_address={props.staking_address}
 												staking_abi={props.staking_abi}
 												projectLive={props.projectLive}
+												projectSuccessfullyEnded={
+													props.projectSuccessfullyEnded
+												}
 											/>
 											{props.number_of_donators && (
 												<a
@@ -157,26 +180,28 @@ export default function ProjectCard(props) {
 											)}
 										</div>
 									) : (
-										<div>
-											<Button
-												id="subscribe-btn"
-												variant="warning"
-												size="lg"
-												style={{
-													width: "100%",
-													fontSize: "2vh",
-													maxHeight: "100%",
-												}}
-												onClick={subscribeToProject}
-												disabled={subscribed}
-											>
-												{subscribeButtonText}
-											</Button>
-											<p style={{ marginTop: "10px" }}>
-												{props.numberOfSubscribers &&
-													`${props.numberOfSubscribers} Subscribers`}
-											</p>
-										</div>
+										props.projectSuccessfullyEnded === null && (
+											<div>
+												<Button
+													id="subscribe-btn"
+													variant="warning"
+													size="lg"
+													style={{
+														width: "100%",
+														fontSize: "2vh",
+														maxHeight: "100%",
+													}}
+													onClick={subscribeToProject}
+													disabled={subscribed}
+												>
+													{subscribeButtonText}
+												</Button>
+												<p style={{ marginTop: "10px" }}>
+													{props.numberOfSubscribers &&
+														`${props.numberOfSubscribers} Subscribers`}
+												</p>
+											</div>
+										)
 									)}
 								</div>
 							</div>

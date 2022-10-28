@@ -347,10 +347,11 @@ export default function ContributeBtn(props) {
 											!stakingOptions ||
 											!stakingOptions[7] ||
 											!readyToContribute ||
+											// !projectLive ||
 											pending
 										}
 									>
-										Complete Donation
+										{`Complete Donation ${projectLive}`}
 									</Button>
 								) : (
 									<Button
@@ -365,6 +366,7 @@ export default function ContributeBtn(props) {
 										onClick={() =>
 											document.getElementById("connect-btn").click()
 										}
+										disabled={!projectLive}
 									>
 										Approve Donation
 									</Button>

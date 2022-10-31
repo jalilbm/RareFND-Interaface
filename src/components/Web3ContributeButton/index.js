@@ -364,7 +364,7 @@ export default function ContributeBtn(props) {
 											pending
 										}
 									>
-										{`Complete Donation ${projectLive}`}
+										{`Complete Donation`}
 									</Button>
 								) : (
 									<Button

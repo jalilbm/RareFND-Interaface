@@ -180,7 +180,7 @@ export default function PrivacyPolicy() {
 								textDecoration: "underline",
 							}}
 						>
-							How We Use Your Information:
+							How We Use Your Information?
 						</span>
 						<br />
 						<span>
@@ -243,7 +243,7 @@ export default function PrivacyPolicy() {
 								textDecoration: "underline",
 							}}
 						>
-							How We Share Your Personal Data:
+							How We Share Your Personal Data?
 						</span>
 						<br />
 						We do not sell, share, or disclose Personal Information about our

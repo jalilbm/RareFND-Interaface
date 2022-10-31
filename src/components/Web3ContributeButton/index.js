@@ -38,7 +38,7 @@ export default function ContributeBtn(props) {
 	const [token, setToken] = useState();
 	const [staking, setStaking] = useState();
 	const [allowance, setAllowance] = useState(0);
-	const [finishedTokenInfoUpdate, setFinishedTokenInfoUpdate] = useState(false);
+	const [finishedTokenInfoUpdate, setFinishedTokenInfoUpdate] = useState(true);
 	const [projectData, setProjectData] = useState();
 	const [stakingOptions, setStakingOptions] = useState();
 	const [stakingData, setStakingData] = useState();
@@ -273,7 +273,20 @@ export default function ContributeBtn(props) {
 											placeholder={"100"}
 											autoComplete="off"
 											type="text"
-											pattern="(^[0-9]{0,1000}$)|(^[0-9]{0,10000}\.[0-9]{0,18}$)"
+											onKeyPress={(e) => {
+												if (
+													e.key === "." &&
+													(e.target.value.includes(".") ||
+														e.target.value === "")
+												) {
+													e.preventDefault();
+												}
+												!/^[0-9]/.test(e.key) &&
+													!/^[.]/.test(e.key) &&
+													!e.target.value.includes(".") &&
+													e.preventDefault();
+											}}
+											pattern="^[0-9]*[.]?[0-9]*$"
 											// disabled={!allowance || allowance <= 0}
 											style={{
 												backgroundColor: "transparent",

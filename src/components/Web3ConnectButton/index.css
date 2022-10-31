@@ -1,0 +1,12 @@
+[class*="disconnect-option"]:hover span {
+	display: none;
+}
+
+[class*="disconnect-option"]:hover {
+	background-color: red;
+}
+
+[class*="disconnect-option"]:hover:before {
+	content: "Disconnect wallet";
+	color: white;
+}

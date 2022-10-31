@@ -57,7 +57,7 @@ export default function PrivacyPolicy() {
 								textDecoration: "underline",
 							}}
 						>
-							What are the basics of using Rare FND?:
+							What are the basics of using Rare FND?
 						</span>{" "}
 						<br />
 						You may be required to sign up for an account, select a password and
@@ -171,7 +171,7 @@ export default function PrivacyPolicy() {
 								textDecoration: "underline",
 							}}
 						>
-							How Campaigns Work:
+							How Campaigns Work?
 						</span>
 						<p>
 							When an Organization posts a campaign on Rare FND, they’re
@@ -258,7 +258,7 @@ export default function PrivacyPolicy() {
 								textDecoration: "underline",
 							}}
 						>
-							How Campaigns Are Funded:
+							How Campaigns Are Funded?
 						</span>
 						<br />
 						The below points outline how you as a contributor or donator fund a
@@ -376,7 +376,7 @@ export default function PrivacyPolicy() {
 								textDecoration: "underline",
 							}}
 						>
-							Do the Services cost anything?:
+							Do the Services cost anything?
 						</span>
 						<br /> The Services on Rare FND are completely free. Rare FND does
 						not charge the organization any fees neither does it take any

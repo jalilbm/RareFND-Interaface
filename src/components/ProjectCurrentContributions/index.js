@@ -42,9 +42,9 @@ export default function ProjectCurrentContributions(props) {
 								className="display-6 fw-bold"
 								style={{ fontFamily: "'Kaisei Opti', sans-serif" }}
 							>
-								{`US$ ${Number(
-									usdRaisedAmount
-								).toLocaleString()} / ${projectData.fund_amount.toLocaleString()}`}
+								{`US$ ${Number(usdRaisedAmount).toFixed(
+									2
+								)} / ${projectData.fund_amount.toLocaleString()}`}
 							</h1>
 							<ProgressBar
 								animated
@@ -78,7 +78,7 @@ export default function ProjectCurrentContributions(props) {
 									whiteSpace: "pre-line",
 								}}
 							>
-								{`US$ ${Number(projectData.current_reward).toLocaleString()}`}
+								{`US$ ${Number(projectData.current_reward).toFixed(2)}`}
 							</div>
 						</Col>
 						<Col md={6} className="text-center mt-1" style={{ color: "black" }}>
@@ -95,7 +95,7 @@ export default function ProjectCurrentContributions(props) {
 									whiteSpace: "pre-line",
 								}}
 							>
-								US$ {Number(projectData.rewarded_amount).toLocaleString()}
+								US$ {Number(projectData.rewarded_amount).toFixed(2)}
 							</div>
 						</Col>
 					</Row>

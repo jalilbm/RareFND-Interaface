@@ -14,7 +14,8 @@ export default function Funding(props) {
 	projectDataRef.current = props.projectData;
 
 	const handleInputChanges = (e, rowId) => {
-		let { id, name, value } = e.target;
+		let { name, value } = e.target;
+		props.handleInputErrors(name, value, `rewards.${rowId}`);
 		let projectData_ = { ...projectDataRef.current };
 		projectData_["rewards"][rowId] = {
 			...projectData_["rewards"][rowId],
@@ -98,6 +99,12 @@ export default function Funding(props) {
 												props.projectData.rewards[`${item}`].incentiveTitle
 											}
 										/>
+										<p className="invalid-input-p">
+											{props.formErrors &&
+												props.formErrors.rewards &&
+												props.formErrors.rewards[item] &&
+												props.formErrors.rewards[item].incentiveTitle}
+										</p>
 									</div>
 									<div className="input-with-title">
 										<p
@@ -116,13 +123,20 @@ export default function Funding(props) {
 											placeholder="Gently brings awareness to self-care activities, using encouraging push notifications, rather than guilt or shame."
 											onChange={(e) => handleInputChanges(e, `${item}`)}
 											value={
-												props.projectData &&
-												props.projectData.rewards &&
-												props.projectData.rewards[`${item}`] &&
-												props.projectData.rewards[`${item}`]
-													.incentiveDescription
+												(props.projectData &&
+													props.projectData.rewards &&
+													props.projectData.rewards[`${item}`] &&
+													props.projectData.rewards[`${item}`]
+														.incentiveDescription) ||
+												""
 											}
 										></textarea>
+										<p className="invalid-input-p">
+											{props.formErrors &&
+												props.formErrors.rewards &&
+												props.formErrors.rewards[item] &&
+												props.formErrors.rewards[item].incentiveDescription}
+										</p>
 									</div>
 									<p
 										style={{
@@ -133,11 +147,19 @@ export default function Funding(props) {
 										<span className="required-asterisk">*</span>
 									</p>
 									<div className="input-with-title">
+										{/* projectTaxCountry: "",
+						taxIdNumber: "",
+						whitePaperUrl: "",
+						tokenomicsUrl: "",
+						certificateOfIncumbency: null,
+						companyStructureChart: null, */}
+
 										<Calendar
 											setProjectData={props.setProjectData}
 											projectDataRef={projectDataRef}
 											rowId={item}
 											name="incentiveEstimatedDelivery"
+											handleInputErrors={props.handleInputErrors}
 											value={
 												props.projectData &&
 												props.projectData["rewards"] &&
@@ -148,6 +170,13 @@ export default function Funding(props) {
 											}
 											source="rewards"
 										/>
+										<p className="invalid-input-p">
+											{props.formErrors &&
+												props.formErrors.rewards &&
+												props.formErrors.rewards[item] &&
+												props.formErrors.rewards[item]
+													.incentiveEstimatedDelivery}
+										</p>
 									</div>
 									<div className="input-with-title">
 										<p
@@ -176,6 +205,12 @@ export default function Funding(props) {
 												]
 											}
 										/>
+										<p className="invalid-input-p">
+											{props.formErrors &&
+												props.formErrors.rewards &&
+												props.formErrors.rewards[item] &&
+												props.formErrors.rewards[item].availableIncentives}
+										</p>
 									</div>
 									<div className="input-with-title">
 										<p
@@ -203,6 +238,12 @@ export default function Funding(props) {
 												]
 											}
 										/>
+										<p className="invalid-input-p">
+											{props.formErrors &&
+												props.formErrors.rewards &&
+												props.formErrors.rewards[item] &&
+												props.formErrors.rewards[item].incentivePrice}
+										</p>
 									</div>
 								</Col>
 								<Col>

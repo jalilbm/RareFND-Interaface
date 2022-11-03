@@ -57,10 +57,22 @@ export default function Funding(props) {
 							className="atomic-text-input w-100"
 							id="projectFundsAmount"
 							maxLength="60"
-							name="0"
+							name="projectFundsAmount"
 							placeholder="$ 0.0"
 							type="text"
 							onChange={(event) => props.updateProjectData(event, "funding")}
+							onKeyPress={(e) => {
+								if (
+									e.key === "." &&
+									(e.target.value.includes(".") || e.target.value === "")
+								) {
+									e.preventDefault();
+								}
+								!/^[0-9]/.test(e.key) &&
+									!/^[.]/.test(e.key) &&
+									!e.target.value.includes(".") &&
+									e.preventDefault();
+							}}
 							pattern="(^[0-9]{0,1000}$)|(^[0-9]{0,10000}\.[0-9]{0,18}$)"
 							value={
 								props.projectData &&

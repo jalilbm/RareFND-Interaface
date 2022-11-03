@@ -13,7 +13,8 @@ export default function MyApp(props) {
 				props.source
 			);
 		}
-		if (props.setProjectData && value && props.source === "rewards") {
+		if (props.setProjectData && props.source === "rewards") {
+			props.handleInputErrors(props.name, value, `rewards.${props.rowId}`);
 			let projectData_ = { ...props.projectDataRef.current };
 			projectData_["rewards"][props.rowId] = {
 				...projectData_["rewards"][props.rowId],

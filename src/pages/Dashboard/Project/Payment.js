@@ -183,6 +183,9 @@ export default function Payment(props) {
 										props.updateProjectData(event, "payment")
 									}
 								/>
+								<p className="invalid-input-p">
+									{props.formErrors && props.formErrors.companyName}
+								</p>
 							</div>
 						</Col>
 						<Col md={6}>
@@ -210,6 +213,9 @@ export default function Payment(props) {
 										props.updateProjectData(event, "payment")
 									}
 								/>
+								<p className="invalid-input-p">
+									{props.formErrors && props.formErrors.natureOfBusiness}
+								</p>
 							</div>
 						</Col>
 					</Row>
@@ -245,6 +251,9 @@ export default function Payment(props) {
 										props.updateProjectData(event, "payment")
 									}
 								/>
+								<p className="invalid-input-p">
+									{props.formErrors && props.formErrors.companyAddress}
+								</p>
 							</div>
 						</Col>
 						<Col md={6}>
@@ -272,6 +281,9 @@ export default function Payment(props) {
 										props.updateProjectData(event, "payment")
 									}
 								/>
+								<p className="invalid-input-p">
+									{props.formErrors && props.formErrors.companyCity}
+								</p>
 							</div>
 						</Col>
 					</Row>
@@ -307,6 +319,9 @@ export default function Payment(props) {
 										props.updateProjectData(event, "payment")
 									}
 								/>
+								<p className="invalid-input-p">
+									{props.formErrors && props.formErrors.companyZipCode}
+								</p>
 							</div>
 						</Col>
 						<Col md={6}>
@@ -332,6 +347,9 @@ export default function Payment(props) {
 											props.projectData["payment"].companyCountry
 										}
 									/>
+									<p className="invalid-input-p">
+										{props.formErrors && props.formErrors.companyCountry}
+									</p>
 								</div>
 							</div>
 						</Col>
@@ -363,6 +381,10 @@ export default function Payment(props) {
 										}
 										source="payment"
 									/>
+									<p className="invalid-input-p">
+										{props.formErrors &&
+											props.formErrors.projectIncorporationDate}
+									</p>
 								</div>
 							</div>
 						</Col>
@@ -393,6 +415,10 @@ export default function Payment(props) {
 										props.updateProjectData(event, "payment")
 									}
 								/>
+								<p className="invalid-input-p">
+									{props.formErrors &&
+										props.formErrors.companyRegistrationNumber}
+								</p>
 							</div>
 						</Col>
 						<Col lg={4}>
@@ -421,6 +447,10 @@ export default function Payment(props) {
 										props.updateProjectData(event, "payment")
 									}
 								/>
+								<p className="invalid-input-p">
+									{props.formErrors &&
+										props.formErrors.companyEstimatedAnnualTurnover}
+								</p>
 							</div>
 						</Col>
 					</Row>
@@ -454,6 +484,9 @@ export default function Payment(props) {
 											props.projectData["payment"].projectTaxCountry
 										}
 									/>
+									<p className="invalid-input-p">
+										{props.formErrors && props.formErrors.projectTaxCountry}
+									</p>
 								</div>
 							</div>
 						</Col>
@@ -484,10 +517,13 @@ export default function Payment(props) {
 										props.updateProjectData(event, "payment")
 									}
 								/>
+								<p className="invalid-input-p">
+									{props.formErrors && props.formErrors.taxIdNumber}
+								</p>
 							</div>
 						</Col>
 					</Row>
-					<Row
+					{/* <Row
 						style={{
 							marginBottom: "20px",
 							marginLeft: "0px",
@@ -548,7 +584,7 @@ export default function Payment(props) {
 								/>
 							</div>
 						</Col>
-					</Row>
+					</Row> */}
 					<Row
 						style={{
 							marginBottom: "20px",
@@ -583,6 +619,10 @@ export default function Payment(props) {
 										}
 										source="payment"
 									/>
+									<p className="invalid-input-p">
+										{props.formErrors &&
+											props.formErrors.certificateOfIncumbency}
+									</p>
 								</div>
 							</div>
 						</Col>
@@ -598,7 +638,6 @@ export default function Payment(props) {
 								>
 									<p style={{ margin: "0px" }}>
 										Upload company structure chart (.jpg, .jpeg, .png, .pdf)
-										<span className="required-asterisk">*</span>
 									</p>
 									<UploadButton
 										title="Select File"

@@ -42,7 +42,7 @@ export default function CategoryVerticalCard(props) {
 								: props.project_raised_amount >= props.project_goal_amount
 								? "succeed"
 								: props.project_raised_amount === 0
-								? "Pending"
+								? "Coming Soon"
 								: "Failed"}
 						</p>
 					</div>

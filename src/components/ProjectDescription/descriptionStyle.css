@@ -2,8 +2,3 @@
 	max-width: 100%;
 	object-fit: contain;
 }
-
-iframe {
-	width: 100vw;
-	height: calc(100vw / 1.77777778);
-}

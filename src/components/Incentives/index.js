@@ -28,14 +28,22 @@ export default function index(props) {
 			<p className="incentive-description" style={{ fontSize: "13px" }}>
 				{props.description}
 			</p>
-			<p className="incentive-includes fw-bold" style={{ fontSize: "15px" }}>
-				INCLUDES:
-			</p>
-			<ul className="included-incentives" style={{ fontSize: "13px" }}>
-				{Array.from(included_incentives).map((_, idx) => (
-					<li>{_}</li>
-				))}
-			</ul>
+			{Array.from(included_incentives).length > 0 && (
+				<div>
+					<p
+						className="incentive-includes fw-bold"
+						style={{ fontSize: "15px" }}
+					>
+						INCLUDES:
+					</p>
+					<ul className="included-incentives" style={{ fontSize: "13px" }}>
+						{Array.from(included_incentives).map((_, idx) => (
+							<li>{_}</li>
+						))}
+					</ul>
+				</div>
+			)}
+
 			<p className="estimated-delivery" style={{ fontSize: "13px" }}>
 				<span className="fw-bold">ESTIMATED DELIVERY</span>
 				<br />
@@ -83,12 +91,26 @@ export default function index(props) {
 						}}
 					>
 						<input
+							id="contribute-amount-2"
 							autoComplete="off"
 							type="text"
 							pattern="(^[0-9]{0,1000}$)|(^[0-9]{0,10000}\.[0-9]{0,18}$)"
 							placeholder={" $  " + `+${props.price}`}
 							style={{ outline: "none", border: "none" }}
 							className="w-100 h-100"
+							onKeyPress={(e) => {
+								if (
+									(e.key === "." &&
+										(e.target.value.includes(".") || e.target.value === "")) ||
+									(!/^[0-9]/.test(e.key) && !/^[.]/.test(e.key))
+								) {
+									e.preventDefault();
+								}
+								!/^[0-9]/.test(e.key) &&
+									!/^[.]/.test(e.key) &&
+									!e.target.value.includes(".") &&
+									e.preventDefault();
+							}}
 						></input>
 					</div>
 				</Col>
@@ -104,6 +126,11 @@ export default function index(props) {
 							width: "100%",
 						}}
 						disabled={!props.projectLive}
+						onClick={() => {
+							document.getElementById("contribute-amount").value =
+								document.getElementById("contribute-amount-2").value;
+							document.getElementById("contribute-fnd-btn").click();
+						}}
 					>
 						CONTINUE
 					</Button>

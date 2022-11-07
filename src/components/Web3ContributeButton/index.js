@@ -275,9 +275,10 @@ export default function ContributeBtn(props) {
 											type="text"
 											onKeyPress={(e) => {
 												if (
-													e.key === "." &&
-													(e.target.value.includes(".") ||
-														e.target.value === "")
+													(e.key === "." &&
+														(e.target.value.includes(".") ||
+															e.target.value === "")) ||
+													(!/^[0-9]/.test(e.key) && !/^[.]/.test(e.key))
 												) {
 													e.preventDefault();
 												}
@@ -368,7 +369,7 @@ export default function ContributeBtn(props) {
 									</Button>
 								) : (
 									<Button
-										id="contribute-fnd-btn-2"
+										id="contribute-fnd-btn"
 										variant="warning"
 										size="lg"
 										style={{

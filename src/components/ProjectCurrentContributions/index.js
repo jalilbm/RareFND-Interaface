@@ -95,7 +95,7 @@ export default function ProjectCurrentContributions(props) {
 									whiteSpace: "pre-line",
 								}}
 							>
-								US$ {Number(projectData.rewarded_amount).toFixed(2)}
+								US$ {Number(projectData.rewarded_amount).toLocaleString()}
 							</div>
 						</Col>
 					</Row>

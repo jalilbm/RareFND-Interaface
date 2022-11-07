@@ -63,8 +63,9 @@ export default function Funding(props) {
 							onChange={(event) => props.updateProjectData(event, "funding")}
 							onKeyPress={(e) => {
 								if (
-									e.key === "." &&
-									(e.target.value.includes(".") || e.target.value === "")
+									(e.key === "." &&
+										(e.target.value.includes(".") || e.target.value === "")) ||
+									(!/^[0-9]/.test(e.key) && !/^[.]/.test(e.key))
 								) {
 									e.preventDefault();
 								}

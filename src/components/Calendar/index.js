@@ -29,7 +29,6 @@ export default function MyApp(props) {
 				...projectData_["payment"]["UBOs"][props.rowId],
 				[props.name]: value,
 			};
-
 			props.setProjectData(projectData_);
 		}
 	}, [value]);

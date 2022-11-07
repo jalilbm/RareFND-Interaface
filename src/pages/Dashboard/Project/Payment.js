@@ -380,6 +380,7 @@ export default function Payment(props) {
 								<div className="input-with-title">
 									<Calendar
 										updateProjectData={props.updateProjectData}
+										handleInputErrors={props.handleInputErrors}
 										name="projectIncorporationDate"
 										value={
 											props.projectData &&
@@ -782,6 +783,7 @@ export default function Payment(props) {
 														<div className="input-with-title">
 															<Calendar
 																setProjectData={props.setProjectData}
+																handleInputErrors={props.handleInputErrors}
 																projectDataRef={projectDataRef}
 																rowId={item}
 																name="dateOfBirth"

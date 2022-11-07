@@ -51,9 +51,6 @@ export default function Payment(props) {
 	}, []);
 
 	const handleInputChanges = (e, rowId) => {
-		console.log(
-			"================================================================"
-		);
 		const { name, value } = e.target;
 		props.handleInputErrors(name, value, `payment.${rowId}`);
 		let projectData_ = { ...projectDataRef.current };

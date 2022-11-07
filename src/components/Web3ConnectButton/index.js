@@ -91,9 +91,7 @@ export default function Web3ConnectButton() {
 			switchNetwork();
 		} else {
 			try {
-				console.log("jaliliiiiiii");
 				const connection_ = await web3Modal.connect();
-				console.log("jalilooooooo");
 				const provider_ = new ethers.providers.Web3Provider(connection_);
 				const accounts = await provider_.listAccounts();
 				const network = await provider_.getNetwork();

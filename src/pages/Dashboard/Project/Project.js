@@ -70,7 +70,6 @@ export default function DashboardProjects() {
 			tmp[errorPath.split(".")[0]][errorPath.split(".")[1]] = {};
 		}
 		formErrorsRef.current = tmp;
-		console.log("jojojojojojojojojjojojo", errorPath, tmp);
 		setTimeout(() => {
 			setFormErrors(tmp);
 		}, 0);
@@ -114,23 +113,7 @@ export default function DashboardProjects() {
 				Object.keys(tmp[errorPath.split(".")[0]][errorPath.split(".")[1]])
 					.length === 0
 			) {
-				console.log(
-					"___=sa-s-as----______",
-					[errorPath.split(".")[0]],
-					[errorPath.split(".")[1]],
-					tmp[errorPath.split(".")[0]],
-					tmp[errorPath.split(".")[0]][errorPath.split(".")[1]],
-					tmp
-				);
 				delete tmp[errorPath.split(".")[0]][errorPath.split(".")[1]];
-				console.log(
-					"****************************************************************",
-					[errorPath.split(".")[0]],
-					[errorPath.split(".")[1]],
-					tmp[errorPath.split(".")[0]],
-					tmp[errorPath.split(".")[0]][errorPath.split(".")[1]],
-					tmp
-				);
 			}
 		} else {
 			delete tmp[input];
@@ -169,7 +152,6 @@ export default function DashboardProjects() {
 
 	const handleInputErrors = (name, value, errorPath = null) => {
 		if (errorPath !== null) {
-			console.log("popopopo");
 			addErrorPath(errorPath);
 		}
 		switch (name) {
@@ -384,7 +366,6 @@ export default function DashboardProjects() {
 
 	// Test errors and save data to local storage every time data changes
 	useEffect(() => {
-		console.log(projectData);
 		localStorage.setItem("createProjectData", JSON.stringify(projectData));
 
 		// Test Basics

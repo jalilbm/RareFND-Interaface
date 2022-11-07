@@ -6,12 +6,13 @@ import "./index.css";
 export default function CategoryHorizontalCard(props) {
 	return (
 		<Link to={`/project/${props.project_id}`} className="subnav_link">
-			<div style={{ position: "relative" }}>
+			<div>
 				<Row
 					style={{
 						width: "100%",
 						height: "100%",
 						padding: "1vw 0vw 0vw 0vw",
+						position: "relative",
 					}}
 				>
 					<Col xs={6} style={{ height: "100%" }}>

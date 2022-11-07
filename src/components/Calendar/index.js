@@ -23,6 +23,7 @@ export default function MyApp(props) {
 
 			props.setProjectData(projectData_);
 		} else if (props.setProjectData && value && props.source === "payment") {
+			props.handleInputErrors(props.name, value, `payment.${props.rowId}`);
 			let projectData_ = { ...props.projectDataRef.current };
 			projectData_["payment"]["UBOs"][props.rowId] = {
 				...projectData_["payment"]["UBOs"][props.rowId],

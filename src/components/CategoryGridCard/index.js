@@ -89,6 +89,12 @@ export default function CategoryGridCard(props) {
 								src={props.categoryProjects[0].thumbnail}
 								project_owner="djalil"
 								project_id={props.categoryProjects[0].id}
+								project_live={props.categoryProjects[0].live}
+								project_raised_amount={
+									props.categoryProjects[0].raised_amount +
+									props.categoryProjects[0].current_reward
+								}
+								project_goal_amount={props.categoryProjects[0].fund_amount}
 							/>
 						) : (
 							<div style={{ height: "700px" }}></div>
@@ -106,6 +112,9 @@ export default function CategoryGridCard(props) {
 										project_owner="djalil"
 										src={_.thumbnail}
 										project_id={_.id}
+										project_live={_.live}
+										project_raised_amount={_.raised_amount + _.current_reward}
+										project_goal_amount={_.fund_amount}
 									/>
 								</div>
 							))}
@@ -135,7 +144,10 @@ export default function CategoryGridCard(props) {
 											description={_.head}
 											project_owner="ikram"
 											project_id={_.id}
-											imageStyle={{ width: "400px" }}
+											imageStyle={{ width: "320px" }}
+											project_live={_.live}
+											project_raised_amount={_.raised_amount + _.current_reward}
+											project_goal_amount={_.fund_amount}
 										/>
 									</div>
 								))
@@ -165,7 +177,10 @@ export default function CategoryGridCard(props) {
 											description={_.head}
 											project_owner="ikram"
 											project_id={_.id}
-											imageStyle={{ width: "400px" }}
+											imageStyle={{ width: "320px" }}
+											project_live={_.live}
+											project_raised_amount={_.raised_amount + _.current_reward}
+											project_goal_amount={_.fund_amount}
 										/>
 									</div>
 								))
@@ -195,7 +210,10 @@ export default function CategoryGridCard(props) {
 											description={_.head}
 											project_owner="ikram"
 											project_id={_.id}
-											imageStyle={{ width: "400px" }}
+											imageStyle={{ width: "320px" }}
+											project_live={_.live}
+											project_raised_amount={_.raised_amount + _.current_reward}
+											project_goal_amount={_.fund_amount}
 										/>
 									</div>
 								))

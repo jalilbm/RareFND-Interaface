@@ -67,12 +67,14 @@ export default function DashboardProjects() {
 			tmp[errorPath.split(".")[0]] = {};
 		}
 		if (!tmp[errorPath.split(".")[0]][errorPath.split(".")[1]]) {
-			console.log("ikram", [errorPath.split(".")[1]]);
 			tmp[errorPath.split(".")[0]][errorPath.split(".")[1]] = {};
 		}
 		formErrorsRef.current = tmp;
-		console.log("jaliloooo", tmp);
-		setFormErrors(tmp);
+		console.log("jojojojojojojojojjojojo", errorPath, tmp);
+		setTimeout(() => {
+			setFormErrors(tmp);
+		}, 0);
+		// setFormErrors(tmp);
 	};
 
 	const addInputError = (input, errorMessage, errorPath = null) => {
@@ -80,7 +82,9 @@ export default function DashboardProjects() {
 			let tmp = { ...formErrorsRef.current };
 			tmp[errorPath.split(".")[0]][errorPath.split(".")[1]][input] =
 				errorMessage;
-			setFormErrors(tmp);
+			setTimeout(() => {
+				setFormErrors(tmp);
+			}, 0);
 		} else {
 			// setFormErrors((prev) => {
 			// 	return { ...prev, [input]: errorMessage };
@@ -106,11 +110,35 @@ export default function DashboardProjects() {
 			tmp[errorPath.split(".")[0]][errorPath.split(".")[1]][input]
 		) {
 			delete tmp[errorPath.split(".")[0]][errorPath.split(".")[1]][input];
+			if (
+				Object.keys(tmp[errorPath.split(".")[0]][errorPath.split(".")[1]])
+					.length === 0
+			) {
+				console.log(
+					"___=sa-s-as----______",
+					[errorPath.split(".")[0]],
+					[errorPath.split(".")[1]],
+					tmp[errorPath.split(".")[0]],
+					tmp[errorPath.split(".")[0]][errorPath.split(".")[1]],
+					tmp
+				);
+				delete tmp[errorPath.split(".")[0]][errorPath.split(".")[1]];
+				console.log(
+					"****************************************************************",
+					[errorPath.split(".")[0]],
+					[errorPath.split(".")[1]],
+					tmp[errorPath.split(".")[0]],
+					tmp[errorPath.split(".")[0]][errorPath.split(".")[1]],
+					tmp
+				);
+			}
 		} else {
 			delete tmp[input];
 		}
 
-		setFormErrors(tmp);
+		setTimeout(() => {
+			setFormErrors(tmp);
+		}, 0);
 	};
 
 	const handleEmptyInputError = (
@@ -141,6 +169,7 @@ export default function DashboardProjects() {
 
 	const handleInputErrors = (name, value, errorPath = null) => {
 		if (errorPath !== null) {
+			console.log("popopopo");
 			addErrorPath(errorPath);
 		}
 		switch (name) {
@@ -308,39 +337,105 @@ export default function DashboardProjects() {
 					"Certificate of incorporation is required!"
 				);
 				break;
+			case "projectStory":
+				handleEmptyInputError(value, name, "Project story is required!");
+				break;
+			case "fullName":
+				handleEmptyInputError(value, name, "Full name is required!", errorPath);
+				break;
+			case "position":
+				handleEmptyInputError(value, name, "Position is required!", errorPath);
+				break;
+			case "dateOfBirth":
+				handleEmptyInputError(
+					value,
+					name,
+					"Date of birth is required!",
+					errorPath
+				);
+				break;
+			case "idFile":
+				handleEmptyInputError(
+					value,
+					name,
+					"ID or Passport is required!",
+					errorPath
+				);
+				break;
+			case "proofOfAddressFile":
+				handleEmptyInputError(
+					value,
+					name,
+					"Proof of address is required!",
+					errorPath
+				);
+				break;
 		}
 	};
 
 	const updateProjectData = (event, source) => {
 		let { name, value } = event.target;
-		handleInputErrors(name, value);
 		setProjectData({
 			...projectData,
 			[source]: { ...projectData[source], [name]: value },
 		});
+		handleInputErrors(name, value);
 	};
 
+	// Test errors and save data to local storage every time data changes
 	useEffect(() => {
+		console.log(projectData);
+		localStorage.setItem("createProjectData", JSON.stringify(projectData));
+
+		// Test Basics
 		for (
 			let index = 0;
 			index < Object.keys(projectData.basics).length;
 			index++
 		) {
 			const key = Object.keys(projectData.basics)[index];
-			console.log(key, projectData.basics.key);
 			handleInputErrors(key, projectData.basics[key] || null);
 		}
 
+		// Test Funding
 		handleInputErrors(
 			"projectFundsAmount",
 			projectData.funding.projectFundsAmount
 		);
-	}, []);
 
-	useEffect(() => {
-		console.log(projectData);
+		// Test Rewards
+		for (
+			let index = 0;
+			index < Object.keys(projectData.rewards).length;
+			index++
+		) {
+			const key = Object.keys(projectData.rewards)[index];
+			for (
+				let index = 0;
+				index < Object.keys(projectData.rewards[key]).length;
+				index++
+			) {
+				const key_2 = Object.keys(projectData.rewards[key])[index];
+				handleInputErrors(
+					key_2,
+					projectData.rewards[key][key_2] || null,
+					`rewards.${key}`
+				);
+			}
+		}
 
-		localStorage.setItem("createProjectData", JSON.stringify(projectData));
+		// Test Story
+		handleInputErrors("projectStory", projectData.funding.projectFundsAmount);
+
+		// Test Payment
+		for (
+			let index = 0;
+			index < Object.keys(projectData.payment).length;
+			index++
+		) {
+			const key = Object.keys(projectData.payment)[index];
+			handleInputErrors(key, projectData.payment[key] || null);
+		}
 	}, [projectData]);
 
 	const changeTab = (value) => {
@@ -397,6 +492,7 @@ export default function DashboardProjects() {
 						setProjectData={setProjectData}
 						formErrors={formErrors}
 						handleInputErrors={handleInputErrors}
+						setFormErrors={setFormErrors}
 					/>
 				);
 				break;
@@ -428,6 +524,8 @@ export default function DashboardProjects() {
 						setProjectData={setProjectData}
 						previousTabFunction={() => changeTab("create-project-tab-5")}
 						formErrors={formErrors}
+						handleInputErrors={handleInputErrors}
+						setFormErrors={setFormErrors}
 					/>
 				);
 				break;
@@ -442,7 +540,7 @@ export default function DashboardProjects() {
 				);
 				break;
 		}
-	}, [selectedTab, projectData]);
+	}, [selectedTab, projectData, formErrors]);
 	return (
 		<div className="dashboard-projects w-100">
 			<SideBar />

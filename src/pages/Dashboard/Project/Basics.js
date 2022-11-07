@@ -52,7 +52,7 @@ export default function Basics(props) {
 							document.getElementById("projectSubcategory").textContent =
 								"No Subcategories";
 						props.updateProjectData(
-							{ target: { projectSubcategory: null } },
+							{ target: { name: "projectSubcategory", value: null } },
 							"basics"
 						);
 					}

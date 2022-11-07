@@ -29,6 +29,13 @@ export default function Payment(props) {
 		let tmp = { ...projectDataRef.current };
 		delete tmp.payment.UBOs[item];
 		props.setProjectData(tmp);
+
+		// tmp = { ...props.formErrors };
+		// delete tmp.payment[item];
+		// if (Object.keys(tmp.payment).length === 0) {
+		// 	delete tmp.payment;
+		// }
+		// props.setFormErrors(tmp);
 	};
 
 	useEffect(() => {
@@ -44,13 +51,16 @@ export default function Payment(props) {
 	}, []);
 
 	const handleInputChanges = (e, rowId) => {
+		console.log(
+			"================================================================"
+		);
 		const { name, value } = e.target;
+		props.handleInputErrors(name, value, `payment.${rowId}`);
 		let projectData_ = { ...projectDataRef.current };
 		projectData_["payment"]["UBOs"][rowId] = {
 			...projectData_["payment"]["UBOs"][rowId],
 			[name]: value,
 		};
-
 		props.setProjectData(projectData_);
 	};
 

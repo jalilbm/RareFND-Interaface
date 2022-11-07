@@ -29,6 +29,13 @@ export default function Funding(props) {
 		let tmp = { ...projectDataRef.current };
 		delete tmp.rewards[item];
 		props.setProjectData(tmp);
+
+		tmp = { ...props.formErrors };
+		delete tmp.rewards[item];
+		if (Object.keys(tmp.rewards).length === 0) {
+			delete tmp.rewards;
+		}
+		props.setFormErrors(tmp);
 	};
 
 	const addRewardRow = () => {

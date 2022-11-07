@@ -99,6 +99,9 @@ export default function Story(props) {
 						onBlur={(event, editor) => {}}
 						onFocus={(event, editor) => {}}
 					/>
+					<p className="invalid-input-p">
+						{props.formErrors && props.formErrors.projectStory}
+					</p>
 				</div>
 			</Row>
 			<Row style={{ padding: "3vw", marginLeft: "0px", marginRight: "0px" }}>

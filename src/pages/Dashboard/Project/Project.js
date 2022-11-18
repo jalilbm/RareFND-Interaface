@@ -56,72 +56,48 @@ export default function DashboardProjects() {
 	const [renderTab, setRenderTab] = useState(null);
 	const formErrorsRef = useRef(formErrors);
 	formErrorsRef.current = formErrors;
+	var tmpFormErrors = {};
 
 	useEffect(() => {
-		console.log(formErrors);
+		console.log("formErrors", formErrors);
 	}, [formErrors]);
 
 	const addErrorPath = (errorPath) => {
-		let tmp = { ...formErrorsRef.current };
-		if (!tmp[errorPath.split(".")[0]]) {
-			tmp[errorPath.split(".")[0]] = {};
+		if (!tmpFormErrors[errorPath.split(".")[0]]) {
+			tmpFormErrors[errorPath.split(".")[0]] = {};
 		}
-		if (!tmp[errorPath.split(".")[0]][errorPath.split(".")[1]]) {
-			tmp[errorPath.split(".")[0]][errorPath.split(".")[1]] = {};
+		if (!tmpFormErrors[errorPath.split(".")[0]][errorPath.split(".")[1]]) {
+			tmpFormErrors[errorPath.split(".")[0]][errorPath.split(".")[1]] = {};
 		}
-		formErrorsRef.current = tmp;
-		setTimeout(() => {
-			setFormErrors(tmp);
-		}, 0);
-		// setFormErrors(tmp);
+		formErrorsRef.current = tmpFormErrors;
 	};
 
 	const addInputError = (input, errorMessage, errorPath = null) => {
 		if (errorPath !== null) {
-			let tmp = { ...formErrorsRef.current };
-			tmp[errorPath.split(".")[0]][errorPath.split(".")[1]][input] =
+			let tmpFormErrors = { ...formErrorsRef.current };
+			tmpFormErrors[errorPath.split(".")[0]][errorPath.split(".")[1]][input] =
 				errorMessage;
 			setTimeout(() => {
-				setFormErrors(tmp);
+				setFormErrors(tmpFormErrors);
 			}, 0);
 		} else {
-			// setFormErrors((prev) => {
-			// 	return { ...prev, [input]: errorMessage };
-			// });
-			setTimeout(() => {
-				setFormErrors((formErrors) => {
-					return { ...formErrors, [input]: errorMessage };
-				});
-			}, 0);
-			// setFormErrors({
-			// 	...formErrors,
-			// 	[input]: errorMessage,
-			// });
+			tmpFormErrors[input] = errorMessage;
 		}
 	};
 
 	const removeInputError = (input, errorPath = null) => {
-		let tmp = { ...formErrors };
 		if (
 			errorPath !== null &&
-			tmp[errorPath.split(".")[0]] &&
-			tmp[errorPath.split(".")[0]][errorPath.split(".")[1]] &&
-			tmp[errorPath.split(".")[0]][errorPath.split(".")[1]][input]
+			tmpFormErrors[errorPath.split(".")[0]] &&
+			tmpFormErrors[errorPath.split(".")[0]][errorPath.split(".")[1]] &&
+			tmpFormErrors[errorPath.split(".")[0]][errorPath.split(".")[1]][input]
 		) {
-			delete tmp[errorPath.split(".")[0]][errorPath.split(".")[1]][input];
-			if (
-				Object.keys(tmp[errorPath.split(".")[0]][errorPath.split(".")[1]])
-					.length === 0
-			) {
-				delete tmp[errorPath.split(".")[0]][errorPath.split(".")[1]];
-			}
+			delete tmpFormErrors[errorPath.split(".")[0]][errorPath.split(".")[1]][
+				input
+			];
 		} else {
-			delete tmp[input];
+			delete tmpFormErrors[input];
 		}
-
-		setTimeout(() => {
-			setFormErrors(tmp);
-		}, 0);
 	};
 
 	const handleEmptyInputError = (
@@ -130,7 +106,15 @@ export default function DashboardProjects() {
 		errorMessage,
 		errorPath = null
 	) => {
-		if (!value || value === "" || value === null) {
+		if (
+			!value ||
+			value === "" ||
+			value === null ||
+			(typeof value === "object" && !value.name)
+		) {
+			if (typeof value === "object") {
+				console.log(input, value, Object.keys(value).length);
+			}
 			addInputError(input, errorMessage, errorPath);
 		} else {
 			removeInputError(input, errorPath);
@@ -367,8 +351,8 @@ export default function DashboardProjects() {
 	// Test errors and save data to local storage every time data changes
 	useEffect(() => {
 		localStorage.setItem("createProjectData", JSON.stringify(projectData));
-
 		// Test Basics
+		tmpFormErrors = { ...formErrors };
 		for (
 			let index = 0;
 			index < Object.keys(projectData.basics).length;
@@ -406,7 +390,7 @@ export default function DashboardProjects() {
 		}
 
 		// Test Story
-		handleInputErrors("projectStory", projectData.funding.projectFundsAmount);
+		handleInputErrors("projectStory", projectData.story.projectStory);
 
 		// Test Payment
 		for (
@@ -417,6 +401,31 @@ export default function DashboardProjects() {
 			const key = Object.keys(projectData.payment)[index];
 			handleInputErrors(key, projectData.payment[key] || null);
 		}
+		// Test Payment UBOs
+		for (
+			let index = 0;
+			index < Object.keys(projectData.payment.UBOs).length;
+			index++
+		) {
+			const key = Object.keys(projectData.payment.UBOs)[index];
+			for (
+				let index = 0;
+				index < Object.keys(projectData.payment.UBOs[key]).length;
+				index++
+			) {
+				const key_2 = Object.keys(projectData.payment.UBOs[key])[index];
+				handleInputErrors(
+					key_2,
+					projectData.payment.UBOs[key][key_2] || null,
+					`payment.${key}`
+				);
+			}
+		}
+
+		if (Object.keys(tmpFormErrors).length > 0) {
+			setFormErrors({ ...tmpFormErrors });
+		}
+		console.log("projectData", projectData);
 	}, [projectData]);
 
 	const changeTab = (value) => {

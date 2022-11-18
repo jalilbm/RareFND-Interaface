@@ -29,13 +29,6 @@ export default function Payment(props) {
 		let tmp = { ...projectDataRef.current };
 		delete tmp.payment.UBOs[item];
 		props.setProjectData(tmp);
-
-		// tmp = { ...props.formErrors };
-		// delete tmp.payment[item];
-		// if (Object.keys(tmp.payment).length === 0) {
-		// 	delete tmp.payment;
-		// }
-		// props.setFormErrors(tmp);
 	};
 
 	useEffect(() => {
@@ -52,7 +45,7 @@ export default function Payment(props) {
 
 	const handleInputChanges = (e, rowId) => {
 		const { name, value } = e.target;
-		props.handleInputErrors(name, value, `payment.${rowId}`);
+		// props.handleInputErrors(name, value, `payment.${rowId}`);
 		let projectData_ = { ...projectDataRef.current };
 		projectData_["payment"]["UBOs"][rowId] = {
 			...projectData_["payment"]["UBOs"][rowId],
@@ -61,43 +54,79 @@ export default function Payment(props) {
 		props.setProjectData(projectData_);
 	};
 
+	// used when finish to get all errors from nested objects
+	const getObjectValues = (obj) =>
+		obj && typeof obj === "object"
+			? Object.values(obj).map(getObjectValues).flat()
+			: [obj];
+
+	// clean errorsForm from rewards and payment empty nested objects
+	const cleanErrorsForm = (errorsForm) => {
+		var tmp = { ...errorsForm };
+		if (tmp.rewards) {
+			let empty_rewards = true;
+			for (let i = 0; i < Object.keys(tmp.rewards).length; i++) {
+				const key = Object.keys(tmp.rewards)[i];
+				if (tmp.rewards[key] && Object.keys(tmp.rewards[key]).length > 0) {
+					empty_rewards = false;
+					break;
+				}
+			}
+			if (empty_rewards) delete tmp.rewards;
+		}
+		if (tmp.payment) {
+			let empty_payment = true;
+			for (let i = 0; i < Object.keys(tmp.payment).length; i++) {
+				const key = Object.keys(tmp.payment)[i];
+				if (tmp.payment[key] && Object.keys(tmp.payment[key]).length > 0) {
+					empty_payment = false;
+					break;
+				}
+			}
+			if (empty_payment) delete tmp.payment;
+		}
+		return tmp;
+	};
+
 	const handleFinish = () => {
-		const tokens = JSON.parse(localStorage.getItem("authTokens"));
-		const access = tokens.access;
-		api
-			.post(
-				process.env.REACT_APP_BASE_URL + "/api/project/add/",
-				projectDataRef.current
-				// {
-				// 	headers: {
-				// 		Authorization: `Bearer ${access}`,
-				// 		"Content-Type": "multipart/form-data",
-				// 	},
-				// }
-			)
-			.then((response) => {
-				if (response.status === 201) {
-					setPopUpData({
-						title: "Project submitted",
-						description:
-							"Your project has been submitted and it will be soon reviewed by one of our team members, stay tunned, we will contact you soon!",
-					});
-				} else {
+		let cleanedErrorsForm = cleanErrorsForm(props.formErrors);
+		if (Object.keys(cleanedErrorsForm).length > 0) {
+			setPopUpData({
+				title: "Missing Inputs!",
+				description: `Please check this missing inputs\n${JSON.stringify(
+					cleanedErrorsForm,
+					undefined,
+					2
+				)}`,
+			});
+		} else {
+			api
+				.post(
+					process.env.REACT_APP_BASE_URL + "/api/project/add/",
+					projectDataRef.current
+				)
+				.then((response) => {
+					if (response.status === 201) {
+						setPopUpData({
+							title: "Project submitted",
+							description:
+								"Your project has been submitted and it will be soon reviewed by one of our team members, stay tunned, we will contact you soon!",
+						});
+					} else {
+						setPopUpData({
+							title: "Something Went Wrong!",
+							description: `Your Project was not submitted successfully, please verify that you have entered all the necessary data and supplied all the necessary files and try again`,
+						});
+					}
+				})
+				.catch((error) => {
 					setPopUpData({
 						title: "Something Went Wrong!",
-						description: `Your Project was not submitted successfully, please verify that you have entered all the necessary data and supplied all the necessary files. The server error was: ${JSON.stringify(
-							response.response.data.errors
-						)}`,
+						description:
+							"Your Project was not submitted successfully, please verify that you have entered all the necessary data and supplied all the necessary files",
 					});
-				}
-			})
-			.catch((error) => {
-				setPopUpData({
-					title: "Something Went Wrong!",
-					description:
-						"Your Project was not submitted successfully, please verify that you have entered all the necessary data and supplied all the necessary files",
 				});
-			});
+		}
 	};
 
 	const getUploadedFileName = (file, rowId) => {
@@ -729,6 +758,12 @@ export default function Payment(props) {
 															]["fullName"]
 														}
 													/>
+													<p className="invalid-input-p">
+														{props.formErrors &&
+															props.formErrors.payment &&
+															props.formErrors.payment[item] &&
+															props.formErrors.payment[item].fullName}
+													</p>
 												</div>
 											</Row>
 											<Row
@@ -768,6 +803,12 @@ export default function Payment(props) {
 																]["position"]
 															}
 														/>
+														<p className="invalid-input-p">
+															{props.formErrors &&
+																props.formErrors.payment &&
+																props.formErrors.payment[item] &&
+																props.formErrors.payment[item].position}
+														</p>
 													</div>
 												</Col>
 												<Col md={6}>
@@ -800,6 +841,12 @@ export default function Payment(props) {
 																	]["dateOfBirth"]
 																}
 															/>
+															<p className="invalid-input-p">
+																{props.formErrors &&
+																	props.formErrors.payment &&
+																	props.formErrors.payment[item] &&
+																	props.formErrors.payment[item].dateOfBirth}
+															</p>
 														</div>
 													</div>
 												</Col>
@@ -835,6 +882,12 @@ export default function Payment(props) {
 																valueFunction={getUploadedFileName}
 															/>
 														</div>
+														<p className="invalid-input-p">
+															{props.formErrors &&
+																props.formErrors.payment &&
+																props.formErrors.payment[item] &&
+																props.formErrors.payment[item].idFile}
+														</p>
 													</div>
 												</Col>
 												<Col md={6}>
@@ -861,6 +914,13 @@ export default function Payment(props) {
 																valueFunction={getUploadedFileName}
 															/>
 														</div>
+														<p className="invalid-input-p">
+															{props.formErrors &&
+																props.formErrors.payment &&
+																props.formErrors.payment[item] &&
+																props.formErrors.payment[item]
+																	.proofOfAddressFile}
+														</p>
 													</div>
 												</Col>
 											</Row>

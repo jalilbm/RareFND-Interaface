@@ -21,6 +21,7 @@
 		"bootstrap": "^5.2.0",
 		"bootstrap-icons": "^1.9.1",
 		"cdbreact": "^1.5.3",
+		"ckeditor5-custom-build": "file:ckeditor5",
 		"dayjs": "^1.11.5",
 		"ethers": "^5.6.9",
 		"izitoast": "^1.4.0",
@@ -69,5 +70,8 @@
 			"last 1 firefox version",
 			"last 1 safari version"
 		]
+	},
+	"devDependencies": {
+		"webpack": "^4.44.0"
 	}
 }

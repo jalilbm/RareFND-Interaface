@@ -20,7 +20,6 @@ export default function MyApp(props) {
 				...projectData_["rewards"][props.rowId],
 				[props.name]: value,
 			};
-
 			props.setProjectData(projectData_);
 		} else if (props.setProjectData && value && props.source === "payment") {
 			props.handleInputErrors(props.name, value, `payment.${props.rowId}`);

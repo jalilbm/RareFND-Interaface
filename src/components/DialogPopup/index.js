@@ -17,7 +17,9 @@ function ModalDialog(props) {
 				<Modal.Header closeButton onClick={initModal}>
 					<Modal.Title>{props.title}</Modal.Title>
 				</Modal.Header>
-				<Modal.Body>{props.description}</Modal.Body>
+				<Modal.Body style={{ whiteSpace: "pre-wrap" }}>
+					{props.description}
+				</Modal.Body>
 				<Modal.Footer>
 					<Button
 						variant="warning"

@@ -1,7 +1,11 @@
 import { Row } from "react-bootstrap";
 import DashboardCreateProjectItemHead from "../../../components/DashboardCreateProjectItemHead";
+// import { CKEditor } from "@ckeditor/ckeditor5-react";
+// import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+
+import Editor from "ckeditor5-custom-build/build/ckeditor";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+
 import Button from "react-bootstrap/Button";
 import useAxios from "../../../utils/useAxios/useAxios";
 
@@ -23,7 +27,6 @@ export default function Story(props) {
 		return {
 			upload: () => {
 				return new Promise((resolve, reject) => {
-					// const body = new FormData();
 					loader.file.then((file) => {
 						api
 							.post("/api/project/ckeditor/upload_image", {
@@ -37,22 +40,6 @@ export default function Story(props) {
 							.catch((err) => {
 								reject(err);
 							});
-
-						// body.append("files", file);
-						// fetch(`${API_URL}/${UPLOAD_ENDPOINT}`, {
-						// 	method: "post",
-						// 	body: body,
-						// 	// mode: "no-cors"
-						// })
-						// 	.then((res) => res.json())
-						// 	.then((res) => {
-						// 		resolve({
-						// 			default: `${API_URL}/${res.filename}`,
-						// 		});
-						// 	})
-						// .catch((err) => {
-						// 	reject(err);
-						// });
 					});
 				});
 			},
@@ -83,7 +70,7 @@ export default function Story(props) {
 				</p>
 				<div>
 					<CKEditor
-						editor={ClassicEditor}
+						editor={Editor}
 						config={{
 							extraPlugins: [uploadPlugin],
 						}}
@@ -97,7 +84,8 @@ export default function Story(props) {
 						}}
 						onChange={(event, editor) => handleChange(event, editor)}
 						onBlur={(event, editor) => {}}
-						onFocus={(event, editor) => {}}
+						onF
+						ocus={(event, editor) => {}}
 					/>
 					<p className="invalid-input-p">
 						{props.formErrors && props.formErrors.projectStory}

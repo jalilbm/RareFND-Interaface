@@ -15,7 +15,6 @@ export default function Funding(props) {
 
 	const handleInputChanges = (e, rowId) => {
 		let { name, value } = e.target;
-		props.handleInputErrors(name, value, `rewards.${rowId}`);
 		let projectData_ = { ...projectDataRef.current };
 		projectData_["rewards"][rowId] = {
 			...projectData_["rewards"][rowId],
@@ -154,13 +153,6 @@ export default function Funding(props) {
 										<span className="required-asterisk">*</span>
 									</p>
 									<div className="input-with-title">
-										{/* projectTaxCountry: "",
-						taxIdNumber: "",
-						whitePaperUrl: "",
-						tokenomicsUrl: "",
-						certificateOfIncumbency: null,
-						companyStructureChart: null, */}
-
 										<Calendar
 											setProjectData={props.setProjectData}
 											projectDataRef={projectDataRef}

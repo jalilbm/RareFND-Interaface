@@ -1,13 +1,9 @@
-import CategoryProjectCard from "../../components/CategoryProjectCard";
 import CategoryVerticalCard from "./CategoryVerticalCard";
 import CategoryHorizontalCard from "./CategoryHorizontalCard";
-import img from "../../assets/carousel/AboutUs.jpg";
-import React, { Component } from "react";
 import Slider from "react-slick";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import "./index.css";
-import { Carousel } from "bootstrap";
 
 export default function CategoryGridCard(props) {
 	const settings = {
@@ -84,6 +80,7 @@ export default function CategoryGridCard(props) {
 						<h3 className="categorygrid">Feature Project</h3>
 						{props.categoryProjects.length ? (
 							<CategoryVerticalCard
+								owner_username={props.categoryProjects[0].owner_username}
 								title={props.categoryProjects[0].title}
 								description={props.categoryProjects[0].head}
 								src={props.categoryProjects[0].thumbnail}
@@ -108,6 +105,7 @@ export default function CategoryGridCard(props) {
 							Array.from(props.categoryProjects).map((_, idx) => (
 								<div>
 									<CategoryHorizontalCard
+										owner_username={_.owner_username}
 										title={_.title}
 										project_owner="djalil"
 										src={_.thumbnail}
@@ -139,6 +137,7 @@ export default function CategoryGridCard(props) {
 								Array.from(props.categoryProjects).map((_, idx) => (
 									<div>
 										<CategoryVerticalCard
+											owner_username={_.owner_username}
 											src={_.thumbnail}
 											title={_.title}
 											description={_.head}
@@ -172,6 +171,7 @@ export default function CategoryGridCard(props) {
 								Array.from(props.categoryProjects).map((_, idx) => (
 									<div>
 										<CategoryVerticalCard
+											owner_username={_.owner_username}
 											src={_.thumbnail}
 											title={_.title}
 											description={_.head}
@@ -205,6 +205,7 @@ export default function CategoryGridCard(props) {
 								Array.from(props.categoryProjects).map((_, idx) => (
 									<div>
 										<CategoryVerticalCard
+											owner_username={_.owner_username}
 											src={_.thumbnail}
 											title={_.title}
 											description={_.head}

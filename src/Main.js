@@ -49,6 +49,7 @@ export default function Main() {
 				<Route exact path="/home" element={<Home />} />
 				<Route exact path="/category/:categoryname" element={<Category />} />
 				<Route exact path="/project/:id" element={<Project />} />
+				<Route exact path="/projects/:owner/:title" element={<Project />} />
 				{/* <Route exact path="/contact-us" element={<About />} /> */}
 				<Route exact path="/legal" element={<Legal />} />
 				<Route exact path="/about-us" element={<Programs />} />

@@ -112,9 +112,6 @@ export default function DashboardProjects() {
 			value === null ||
 			(typeof value === "object" && !value.name)
 		) {
-			if (typeof value === "object") {
-				console.log(input, value, Object.keys(value).length);
-			}
 			addInputError(input, errorMessage, errorPath);
 		} else {
 			removeInputError(input, errorPath);
@@ -134,6 +131,22 @@ export default function DashboardProjects() {
 		}
 	};
 
+	const handleNonAllowedValues = (
+		value,
+		input,
+		nonAllowedValues,
+		errorMessage,
+		errorPath = null
+	) => {
+		for (let i = 0; i < nonAllowedValues.length; i++) {
+			if (value.includes(nonAllowedValues[i])) {
+				addInputError(input, errorMessage, errorPath);
+				return;
+			}
+			removeInputError(input, errorPath);
+		}
+	};
+
 	const handleInputErrors = (name, value, errorPath = null) => {
 		if (errorPath !== null) {
 			addErrorPath(errorPath);
@@ -141,6 +154,17 @@ export default function DashboardProjects() {
 		switch (name) {
 			case "projectTitle":
 				handleEmptyInputError(value, name, "Project Title is required!");
+				if (!tmpFormErrors.projectTitle) {
+					const NonAllowedValues = ["-", ",", "."];
+					handleNonAllowedValues(
+						value,
+						name,
+						NonAllowedValues,
+						`Project title contains invalid character (${NonAllowedValues.map(
+							(value) => `"${value}"`
+						)})`
+					);
+				}
 				break;
 			case "projectCategory":
 				handleNonSelectedDropMenu(

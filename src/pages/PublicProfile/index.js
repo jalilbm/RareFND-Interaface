@@ -50,7 +50,7 @@ export default function PublicProfile() {
 						</div>
 						<div className="centerDiv" style={{ textAlign: "center" }}>
 							<div style={{ width: "500px" }}>
-								<p>{profileInfo.bio}</p>
+								<p style={{ whiteSpace: "pre-wrap" }}>{profileInfo.bio}</p>
 							</div>
 						</div>
 					</div>

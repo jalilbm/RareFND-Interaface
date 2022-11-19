@@ -4,7 +4,13 @@ import "./index.css";
 export default function CategoryVerticalCard(props) {
 	const s = { ...props.imageStyle };
 	return (
-		<Link to={`/project/${props.project_id}`} className="subnav_link">
+		<Link
+			to={`/projects/${props.owner_username.replace(
+				/\s+/g,
+				"-"
+			)}/${props.title.replace(/\s+/g, "-")}`}
+			className="subnav_link"
+		>
 			<div className="w-100" style={{ position: "relative" }}>
 				<div>
 					<img

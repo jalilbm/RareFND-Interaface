@@ -90,6 +90,7 @@ export default function Payment(props) {
 
 	const handleFinish = () => {
 		let cleanedErrorsForm = cleanErrorsForm(props.formErrors);
+
 		if (Object.keys(cleanedErrorsForm).length > 0) {
 			setPopUpData({
 				title: "Missing Inputs!",
@@ -100,31 +101,50 @@ export default function Payment(props) {
 				)}`,
 			});
 		} else {
-			api
-				.post(
-					process.env.REACT_APP_BASE_URL + "/api/project/add/",
-					projectDataRef.current
+			axios
+				.get(
+					process.env.REACT_APP_BASE_URL +
+						`/api/unique/project_title/${projectDataRef.current["basics"]["projectTitle"]}/`
 				)
 				.then((response) => {
-					if (response.status === 201) {
+					if (!response.data.valid) {
+						cleanedErrorsForm["projectTitle"] = "Project title already exists";
 						setPopUpData({
-							title: "Project submitted",
-							description:
-								"Your project has been submitted and it will be soon reviewed by one of our team members, stay tunned, we will contact you soon!",
+							title: "Incorrect data!",
+							description: `Please check the following:\n${JSON.stringify(
+								cleanedErrorsForm,
+								undefined,
+								2
+							)}`,
 						});
 					} else {
-						setPopUpData({
-							title: "Something Went Wrong!",
-							description: `Your Project was not submitted successfully, please verify that you have entered all the necessary data and supplied all the necessary files and try again`,
-						});
+						api
+							.post(
+								process.env.REACT_APP_BASE_URL + "/api/project/add/",
+								projectDataRef.current
+							)
+							.then((response) => {
+								if (response.status === 201) {
+									setPopUpData({
+										title: "Project submitted",
+										description:
+											"Your project has been submitted and it will be soon reviewed by one of our team members, stay tunned, we will contact you soon!",
+									});
+								} else {
+									setPopUpData({
+										title: "Something Went Wrong!",
+										description: `Your Project was not submitted successfully, please verify that you have entered all the necessary data and supplied all the necessary files and try again`,
+									});
+								}
+							})
+							.catch((error) => {
+								setPopUpData({
+									title: "Something Went Wrong!",
+									description:
+										"Your Project was not submitted successfully, please verify that you have entered all the necessary data and supplied all the necessary files",
+								});
+							});
 					}
-				})
-				.catch((error) => {
-					setPopUpData({
-						title: "Something Went Wrong!",
-						description:
-							"Your Project was not submitted successfully, please verify that you have entered all the necessary data and supplied all the necessary files",
-					});
 				});
 		}
 	};

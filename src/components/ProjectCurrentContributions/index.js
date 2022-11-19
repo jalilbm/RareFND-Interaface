@@ -5,10 +5,9 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import { useParams } from "react-router";
 
 export default function ProjectCurrentContributions(props) {
-	const { id } = useParams();
+	const id = props.projectId;
 	const [projectData, setProjectData] = useState(null);
 	const [usdRaisedAmount, setUsdRaisedAmount] = useState(0);
 	useEffect(() => {

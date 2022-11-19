@@ -5,6 +5,8 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import ProjectCard from "../../components/ProjectCard";
+import { useLocation } from "react-router-dom";
+import { useParams } from "react-router";
 
 export default function Project(props) {
 	const [projectData, setProjectData] = useState({});
@@ -17,7 +19,10 @@ export default function Project(props) {
 		useState(null);
 	const [fundingDataUpdated, setFundingDataUpdated] = useState(false);
 
-	const projectId = window.location.href.split("/").at(-1);
+	const { pathname, hash, key } = useLocation();
+	var projectId = projectData.id || "";
+	let { owner, title } = useParams();
+	title = title.replace(/-/g, " ");
 
 	useEffect(() => {
 		axios
@@ -26,22 +31,41 @@ export default function Project(props) {
 				if (response.status === 200)
 					setIncentivesData(response.data.incentives);
 			});
-	}, []);
+	}, [projectId]);
 
 	useEffect(() => {
-		axios
-			.get(process.env.REACT_APP_BASE_URL + `/api/project/${projectId}/`)
-			.then((response) => {
-				setProjectData(response.data);
-				if (!response.data.live && response.data.raised_amount === 0) {
-					// means no funding data
-					setFundingDataUpdated(true);
-				}
-			});
+		if (pathname.includes("projects")) {
+			axios
+				.get(process.env.REACT_APP_BASE_URL + `/api/projects/${title}/`)
+				.then((response) => {
+					if (response.status === 200) {
+						console.log(response.data);
+						setProjectData(response.data);
+						projectId = response.data.id;
+						if (!response.data.live && response.data.raised_amount === 0) {
+							// means no funding data
+							setFundingDataUpdated(true);
+						}
+					}
+				})
+				.catch((response) => window.alert(response.message));
+		} else {
+			projectId = pathname.split("/").pop();
+			axios
+				.get(process.env.REACT_APP_BASE_URL + `/api/project/${projectId}/`)
+				.then((response) => {
+					setProjectData(response.data);
+					if (!response.data.live && response.data.raised_amount === 0) {
+						// means no funding data
+						setFundingDataUpdated(true);
+					}
+				})
+				.catch((response) => window.alert(response.message));
+		}
 	}, []);
 	return (
 		<div className="post">
-			{!projectData.title ? (
+			{!projectData.title || !projectId || projectId === undefined ? (
 				<LoadingSpinner />
 			) : (
 				<div>
@@ -61,6 +85,7 @@ export default function Project(props) {
 						<ProjectCurrentContributions
 							setProjectSuccessfullyEnded={setProjectSuccessfullyEnded}
 							setFundingDataUpdated={setFundingDataUpdated}
+							projectId={projectData.id}
 						/>
 					)}
 					<ProjectDescription

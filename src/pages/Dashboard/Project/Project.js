@@ -114,15 +114,6 @@ export default function DashboardProjects() {
 		errorMessage,
 		errorPath = null
 	) => {
-		// if (typeof value === "object") {
-		// 	console.log(
-		// 		"typeof value === 'object'",
-		// 		value,
-		// 		isEmpty(value),
-		// 		"Object.keys(value).length",
-		// 		Object.keys(value).length
-		// 	);
-		// }
 		if (
 			!value ||
 			value === "" ||
@@ -466,9 +457,9 @@ export default function DashboardProjects() {
 			}
 		}
 
-		if (Object.keys(tmpFormErrors).length > 0) {
-			setFormErrors({ ...tmpFormErrors });
-		}
+		// if (Object.keys(tmpFormErrors).length > 0) {
+		// 	setFormErrors({ ...tmpFormErrors });
+		// }
 		console.log("projectData", projectData);
 	}, [projectData]);
 

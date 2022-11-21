@@ -54,7 +54,7 @@ export default function DashboardProjects() {
 						taxIdNumber: "",
 						whitePaperUrl: "",
 						tokenomicsUrl: "",
-						certificateOfIncumbency: null,
+						certificateOfIncumbencyFile: null,
 						companyStructureChart: null,
 					},
 			  }
@@ -344,7 +344,7 @@ export default function DashboardProjects() {
 					"Tax identification number is required!"
 				);
 				break;
-			case "certificateOfIncumbency":
+			case "certificateOfIncumbencyFile":
 				handleEmptyInputError(
 					value,
 					name,

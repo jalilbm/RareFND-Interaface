@@ -667,18 +667,20 @@ export default function Payment(props) {
 										title="Select File"
 										accepted_formats=".jpg, .jpeg, .png, .pdf"
 										updateProjectData={props.updateProjectData}
-										name="certificateOfIncumbency"
+										name="certificateOfIncumbencyFile"
 										value={
 											props.projectData &&
 											props.projectData["payment"] &&
-											props.projectData["payment"].certificateOfIncumbency &&
-											props.projectData["payment"].certificateOfIncumbency.name
+											props.projectData["payment"]
+												.certificateOfIncumbencyFile &&
+											props.projectData["payment"].certificateOfIncumbencyFile
+												.name
 										}
 										source="payment"
 									/>
 									<p className="invalid-input-p">
 										{props.formErrors &&
-											props.formErrors.certificateOfIncumbency}
+											props.formErrors.certificateOfIncumbencyFile}
 									</p>
 								</div>
 							</div>

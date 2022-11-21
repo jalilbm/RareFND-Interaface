@@ -131,14 +131,8 @@ export default function DashboardProjects() {
 				((input.includes("File") && !value.name) ||
 					(!input.includes("File") && isEmpty(value))))
 		) {
-			if (input === "projectDeadlineDate") {
-				console.log("hohoohoh    1", value, typeof value);
-			}
 			addInputError(input, errorMessage, errorPath);
 		} else {
-			if (input === "projectDeadlineDate") {
-				console.log("hohoohoh     2", value);
-			}
 			removeInputError(input, errorPath);
 		}
 	};

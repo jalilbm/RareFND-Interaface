@@ -9,6 +9,13 @@ import Payment from "./Payment";
 import CreateProjectNavBar from "../../../components/CreateProjectNavBar";
 import { useState, useEffect, useRef } from "react";
 
+function isEmpty(object) {
+	for (var i in object) {
+		return true;
+	}
+	return false;
+}
+
 export default function DashboardProjects() {
 	const [selectedTab, setSelectedTab] = useState("create-project-tab-1");
 	const [selectedNavItem, setSelectedNavItem] = useState(
@@ -106,14 +113,31 @@ export default function DashboardProjects() {
 		errorMessage,
 		errorPath = null
 	) => {
+		if (typeof value === "object") {
+			console.log(
+				"typeof value === 'object'",
+				value,
+				isEmpty(value),
+				"Object.keys(value).length",
+				Object.keys(value).length
+			);
+		}
 		if (
 			!value ||
 			value === "" ||
 			value === null ||
-			(typeof value === "object" && !value.name)
+			(typeof value === "object" &&
+				((input.includes("File") && !value.name) ||
+					(!input.includes("File") && isEmpty(value))))
 		) {
+			if (input === "projectDeadlineDate") {
+				console.log("hohoohoh    1", value, typeof value);
+			}
 			addInputError(input, errorMessage, errorPath);
 		} else {
+			if (input === "projectDeadlineDate") {
+				console.log("hohoohoh     2", value);
+			}
 			removeInputError(input, errorPath);
 		}
 	};

@@ -56,6 +56,7 @@ export default function DashboardProjects() {
 						tokenomicsUrl: "",
 						certificateOfIncumbencyFile: null,
 						companyStructureChart: null,
+						UBOs: {},
 					},
 			  }
 	);
@@ -113,15 +114,15 @@ export default function DashboardProjects() {
 		errorMessage,
 		errorPath = null
 	) => {
-		if (typeof value === "object") {
-			console.log(
-				"typeof value === 'object'",
-				value,
-				isEmpty(value),
-				"Object.keys(value).length",
-				Object.keys(value).length
-			);
-		}
+		// if (typeof value === "object") {
+		// 	console.log(
+		// 		"typeof value === 'object'",
+		// 		value,
+		// 		isEmpty(value),
+		// 		"Object.keys(value).length",
+		// 		Object.keys(value).length
+		// 	);
+		// }
 		if (
 			!value ||
 			value === "" ||
@@ -450,6 +451,7 @@ export default function DashboardProjects() {
 			handleInputErrors(key, projectData.payment[key] || null);
 		}
 		// Test Payment UBOs
+		console.log(projectData.payment.UBOs);
 		for (
 			let index = 0;
 			index < Object.keys(projectData.payment.UBOs).length;

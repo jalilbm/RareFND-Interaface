@@ -4,11 +4,11 @@ import "./Calendar.css";
 import "./DatePicker.css";
 
 export default function MyApp(props) {
-	const [value, onChange] = useState(
-		typeof props.value === "string"
+	let date =
+		typeof props.value === "string" && props.value !== ""
 			? new Date(props.value)
-			: props.value || null
-	);
+			: props.value;
+	const [value, onChange] = useState(typeof date === "object" ? date : null);
 
 	useEffect(() => {
 		if (props.updateProjectData) {

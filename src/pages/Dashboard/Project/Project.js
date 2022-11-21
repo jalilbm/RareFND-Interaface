@@ -460,6 +460,7 @@ export default function DashboardProjects() {
 		// if (Object.keys(tmpFormErrors).length > 0) {
 		// 	setFormErrors({ ...tmpFormErrors });
 		// }
+		setFormErrors({ ...tmpFormErrors });
 		console.log("projectData", projectData);
 	}, [projectData]);
 

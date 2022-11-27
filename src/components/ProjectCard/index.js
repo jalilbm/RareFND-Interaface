@@ -167,6 +167,7 @@ export default function ProjectCard(props) {
 											props.projectSuccessfullyEnded === false ? (
 												<div>
 													<Web3ContributeButton
+														projectId={props.projectId}
 														staking_address={props.staking_address}
 														staking_abi={props.staking_abi}
 														projectLive={props.projectLive}

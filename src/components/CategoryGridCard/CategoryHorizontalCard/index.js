@@ -52,7 +52,7 @@ export default function CategoryHorizontalCard(props) {
 									{props.project_live
 										? "Live"
 										: props.project_raised_amount >= props.project_goal_amount
-										? "succeed"
+										? "Successful"
 										: props.project_raised_amount === 0
 										? "Coming Soon"
 										: "Failed"}

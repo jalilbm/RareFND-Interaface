@@ -78,7 +78,7 @@ export default function ContributeBtn(props) {
 
 	useEffect(() => {
 		axios
-			.get(process.env.REACT_APP_BASE_URL + `/api/project/${id}/`)
+			.get(process.env.REACT_APP_BASE_URL + `/api/project/${props.projectId}/`)
 			.then((response) => {
 				setProjectData(response.data);
 				setProjectLive(response.data.live);
@@ -442,38 +442,29 @@ export default function ContributeBtn(props) {
 						</Row>
 					</div>
 
-					{
-						txHash && (
-							<div
-								style={{
-									backgroundColor: "#09ce00",
-									color: "white",
-									height: "50px",
-									display: "flex",
-									justifyContent: "center",
-									alignItems: "center",
-								}}
-							>
-								<p style={{ margin: "0", padding: "0" }}>
-									Transaction Hash:{" "}
-									<a
-										href={`https://bscscan.com/tx/${txHash}`}
-										target="_blank"
-										rel="noopener"
-									>
-										{txHash}
-									</a>
-								</p>
-							</div>
-						)
-
-						// <a
-						// 	style={{ margin: "0", padding: "0" }}
-						// 	href="https://bscscan.com/tx/"
-						// >
-						// 	"Transaction Hash: " + <a href="https://bscscan.com/tx/">txHash</a>
-						// </a>
-					}
+					{txHash && (
+						<div
+							style={{
+								backgroundColor: "#09ce00",
+								color: "white",
+								height: "50px",
+								display: "flex",
+								justifyContent: "center",
+								alignItems: "center",
+							}}
+						>
+							<p style={{ margin: "0", padding: "0" }}>
+								Transaction Hash:{" "}
+								<a
+									href={`https://bscscan.com/tx/${txHash}`}
+									target="_blank"
+									rel="noopener"
+								>
+									{txHash}
+								</a>
+							</p>
+						</div>
+					)}
 				</div>
 			) : (
 				<LoadingSpinner color="#FFC115" />

@@ -66,9 +66,9 @@ export default function DashboardProjects() {
 	formErrorsRef.current = formErrors;
 	var tmpFormErrors = {};
 
-	useEffect(() => {
-		console.log("formErrors", formErrors);
-	}, [formErrors]);
+	// useEffect(() => {
+	// 	console.log("formErrors", formErrors);
+	// }, [formErrors]);
 
 	const addErrorPath = (errorPath) => {
 		if (!tmpFormErrors[errorPath.split(".")[0]]) {
@@ -436,7 +436,6 @@ export default function DashboardProjects() {
 			handleInputErrors(key, projectData.payment[key] || null);
 		}
 		// Test Payment UBOs
-		console.log(projectData.payment.UBOs);
 		for (
 			let index = 0;
 			index < Object.keys(projectData.payment.UBOs).length;

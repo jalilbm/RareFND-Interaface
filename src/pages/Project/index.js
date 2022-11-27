@@ -39,7 +39,6 @@ export default function Project(props) {
 				.get(process.env.REACT_APP_BASE_URL + `/api/projects/${title}/`)
 				.then((response) => {
 					if (response.status === 200) {
-						console.log(response.data);
 						setProjectData(response.data);
 						projectId = response.data.id;
 						if (!response.data.live && response.data.raised_amount === 0) {

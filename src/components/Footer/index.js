@@ -47,6 +47,7 @@ export default function Footer() {
 												RARE FND LIMITED, 86-90 Paul Street, London, England,
 												EC2A 4NE (14325862)
 											</a>
+											<br></br>
 											<a
 												target="_blank"
 												rel="noreferrer"

@@ -22,7 +22,9 @@ export default function DashboardProjects() {
 		"create-project-tab-1"
 	);
 	const [projectData, setProjectData] = useState(
-		localStorage.getItem("createProjectData")
+		localStorage.getItem("createProjectData") &&
+			"certificateOfIncumbencyFile" in
+				JSON.parse(localStorage.getItem("createProjectData")).payment
 			? JSON.parse(localStorage.getItem("createProjectData"))
 			: {
 					basics: {
@@ -65,6 +67,16 @@ export default function DashboardProjects() {
 	const formErrorsRef = useRef(formErrors);
 	formErrorsRef.current = formErrors;
 	var tmpFormErrors = {};
+
+	if (
+		localStorage.getItem("createProjectData") &&
+		!(
+			"certificateOfIncumbencyFile" in
+			JSON.parse(localStorage.getItem("createProjectData")).payment
+		)
+	) {
+		localStorage.removeItem("createProjectData");
+	}
 
 	// useEffect(() => {
 	// 	console.log("formErrors", formErrors);

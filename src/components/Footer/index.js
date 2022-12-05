@@ -47,6 +47,16 @@ export default function Footer() {
 												RARE FND LIMITED, 86-90 Paul Street, London, England,
 												EC2A 4NE (14325862)
 											</a>
+											<a
+												target="_blank"
+												rel="noreferrer"
+												href="https://goo.gl/maps/iGgGPP9MXsUTtdDy6"
+												className="my-3 text-secondary"
+												style={{ width: "250px" }}
+											>
+												RATBits NFT Marketplace DMCC, 48th floor Almas Towers,
+												JLT, Dubai
+											</a>
 										</p>
 									</CDBBox>
 								</Col>

@@ -101,7 +101,7 @@ export default function ContributeBtn(props) {
 	}, [staking]);
 
 	useMemo(() => {
-		if (provider && stakingAddress && stakingAddress) {
+		if (provider && stakingAddress) {
 			const signer = provider.getSigner();
 			const token_ = new ethers.Contract(tokenAddress, token_abi, signer);
 			const staking = new ethers.Contract(stakingAddress, staking_abi, signer);

@@ -41,11 +41,14 @@
 		"react-spinners": "^0.13.6",
 		"react-use-file-upload": "^0.9.5",
 		"sass": "^1.54.5",
+		"sha512": "^0.0.1",
 		"slick-carousel": "^1.8.1",
 		"use-handle-change": "^2.2.9",
 		"validator": "^13.7.0",
 		"web-vitals": "^2.1.4",
-		"web3modal": "1.9.5"
+		"web3modal": "1.9.5",
+		"js-sha512": "^0.8.0",
+		"react-iframe": "^1.8.5"
 	},
 	"scripts": {
 		"start": "react-scripts start",

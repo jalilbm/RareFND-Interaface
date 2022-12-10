@@ -300,8 +300,8 @@ export default function ContributeBtn(props) {
 				address: address,
 				signature: sigHax,
 				email: email,
-				redirect_url: window.location.href + `?message=completed`,
-				// redirect_url: `https://temporary-rarefnd.netlify.app/?message=completed`,
+				// redirect_url: window.location.href + `?message=completed`,
+				redirect_url: `https://temporary-rarefnd.netlify.app/?message=completed`,
 			};
 
 			window.location.replace(
@@ -514,7 +514,7 @@ export default function ContributeBtn(props) {
 										}
 										disabled={!projectLive}
 									>
-										Approve Donation
+										Donate by FND
 									</Button>
 								)}
 							</Col>

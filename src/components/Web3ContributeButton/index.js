@@ -214,6 +214,38 @@ export default function ContributeBtn(props) {
 		setPending(false);
 	}
 
+	const switchNetwork = async () => {
+		try {
+			await provider.provider.request({
+				method: "wallet_switchEthereumChain",
+				params: [{ chainId: TARGET_CHAIN }],
+			});
+		} catch (switchError) {
+			if (switchError.code === 4902) {
+				try {
+					await provider.provider.request({
+						method: "wallet_addEthereumChain",
+						params: [
+							{
+								chainId: TARGET_CHAIN,
+								rpcUrls: ["https://bsc-dataseed.binance.org/"],
+								chainName: "Binance Smart Chain",
+								nativeCurrency: {
+									name: "Binance Token",
+									symbol: "BNB",
+									decimals: 18,
+								},
+								blockExplorerUrls: ["https://bscscan.com/"],
+							},
+						],
+					});
+				} catch (error) {
+					console.log(error);
+				}
+			}
+		}
+	};
+
 	async function isReadyToContribute() {
 		if (!projectLive) {
 			setReadyToContribute(false);
@@ -488,13 +520,21 @@ export default function ContributeBtn(props) {
 											fontSize: "1rem",
 											maxHeight: "100%",
 										}}
-										onClick={() => stake()}
+										onClick={() => {
+											if (chainId === TARGET_CHAIN) {
+												stake();
+											} else {
+												switchNetwork();
+											}
+										}}
 										disabled={
-											!stakingOptions ||
-											!stakingOptions[7] ||
-											!readyToContribute ||
-											// !projectLive ||
-											pending
+											(chainId === TARGET_CHAIN &&
+												(!stakingOptions ||
+													!stakingOptions[7] ||
+													!readyToContribute ||
+													// !projectLive ||
+													pending)) ||
+											false
 										}
 									>
 										Donate by FND

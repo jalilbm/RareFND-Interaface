@@ -497,7 +497,7 @@ export default function ContributeBtn(props) {
 											pending
 										}
 									>
-										{`Complete Donation`}
+										Donate by FND
 									</Button>
 								) : (
 									<Button

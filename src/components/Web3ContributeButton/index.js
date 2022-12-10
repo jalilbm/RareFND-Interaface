@@ -271,7 +271,7 @@ export default function ContributeBtn(props) {
 			.then((res) => {
 				// console.log("res: ", res.data)
 				if (res.data) {
-					redirectToMercuryo(venlyEmail, res.data.email);
+					redirectToMercuryo(res.data.address, venlyEmail);
 				}
 			})
 			.catch((err) => console.log(err));
@@ -300,8 +300,8 @@ export default function ContributeBtn(props) {
 				address: address,
 				signature: sigHax,
 				email: email,
-				// redirect_url: window.location.href + `?message=completed`,
-				redirect_url: `https://temporary-rarefnd.netlify.app/?message=completed`,
+				redirect_url: window.location.href + `?message=completed`,
+				// redirect_url: `https://temporary-rarefnd.netlify.app/?message=completed`,
 			};
 
 			window.location.replace(

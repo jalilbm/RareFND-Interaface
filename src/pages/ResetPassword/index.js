@@ -12,6 +12,9 @@ export default function (props) {
 	const navigate = useNavigate();
 	const token = pathname.split("/").pop();
 	const email = pathname.split("/").at(-2);
+
+	const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
 	useEffect(() => {
 		axios
 			.post(
@@ -28,7 +31,7 @@ export default function (props) {
 				setValidToken(false);
 			});
 	}, []);
-	const onFinish = () => {
+	const onFinish = async () => {
 		messageApi.open({
 			type: "loading",
 			content: "Please wait!",
@@ -39,17 +42,14 @@ export default function (props) {
 				token: token,
 				password: document.getElementById("basic_password-1").value,
 			})
-			.then((response) => {
+			.then(async (response) => {
 				if (response.status === 200) {
 					messageApi.open({
 						type: "success",
 						content: "Password changed successfully!",
 					});
-					setTimeout(function () {
-						if (newState == -1) {
-							navigate("/login");
-						}
-					}, 5000);
+					await delay(5000);
+					navigate("/login");
 				}
 			})
 			.catch((err) => {

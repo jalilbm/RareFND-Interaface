@@ -45,7 +45,11 @@ export default function (props) {
 						type: "success",
 						content: "Password changed successfully!",
 					});
-					navigate("/login");
+					setTimeout(function () {
+						if (newState == -1) {
+							navigate("/login");
+						}
+					}, 5000);
 				}
 			})
 			.catch((err) => {

@@ -30,7 +30,7 @@ export default function (props) {
 	}, []);
 	const onFinish = () => {
 		messageApi.open({
-			type: "warning",
+			type: "loading",
 			content: "Please wait!",
 		});
 		axios
@@ -41,11 +41,11 @@ export default function (props) {
 			})
 			.then((response) => {
 				if (response.status === 200) {
-					navigate("/login");
 					messageApi.open({
 						type: "success",
 						content: "Password changed successfully!",
 					});
+					navigate("/login");
 				}
 			})
 			.catch((err) => {

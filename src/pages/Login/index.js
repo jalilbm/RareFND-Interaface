@@ -4,6 +4,13 @@ import React from "react";
 import "./index.css";
 import AuthContext from "../../Context/AuthContext";
 import { Link } from "react-router-dom";
+import { Modal, message, Input } from "antd";
+import axios from "axios";
+const { confirm } = Modal;
+
+const validateEmail = (email) => {
+	return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).toLowerCase());
+};
 
 export default function (props) {
 	const initialValues = { email: "", password: "" };
@@ -11,6 +18,7 @@ export default function (props) {
 	const [formValues, setFormValues] = useState(initialValues);
 	const [formErrors, setFormErrors] = useState({});
 	const [isSubmit, setIsSubmit] = useState(false);
+	const [messageApi, contextHolder] = message.useMessage();
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -47,8 +55,44 @@ export default function (props) {
 		return errors;
 	};
 
+	const ResetPassword = () => {
+		const email = document.getElementById("password-reset-email").value;
+		if (!validateEmail(email)) {
+			messageApi.open({
+				type: "error",
+				content: "Invalid email address",
+			});
+		} else {
+			axios.post(process.env.REACT_APP_BASE_URL + "/api/user/reset_password/", {
+				email: email,
+			});
+			messageApi.open({
+				type: "info",
+				content:
+					"You will receive an email from us if you have an account in our website",
+				duration: 10,
+			});
+		}
+	};
+
+	const showConfirm = () => {
+		confirm({
+			title: "Enter your email to reset your password",
+			content: (
+				<Input id="password-reset-email" type="email" placeholder="Email" />
+			),
+			onOk() {
+				ResetPassword();
+			},
+			// onCancel() {
+			// 	console.log("Cancel");
+			// },
+		});
+	};
+
 	return (
 		<div className="Auth-form-container">
+			{contextHolder}
 			<form className="Auth-form" onSubmit={handleSubmit}>
 				<div className="Auth-form-content">
 					<h3 className="Auth-form-title">Login</h3>
@@ -81,9 +125,16 @@ export default function (props) {
 							Login
 						</button>
 					</div>
-					<p className="text-right mt-2">
-						Forgot <Link to="#">password?</Link>
-					</p>
+					<div
+						onClick={showConfirm}
+						style={{
+							cursor: "pointer",
+							color: "blue",
+							textDecoration: "underline",
+						}}
+					>
+						<p className="text-right mt-2">Forgot password?</p>
+					</div>
 					<p className="text-right mt-2">
 						You don't have an account? <Link to="/signup">Sign Up</Link>
 					</p>

@@ -33,7 +33,7 @@ export default function PublicProfile() {
 							<h1>
 								{profileInfo.username !== "dean"
 									? profileInfo.username
-									: "AURA"}
+									: "AURA SKYPOOL"}
 							</h1>
 						</div>
 						<div className="centerDiv">

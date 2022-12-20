@@ -263,7 +263,7 @@ export default function ProjectCard(props) {
 															<p style={{ margin: "0", padding: "0" }}>
 																{props.ownerUsername !== "dean"
 																	? props.ownerUsername
-																	: "AURA"}
+																	: "AURA SKYPOOL"}
 															</p>
 														</div>
 													</div>
@@ -277,6 +277,7 @@ export default function ProjectCard(props) {
 													fontSize: "1.3rem",
 													color: "grey",
 													textAlign: "left",
+													whiteSpace: "pre-wrap",
 												}}
 											>
 												{props.text}

@@ -64,7 +64,7 @@ export default function ProjectDescription(props) {
 								<h3>
 									{props.ownerUsername !== "dean"
 										? props.ownerUsername
-										: "AURA"}
+										: "AURA SKYPOOL"}
 								</h3>
 							</div>
 						</Link>

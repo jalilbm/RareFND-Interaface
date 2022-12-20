@@ -15,3 +15,18 @@
 .row.vertical-divider div[class^="col-"]:last-child {
 	border-right: none;
 }
+
+@media screen and (max-width: 770px) {
+	.col-md-6 {
+		padding: 0 !important;
+	}
+	div[class="w-100 row"] > div > hr {
+		display: none !important;
+	}
+	#comingSoonImage {
+		display: none;
+	}
+	.project-address {
+		justify-content: center;
+	}
+}

@@ -61,7 +61,11 @@ export default function ProjectDescription(props) {
 								className="centerDiv"
 								style={{ textDecoration: "underline #000000", color: "Dark" }}
 							>
-								<h3>{props.ownerUsername}</h3>
+								<h3>
+									{props.ownerUsername !== "dean"
+										? props.ownerUsername
+										: "AURA"}
+								</h3>
 							</div>
 						</Link>
 					</div>

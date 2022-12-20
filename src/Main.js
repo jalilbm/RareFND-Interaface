@@ -44,7 +44,7 @@ export default function Main() {
 	}, [pathname, hash, key]); // do this on route change
 
 	return (
-		<div className="main" style={{ minHeight: "100vh" }}>
+		<div className="main" style={{ minHeight: "70vh" }}>
 			<Routes>
 				<Route exact path="/" element={<Home />} />
 				<Route exact path="/home" element={<Home />} />

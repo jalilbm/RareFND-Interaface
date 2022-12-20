@@ -4,14 +4,34 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Web3ContributeButton from "../Web3ContributeButton";
 import "./index.css";
-import Button from "react-bootstrap/Button";
 import useAxios from "../../utils/useAxios/useAxios";
 import { useState, useEffect, useContext } from "react";
 import AuthContext from "../../Context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import comingSoon from "../../assets/coming-soon.png";
 import succeed from "../../assets/succeed.png";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import { StarOutlined, FacebookFilled } from "@ant-design/icons";
+import { Button, Image } from "antd";
+import locationIcon from "../../assets/locationIcon.png";
+import {
+	FacebookShareCount,
+	EmailShareButton,
+	FacebookShareButton,
+	LinkedinShareButton,
+	TelegramShareButton,
+	TwitterShareButton,
+	WhatsappShareButton,
+} from "react-share";
+
+import {
+	EmailIcon,
+	FacebookIcon,
+	LinkedinIcon,
+	TelegramIcon,
+	TwitterIcon,
+	WhatsappIcon,
+} from "react-share";
 
 export default function ProjectCard(props) {
 	let api = useAxios();
@@ -19,6 +39,9 @@ export default function ProjectCard(props) {
 	const [subscribed, setSubscribed] = useState(false);
 	const [subscribeButtonText, setSubscribeButtonText] = useState("");
 	const navigate = useNavigate();
+	// const shareUrl =  window.location.href
+	const shareUrl =
+		"https://rarefnd.com/projects/OkoaHeros/Clean-Water-for-Bulamagi-Village";
 
 	useEffect(() => {
 		if (subscribed) {
@@ -44,15 +67,16 @@ export default function ProjectCard(props) {
 
 	const subscribeToProject = () => {
 		if (user) {
+			document.getElementById("subscribe-btn").disabled = true;
 			api
 				.put(`/api/project/subscribe/`, { projectId: props.projectId })
 				.then((response) => {
 					if (response.status === 200) {
-						window.alert("Subscribed successfully");
 						setSubscribed(true);
 						document.getElementById("subscribe-btn").textContent = "Subscribed";
 					} else {
 						window.alert("Couldn't subscribe, please try again in few seconds");
+						document.getElementById("subscribe-btn").disabled = false;
 					}
 				});
 		} else {
@@ -69,15 +93,38 @@ export default function ProjectCard(props) {
 					}`}
 					style={{ margin: "0px" }}
 				>
-					<Col md={6}>
-						<Card.Img
-							variant="left"
-							src={props.image}
+					<Col md={6} width="50%">
+						<div
 							style={{
 								width: "100%",
-								objectFit: "cover",
+								height: "100%",
 							}}
-						/>
+						>
+							<Image
+								src={props.image}
+								width="100%"
+								style={{
+									width: "100%",
+									objectFit: "cover",
+								}}
+							/>
+							{!props.projectLive &&
+								props.projectSuccessfullyEnded !== false &&
+								props.projectSuccessfullyEnded !== true && (
+									<div
+										style={{
+											backgroundColor: "#FFC115",
+											width: "100%",
+											height: "30px",
+											color: "white",
+											display: "none",
+										}}
+										className="coming-soon-banner centerDiv"
+									>
+										<p>Coming Soon</p>
+									</div>
+								)}
+						</div>
 					</Col>
 					{window.innerWidth <= 767 && (
 						<div style={{ width: "100%" }}>
@@ -120,9 +167,6 @@ export default function ProjectCard(props) {
 											flexDirection: "column",
 											backgroundColor: "white",
 											height: "100%",
-											// margin: window.innerWidth > 1000 ? "0 200 0 200" : "0",
-											// padding: "5% 5% 0 5%",
-											// position: "relative",
 										}}
 									>
 										{!props.projectLive &&
@@ -146,21 +190,99 @@ export default function ProjectCard(props) {
 														right: "-5px",
 													}}
 												>
-													<img src={comingSoon} style={{ width: "7rem" }} />
+													<img
+														id="comingSoonImage"
+														src={comingSoon}
+														style={{ width: "7rem" }}
+													/>
 												</div>
 											))}
-										<h1>
+										<h1 style={{ margin: "0", padding: "0" }}>
 											<Card.Title
 												style={{
 													fontSize: "xx-large",
+													textAlign: "left",
 												}}
 											>
 												{props.title}
 											</Card.Title>
 										</h1>
-										<Card.Text style={{ fontSize: "larger" }}>
-											{props.text}
-										</Card.Text>
+
+										<div
+										// style={{
+										// 	display:
+										// 		props.projectSuccessfullyEnded !== false &&
+										// 		props.projectSuccessfullyEnded !== true
+										// 			? "block"
+										// 			: "None",
+										// }}
+										>
+											<Link
+												to={`/profile/${props.ownerId}`}
+												target="_blank"
+												rel="noopener noreferrer"
+											>
+												<div style={{ display: "flex" }}>
+													<div style={{ width: "64px" }}>
+														<Image
+															src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+															style={{ width: 64 }}
+															preview={false}
+														/>
+													</div>
+													<div
+														style={{
+															display: "flex",
+															flexDirection: "column",
+															justifyContent: "space-between",
+															padding: "12px 0 12px 12px",
+														}}
+													>
+														<div
+															style={{
+																display: "flex",
+																alignItems: "center",
+															}}
+														>
+															<p
+																style={{
+																	margin: "0",
+																	padding: "0",
+																	color: "grey",
+																}}
+															>
+																Project owner
+															</p>
+														</div>
+														<div
+															style={{
+																display: "flex",
+																alignItems: "center",
+															}}
+														>
+															<p style={{ margin: "0", padding: "0" }}>
+																{props.ownerUsername !== "dean"
+																	? props.ownerUsername
+																	: "AURA"}
+															</p>
+														</div>
+													</div>
+												</div>
+											</Link>
+										</div>
+										<br></br>
+										<div className="centerDiv" style={{ height: "100%" }}>
+											<Card.Text
+												style={{
+													fontSize: "1.3rem",
+													color: "grey",
+													textAlign: "left",
+												}}
+											>
+												{props.text}
+											</Card.Text>
+										</div>
+										<br />
 										<div style={{ marginTop: "auto" }}>
 											{props.projectLive ||
 											props.projectSuccessfullyEnded === true ||
@@ -195,16 +317,12 @@ export default function ProjectCard(props) {
 												props.projectSuccessfullyEnded === null && (
 													<div>
 														<Button
+															type="primary"
+															icon={<StarOutlined />}
 															id="subscribe-btn"
-															variant="warning"
-															size="lg"
-															style={{
-																width: "100%",
-																fontSize: "2vh",
-																maxHeight: "100%",
-															}}
 															onClick={subscribeToProject}
 															disabled={subscribed}
+															size="large"
 														>
 															{subscribeButtonText}
 														</Button>
@@ -216,6 +334,54 @@ export default function ProjectCard(props) {
 												)
 											)}
 										</div>
+										<hr style={{ marginBottom: "10px 0 10px 0" }} />
+
+										{/* <EmailShareButton url={window.location.href} /> */}
+
+										<Row>
+											<Col md={6} style={{ marginBottom: "10px" }}>
+												<div
+													className="project-address"
+													style={{ display: "flex", alignItems: "center" }}
+												>
+													<img src={locationIcon}></img>
+													<p style={{ margin: "0", padding: "0 0 0 5px" }}>
+														{props.projectAddress}
+													</p>
+												</div>
+											</Col>
+											<Col md={6} style={{ marginBottom: "30px" }}>
+												<div
+													style={{
+														display: "flex",
+														justifyContent: "space-around",
+														alignContent: "center",
+													}}
+												>
+													<div className="centerDiv">
+														<p style={{ margin: "0", padding: "0" }}>Share: </p>
+													</div>
+													<FacebookShareButton url={shareUrl}>
+														<FacebookIcon size={32} />
+													</FacebookShareButton>
+													<TwitterShareButton url={shareUrl}>
+														<TwitterIcon size={32} />
+													</TwitterShareButton>
+													<TelegramShareButton url={shareUrl}>
+														<TelegramIcon size={32} />
+													</TelegramShareButton>
+													<LinkedinShareButton url={shareUrl}>
+														<LinkedinIcon size={32} />
+													</LinkedinShareButton>
+													<WhatsappShareButton url={shareUrl}>
+														<WhatsappIcon size={32} />
+													</WhatsappShareButton>
+													<EmailShareButton url={shareUrl}>
+														<EmailIcon size={32} />
+													</EmailShareButton>
+												</div>
+											</Col>
+										</Row>
 									</div>
 								) : (
 									<LoadingSpinner color="#FFC115" />

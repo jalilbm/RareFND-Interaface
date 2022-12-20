@@ -4,12 +4,17 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
+import { ConfigProvider } from "antd";
+import "antd/dist/antd.variable.min.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+ConfigProvider.config({ theme: { primaryColor: "#FFC115" } });
 root.render(
 	<React.StrictMode>
 		<Router>
-			<App />
+			<ConfigProvider>
+				<App />
+			</ConfigProvider>
 		</Router>
 	</React.StrictMode>
 );

@@ -18,6 +18,7 @@ export default function App() {
 						text="Donate now and benefit from Give2Earn at Rare FND"
 						href="https://rarefnd.zendesk.com/hc/en-gb/articles/7408695124125-Introducing-Give2Earn"
 					/>
+
 					<NavBar />
 					<Main />
 					<Footer />

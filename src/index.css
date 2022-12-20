@@ -38,6 +38,12 @@ button:active:hover {
 	/* background-color: #ff0000; */
 }
 
+.ant-btn,
+.anticon {
+	display: inline-flex !important;
+	align-items: center !important;
+}
+
 input:invalid,
 textarea:invalid {
 	animation: shake 0.2s ease-in-out 0s 2;
@@ -63,7 +69,10 @@ textarea:invalid {
 	justify-content: center;
 	align-items: center;
 }
-
+p {
+	margin: 0 !important;
+	padding: 0 !important;
+}
 .invalid-input-p {
 	color: red;
 	margin: 0;

@@ -30,14 +30,22 @@ export default function PublicProfile() {
 							></img>
 						</div>
 						<div className="centerDiv">
-							<h1>{profileInfo.username}</h1>
+							<h1>
+								{profileInfo.username !== "dean"
+									? profileInfo.username
+									: "AURA"}
+							</h1>
 						</div>
 						<div className="centerDiv">
-							<p className="m-1">{`${profileInfo.first_name} ${profileInfo.last_name}`}</p>
+							<p className="m-1">{`${
+								profileInfo.first_name !== null ? profileInfo.first_name : ""
+							} ${
+								profileInfo.last_name !== null ? profileInfo.last_name : ""
+							}`}</p>
 						</div>
-						<div className="centerDiv">
+						{/* <div className="centerDiv">
 							<p>{profileInfo.email}</p>
-						</div>
+						</div> */}
 						<div className="centerDiv">
 							<div
 								style={{

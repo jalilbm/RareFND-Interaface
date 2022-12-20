@@ -38,7 +38,10 @@ export default function Project(props) {
 			axios
 				.get(process.env.REACT_APP_BASE_URL + `/api/projects/${title}/`)
 				.then((response) => {
-					if (response.status === 200) {
+					if (
+						response.status === 200 &&
+						response.data.owner_username.toLowerCase() === owner.toLowerCase()
+					) {
 						setProjectData(response.data);
 						projectId = response.data.id;
 						if (!response.data.live && response.data.raised_amount === 0) {
@@ -79,6 +82,9 @@ export default function Project(props) {
 						staking_address={projectData.staking_address}
 						projectSuccessfullyEnded={projectSuccessfullyEnded}
 						fundingDataUpdated={fundingDataUpdated}
+						ownerId={projectData.owner}
+						ownerUsername={projectData.owner_username}
+						projectAddress={projectData.address}
 					/>
 					{(projectData.live || projectData.raised_amount > 0) && (
 						<ProjectCurrentContributions
@@ -87,14 +93,18 @@ export default function Project(props) {
 							projectId={projectData.id}
 						/>
 					)}
-					<ProjectDescription
-						description={projectData.description}
-						ownerId={projectData.owner}
-						ownerUsername={projectData.owner_username}
-						projectId={projectData.id}
-						incentivesData={incentivesData}
-						projectLive={projectData.live}
-					/>
+					{(projectData.live ||
+						projectSuccessfullyEnded === true ||
+						projectSuccessfullyEnded === false) && (
+						<ProjectDescription
+							description={projectData.description}
+							ownerId={projectData.owner}
+							ownerUsername={projectData.owner_username}
+							projectId={projectData.id}
+							incentivesData={incentivesData}
+							projectLive={projectData.live}
+						/>
+					)}
 				</div>
 			)}
 		</div>

@@ -7,3 +7,18 @@
 .category-link {
 	text-decoration: none;
 }
+
+h3 {
+	margin-bottom: 0 !important;
+	padding-bottom: 0 !important;
+}
+
+@media screen and (max-width: 770px) {
+	.navSlider {
+		padding-left: 2rem;
+		padding-right: 2rem;
+	}
+	.coming-soon-banner {
+		display: flex !important;
+	}
+}

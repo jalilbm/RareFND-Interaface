@@ -12,7 +12,7 @@ import comingSoon from "../../assets/coming-soon.png";
 import succeed from "../../assets/succeed.png";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import { StarOutlined, FacebookFilled } from "@ant-design/icons";
-import { Button, Image } from "antd";
+import { Button, Image, Avatar } from "antd";
 import locationIcon from "../../assets/locationIcon.png";
 import {
 	FacebookShareCount,
@@ -217,19 +217,23 @@ export default function ProjectCard(props) {
 										// 			: "None",
 										// }}
 										>
-											<Link
-												to={`/profile/${props.ownerId}`}
-												target="_blank"
-												rel="noopener noreferrer"
-											>
-												<div style={{ display: "flex" }}>
-													<div style={{ width: "64px" }}>
-														<Image
-															src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-															style={{ width: 64 }}
-															preview={false}
-														/>
-													</div>
+											<div style={{ display: "flex" }}>
+												<div style={{ width: "64px" }}>
+													<Avatar
+														style={{ width: 64, height: 64 }}
+														src={
+															<Image
+																src={props.ownerProfilePicture}
+																style={{ width: 64, height: 64 }}
+															/>
+														}
+													/>
+												</div>
+												<Link
+													to={`/profile/${props.ownerId}`}
+													target="_blank"
+													rel="noopener noreferrer"
+												>
 													<div
 														style={{
 															display: "flex",
@@ -267,8 +271,8 @@ export default function ProjectCard(props) {
 															</p>
 														</div>
 													</div>
-												</div>
-											</Link>
+												</Link>
+											</div>
 										</div>
 										<br></br>
 										<div className="centerDiv" style={{ height: "100%" }}>

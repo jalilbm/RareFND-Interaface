@@ -39,9 +39,9 @@ export default function ProjectCard(props) {
 	const [subscribed, setSubscribed] = useState(false);
 	const [subscribeButtonText, setSubscribeButtonText] = useState("");
 	const navigate = useNavigate();
-	// const shareUrl =  window.location.href
-	const shareUrl =
-		"https://rarefnd.com/projects/OkoaHeros/Clean-Water-for-Bulamagi-Village";
+	const shareUrl = window.location.href;
+	// const shareUrl =
+	// ("https://rarefnd.com/projects/OkoaHeros/Clean-Water-for-Bulamagi-Village");
 
 	useEffect(() => {
 		if (subscribed) {

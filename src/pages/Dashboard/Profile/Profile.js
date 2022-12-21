@@ -8,7 +8,7 @@ import axios from "axios";
 import useAxios from "../../../utils/useAxios/useAxios";
 import validator from "validator";
 import { ErrorSharp } from "@mui/icons-material";
-import { Button, Image, Avatar } from "antd";
+import { Image, Avatar } from "antd";
 
 export default function DashboardProfile(props) {
 	const location = useLocation();
@@ -118,11 +118,14 @@ export default function DashboardProfile(props) {
 					<div className="col-md-5 border-right">
 						<div className="d-flex flex-column align-items-center text-center p-3 py-5">
 							<Avatar
-								style={{ width: 64, height: 64 }}
+								style={{ width: 150, height: 150 }}
 								src={
 									<Image
-										src={userData && userData.owner_profile_picture}
-										style={{ width: 64, height: 64 }}
+										src={
+											(userData && userData.profile_picture) ||
+											"https://rarefnd-bucket.s3.us-east-2.amazonaws.com/users/avatar.jpg"
+										}
+										style={{ width: 150, height: 150 }}
 									/>
 								}
 							/>

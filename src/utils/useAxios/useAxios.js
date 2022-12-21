@@ -41,7 +41,7 @@ export default function useAxios(props) {
 		(response) => response,
 		(error) => {
 			if (error.response.status === 401) logOut();
-			return error;
+			return "Session logged out, please login again!";
 		}
 	);
 

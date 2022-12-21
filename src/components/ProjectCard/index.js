@@ -59,7 +59,7 @@ export default function ProjectCard(props) {
 					if (response.status === 200) {
 						setSubscribed(response.data.subscribed);
 					} else {
-						window.alert("Something went wrong please refresh");
+						window.alert("Session logged out, please log in and try again");
 					}
 				});
 		}
@@ -333,7 +333,11 @@ export default function ProjectCard(props) {
 														</Button>
 														<p style={{ marginTop: "10px" }}>
 															{props.numberOfSubscribers &&
-																`${props.numberOfSubscribers} Subscribers`}
+																`${
+																	subscribed
+																		? props.numberOfSubscribers + 1
+																		: props.numberOfSubscribers
+																} Subscribers`}
 														</p>
 													</div>
 												)

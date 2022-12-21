@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import "./index.scss";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import { Image, Avatar } from "antd";
 
 export default function PublicProfile() {
 	const profileId = window.location.href.split("/").at(-1);
@@ -23,11 +24,18 @@ export default function PublicProfile() {
 				<div>
 					<div className="profileHeader">
 						<div className="centerDiv">
-							<img
-								id="profileImage"
-								className="rounded-circle"
-								src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-							></img>
+							<Avatar
+								style={{ width: 124, height: 124, marginTop: 20 }}
+								src={
+									<Image
+										src={
+											(profileInfo && profileInfo.profile_picture) ||
+											"https://rarefnd-bucket.s3.us-east-2.amazonaws.com/users/avatar.jpg"
+										}
+										style={{ width: 124, height: 124 }}
+									/>
+								}
+							/>
 						</div>
 						<div className="centerDiv">
 							<h1>

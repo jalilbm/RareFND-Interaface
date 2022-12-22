@@ -38,12 +38,6 @@ export default function Project(props) {
 			axios
 				.get(process.env.REACT_APP_BASE_URL + `/api/projects/${title}/`)
 				.then((response) => {
-					console.log(
-						"hahah",
-						response.data.owner_username.toLowerCase(),
-						owner.toLowerCase(),
-						owner.toLowerCase() === response.data.owner_username.toLowerCase()
-					);
 					if (
 						response.status === 200 &&
 						response.data.owner_username.toLowerCase() ===

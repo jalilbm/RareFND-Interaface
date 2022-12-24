@@ -113,7 +113,7 @@ export default function ContributeBtn(props) {
 				setStakingAddress(response.data.staking_address);
 				setStaking_abi(JSON.parse(response.data.staking_abi));
 			});
-	}, []);
+	}, [txHash]);
 
 	useEffect(() => {
 		clearInterval(refreshStakingId);

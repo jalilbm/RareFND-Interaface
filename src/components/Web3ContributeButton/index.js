@@ -532,7 +532,7 @@ export default function ContributeBtn(props) {
 												(!stakingOptions ||
 													!stakingOptions[7] ||
 													!readyToContribute ||
-													// !projectLive ||
+													!projectLive ||
 													pending)) ||
 											false
 										}

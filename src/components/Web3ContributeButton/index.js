@@ -528,13 +528,11 @@ export default function ContributeBtn(props) {
 											}
 										}}
 										disabled={
-											(chainId === TARGET_CHAIN &&
-												(!stakingOptions ||
-													!stakingOptions[7] ||
-													!readyToContribute ||
-													!projectLive ||
-													pending)) ||
-											false
+											!stakingOptions ||
+											!stakingOptions[7] ||
+											!readyToContribute ||
+											!projectLive ||
+											pending
 										}
 									>
 										Donate by FND

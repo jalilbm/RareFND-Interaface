@@ -51,7 +51,9 @@ export default function ContributeBtn(props) {
 	const [staking_abi, setStaking_abi] = useState();
 	const [balance, setBalance] = useState(0);
 	const [usdBalance, setUsdBalance] = useState(0);
-	const [txHash, setTxHash] = useState(null);
+	const [txHash, setTxHash] = useState(
+		"0x54550f395515300ca206b5e3f1e6c6a1e0b408fa280ffc84cc34adb946f4499d"
+	);
 	const [venlyAuth, setVenlyAuth] = useState("");
 	const [venlyEmail, setVenlyEmail] = useState("");
 	const [venlyEmailErr, setVenlyEmailErr] = useState("");
@@ -190,6 +192,10 @@ export default function ContributeBtn(props) {
 			}
 		}
 	}
+
+	// setTxHash(
+	// 	"0x54550f395515300ca206b5e3f1e6c6a1e0b408fa280ffc84cc34adb946f4499d"
+	// );
 
 	async function approve() {
 		setPending(true);
@@ -612,10 +618,11 @@ export default function ContributeBtn(props) {
 							style={{
 								backgroundColor: "#09ce00",
 								color: "white",
-								height: "50px",
-								display: "flex",
-								justifyContent: "center",
-								alignItems: "center",
+								// height: "50px",
+								// display: "flex",
+								// justifyContent: "center",
+								// alignItems: "center",
+								padding: "5px",
 							}}
 						>
 							<p style={{ margin: "0", padding: "0" }}>

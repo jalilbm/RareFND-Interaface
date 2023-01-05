@@ -32,7 +32,24 @@ export const AuthProvider = ({ children }) => {
 					setAuthTokens(response.data);
 					setUser(jwt_decode(response.data.access));
 					localStorage.setItem("authTokens", JSON.stringify(response.data));
-					navigate(-1);
+					const lastNonLoggedInVisitedUrl = JSON.parse(
+						localStorage.getItem("lastNonLoggedInVisitedUrl")
+					);
+					console.log(
+						"hoho",
+						lastNonLoggedInVisitedUrl,
+						lastNonLoggedInVisitedUrl.lastNonLoggedInVisitedUrl
+					);
+					if (
+						lastNonLoggedInVisitedUrl &&
+						lastNonLoggedInVisitedUrl.lastNonLoggedInVisitedUrl
+					) {
+						navigate(lastNonLoggedInVisitedUrl.lastNonLoggedInVisitedUrl);
+						localStorage.removeItem("lastNonLoggedInVisitedUrl");
+					} else {
+						console.log("1111111");
+						navigate(-1);
+					}
 				} else {
 					alert("login failed");
 				}

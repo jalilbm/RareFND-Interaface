@@ -8,6 +8,7 @@ import axios from "axios";
 import { ProviderContext } from "../../web3/ProviderContext";
 import { Link } from "react-router-dom";
 import DialogPopup from "../../components/DialogPopup";
+import { useNavigate } from "react-router-dom";
 
 var regexp = /^[\s()+-]*([0-9][\s()+-]*){6,20}$/;
 function isValidPhonenumber(value) {
@@ -27,14 +28,15 @@ export default function () {
 	const { provider, setProvider } = useContext(ProviderContext);
 	const [, updateState] = useState();
 	const forceUpdate = useCallback(() => updateState({}), []);
+	const navigate = useNavigate();
 
-	const getWallletAdress = async () => {
+	const getWalletAddress = async () => {
 		const accounts = await provider.listAccounts();
 		if (accounts) setWalletAddress(accounts[0]);
 	};
 
 	useEffect(() => {
-		if (provider) getWallletAdress();
+		if (provider) getWalletAddress();
 	}, [provider]);
 
 	const handleChange = (e) => {
@@ -50,6 +52,7 @@ export default function () {
 
 	useEffect(() => {
 		if (Object.keys(formErrors).length === 0 && isSubmit) {
+			document.getElementById("sign-up-btn").disabled = true;
 			axios
 				.post(process.env.REACT_APP_BASE_URL + "/api/user/signup/", {
 					username: formValues.username,
@@ -221,7 +224,7 @@ export default function () {
 					</div>
 					<div className="form-group mt-3">
 						<label>
-							Password Confirmation <span className="text-danger">*</span>
+							Confirm password <span className="text-danger">*</span>
 						</label>
 						<input
 							type="password"
@@ -234,7 +237,7 @@ export default function () {
 						<p className="text-danger">{formErrors.password2}</p>
 					</div>
 
-					<div className="form-group mt-3">
+					{/* <div className="form-group mt-3">
 						<label>First Name</label>
 						<input
 							type="text"
@@ -293,11 +296,11 @@ export default function () {
 							<p>No wallet connected</p>
 						)}
 						<p className="text-danger">{formErrors.walletAddress}</p>
-					</div>
+					</div> */}
 
 					<div className="d-grid gap-2 mt-3">
-						<button type="submit" className="btn btn-warning">
-							Submit
+						<button type="submit" className="btn btn-warning" id="sign-up-btn">
+							Sign up
 						</button>
 					</div>
 					<p className="forgot-password text-right mt-2">
@@ -308,10 +311,12 @@ export default function () {
 			{accountCreated && (
 				<DialogPopup
 					title="Verify your email"
-					description="You will receive an email confirmation, please check your spam section too, 
-					and follow the instructions to verify your account."
+					description="You will receive an email confirmation (PLEASE CHECK THE SPAM SECTION TOO), and follow the instructions to verify your account."
 					show={true}
-					function_={() => setAccountCreated(false)}
+					function_={() => {
+						setAccountCreated(false);
+						navigate(-1);
+					}}
 				/>
 			)}
 		</div>

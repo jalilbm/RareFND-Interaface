@@ -7,7 +7,7 @@ import "./index.css";
 import useAxios from "../../utils/useAxios/useAxios";
 import { useState, useEffect, useContext } from "react";
 import AuthContext from "../../Context/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import comingSoon from "../../assets/coming-soon.png";
 import succeed from "../../assets/succeed.png";
 import LoadingSpinner from "../../components/LoadingSpinner";
@@ -43,6 +43,7 @@ export default function ProjectCard(props) {
 	);
 
 	const navigate = useNavigate();
+	const location = useLocation();
 	const shareUrl = window.location.href;
 	// const shareUrl =
 	// ("https://rarefnd.com/projects/OkoaHeros/Clean-Water-for-Bulamagi-Village");
@@ -103,6 +104,11 @@ export default function ProjectCard(props) {
 					}
 				});
 		} else {
+			console.log("plplp", location);
+			localStorage.setItem(
+				"lastNonLoggedInVisitedUrl",
+				JSON.stringify({ lastNonLoggedInVisitedUrl: location.pathname })
+			);
 			navigate("/login");
 		}
 	};

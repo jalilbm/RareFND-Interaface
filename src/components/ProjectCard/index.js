@@ -335,7 +335,7 @@ export default function ProjectCard(props) {
 															{props.numberOfSubscribers &&
 																`${
 																	subscribed
-																		? props.numberOfSubscribers + 1
+																		? props.numberOfSubscribers
 																		: props.numberOfSubscribers
 																} Subscribers`}
 														</p>

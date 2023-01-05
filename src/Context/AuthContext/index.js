@@ -42,7 +42,6 @@ export const AuthProvider = ({ children }) => {
 						navigate(lastNonLoggedInVisitedUrl.lastNonLoggedInVisitedUrl);
 						localStorage.removeItem("lastNonLoggedInVisitedUrl");
 					} else {
-						("1111111");
 						navigate(-1);
 					}
 				} else {

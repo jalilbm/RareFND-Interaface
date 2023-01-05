@@ -51,9 +51,7 @@ export default function ContributeBtn(props) {
 	const [staking_abi, setStaking_abi] = useState();
 	const [balance, setBalance] = useState(0);
 	const [usdBalance, setUsdBalance] = useState(0);
-	const [txHash, setTxHash] = useState(
-		"0x54550f395515300ca206b5e3f1e6c6a1e0b408fa280ffc84cc34adb946f4499d"
-	);
+	const [txHash, setTxHash] = useState();
 	const [venlyAuth, setVenlyAuth] = useState("");
 	const [venlyEmail, setVenlyEmail] = useState("");
 	const [venlyEmailErr, setVenlyEmailErr] = useState("");

@@ -35,11 +35,6 @@ export const AuthProvider = ({ children }) => {
 					const lastNonLoggedInVisitedUrl = JSON.parse(
 						localStorage.getItem("lastNonLoggedInVisitedUrl")
 					);
-					console.log(
-						"hoho",
-						lastNonLoggedInVisitedUrl,
-						lastNonLoggedInVisitedUrl.lastNonLoggedInVisitedUrl
-					);
 					if (
 						lastNonLoggedInVisitedUrl &&
 						lastNonLoggedInVisitedUrl.lastNonLoggedInVisitedUrl
@@ -47,7 +42,7 @@ export const AuthProvider = ({ children }) => {
 						navigate(lastNonLoggedInVisitedUrl.lastNonLoggedInVisitedUrl);
 						localStorage.removeItem("lastNonLoggedInVisitedUrl");
 					} else {
-						console.log("1111111");
+						("1111111");
 						navigate(-1);
 					}
 				} else {

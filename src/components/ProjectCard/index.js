@@ -104,7 +104,6 @@ export default function ProjectCard(props) {
 					}
 				});
 		} else {
-			console.log("plplp", location);
 			localStorage.setItem(
 				"lastNonLoggedInVisitedUrl",
 				JSON.stringify({ lastNonLoggedInVisitedUrl: location.pathname })

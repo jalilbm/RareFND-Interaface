@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
 					setAuthTokens(response.data);
 					setUser(jwt_decode(response.data.access));
 					localStorage.setItem("authTokens", JSON.stringify(response.data));
-					navigate("/");
+					navigate(-1);
 				} else {
 					alert("login failed");
 				}

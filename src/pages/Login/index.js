@@ -6,6 +6,7 @@ import AuthContext from "../../Context/AuthContext";
 import { Link } from "react-router-dom";
 import { Modal, message, Input } from "antd";
 import axios from "axios";
+
 const { confirm } = Modal;
 
 const validateEmail = (email) => {
@@ -33,6 +34,7 @@ export default function (props) {
 
 	useEffect(() => {
 		if (Object.keys(formErrors).length === 0 && isSubmit) {
+			document.getElementById("login-btn").disabled = true;
 			loginUser(formValues.email, formValues.password);
 		}
 	}, [formErrors]);
@@ -121,7 +123,7 @@ export default function (props) {
 						<p className="text-danger">{formErrors.password}</p>
 					</div>
 					<div className="d-grid gap-2 mt-3">
-						<button type="submit" className="btn btn-warning">
+						<button type="submit" className="btn btn-warning" id="login-btn">
 							Login
 						</button>
 					</div>

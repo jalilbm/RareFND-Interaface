@@ -38,6 +38,10 @@ export default function ProjectCard(props) {
 	let { user } = useContext(AuthContext);
 	const [subscribed, setSubscribed] = useState(false);
 	const [subscribeButtonText, setSubscribeButtonText] = useState("");
+	const [numberOfSubscribers, setNumberOfSubscribers] = useState(
+		props.numberOfSubscribers
+	);
+
 	const navigate = useNavigate();
 	const shareUrl = window.location.href;
 	// const shareUrl =
@@ -52,12 +56,25 @@ export default function ProjectCard(props) {
 	}, [subscribed]);
 
 	useEffect(() => {
-		if (props.projectId && user && props.numberOfSubscribers) {
+		if (props.projectId && user) {
+			document.getElementById("subscribe-btn").disabled = true;
 			api
 				.get(`/api/project/checked_subscribed/${props.projectId}/`)
 				.then((response) => {
 					if (response.status === 200) {
 						setSubscribed(response.data.subscribed);
+						if (!response.data.subscribed) {
+							document.getElementById("subscribe-btn").disabled = false;
+							const storedData = JSON.parse(
+								localStorage.getItem("subscribeToProject")
+							);
+							if (storedData && storedData["subscribeToProject"]) {
+								document.getElementById("subscribe-btn").disabled = true;
+								subscribeToProject();
+							}
+						} else {
+							localStorage.removeItem("subscribeToProject");
+						}
 					} else {
 						window.alert("Session logged out, please log in and try again");
 					}
@@ -66,6 +83,10 @@ export default function ProjectCard(props) {
 	}, [props.projectId]);
 
 	const subscribeToProject = () => {
+		localStorage.setItem(
+			"subscribeToProject",
+			JSON.stringify({ subscribeToProject: props.projectId })
+		);
 		if (user) {
 			document.getElementById("subscribe-btn").disabled = true;
 			api
@@ -74,6 +95,8 @@ export default function ProjectCard(props) {
 					if (response.status === 200) {
 						setSubscribed(true);
 						document.getElementById("subscribe-btn").textContent = "Subscribed";
+						setNumberOfSubscribers(numberOfSubscribers + 1);
+						localStorage.removeItem("subscribeToProject");
 					} else {
 						window.alert("Couldn't subscribe, please try again in few seconds");
 						document.getElementById("subscribe-btn").disabled = false;
@@ -332,12 +355,7 @@ export default function ProjectCard(props) {
 															{subscribeButtonText}
 														</Button>
 														<p style={{ marginTop: "10px" }}>
-															{props.numberOfSubscribers &&
-																`${
-																	subscribed
-																		? props.numberOfSubscribers
-																		: props.numberOfSubscribers
-																} Subscribers`}
+															{`${numberOfSubscribers} Subscribers`}
 														</p>
 													</div>
 												)

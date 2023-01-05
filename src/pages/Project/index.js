@@ -25,12 +25,14 @@ export default function Project(props) {
 	title = title.replace(/-/g, " ");
 
 	useEffect(() => {
-		axios
-			.get(process.env.REACT_APP_BASE_URL + `/api/incentives/${projectId}/`)
-			.then((response) => {
-				if (response.status === 200)
-					setIncentivesData(response.data.incentives);
-			});
+		if (projectId !== "") {
+			axios
+				.get(process.env.REACT_APP_BASE_URL + `/api/incentives/${projectId}/`)
+				.then((response) => {
+					if (response.status === 200)
+						setIncentivesData(response.data.incentives);
+				});
+		}
 	}, [projectId]);
 
 	useEffect(() => {

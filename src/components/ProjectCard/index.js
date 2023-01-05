@@ -58,7 +58,10 @@ export default function ProjectCard(props) {
 
 	useEffect(() => {
 		if (props.projectId && user) {
-			document.getElementById("subscribe-btn").disabled = true;
+			if (document.getElementById("subscribe-btn")) {
+				document.getElementById("subscribe-btn").disabled = true;
+			}
+
 			api
 				.get(`/api/project/checked_subscribed/${props.projectId}/`)
 				.then((response) => {

@@ -89,6 +89,7 @@ export default function Project(props) {
 						ownerUsername={projectData.owner_username}
 						projectAddress={projectData.address}
 						ownerProfilePicture={projectData.owner_profile_picture}
+						projectCategory={projectData.category}
 					/>
 					{(projectData.live || projectData.raised_amount > 0) && (
 						<ProjectCurrentContributions

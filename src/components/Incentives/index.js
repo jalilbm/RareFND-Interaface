@@ -2,7 +2,7 @@ import Button from "react-bootstrap/Button";
 import { Col, Row } from "react-bootstrap";
 import ContributeBtn from "../Web3ContributeButton";
 
-export default function index(props) {
+export default function Incentive(props) {
 	const included_incentives = props.included_incentives;
 	return (
 		<div
@@ -91,7 +91,7 @@ export default function index(props) {
 						}}
 					>
 						<input
-							id="contribute-amount-2"
+							id={`contribute-amount-2-${props.index}`}
 							autoComplete="off"
 							type="text"
 							pattern="(^[0-9]{0,1000}$)|(^[0-9]{0,10000}\.[0-9]{0,18}$)"
@@ -111,7 +111,8 @@ export default function index(props) {
 									!e.target.value.includes(".") &&
 									e.preventDefault();
 							}}
-						></input>
+							value={props.price}
+						/>
 					</div>
 				</Col>
 				<Col md={5}>
@@ -128,8 +129,10 @@ export default function index(props) {
 						disabled={!props.projectLive}
 						onClick={() => {
 							document.getElementById("contribute-amount").value =
-								document.getElementById("contribute-amount-2").value;
-							document.getElementById("contribute-fnd-btn").click();
+								document.getElementById(
+									`contribute-amount-2-${props.index}`
+								).value;
+							window.scrollTo(0, 0);
 						}}
 					>
 						CONTINUE

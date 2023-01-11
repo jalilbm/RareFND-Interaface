@@ -24,8 +24,9 @@ export default function Basics(props) {
 			.get(process.env.REACT_APP_BASE_URL + "/api/eligible_country/")
 			.then((response) => {
 				let eligible_countries = response.data.eligible_countries;
-				eligible_countries.sort(
-					(a, b) => parseFloat(a.nicename) - parseFloat(b.nicename)
+				console.log(eligible_countries);
+				eligible_countries.sort((a, b) =>
+					a.nicename > b.nicename ? 1 : b.nicename > a.nicename ? -1 : 0
 				);
 				setCountries(eligible_countries);
 			});
@@ -132,7 +133,7 @@ export default function Basics(props) {
 							marginBottom: "3px",
 						}}
 					>
-						Head<span className="required-asterisk">*</span>
+						Brief Description<span className="required-asterisk">*</span>
 					</p>
 					<div className="input-with-title">
 						<textarea

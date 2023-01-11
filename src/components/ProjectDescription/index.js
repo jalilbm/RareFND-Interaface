@@ -84,6 +84,7 @@ export default function ProjectDescription(props) {
 										reserved={_.reserved}
 										project={_.project}
 										projectLive={props.projectLive}
+										index={idx}
 									/>
 								))}
 						</div>

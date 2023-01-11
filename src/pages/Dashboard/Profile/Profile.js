@@ -1,14 +1,14 @@
 import SideBar from "../../../components/DashboardSideBare";
-import DialogPopup from "../../../components/DialogPopup";
 import "./profile.scss";
 import PhoneInput from "react-phone-input-2";
 import { useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect, useState, useRef } from "react";
 import useAxios from "../../../utils/useAxios/useAxios";
 import validator from "validator";
-import { ErrorSharp } from "@mui/icons-material";
 import { Image, Avatar } from "antd";
+import { EditOutlined } from "@ant-design/icons";
+import UploadButton from "../../../components/UploadButton";
+import LoadingSpinner from "../../../components/LoadingSpinner";
 
 export default function DashboardProfile(props) {
 	const location = useLocation();
@@ -16,7 +16,13 @@ export default function DashboardProfile(props) {
 	const [errors, setErrors] = useState({});
 	const [formErrors, setFormErrors] = useState({});
 	const [submitted, setSubmitted] = useState(false);
-	let api = useAxios();
+	const userProfileImage = useRef(null);
+
+	let api = useAxios({
+		headers: {
+			"content-type": "multipart/form-data",
+		},
+	});
 
 	useEffect(() => {
 		api.get("/api/user/profile_info/").then((response) => {
@@ -30,14 +36,22 @@ export default function DashboardProfile(props) {
 		delete tmp[name];
 		setFormErrors({ ...tmp });
 		if (userData) {
-			setUserData({
-				...userData,
-				[name]: value,
-			});
+			if (name === "profile_picture") {
+				setUserData({
+					...userData,
+					[name]: [userProfileImage.current.files[0]],
+				});
+			} else {
+				setUserData({
+					...userData,
+					[name]: value,
+				});
+			}
 		}
 	};
 
 	const saveProfile = () => {
+		document.getElementById("save-btn").disabled = "true";
 		if (Object.keys(formErrors).length > 0) {
 			setSubmitted(!submitted);
 		}
@@ -45,12 +59,14 @@ export default function DashboardProfile(props) {
 		if (userData.phone !== "" && !`${userData.phone}`.includes("+")) {
 			tmp = { ...tmp, phone: `+${userData.phone}` };
 		}
+
 		setUserData({ ...tmp });
 		if (!tmp.username) {
 			setFormErrors({
 				...useAxios,
 				email: "Email required",
 			});
+			document.getElementById("save-btn").disabled = "false";
 			return;
 		}
 
@@ -59,9 +75,9 @@ export default function DashboardProfile(props) {
 				...useAxios,
 				email: "Email required",
 			});
+			document.getElementById("save-btn").disabled = "false";
 			return;
 		}
-
 		api
 			.get(
 				process.env.REACT_APP_BASE_URL + `/api/unique/username/${tmp.username}/`
@@ -92,180 +108,253 @@ export default function DashboardProfile(props) {
 						setSubmitted(!submitted);
 					});
 			});
+		document.getElementById("save-btn").disabled = "false";
 	};
 
 	useEffect(() => {
 		if (Object.keys(userData).length > 0 && submitted) {
+			document.getElementById("save-btn").disabled = true;
 			if (Object.keys(formErrors).length === 0) {
+				if (
+					userData.profile_picture &&
+					typeof userData.profile_picture === "string"
+				) {
+					delete userData["profile_picture"];
+				}
+				console.log(userData);
 				api.put("/api/user/update/", userData).then((response) => {
 					if (response.status === 200) {
+						document.getElementById("save-btn").disabled = false;
 						window.alert("Account Updated");
-					} else {
-						window.alert(JSON.stringify(response.response.data.errors));
 					}
 				});
 			} else {
 				window.alert("Error");
 			}
+			document.getElementById("save-btn").disabled = false;
 		}
 	}, [submitted]);
+
+	const getUrlFromFile = () => {
+		const [file] = userData.profile_picture;
+		if (file) {
+			let tmp_url = URL.createObjectURL(file);
+			return tmp_url;
+		}
+	};
 
 	return (
 		<div className="dashboard-profile">
 			{location.pathname !== "/dashboard/projects" && <SideBar />}
 			<div className="dashboard-profile-container">
-				<div className="row" style={{ width: "100%" }}>
-					<div className="col-md-5 border-right">
-						<div className="d-flex flex-column align-items-center text-center p-3 py-5">
-							<Avatar
-								style={{ width: 150, height: 150 }}
-								src={
-									<Image
-										src={
-											(userData && userData.profile_picture) ||
-											"https://rarefnd-bucket.s3.us-east-2.amazonaws.com/users/avatar.jpg"
-										}
-										style={{ width: 150, height: 150 }}
-									/>
-								}
-							/>
-							<span className="font-weight-bold">
-								@{userData && userData.username}
-							</span>
-							<span className="text-black-50">
-								{userData && userData.email}
-							</span>
-						</div>
-					</div>
-					<div className="col-md-7 border-right">
-						<div className="p-3 py-5">
-							<div className="d-flex justify-content-between align-items-center mb-3">
-								<h4 className="text-right">Profile Settings</h4>
-							</div>
-							<div className="row mt-2">
-								<div className="col-md-6">
-									<label className="labels">
-										First name<span className="required-asterisk">*</span>
-									</label>
-									<input
-										name="first_name"
-										type="text"
-										className="form-control"
-										value={userData && userData.first_name}
-										onChange={handleChanges}
-									/>
-								</div>
-								<div className="col-md-6">
-									<label className="labels">
-										Last name<span className="required-asterisk">*</span>
-									</label>
-									<input
-										name="last_name"
-										type="text"
-										className="form-control"
-										value={userData && userData.last_name}
-										onChange={handleChanges}
-									/>
-								</div>
-							</div>
-
-							<div className="row mt-2">
-								<div className="col-md-6">
-									<label className="labels">
-										Email<span className="required-asterisk">*</span>
-									</label>
-									<input
-										name="email"
-										type="text"
-										className="form-control"
-										value={userData && userData.email}
-										onChange={handleChanges}
-									/>
-									<p id="email-validity" className="invalid-input-p">
-										{formErrors.email}
-									</p>
-								</div>
-								<div className="col-md-6">
-									<label className="labels">
-										Username<span className="required-asterisk">*</span>
-									</label>
-									<input
-										name="username"
-										type="text"
-										className="form-control"
-										value={userData && userData.username}
-										onChange={handleChanges}
-									/>
-									<p id="username-validity" className="invalid-input-p">
-										{formErrors.username}
-									</p>
-								</div>
-							</div>
-							<div className="row mt-2">
-								<div className="col-md-12">
-									<label className="labels">
-										Bio<span className="required-asterisk">*</span>
-									</label>
-									<textarea
-										className="form-control"
-										name="bio"
-										type="text"
-										value={userData && userData.bio}
-										onChange={handleChanges}
-									></textarea>
-								</div>
-							</div>
-
-							<div className="row mt-3">
-								<div className="col-md-12">
-									<label className="labels">Mobile Number</label>
-									<PhoneInput
-										id="phonenumber"
-										name="phone"
-										classNameName="mt-1"
-										inputStyle={{ width: "100%" }}
-										value={userData && userData.phone}
-										onChange={(value) => {
-											const isValidPhoneNumber = validator.isMobilePhone(value);
-											const phone = "phone";
-											if (!isValidPhoneNumber) {
-												setFormErrors({
-													...errors,
-													phone: "Invalid phone number",
-												});
-											} else if (formErrors["phone"]) {
-												let tmp = { ...formErrors };
-												delete tmp[phone];
-												setFormErrors({ ...tmp });
+				{Object.keys(userData).length > 0 ? (
+					<div className="row" style={{ width: "100%" }}>
+						<div className="col-md-5 border-right">
+							<div className="d-flex flex-column align-items-center text-center p-3 py-5">
+								<div>
+									<div
+									// style={{ position: "relative" }}
+									>
+										<Avatar
+											style={{ width: 150, height: 150 }}
+											src={
+												<Image
+													id="avatar-image"
+													src={
+														userData &&
+														userData.profile_picture &&
+														typeof userData.profile_picture === "string"
+															? userData.profile_picture
+															: userData && userData.profile_picture
+															? getUrlFromFile()
+															: "https://rarefnd-bucket.s3.us-east-2.amazonaws.com/users/avatar.jpg"
+													}
+													style={{ width: 150, height: 150 }}
+												/>
 											}
-											setUserData({
-												...userData,
-												phone: `${value}`,
-											});
-										}}
-										inputProps={{
-											name: "phone",
-											// required: true,
-											autoFocus: true,
-										}}
-									/>
-									<p id="phone-number-validity" className="invalid-input-p">
-										{formErrors.phone}
-									</p>
+										/>
+										<div
+										// style={{ position: "absolute", bottom: "0", right: "0" }}
+										>
+											{
+												<div>
+													<label htmlFor="fileUpload" className="centerDiv">
+														<EditOutlined
+															style={{
+																cursor: "pointer",
+																color: "#FFC115",
+															}}
+														/>{" "}
+														<p
+															style={{
+																margin: "0",
+																padding: "0",
+																cursor: "pointer",
+																textDecoration: "underline",
+																color: "#FFC115",
+															}}
+														>
+															change avatar
+														</p>
+													</label>
+													<input
+														hidden
+														id="fileUpload"
+														name="profile_picture"
+														type="file"
+														accept=".png, .jpeg, .jpg"
+														ref={userProfileImage}
+														onChange={handleChanges}
+													/>
+												</div>
+											}
+										</div>
+									</div>
 								</div>
+								<br />
+								<span className="font-weight-bold">
+									@{userData && userData.username}
+								</span>
+								<span className="text-black-50">
+									{userData && userData.email}
+								</span>
 							</div>
-							<div className="mt-5 text-center">
-								<button
-									className="btn btn-primary profile-button"
-									type="button"
-									onClick={saveProfile}
-								>
-									Save Profile
-								</button>
+						</div>
+						<div className="col-md-7 border-right">
+							<div className="p-3 py-5">
+								<div className="d-flex justify-content-between align-items-center mb-3">
+									<h4 className="text-right">Profile Settings</h4>
+								</div>
+								<div className="row mt-2">
+									<div className="col-md-6">
+										<label className="labels">
+											First name<span className="required-asterisk">*</span>
+										</label>
+										<input
+											name="first_name"
+											type="text"
+											className="form-control"
+											value={userData && userData.first_name}
+											onChange={handleChanges}
+										/>
+									</div>
+									<div className="col-md-6">
+										<label className="labels">
+											Last name<span className="required-asterisk">*</span>
+										</label>
+										<input
+											name="last_name"
+											type="text"
+											className="form-control"
+											value={userData && userData.last_name}
+											onChange={handleChanges}
+										/>
+									</div>
+								</div>
+
+								<div className="row mt-2">
+									<div className="col-md-6">
+										<label className="labels">
+											Email<span className="required-asterisk">*</span>
+										</label>
+										<input
+											name="email"
+											type="text"
+											className="form-control"
+											value={userData && userData.email}
+											onChange={handleChanges}
+										/>
+										<p id="email-validity" className="invalid-input-p">
+											{formErrors.email}
+										</p>
+									</div>
+									<div className="col-md-6">
+										<label className="labels">
+											Username<span className="required-asterisk">*</span>
+										</label>
+										<input
+											name="username"
+											type="text"
+											className="form-control"
+											value={userData && userData.username}
+											onChange={handleChanges}
+										/>
+										<p id="username-validity" className="invalid-input-p">
+											{formErrors.username}
+										</p>
+									</div>
+								</div>
+								<div className="row mt-2">
+									<div className="col-md-12">
+										<label className="labels">
+											Bio<span className="required-asterisk">*</span>
+										</label>
+										<textarea
+											className="form-control"
+											name="bio"
+											type="text"
+											value={userData && userData.bio}
+											onChange={handleChanges}
+										></textarea>
+									</div>
+								</div>
+
+								<div className="row mt-3">
+									<div className="col-md-12">
+										<label className="labels">Mobile Number</label>
+										<PhoneInput
+											id="phonenumber"
+											name="phone"
+											classNameName="mt-1"
+											inputStyle={{ width: "100%" }}
+											value={userData && userData.phone}
+											onChange={(value) => {
+												const isValidPhoneNumber =
+													validator.isMobilePhone(value);
+												const phone = "phone";
+												if (!isValidPhoneNumber) {
+													setFormErrors({
+														...errors,
+														phone: "Invalid phone number",
+													});
+												} else if (formErrors["phone"]) {
+													let tmp = { ...formErrors };
+													delete tmp[phone];
+													setFormErrors({ ...tmp });
+												}
+												setUserData({
+													...userData,
+													phone: `${value}`,
+												});
+											}}
+											inputProps={{
+												name: "phone",
+												// required: true,
+												autoFocus: true,
+											}}
+										/>
+										<p id="phone-number-validity" className="invalid-input-p">
+											{formErrors.phone}
+										</p>
+									</div>
+								</div>
+								<div className="mt-5 text-center">
+									<button
+										className="btn btn-primary profile-button"
+										type="button"
+										onClick={saveProfile}
+										id="save-btn"
+										disabled={false}
+									>
+										Save Profile
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				) : (
+					<LoadingSpinner color="#FFC115" />
+				)}
 			</div>
 		</div>
 	);

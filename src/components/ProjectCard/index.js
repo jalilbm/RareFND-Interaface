@@ -57,7 +57,7 @@ export default function ProjectCard(props) {
 	}, [subscribed]);
 
 	useEffect(() => {
-		if (props.projectId && user) {
+		if (props.projectId && user && !props.projectLive) {
 			if (document.getElementById("subscribe-btn")) {
 				document.getElementById("subscribe-btn").disabled = true;
 			}
@@ -332,6 +332,7 @@ export default function ProjectCard(props) {
 														projectSuccessfullyEnded={
 															props.projectSuccessfullyEnded
 														}
+														projectCategory={props.projectCategory}
 													/>
 													{props.number_of_donators && (
 														<a

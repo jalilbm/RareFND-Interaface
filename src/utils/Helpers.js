@@ -50,7 +50,7 @@ export async function sendTx(tx, okMsg) {
 			iziToast.destroy();
 			iziToast.error({
 				message: extractWeb3Error(err),
-				position: "bottomLeft",
+				position: "topLeft",
 			});
 			return false;
 		});
@@ -61,7 +61,7 @@ export async function sendTx(tx, okMsg) {
 	iziToast.info({
 		message: "Please wait...",
 		timeout: 30000,
-		position: "bottomLeft",
+		position: "topLeft",
 	});
 	return postTx
 		.wait()
@@ -69,7 +69,7 @@ export async function sendTx(tx, okMsg) {
 			iziToast.destroy();
 			iziToast.success({
 				message: okMsg,
-				position: "bottomLeft",
+				position: "topLeft",
 			});
 			return { valid: true, hash: txHash };
 		})
@@ -77,7 +77,7 @@ export async function sendTx(tx, okMsg) {
 			iziToast.destroy();
 			iziToast.error({
 				message: extractWeb3Error(err),
-				position: "bottomLeft",
+				position: "topLeft",
 			});
 			return { valid: false, hash: txHash };
 		});
@@ -86,14 +86,14 @@ export async function sendTx(tx, okMsg) {
 export function popupError(message) {
 	iziToast.error({
 		message,
-		position: "bottomLeft",
+		position: "topLeft",
 	});
 }
 
 export function popupInfo(message) {
 	iziToast.info({
 		message,
-		position: "bottomLeft",
+		position: "topLeft",
 	});
 }
 

@@ -148,7 +148,9 @@ export default function ContributeBtn(props) {
 
 		if (!allowance || allowance.lte(0)) {
 			popupInfo(
-				"Please approve 2x transactions in your wallet to complete your donation!"
+				`Please approve 2x transactions in your wallet to complete your ${
+					props.projectCategory === 2 ? "Donation" : "Contribution"
+				}!`
 			);
 			const approvalStatus = await approve();
 			if (!approvalStatus) {
@@ -172,7 +174,12 @@ export default function ContributeBtn(props) {
 						staking?.stakeUsd(
 							ethers.utils.parseUnits(contribution_amount, USDT_DECIMALS)
 						);
-					const status = await sendTx(tx, "You have successfully donated!");
+					const status = await sendTx(
+						tx,
+						`You have successfully ${
+							props.projectCategory === 2 ? "Donated" : "Contributed"
+						}!`
+					);
 					setPending(false);
 					if (status.valid) {
 						setTxHash(status.hash);
@@ -274,7 +281,11 @@ export default function ContributeBtn(props) {
 			document.getElementById("contribute-amount").value;
 
 		if (!regexp.test(contribution_amount)) {
-			popupInfo("Please enter amount to complete your donation with card!");
+			popupInfo(
+				`Please enter amount to complete your ${
+					props.projectCategory === 2 ? "Donation" : "Contribution"
+				} with card!`
+			);
 			// return alert("Invalid contribution amount");
 		} else {
 			handleShow();
@@ -288,7 +299,11 @@ export default function ContributeBtn(props) {
 		if (!venlyEmail) {
 			setVenlyEmailErr("Email field is required.");
 		} else if (contribution_amount < 16) {
-			popupInfo("Donation amount should at least be $16 or above");
+			popupInfo(
+				`${
+					props.projectCategory === 2 ? "Donation" : "Contribution"
+				} amount should at least be $16 or above`
+			);
 		} else {
 			// popupInfo("Proceed payment with card!");
 			createVenlyWallet();
@@ -344,7 +359,7 @@ export default function ContributeBtn(props) {
 				`https://exchange.mercuryo.io/?widget_id=${data.widget_id}&address=${data.address}&signature=${data.signature}&fiat_amount=${data.amount}&type=${data.type}&fiat_currency=${data.from}&currency=${data.to}&email=${data.email}&redirect_url=${data.redirect_url}`
 			);
 		} else {
-			popupInfo("Donation amount should at least be $16 or above");
+			popupInfo("Donation amount should at least be $16 or more");
 		}
 	}
 
@@ -539,7 +554,8 @@ export default function ContributeBtn(props) {
 											pending
 										}
 									>
-										Donate by FND
+										{props.projectCategory === 2 ? "Donate" : "Contribute"} by
+										FND
 									</Button>
 								) : (
 									<Button
@@ -556,7 +572,8 @@ export default function ContributeBtn(props) {
 										}
 										disabled={!projectLive}
 									>
-										Donate by FND
+										{props.projectCategory === 2 ? "Donate" : "Contribute"} by
+										FND
 									</Button>
 								)}
 							</Col>
@@ -605,7 +622,8 @@ export default function ContributeBtn(props) {
 									disabled={!projectLive}
 									// disabled={true}
 								>
-									Donate by card
+									{props.projectCategory === 2 ? "Donate" : "Contribute"} by
+									card
 								</Button>
 							</Col>
 						</Row>

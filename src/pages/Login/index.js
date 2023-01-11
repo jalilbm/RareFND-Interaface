@@ -35,7 +35,8 @@ export default function (props) {
 	useEffect(() => {
 		if (Object.keys(formErrors).length === 0 && isSubmit) {
 			document.getElementById("login-btn").disabled = true;
-			loginUser(formValues.email, formValues.password);
+			loginUser(formValues.email.toLowerCase(), formValues.password);
+			document.getElementById("login-btn").disabled = false;
 		}
 	}, [formErrors]);
 
@@ -86,9 +87,6 @@ export default function (props) {
 			onOk() {
 				ResetPassword();
 			},
-			// onCancel() {
-			// 	console.log("Cancel");
-			// },
 		});
 	};
 

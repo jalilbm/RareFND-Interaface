@@ -36,8 +36,8 @@ export default function Payment(props) {
 			.get(process.env.REACT_APP_BASE_URL + "/api/eligible_country/")
 			.then((response) => {
 				let eligible_countries = response.data.eligible_countries;
-				eligible_countries.sort(
-					(a, b) => parseFloat(a.nicename) - parseFloat(b.nicename)
+				eligible_countries.sort((a, b) =>
+					a.nicename > b.nicename ? 1 : b.nicename > a.nicename ? -1 : 0
 				);
 				setCountries(eligible_countries);
 			});
@@ -518,7 +518,7 @@ export default function Payment(props) {
 							marginRight: "0px",
 						}}
 					>
-						<Col md={6}>
+						<Col md={4}>
 							<div className="input-with-title">
 								<p
 									style={{
@@ -547,7 +547,7 @@ export default function Payment(props) {
 								</div>
 							</div>
 						</Col>
-						<Col md={6}>
+						<Col md={4}>
 							<div className="input-with-title">
 								<p
 									style={{
@@ -576,6 +576,36 @@ export default function Payment(props) {
 								/>
 								<p className="invalid-input-p">
 									{props.formErrors && props.formErrors.taxIdNumber}
+								</p>
+							</div>
+						</Col>
+						<Col md={4}>
+							<div className="input-with-title">
+								<p
+									style={{
+										marginBottom: "3px",
+									}}
+								>
+									Your Wallet Address (to receive funds when target reached)
+								</p>
+								<input
+									className="atomic-text-input w-100"
+									id="ownerWalletAddress"
+									maxLength="80"
+									name="ownerWalletAddress"
+									placeholder="(Optional) Your Wallet Address"
+									type="text"
+									value={
+										props.projectData &&
+										props.projectData["payment"] &&
+										props.projectData["payment"].ownerWalletAddress
+									}
+									onChange={(event) =>
+										props.updateProjectData(event, "payment")
+									}
+								/>
+								<p className="invalid-input-p">
+									{props.formErrors && props.formErrors.ownerWalletAddress}
 								</p>
 							</div>
 						</Col>
@@ -716,7 +746,7 @@ export default function Payment(props) {
 						</Col>
 					</Row>
 				</Row>
-				<hr />
+				{/* <hr />
 				<Row style={{ padding: "3vw", marginLeft: "0px", marginRight: "0px" }}>
 					<h1 style={{ marginBottom: "30px" }}>UBOs Details</h1>
 					{
@@ -961,7 +991,7 @@ export default function Payment(props) {
 					>
 						Add UBO
 					</Button>
-				</Row>
+				</Row> */}
 
 				<Row style={{ padding: "3vw", marginLeft: "0px", marginRight: "0px" }}>
 					<div style={{ display: "flex", justifyContent: "space-between" }}>

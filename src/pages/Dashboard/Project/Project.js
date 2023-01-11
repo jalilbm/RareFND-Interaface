@@ -352,41 +352,42 @@ export default function DashboardProjects() {
 			case "projectStory":
 				handleEmptyInputError(value, name, "Project story is required!");
 				break;
-			case "fullName":
-				handleEmptyInputError(value, name, "Full name is required!", errorPath);
-				break;
-			case "position":
-				handleEmptyInputError(value, name, "Position is required!", errorPath);
-				break;
-			case "dateOfBirth":
-				handleEmptyInputError(
-					value,
-					name,
-					"Date of birth is required!",
-					errorPath
-				);
-				break;
-			case "idFile":
-				handleEmptyInputError(
-					value,
-					name,
-					"ID or Passport is required!",
-					errorPath
-				);
-				break;
-			case "proofOfAddressFile":
-				handleEmptyInputError(
-					value,
-					name,
-					"Proof of address is required!",
-					errorPath
-				);
-				break;
+			// case "fullName":
+			// 	handleEmptyInputError(value, name, "Full name is required!", errorPath);
+			// 	break;
+			// case "position":
+			// 	handleEmptyInputError(value, name, "Position is required!", errorPath);
+			// 	break;
+			// case "dateOfBirth":
+			// 	handleEmptyInputError(
+			// 		value,
+			// 		name,
+			// 		"Date of birth is required!",
+			// 		errorPath
+			// 	);
+			// 	break;
+			// case "idFile":
+			// 	handleEmptyInputError(
+			// 		value,
+			// 		name,
+			// 		"ID or Passport is required!",
+			// 		errorPath
+			// 	);
+			// 	break;
+			// case "proofOfAddressFile":
+			// 	handleEmptyInputError(
+			// 		value,
+			// 		name,
+			// 		"Proof of address is required!",
+			// 		errorPath
+			// 	);
+			// 	break;
 		}
 	};
 
 	const updateProjectData = (event, source) => {
 		let { name, value } = event.target;
+		console.log(name, value);
 		setProjectData({
 			...projectData,
 			[source]: { ...projectData[source], [name]: value },
